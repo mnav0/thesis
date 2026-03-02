@@ -1,3 +1,11 @@
+# Mockups
+
+<img width="1439" height="976" alt="Screenshot 2026-03-02 at 10 46 27 AM" src="https://github.com/user-attachments/assets/dc7042f5-da20-44e4-8aa8-dea6b680705b" />
+
+<img width="1440" height="975" alt="Screenshot 2026-03-02 at 10 46 38 AM" src="https://github.com/user-attachments/assets/579c7052-cfa0-424e-8329-7793fc1d7ff6" />
+
+<img width="1437" height="971" alt="Screenshot 2026-03-02 at 10 47 08 AM" src="https://github.com/user-attachments/assets/6a7075d2-b0ab-49ba-89c3-9465d4cc418f" />
+
 # Sketches
 
 <img width="1995" height="2500" alt="01_CreatingContext" src="https://raw.githubusercontent.com/mnav0/thesis/refs/heads/main/sketches/01_CreatingContext.png" />
