@@ -102,7 +102,7 @@ export const mediumsById = ref({});
 export const artworks = ref([]);
 export const artistThemesMap = ref({}); // theme_id -> Set of artist ids
 export const institutionThemesMap = ref({}); // theme_id -> Set of artist ids
-export const groupBy = ref("artist"); // or 'institution' or 'theme' or 'medium'
+export const groupBy = ref("theme"); // or 'institution' or 'theme' or 'medium'
 
 export const groupedArtworks = computed(() => {
  if (groupBy.value === "artist") {
@@ -135,35 +135,33 @@ export const groupedArtworks = computed(() => {
 	});
 	return Object.values(groups);
  } else if (groupBy.value === "theme") {
-	 // Cluster by theme: for each theme, group all artists linked to that theme (from both artist_themes and institution_themes),
-	 // and for each artist, select a random artwork to represent them.
-	 const groups = [];
-	 const allThemes = Object.keys(themesById.value);
-	 for (const themeId of allThemes) {
-		 const theme = themesById.value[themeId];
-		 // Get all unique artist ids for this theme from both maps
-		 const artistSet = new Set();
-		 if (artistThemesMap.value[themeId]) {
-			 for (const aid of artistThemesMap.value[themeId]) artistSet.add(aid);
-		 }
-		 if (institutionThemesMap.value[themeId]) {
-			 for (const aid of institutionThemesMap.value[themeId]) artistSet.add(aid);
-		 }
-		 // For each artist, pick a random artwork
-		 const items = [];
-		 for (const artistId of artistSet) {
-			 const artistArtworks = artworks.value.filter(a => a.artist === artistId);
-			 if (artistArtworks.length > 0) {
-				 // Pick a random artwork for this artist
-				 const idx = Math.floor(Math.random() * artistArtworks.length);
-				 items.push(artistArtworks[idx]);
-			 }
-		 }
-		 if (items.length > 0) {
-			 groups.push({ name: theme.theme_title, items });
-		 }
-	 }
-	 return groups;
+   // Cluster by theme: for each theme, group all artists linked to that theme (from both artist_themes and institution_themes),
+   // and for each artist, include ALL their artworks.
+   const groups = [];
+   const allThemes = Object.keys(themesById.value);
+   for (const themeId of allThemes) {
+     const theme = themesById.value[themeId];
+     // Get all unique artist ids for this theme from both maps
+     const artistSet = new Set();
+     if (artistThemesMap.value[themeId]) {
+       for (const aid of artistThemesMap.value[themeId]) artistSet.add(aid);
+     }
+     if (institutionThemesMap.value[themeId]) {
+       for (const aid of institutionThemesMap.value[themeId]) artistSet.add(aid);
+     }
+     // For each artist, include ALL their artworks
+     let items = [];
+     for (const artistId of artistSet) {
+       const artistArtworks = artworks.value.filter(a => a.artist === artistId);
+       if (artistArtworks.length > 0) {
+         items = items.concat(artistArtworks);
+       }
+     }
+     if (items.length > 0) {
+       groups.push({ name: theme.theme_title, items });
+     }
+   }
+   return groups;
  }
  return [];
 });

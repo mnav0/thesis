@@ -27,10 +27,10 @@ onMounted(fetchAndParseData);
     <label>
       Cluster by:
       <select v-model="groupBy">
+        <option value="theme">Theme</option>
         <option value="artist">Artist</option>
         <option value="institution">Institution</option>
         <option value="medium">Medium</option>
-        <option value="theme">Theme</option>
       </select>
     </label>
     <div class="clusters-grid">

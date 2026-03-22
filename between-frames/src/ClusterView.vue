@@ -1,17 +1,106 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
+import DotTimeline from "./DotTimeline.vue";
+import { artistsById, institutionsById } from "./main.js";
+import artistThemesCSV from "./data/artist_themes.csv?raw";
+import institutionThemesCSV from "./data/institution_themes.csv?raw";
+
 const props = defineProps({
   cluster: Object,
   groupBy: String,
 });
 const emit = defineEmits(["close"]);
+
+// Parse CSV utility (copied from main.js)
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  const headers = lines[0]
+    .split(",")
+    .map((h) => h.trim().replace(/^"|"$/g, ""));
+  return lines.slice(1).map((line) => {
+    const values = [];
+    let current = "";
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') inQuotes = !inQuotes;
+      else if (char === "," && !inQuotes) {
+        values.push(current);
+        current = "";
+      } else current += char;
+    }
+    values.push(current);
+    const cleanedValues = values.map((v) => v.trim().replace(/^"|"$/g, ""));
+    const obj = {};
+    headers.forEach((h, i) => (obj[h] = cleanedValues[i]));
+    return obj;
+  });
+}
+
+const artistThemeRows = parseCSV(artistThemesCSV);
+const institutionThemeRows = parseCSV(institutionThemesCSV);
+
+const dotTimelineData = computed(() => {
+  if (props.groupBy !== "theme" || !props.cluster) return [];
+  const themeTitle = props.cluster.name;
+  // Get all theme rows for this theme from both sources
+  const artistRows = artistThemeRows.filter(
+    (row) => row.theme_title === themeTitle,
+  );
+  const institutionRows = institutionThemeRows.filter(
+    (row) => row.theme_title === themeTitle,
+  );
+  // Map to chart data format
+  const artistData = artistRows.map((row) => ({
+    artist: row.artist,
+    artistName: artistsById.value[row.artist]?.name || row.artist,
+    date: row.date,
+    theme_source_sentence: row.theme_source_sentence,
+    sourceType: "artist",
+    sourceName: artistsById.value[row.artist]?.name || row.artist,
+  }));
+  const institutionData = institutionRows.map((row) => ({
+    artist: row.artist,
+    artistName: artistsById.value[row.artist]?.name || row.artist,
+    date: row.date,
+    theme_source_sentence: row.theme_source_sentence,
+    sourceType: "institution",
+    sourceName:
+      institutionsById.value[row.institution]?.name || row.institution,
+  }));
+  // Merge and sort by date
+  return [...artistData, ...institutionData].sort((a, b) => +a.date - +b.date);
+});
+
+const dotTimelineArtworks = computed(() => {
+  if (props.groupBy !== "theme" || !props.cluster) return [];
+  // For each artist, show ALL artworks (not just one per artist/date)
+  return props.cluster.items
+    .filter((art) => art.date_created && art.artistName && art.image_url)
+    .map((art) => ({
+      artist: art.artist,
+      artistName: art.artistName,
+      date: art.date_created,
+      title: art.title,
+      image_url: art.image_url,
+    }));
+});
 </script>
 
 <template>
   <div class="cluster-view-fullpage">
     <button class="close-btn" @click="emit('close')">×</button>
     <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
-    <div class="cluster-view-artworks">
+    <div v-if="groupBy === 'theme'">
+      <DotTimeline
+        :data="dotTimelineData"
+        :artworks="dotTimelineArtworks"
+        :width="900"
+        :height="420"
+        :colorMap="{ artist: '#111', institution: '#fff' }"
+      />
+    </div>
+    <div v-else class="cluster-view-artworks">
       <div
         v-for="art in cluster.items"
         :key="art.title + art.image_url"
@@ -108,10 +197,6 @@ const emit = defineEmits(["close"]);
 .cluster-view-placeholder {
   width: 220px;
   height: 220px;
-  border: 2px solid #111;
-  background: none;
-  border-radius: 0;
-  margin-bottom: 0.7em;
 }
 .cluster-view-meta {
   text-align: center;

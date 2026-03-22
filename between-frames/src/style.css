@@ -40,7 +40,7 @@ h2 {
 .clusters-grid {
   display: flex;
   flex-wrap: wrap;
-  padding: 5rem;
+  padding: 5rem 0;
   gap: 5rem;
   justify-content: space-around;
 }
