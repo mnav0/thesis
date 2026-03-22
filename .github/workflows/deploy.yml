@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  VUEDIR: tracing-identity
+  VUEDIR: between-frames
 
 jobs:
   build:
