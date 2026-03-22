@@ -1,70 +1,16 @@
-// New robust data loader for both local and deployed (Vite ?raw import)
+import { createApp, ref, computed } from 'vue';
+import App from './App.vue';
+import './style.css';
 import artistsCSV from './data/artists.csv?raw';
 import institutionsCSV from './data/institutions.csv?raw';
 import artworksCSV from './data/artworks.csv?raw';
 
-export function fetchAndParseData() {
-	// Utility to parse CSV (simple, not handling quoted commas)
-	function parseCSV(text) {
-		const lines = text.trim().split(/\r?\n/);
-		const headers = lines[0].split(",");
-		return lines.slice(1).map((line) => {
-			const values = [];
-			let current = "";
-			let inQuotes = false;
-			for (let i = 0; i < line.length; i++) {
-				const char = line[i];
-				if (char === '"') inQuotes = !inQuotes;
-				else if (char === "," && !inQuotes) {
-					values.push(current);
-					current = "";
-				} else current += char;
-			}
-			values.push(current);
-			const obj = {};
-			headers.forEach((h, i) => (obj[h.trim()] = values[i]?.trim()));
-			return obj;
-		});
-	}
 
-	const artistArr = parseCSV(artistsCSV);
-	const institutionArr = parseCSV(institutionsCSV);
-	const artworkArr = parseCSV(artworksCSV);
-
-	// Build lookup maps
-	artistsById.value = Object.fromEntries(artistArr.map((a) => [a.id, a]));
-	institutionsById.value = Object.fromEntries(
-		institutionArr.map((i) => {
-			// Parse artists field as array
-			let artistIds = [];
-			try {
-				artistIds = JSON.parse(i.artists.replace(/'/g, '"'));
-			} catch {
-				artistIds = [];
-			}
-			return [i.id, { ...i, artistIds }];
-		}),
-	);
-
-	// Parse artworks, resolve artist/institution names
-	artworks.value = artworkArr.map((a) => ({
-		...a,
-		artistName: artistsById.value[a.artist]?.name || a.artist,
-		institutionName:
-			institutionsById.value[a.institution]?.name || a.institution,
-	}));
-}
-
-import { createApp, ref, computed } from 'vue';
-import App from './App.vue';
-import './style.css';
-
-// Utility to parse CSV (simple, not handling quoted commas)
+// Robust CSV parser: strips quotes from headers and values
 function parseCSV(text) {
 	const lines = text.trim().split(/\r?\n/);
-	const headers = lines[0].split(",");
+	const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
 	return lines.slice(1).map((line) => {
-		// Handle quoted fields and commas
 		const values = [];
 		let current = "";
 		let inQuotes = false;
@@ -77,10 +23,37 @@ function parseCSV(text) {
 			} else current += char;
 		}
 		values.push(current);
+		const cleanedValues = values.map(v => v.trim().replace(/^"|"$/g, ''));
 		const obj = {};
-		headers.forEach((h, i) => (obj[h.trim()] = values[i]?.trim()));
+		headers.forEach((h, i) => (obj[h] = cleanedValues[i]));
 		return obj;
 	});
+}
+
+export function fetchAndParseData() {
+	const artistArr = parseCSV(artistsCSV);
+	const institutionArr = parseCSV(institutionsCSV);
+	const artworkArr = parseCSV(artworksCSV);
+
+	// Build lookup maps
+	artistsById.value = Object.fromEntries(artistArr.map((a) => [a.id, a]));
+	institutionsById.value = Object.fromEntries(
+		institutionArr.map((i) => {
+			let artistIds = [];
+			try {
+				artistIds = JSON.parse(i.artists.replace(/'/g, '"'));
+			} catch {
+				artistIds = [];
+			}
+			return [i.id, { ...i, artistIds }];
+		})
+	);
+	artworks.value = artworkArr.map((a) => ({
+		...a,
+		artistName: artistsById.value[a.artist]?.name || a.artist,
+		institutionName:
+			institutionsById.value[a.institution]?.name || a.institution,
+	}));
 }
 
 export const artistsById = ref({});

@@ -1,0 +1,17 @@
+theme_id,theme_title,notes
+T01,Grief,Emotional loss; present in both artist and institution language
+T02,Vulnerability,Exposure and risk as intentional artistic stance; primarily artist-voiced
+T03,Bodily Autonomy,Right to self-representation through the body; primarily artist-voiced
+T04,Loneliness,Isolation and the search for connection; primarily artist-voiced
+T05,Belonging,Geographic and cultural rootedness or its absence
+T06,Nostalgia,The relationship to the past and inherited histories
+T07,Inherited Identity,Identity passed down through family lineage and legacy
+T08,Ancestry,Tracing biological and cultural origins; diasporic lineage
+T09,Racial Visibility,The politics of being seen or unseen as a racialized subject
+T10,Craft,Physical and devotional making as identity-forming practice
+T11,Feminism,Explicit feminist framing of practice; primarily institution-voiced
+T12,Multiethnicity,The lived condition of holding multiple ethnic and racial identities
+T13,Classification,Resistance to or critique of institutional labeling and ethnic categorization
+T14,Internment,Direct reference to Japanese American incarceration by the US government
+T15,Displacement,Movement between places as a structural condition of identity
+T16,Self-Portraiture,Use of one's own image or body as primary subject matter
