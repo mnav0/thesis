@@ -40,8 +40,9 @@ h2 {
 .clusters-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
+  padding: 5rem;
+  gap: 5rem;
+  justify-content: space-around;
 }
 .cluster-outer {
   display: flex;
@@ -61,8 +62,6 @@ h2 {
 }
 .cluster-container {
   position: relative;
-  width: 360px;
-  height: 360px;
   border-radius: 50%;
   overflow: visible;
 }

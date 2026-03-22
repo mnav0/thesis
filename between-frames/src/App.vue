@@ -8,6 +8,7 @@ import {
   fetchAndParseData,
   groupedArtworks,
   getClusterStyle,
+  computeClusterRadius,
 } from "./main.js";
 import ClusterView from "./ClusterView.vue";
 import "./style.css";
@@ -28,6 +29,8 @@ onMounted(fetchAndParseData);
       <select v-model="groupBy">
         <option value="artist">Artist</option>
         <option value="institution">Institution</option>
+        <option value="medium">Medium</option>
+        <option value="theme">Theme</option>
       </select>
     </label>
     <div class="clusters-grid">
@@ -39,14 +42,28 @@ onMounted(fetchAndParseData);
         <div
           class="cluster-container"
           @click="openCluster(group)"
-          style="cursor: pointer"
+          :style="{
+            cursor: 'pointer',
+            width:
+              Math.max(computeClusterRadius(group.items.length) * 2, 100) +
+              'px',
+            height:
+              Math.max(computeClusterRadius(group.items.length) * 2, 100) +
+              'px',
+          }"
         >
           <div class="cluster-center-label">{{ group.name }}</div>
           <div
             v-for="(art, idx) in group.items"
             :key="art.title + art.image_url"
             class="cluster-art"
-            :style="getClusterStyle(idx, group.items.length)"
+            :style="
+              getClusterStyle(
+                idx,
+                group.items.length,
+                Math.max(computeClusterRadius(group.items.length) * 2, 100),
+              )
+            "
           >
             <template v-if="art.image_url && art.image_url.trim() !== ''">
               <img :src="art.image_url" :alt="art.title" class="cluster-img" />
