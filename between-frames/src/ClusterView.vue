@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits, computed } from "vue";
 import DotTimeline from "./DotTimeline.vue";
-import { artistsById, institutionsById } from "./main.js";
+import { artistsById, institutionsById, artworks as allArtworks } from "./main.js";
 import artistThemesCSV from "./data/artist_themes.csv?raw";
 import institutionThemesCSV from "./data/institution_themes.csv?raw";
 
@@ -56,6 +56,7 @@ const dotTimelineData = computed(() => {
     artistName: artistsById.value[row.artist]?.name || row.artist,
     date: row.date,
     theme_source_sentence: row.theme_source_sentence,
+    is_artwork: row.theme_source && row.theme_source.startsWith("W"),
     sourceType: "artist",
     sourceName: artistsById.value[row.artist]?.name || row.artist,
   }));
@@ -74,10 +75,12 @@ const dotTimelineData = computed(() => {
 
 const dotTimelineArtworks = computed(() => {
   if (props.groupBy !== "theme" || !props.cluster) return [];
-  // For each artist, show ALL artworks (not just one per artist/date)
-  return props.cluster.items
-    .filter((art) => art.date_created && art.artistName && art.image_url)
-    .map((art) => ({
+  // Get all unique artist IDs in this cluster
+  const artistIds = new Set(props.cluster.items.map(art => art.artist));
+  // For those artists, gather all their artworks from the global artworks list
+  return allArtworks.value
+    .filter(art => artistIds.has(art.artist) && art.date_created && art.artistName && art.image_url)
+    .map(art => ({
       artist: art.artist,
       artistName: art.artistName,
       date: art.date_created,
@@ -95,8 +98,8 @@ const dotTimelineArtworks = computed(() => {
       <DotTimeline
         :data="dotTimelineData"
         :artworks="dotTimelineArtworks"
-        :width="900"
-        :height="420"
+        :width="1100"
+        :height="550"
         :colorMap="{ artist: '#111', institution: '#fff' }"
       />
     </div>

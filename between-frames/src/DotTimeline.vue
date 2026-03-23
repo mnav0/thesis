@@ -92,10 +92,9 @@ function render() {
     .style("font-family", "Kosugi, sans-serif");
 
   // Dots for theme statements (clustered like artworks)
-  // Filter out theme statement points where theme_source starts with 'W'
-  const filteredThemeData = props.data.filter(
-    (d) => !(d.theme_source && d.theme_source.startsWith("W")),
-  );
+  // Filter out theme statement points based on artwork title since it'll already be displayed
+  const filteredThemeData = props.data.filter(d => !d.is_artwork);
+
   const THEME_SIZE = 60;
   // Group theme points by artist and year
   const themeGroups = d3.groups(
@@ -172,8 +171,8 @@ function render() {
       tooltip.style("display", "none");
     });
 
-  // Dots for artworks (natural aspect ratio, max 48x48)
-  const ARTWORK_MAX = 60;
+  // Dots for artworks
+  const ARTWORK_SIZE = 72;
   const ARTWORK_HOVER_SCALE = 1.1;
   const artworkGroups = d3.groups(
     props.artworks,
@@ -197,7 +196,7 @@ function render() {
       if (imagesLoaded === totalImages) drawArtworks();
     };
     img.onerror = function () {
-      imageDims[a.image_url] = { w: ARTWORK_MAX, h: ARTWORK_MAX };
+      imageDims[a.image_url] = { w: ARTWORK_SIZE, h: ARTWORK_SIZE };
       imagesLoaded++;
       if (imagesLoaded === totalImages) drawArtworks();
     };
@@ -216,10 +215,10 @@ function render() {
         for (let i = 0; i < n; i++) {
           const d = artworks[i];
           const dims = imageDims[d.image_url] || {
-            w: ARTWORK_MAX,
-            h: ARTWORK_MAX,
+            w: ARTWORK_SIZE,
+            h: ARTWORK_SIZE,
           };
-          let scale = Math.min(ARTWORK_MAX / dims.w, ARTWORK_MAX / dims.h, 1);
+          let scale = Math.min(ARTWORK_SIZE / dims.w, ARTWORK_SIZE / dims.h, 1);
           let w = dims.w * scale;
           let h = dims.h * scale;
           let angle, r, dx, dy;
@@ -310,8 +309,8 @@ function render() {
     .style("font-size", "1em")
     .style("pointer-events", "none")
     .style("display", "none")
-    .style("max-width", "220px")
-    .style("min-width", "120px");
+    .style("max-width", "300px")
+    .style("min-width", "150px");
 }
 
 onMounted(render);

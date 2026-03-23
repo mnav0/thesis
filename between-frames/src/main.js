@@ -149,14 +149,15 @@ export const groupedArtworks = computed(() => {
      if (institutionThemesMap.value[themeId]) {
        for (const aid of institutionThemesMap.value[themeId]) artistSet.add(aid);
      }
-     // For each artist, include ALL their artworks
-     let items = [];
-     for (const artistId of artistSet) {
-       const artistArtworks = artworks.value.filter(a => a.artist === artistId);
-       if (artistArtworks.length > 0) {
-         items = items.concat(artistArtworks);
-       }
-     }
+		 // For each artist, include ONLY ONE of their artworks (randomly selected)
+		 let items = [];
+		 for (const artistId of artistSet) {
+			 const artistArtworks = artworks.value.filter(a => a.artist === artistId);
+			 if (artistArtworks.length > 0) {
+				 const randomIdx = Math.floor(Math.random() * artistArtworks.length);
+				 items.push(artistArtworks[randomIdx]);
+			 }
+		 }
      if (items.length > 0) {
        groups.push({ name: theme.theme_title, items });
      }
