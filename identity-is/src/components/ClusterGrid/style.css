@@ -1,8 +1,8 @@
 .clusters-grid {
   display: flex;
   flex-wrap: wrap;
-  padding: 5rem 0;
-  gap: 5rem;
+  padding: 2rem 0;
+  gap: 2.5rem;
   justify-content: space-around;
 }
 .cluster-outer {
@@ -22,7 +22,6 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-weight: bold;
   font-size: 2.1em;
   color: #222;
   background: rgba(255, 255, 255, 0.92);

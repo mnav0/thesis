@@ -23,8 +23,10 @@ export const groupBy = ref("theme");
 // Pre-parsed theme rows (available after module load, no need to re-parse in components)
 export const artistThemeRows = parseCSV(artistThemesCSV);
 export const institutionThemeRows = parseCSV(institutionThemesCSV);
-
-// --- Bootstrap ---
+export const themeRows = parseCSV(themesCSV);
+export const themePreviewTitles = computed(() =>
+  themeRows.map((row) => row.theme_title).filter(Boolean),
+);
 
 export function fetchAndParseData() {
   const artistArr = parseCSV(artistsCSV);

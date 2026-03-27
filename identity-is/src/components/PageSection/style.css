@@ -1,0 +1,53 @@
+.page-section {
+  width: 100%;
+  height: min(100svh, 900px);
+}
+
+.page-section-texture {
+  opacity: 1;
+}
+
+.page-section-content {
+  height: 100%;
+}
+
+.page-section-heading-block {
+  margin-bottom: 1.5rem;
+}
+
+.page-section-heading-block .page-section-heading {
+  margin-top: 0;
+}
+
+.page-section-subheading {
+  margin: 1.5rem 0 0;
+}
+
+.page-section-body--stacked {
+  margin-top: auto;
+  padding-top: 4rem;
+}
+
+.page-section-heading :deep(i),
+.page-section-heading :deep(em) {
+  font-style: italic;
+}
+
+.page-section-subheading :deep(u) {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.page-section-body--relaxed {
+  padding-top: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .page-section-body--stacked {
+    padding-top: 5rem;
+  }
+
+  .page-section-body--relaxed {
+    padding-top: 7rem;
+  }
+}

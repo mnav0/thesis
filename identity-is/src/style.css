@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Kosugi&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-  background: url("/background.svg") no-repeat center center fixed;
-  background-size: cover;
   min-height: 100vh;
   min-width: 100vw;
   font-family: "Kosugi", sans-serif;
   margin: 0;
-  padding: 2em;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -15,19 +16,43 @@ h1 {
   text-align: center;
   margin-bottom: 1em;
   font-family: "Instrument Serif", serif;
-  font-size: 3.2em;
+  font-size: 4rem;
   letter-spacing: 0.01em;
 }
 
 h2 {
   margin-top: 1.5em;
   color: #333;
-  font-size: 2.2em;
+  font-size: 6rem;
+  line-height: 1.05;
   font-family: "Instrument Serif", serif;
+}
+
+.page-section--dark h2 {
+  color: #fff;
+}
+
+h3 {
+  font-family: "Kosugi", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+p,
+li,
+span {
+  font-family: "Kosugi", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
 }
 
 select {
   font-family: "Kosugi", sans-serif;
   margin-left: 0.5em;
   padding: 0.2em 0.5em;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }

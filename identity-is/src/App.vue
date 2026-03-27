@@ -3,6 +3,10 @@ import { ref, onMounted } from "vue";
 import { fetchAndParseData, groupBy, groupedArtworks } from "./data/index.js";
 import ClusterGrid from "./components/ClusterGrid/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
+import PageSection from "./components/PageSection/index.vue";
+import ClusterPreview from "./components/ClusterPreview/index.vue";
+import ActorsPreview from "./components/ActorsPreview/index.vue";
+import ExhibitionsGraph from "./components/ExhibitionsGraph/index.vue";
 
 const expandedCluster = ref(null);
 
@@ -10,23 +14,70 @@ onMounted(fetchAndParseData);
 </script>
 
 <template>
-  <div class="page">
-    <label>
-      Cluster by:
-      <select v-model="groupBy">
-        <option value="theme">Theme</option>
-        <option value="artist">Artist</option>
-        <option value="institution">Institution</option>
-        <option value="medium">Medium</option>
-      </select>
-    </label>
+  <main class="w-full">
+    <PageSection tone="dark" layout="split" heading="Identity is">
+      <ClusterPreview />
+    </PageSection>
 
-    <section class="cluster-section">
-      <ClusterGrid
-        :groups="groupedArtworks"
-        @select="expandedCluster = $event"
-      />
-    </section>
+    <PageSection
+      tone="light"
+      layout="stacked"
+      texture-preset="rightSoft"
+      heading="Making art provides a way to <i>process</i>, <i>define</i>, and <i>express</i> complex identities."
+    >
+      <ActorsPreview />
+    </PageSection>
+
+    <PageSection tone="light" layout="split" texture-preset="leftDual">
+      <div
+        class="grid h-full grid-cols-12 content-between gap-x-2 gap-y-8 md:grid-rows-[auto_1fr_auto] md:gap-x-4"
+      >
+        <h2 class="col-span-12 m-0 md:col-span-5">
+          What makes up a persona*?
+        </h2>
+        <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
+        <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
+          <img src="/persona.svg" alt="" class="w-full max-w-[28rem]" role="presentation" />
+        </div>
+        <p class="col-span-12 mt-8 md:row-start-3 md:self-end">
+          *A representation of artist identity constructed from texts that
+          contextualize their work.
+        </p>
+      </div>
+    </PageSection>
+
+    <PageSection
+      tone="dark"
+      layout="stacked"
+      texture-preset="rightDual"
+      stacked-body-gap="relaxed"
+      heading="What makes up a persona?"
+      subheading="...for modern and contemporary artists selected from <u>exhibitions</u> curated surrounding the experience of mixed-race and Asian-American identity."
+    >
+      <ExhibitionsGraph />
+    </PageSection>
+
+    <PageSection tone="light" layout="stacked" texture-preset="mixed" stacked-full-width>
+      <div class="grid grid-cols-12 gap-x-2 gap-y-4 md:gap-x-4">
+        <div class="col-span-12">
+          <label>
+            Cluster by:
+            <select v-model="groupBy" class="ml-2 border border-black bg-white px-2 py-1">
+              <option value="theme">Theme</option>
+              <option value="artist">Artist</option>
+              <option value="institution">Institution</option>
+              <option value="medium">Medium</option>
+            </select>
+          </label>
+        </div>
+        <div class="col-span-12">
+          <ClusterGrid
+            :groups="groupedArtworks"
+            @select="expandedCluster = $event"
+          />
+        </div>
+      </div>
+    </PageSection>
 
     <ClusterView
       v-if="expandedCluster"
@@ -34,7 +85,5 @@ onMounted(fetchAndParseData);
       :groupBy="groupBy"
       @close="expandedCluster = null"
     />
-  </div>
+  </main>
 </template>
-
-<style scoped src="./App.css"></style>
