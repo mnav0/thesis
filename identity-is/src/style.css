@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Kosugi&display=swap");
+
+body {
+  background: url("/background.svg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+  font-family: "Kosugi", sans-serif;
+  margin: 0;
+  padding: 2em;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1em;
+  font-family: "Instrument Serif", serif;
+  font-size: 3.2em;
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  margin-top: 1.5em;
+  color: #333;
+  font-size: 2.2em;
+  font-family: "Instrument Serif", serif;
+}
+
+select {
+  font-family: "Kosugi", sans-serif;
+  margin-left: 0.5em;
+  padding: 0.2em 0.5em;
+}

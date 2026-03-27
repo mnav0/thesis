@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  VUEDIR: between-frames
+  VUEDIR: identity-is
 
 jobs:
   build:

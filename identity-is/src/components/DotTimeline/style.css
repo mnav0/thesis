@@ -1,0 +1,6 @@
+.dot-timeline-root {
+  width: 100vw;
+  min-height: 600px;
+  position: relative;
+  overflow-x: auto;
+}
