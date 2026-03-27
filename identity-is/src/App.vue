@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { fetchAndParseData, groupBy, groupedArtworks } from "./data/index.js";
 import ClusterGrid from "./components/ClusterGrid/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
@@ -10,12 +10,29 @@ import ExhibitionsGraph from "./components/ExhibitionsGraph/index.vue";
 
 const expandedCluster = ref(null);
 
-onMounted(fetchAndParseData);
+const firstSectionTone = ref("dark");
+const firstSectionHeading = ref("Identity is");
+
+let firstSectionSwapTimeout = null;
+
+onMounted(() => {
+  fetchAndParseData();
+
+  firstSectionSwapTimeout = window.setTimeout(() => {
+    firstSectionTone.value = "light";
+    firstSectionHeading.value =
+      "Identity is<br/><i>not defined</i><br/><i>by one label</i><br/><i>or field.</i>";
+  }, 3000);
+});
+
+onBeforeUnmount(() => {
+  if (firstSectionSwapTimeout) window.clearTimeout(firstSectionSwapTimeout);
+});
 </script>
 
 <template>
   <main class="w-full">
-    <PageSection tone="dark" layout="split" heading="Identity is">
+    <PageSection :tone="firstSectionTone" layout="split" :heading="firstSectionHeading">
       <ClusterPreview />
     </PageSection>
 

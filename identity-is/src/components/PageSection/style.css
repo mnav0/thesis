@@ -1,10 +1,74 @@
 .page-section {
   width: 100%;
   height: min(100svh, 900px);
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: inherit;
+
+  /* Smooth tone transitions (used when `tone` prop changes). */
+  transition:
+    background-color 800ms ease,
+    border-color 800ms ease,
+    color 800ms ease;
+}
+
+.page-section--dark {
+  background-color: #000;
+  border-color: transparent;
+  color: #fff;
+}
+
+.page-section--light {
+  background-color: #fff;
+  border-color: #000;
+  color: #333;
+}
+
+.page-section-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 800ms ease;
+}
+
+.page-section--light .page-section-background {
+  opacity: 1;
 }
 
 .page-section-texture {
   opacity: 1;
+}
+
+.texture-fade-enter-active,
+.texture-fade-leave-active {
+  transition: opacity 800ms ease;
+}
+
+.texture-fade-enter-from,
+.texture-fade-leave-to {
+  opacity: 0;
+}
+
+.page-section :deep(h2),
+.page-section :deep(h3) {
+  transition: color 800ms ease;
+}
+
+.page-section :deep(.cluster-preview-item) {
+  --cluster-theme-fg: currentColor;
+  color: var(--cluster-theme-fg);
+  transition: color 800ms ease;
+}
+
+.page-section--dark :deep(.cluster-preview-item) {
+  --cluster-theme-fg: #fff;
+}
+
+.page-section--light :deep(.cluster-preview-item) {
+  /* Slightly muted grey (not full black) for the side themes. */
+  --cluster-theme-fg: #b8b8b8;
 }
 
 .page-section-content {

@@ -74,19 +74,15 @@ const textures = computed(
 
 const sectionClasses = computed(() => [
   "page-section relative overflow-hidden",
-  isLight.value ? "border border-black" : "page-section--dark bg-black text-white",
+  isLight.value ? "page-section--light" : "page-section--dark",
 ]);
 
-const sectionStyles = computed(() =>
-  isLight.value
-    ? {
-        backgroundImage: "url('/background.svg')",
-        backgroundRepeat: "repeat",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }
-    : {},
-);
+const backgroundStyles = {
+  backgroundImage: "url('/background.svg')",
+  backgroundRepeat: "repeat",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+};
 
 const stackedBodyClass = computed(() =>
   props.stackedBodyGap === "relaxed"
@@ -102,21 +98,24 @@ const stackedInnerColClass = computed(() =>
 </script>
 
 <template>
-  <section :class="sectionClasses" :style="sectionStyles">
-    <div
-      v-if="isLight"
-      class="pointer-events-none absolute -inset-x-28 -inset-y-40 z-0"
-      aria-hidden="true"
-    >
-      <img
-        v-for="(texture, index) in textures"
-        :key="`${texturePreset}-${index}`"
-        src="/texture.svg"
-        alt=""
-        class="page-section-texture absolute"
-        :style="texture"
-      />
-    </div>
+  <section :class="sectionClasses">
+    <div class="page-section-background" aria-hidden="true" :style="backgroundStyles" />
+    <transition name="texture-fade">
+      <div
+        v-if="isLight"
+        class="pointer-events-none absolute -inset-x-28 -inset-y-40 z-1"
+        aria-hidden="true"
+      >
+        <img
+          v-for="(texture, index) in textures"
+          :key="`${texturePreset}-${index}`"
+          src="/texture.svg"
+          alt=""
+          class="page-section-texture absolute"
+          :style="texture"
+        />
+      </div>
+    </transition>
 
     <div
       class="page-section-content relative z-10 mx-auto w-full max-w-[1600px] px-4 py-20 md:px-8 md:py-28"
