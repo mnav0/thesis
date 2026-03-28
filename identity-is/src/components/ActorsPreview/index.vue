@@ -1,27 +1,32 @@
 <script setup>
+import { publicImgSrc } from "../../utils/public-img-src.js";
+
 const actors = [
-  { key: "artist", 
-    label: "Artist", 
-    icon: "/artist.svg", 
-    top: "10%", 
-    left: "0%" 
+  {
+    key: "artist",
+    label: "Artist",
+    icon: publicImgSrc("artist.svg"),
+    top: "10%",
+    left: "0%",
   },
-  { key: "persona", 
-    label: "Persona", 
-    icon: "/persona.svg", 
-    top: "80%", 
-    left: "20%" 
+  {
+    key: "persona",
+    label: "Persona",
+    icon: publicImgSrc("persona.svg"),
+    top: "80%",
+    left: "20%",
   },
-  { key: "artwork", 
-    label: "Artwork", 
-    icon: "/artwork.svg", 
-    top: "20%", 
-    left: "50%" 
+  {
+    key: "artwork",
+    label: "Artwork",
+    icon: publicImgSrc("artwork.svg"),
+    top: "20%",
+    left: "50%",
   },
   {
     key: "institution",
     label: "Institution",
-    icon: "/institution.svg",
+    icon: publicImgSrc("institution.svg"),
     top: "60%",
     left: "70%",
   },

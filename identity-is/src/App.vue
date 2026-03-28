@@ -7,8 +7,11 @@ import PageSection from "./components/PageSection/index.vue";
 import ClusterPreview from "./components/ClusterPreview/index.vue";
 import ActorsPreview from "./components/ActorsPreview/index.vue";
 import ExhibitionsGraph from "./components/ExhibitionsGraph/index.vue";
+import { publicImgSrc } from "./utils/public-img-src.js";
 
 const expandedCluster = ref(null);
+
+const personaSectionIllustrationSrc = publicImgSrc("persona.svg");
 
 const firstSectionTone = ref("dark");
 const firstSectionHeading = ref("Identity is");
@@ -54,7 +57,12 @@ onBeforeUnmount(() => {
         </h2>
         <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
         <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
-          <img src="/persona.svg" alt="" class="w-full max-w-[28rem]" role="presentation" />
+          <img
+            :src="personaSectionIllustrationSrc"
+            alt=""
+            class="w-full max-w-[28rem]"
+            role="presentation"
+          />
         </div>
         <p class="col-span-12 mt-8 md:row-start-3 md:self-end">
           *A representation of artist identity constructed from texts that

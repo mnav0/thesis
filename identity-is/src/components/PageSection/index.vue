@@ -4,6 +4,7 @@ import {
   DEFAULT_TEXTURE_PRESET,
   SECTION_TEXTURE_PRESETS,
 } from "../../constants/section-texture-presets.js";
+import { publicImgSrc } from "../../utils/public-img-src.js";
 
 const props = defineProps({
   tone: {
@@ -77,12 +78,14 @@ const sectionClasses = computed(() => [
   isLight.value ? "page-section--light" : "page-section--dark",
 ]);
 
-const backgroundStyles = {
-  backgroundImage: "url('/background.svg')",
+const textureSrc = publicImgSrc("texture.svg");
+
+const backgroundStyles = computed(() => ({
+  backgroundImage: `url('${publicImgSrc("background.svg")}')`,
   backgroundRepeat: "repeat",
   backgroundPosition: "center",
   backgroundSize: "cover",
-};
+}));
 
 const stackedBodyClass = computed(() =>
   props.stackedBodyGap === "relaxed"
@@ -109,7 +112,7 @@ const stackedInnerColClass = computed(() =>
         <img
           v-for="(texture, index) in textures"
           :key="`${texturePreset}-${index}`"
-          src="/texture.svg"
+          :src="textureSrc"
           alt=""
           class="page-section-texture absolute"
           :style="texture"
