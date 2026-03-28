@@ -6,7 +6,7 @@ import ClusterView from "./components/ClusterView/index.vue";
 import PageSection from "./components/PageSection/index.vue";
 import ClusterPreview from "./components/ClusterPreview/index.vue";
 import ActorsPreview from "./components/ActorsPreview/index.vue";
-import ExhibitionsGraph from "./components/ExhibitionsGraph/index.vue";
+import ExhibitionsSankey from "./components/ExhibitionsSankey/index.vue";
 import { publicImgSrc } from "./utils/public-img-src.js";
 
 const expandedCluster = ref(null);
@@ -60,7 +60,7 @@ onBeforeUnmount(() => {
         class="grid h-full grid-cols-12 content-between gap-x-2 gap-y-8 md:grid-rows-[auto_1fr_auto] md:gap-x-4"
       >
         <h2 class="col-span-12 m-0 md:col-span-5">
-          What makes up a persona*?
+          What makes up a persona...*
         </h2>
         <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
         <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
@@ -83,10 +83,9 @@ onBeforeUnmount(() => {
       layout="stacked"
       texture-preset="rightDual"
       stacked-body-gap="relaxed"
-      heading="What makes up a persona?"
-      subheading="...for modern and contemporary artists selected from <u>exhibitions</u> curated surrounding the experience of mixed-race and Asian-American identity."
+      subheading="...of modern and contemporary artists curated from exhibitions about the experience of mixed-race and Asian-American identity?"
     >
-      <ExhibitionsGraph />
+      <ExhibitionsSankey />
     </PageSection>
 
     <PageSection tone="light" layout="stacked" texture-preset="mixed" stacked-full-width>
