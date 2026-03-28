@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import { fetchAndParseData, groupBy, groupedArtworks } from "./data/index.js";
+import { groupBy, groupedArtworks } from "./data/index.js";
 import ClusterGrid from "./components/ClusterGrid/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
 import PageSection from "./components/PageSection/index.vue";
@@ -15,11 +15,18 @@ const personaSectionIllustrationSrc = publicImgSrc("persona.svg");
 
 const firstSectionTone = ref("dark");
 const firstSectionHeading = ref("Identity is");
+const shellReady = ref(false);
 
 let firstSectionSwapTimeout = null;
 
 onMounted(() => {
-  fetchAndParseData();
+  const fontWait =
+    typeof document !== "undefined" && document.fonts?.ready
+      ? document.fonts.ready
+      : Promise.resolve();
+  Promise.race([fontWait, new Promise((r) => setTimeout(r, 500))]).then(() => {
+    shellReady.value = true;
+  });
 
   firstSectionSwapTimeout = window.setTimeout(() => {
     firstSectionTone.value = "light";
@@ -34,7 +41,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="w-full">
+  <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
     <PageSection :tone="firstSectionTone" layout="split" :heading="firstSectionHeading">
       <ClusterPreview />
     </PageSection>
