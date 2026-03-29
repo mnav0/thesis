@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useSlots } from "vue";
+import { computed, ref, useSlots } from "vue";
 import {
   DEFAULT_TEXTURE_PRESET,
   SECTION_TEXTURE_PRESETS,
@@ -98,10 +98,13 @@ const stackedInnerColClass = computed(() =>
     ? "col-span-12 flex h-full flex-col"
     : "col-span-12 flex h-full flex-col md:col-span-9 md:col-start-1",
 );
+
+const sectionEl = ref(null);
+defineExpose({ sectionEl });
 </script>
 
 <template>
-  <section :class="sectionClasses">
+  <section ref="sectionEl" :class="sectionClasses">
     <div class="page-section-background" aria-hidden="true" :style="backgroundStyles" />
     <transition name="texture-fade">
       <div

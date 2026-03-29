@@ -64,3 +64,79 @@ select {
 .app-shell--ready {
   opacity: 1;
 }
+
+/* Section 1 dual-heading support */
+.page-section-heading {
+  position: relative;
+}
+
+.s1-short,
+.s1-expanded {
+  display: block;
+  font: inherit;
+  color: inherit;
+}
+
+.s1-expanded {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+/* Floating persona for section 2→3 transition */
+.floating-persona {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+}
+
+.floating-persona__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Invisible anchors inside scroll content mark start/end positions */
+.exhibitions-bridge-anchor {
+  height: 1px;
+  pointer-events: none;
+}
+
+/* Fixed label outside #smooth-wrapper (same pattern as .floating-persona) */
+.exhibitions-bridge-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+}
+
+/* Mirrors the viz container so text centres on the inner plot band */
+.exhibitions-bridge-label__track {
+  max-width: 1100px; /* EXHIBITIONS_VIZ_MAX_WIDTH_PX */
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 200px; /* EXHIBITIONS_VIZ_MARGIN.left */
+  padding-right: 220px; /* EXHIBITIONS_VIZ_MARGIN.right */
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.exhibitions-bridge-label__inner {
+  display: inline-block;
+  font-family: "Kosugi", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.exhibitions-bridge-label__suffix {
+  opacity: 0;
+}

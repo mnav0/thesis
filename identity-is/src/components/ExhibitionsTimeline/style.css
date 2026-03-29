@@ -1,0 +1,12 @@
+.exhibitions-timeline {
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+  position: relative;
+  color: #fff;
+}
+
+.exhibitions-timeline :deep(svg) {
+  display: block;
+  width: 100%;
+}

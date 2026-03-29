@@ -3,14 +3,24 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import * as d3 from "d3";
 import { sankey as d3Sankey, sankeyLinkHorizontal, sankeyLeft } from "d3-sankey";
 import { createTooltip } from "../../utils/d3/tooltip.js";
+import {
+  escapeHtml,
+  exhibitionTooltipShowOptions,
+} from "../../utils/exhibition-tooltip.js";
+import {
+  EXHIBITIONS_LINK_STROKE_PX,
+  EXHIBITIONS_NODE_SIZE_PX,
+  EXHIBITIONS_VIZ_MARGIN,
+  EXHIBITIONS_VIZ_MAX_WIDTH_PX,
+} from "../../constants/exhibitions-viz.js";
 import { FONT_SANS } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
 
-const NODE_WIDTH = 8;
+const NODE_WIDTH = EXHIBITIONS_NODE_SIZE_PX;
 const NODE_PADDING = 20;
 const LABEL_FONT_PX = 13;
-const LINK_STROKE = 1.1;
+const LINK_STROKE = EXHIBITIONS_LINK_STROKE_PX;
 
 const containerRef = ref(null);
 
@@ -222,14 +232,6 @@ function wrapExhibitionTitle(name) {
   return fixWidowLastLine(wrapGreedyWords(trimmed, max), max);
 }
 
-function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 const graphData = computed(() => {
   const exhibitionRows = d3.csvParse(exhibitionsCSV);
   const exhibitions = exhibitionRows.map((r) => ({
@@ -290,7 +292,7 @@ function renderChart() {
 
   const width = root.clientWidth || 900;
   const height = root.clientHeight || 520;
-  const margin = { top: 12, right: 220, bottom: 12, left: 200 };
+  const margin = EXHIBITIONS_VIZ_MARGIN;
 
   const sankeyLayout = d3Sankey()
     .nodeWidth(NODE_WIDTH)
@@ -335,50 +337,45 @@ function renderChart() {
     .enter()
     .append("g");
 
+  function nodeFill(d) {
+    return d.type === "exhibition" ? "#fff" : "#000";
+  }
+
+  function nodeFillHover(d) {
+    return d.type === "exhibition" ? "#eee" : "#111";
+  }
+
   nodeGroup
     .append("rect")
     .attr("x", (d) => d.x0)
     .attr("y", (d) => d.y0)
     .attr("height", (d) => Math.max(1, d.y1 - d.y0))
     .attr("width", (d) => d.x1 - d.x0)
-    .attr("fill", "#000")
+    .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
     .attr("rx", 1)
     .style("cursor", "pointer")
     .on("mouseover", function (event, d) {
-      d3.select(this).attr("fill", "#111").attr("stroke-width", 2);
+      d3.select(this).attr("fill", nodeFillHover(d)).attr("stroke-width", 2);
       if (d.type === "exhibition") {
-        const year = d.startYear
-          ? `<div style="margin-top:2px">${escapeHtml(d.startYear)}</div>`
-          : "";
-        const loc = d.location
-          ? `<div style="margin-top:4px">${escapeHtml(d.location)}</div>`
-          : "";
-        const n = d.sourceLinks.length;
-        show(event, {
-          bg: "#fff",
-          fg: "#111",
-          border: "#111",
-          html: `<div><strong>${escapeHtml(d.name)}</strong></div>${year}${loc}
-                 <div style="margin-top:4px">${n} artist${n !== 1 ? "s" : ""}</div>`,
-        });
+        show(event, exhibitionTooltipShowOptions(d, d.sourceLinks.length));
       } else {
         const n = d.targetLinks.length;
         const life = d.lifeLine
           ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>`
           : "";
         show(event, {
-          bg: "#fff",
-          fg: "#111",
-          border: "#111",
+          bg: "#000",
+          fg: "#fff",
+          border: "#fff",
           html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}
                  <div style="margin-top:4px">${n} exhibition${n !== 1 ? "s" : ""}</div>`,
         });
       }
     })
-    .on("mouseout", function () {
-      d3.select(this).attr("fill", "#000").attr("stroke-width", 1);
+    .on("mouseout", function (event, d) {
+      d3.select(this).attr("fill", nodeFill(d)).attr("stroke-width", 1);
       hide();
     });
 
@@ -455,7 +452,11 @@ watch(graphData, renderChart, { deep: true });
 </script>
 
 <template>
-  <div ref="containerRef" class="exhibitions-sankey"></div>
+  <div
+    ref="containerRef"
+    class="exhibitions-sankey"
+    :style="{ maxWidth: `${EXHIBITIONS_VIZ_MAX_WIDTH_PX}px` }"
+  ></div>
 </template>
 
 <style scoped src="./style.css"></style>

@@ -39,6 +39,7 @@ const actors = [
       v-for="actor in actors"
       :key="actor.key"
       class="actors-preview__cell"
+      :data-actor="actor.key"
       :style="{ top: actor.top, left: actor.left }"
     >
       <img

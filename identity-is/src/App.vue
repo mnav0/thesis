@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { groupBy, groupedArtworks } from "./data/index.js";
 import ClusterGrid from "./components/ClusterGrid/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
@@ -7,17 +7,39 @@ import PageSection from "./components/PageSection/index.vue";
 import ClusterPreview from "./components/ClusterPreview/index.vue";
 import ActorsPreview from "./components/ActorsPreview/index.vue";
 import ExhibitionsSankey from "./components/ExhibitionsSankey/index.vue";
+import ExhibitionsTimeline from "./components/ExhibitionsTimeline/index.vue";
 import { publicImgSrc } from "./utils/public-img-src.js";
+import {
+  destroyAppScrollAnimations,
+  initAppScrollAnimations,
+} from "./utils/scroll-app-animations.js";
 
 const expandedCluster = ref(null);
-
 const personaSectionIllustrationSrc = publicImgSrc("persona.svg");
-
-const firstSectionTone = ref("dark");
-const firstSectionHeading = ref("Identity is");
 const shellReady = ref(false);
+const firstSectionTone = ref("dark");
 
-let firstSectionSwapTimeout = null;
+const section1HeadingHtml = [
+  '<span class="s1-short">Identity is</span>',
+  '<span class="s1-expanded">Identity is<br/><i>not defined</i><br/><i>by one label</i><br/><i>or field.</i></span>',
+].join("");
+
+const section1Ref = ref(null);
+const section2Ref = ref(null);
+const section3Ref = ref(null);
+const timelineRef = ref(null);
+const sankeyRef = ref(null);
+const exhibitionsLabelRef = ref(null);
+const exhibitionsAnchorStartRef = ref(null);
+const exhibitionsAnchorEndRef = ref(null);
+const section3PersonaRef = ref(null);
+const floatingPersonaRef = ref(null);
+
+let smoother = null;
+
+function getSectionEl(compRef) {
+  return compRef.value?.sectionEl ?? compRef.value?.$el;
+}
 
 onMounted(() => {
   const fontWait =
@@ -26,95 +48,146 @@ onMounted(() => {
       : Promise.resolve();
   Promise.race([fontWait, new Promise((r) => setTimeout(r, 500))]).then(() => {
     shellReady.value = true;
+    nextTick(() => {
+      smoother = initAppScrollAnimations({
+        section1El: getSectionEl(section1Ref),
+        section2El: getSectionEl(section2Ref),
+        section3El: getSectionEl(section3Ref),
+        sectionAfterS3El: getSectionEl(timelineRef),
+        floatingPersonaEl: floatingPersonaRef.value,
+        section3PersonaImg: section3PersonaRef.value,
+        onFirstSectionToneChange: (tone) => {
+          firstSectionTone.value = tone;
+        },
+        exhibitionsLabelEl: exhibitionsLabelRef.value,
+        exhibitionsAnchorStartEl: exhibitionsAnchorStartRef.value,
+        exhibitionsAnchorEndEl: exhibitionsAnchorEndRef.value,
+        sankeySectionEl: getSectionEl(sankeyRef),
+      });
+    });
   });
-
-  firstSectionSwapTimeout = window.setTimeout(() => {
-    firstSectionTone.value = "light";
-    firstSectionHeading.value =
-      "Identity is<br/><i>not defined</i><br/><i>by one label</i><br/><i>or field.</i>";
-  }, 3000);
 });
 
 onBeforeUnmount(() => {
-  if (firstSectionSwapTimeout) window.clearTimeout(firstSectionSwapTimeout);
+  destroyAppScrollAnimations(smoother);
 });
 </script>
 
 <template>
-  <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
-    <PageSection :tone="firstSectionTone" layout="split" :heading="firstSectionHeading">
-      <ClusterPreview />
-    </PageSection>
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
+        <!-- Section 1 ─ Identity intro -->
+        <PageSection
+          ref="section1Ref"
+          :tone="firstSectionTone"
+          layout="split"
+          :heading-html="section1HeadingHtml"
+        >
+          <ClusterPreview />
+        </PageSection>
 
-    <PageSection
-      tone="light"
-      layout="stacked"
-      texture-preset="rightSoft"
-      heading="Making art provides a way to <i>process</i>, <i>define</i>, and <i>express</i> complex identities."
-    >
-      <ActorsPreview />
-    </PageSection>
+        <!-- Section 2 ─ Actors (pinned for persona growth) -->
+        <PageSection
+          ref="section2Ref"
+          tone="light"
+          layout="stacked"
+          texture-preset="rightSoft"
+          heading="Making art provides a way to <i>process</i>, <i>define</i>, and <i>express</i> complex identities."
+        >
+          <ActorsPreview />
+        </PageSection>
 
-    <PageSection tone="light" layout="split" texture-preset="leftDual">
-      <div
-        class="grid h-full grid-cols-12 content-between gap-x-2 gap-y-8 md:grid-rows-[auto_1fr_auto] md:gap-x-4"
-      >
-        <h2 class="col-span-12 m-0 md:col-span-5">
-          What makes up a persona...*
-        </h2>
-        <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
-        <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
-          <img
-            :src="personaSectionIllustrationSrc"
-            alt=""
-            class="w-full max-w-[28rem]"
-            role="presentation"
-          />
+        <!-- Section 3 ─ Persona content (always visible text) -->
+        <PageSection ref="section3Ref" tone="light" layout="split" texture-preset="leftDual">
+          <div
+            class="grid h-full grid-cols-12 content-between gap-x-2 gap-y-8 md:grid-rows-[auto_1fr_auto] md:gap-x-4"
+          >
+            <h2 class="col-span-12 m-0 md:col-span-5">
+              What makes up a persona?*
+            </h2>
+            <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
+            <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
+              <img
+                ref="section3PersonaRef"
+                :src="personaSectionIllustrationSrc"
+                alt=""
+                class="w-full max-w-[28rem]"
+                role="presentation"
+              />
+            </div>
+            <p class="col-span-12 mt-8 md:row-start-3 md:self-end">
+              *A representation of artist identity constructed from texts that
+              contextualize their work.
+            </p>
+          </div>
+        </PageSection>
+
+        <!-- Exhibition section -->
+        <PageSection
+          ref="timelineRef"
+          tone="dark"
+          layout="stacked"
+          heading="...for modern and contemporary artists selected from exhibitions about the experience of mixed-race and Asian-American identity?"
+        >
+          <ExhibitionsTimeline />
+          <div ref="exhibitionsAnchorStartRef" class="exhibitions-bridge-anchor" aria-hidden="true"></div>
+        </PageSection>
+
+        <!-- Sankey section -->
+        <PageSection ref="sankeyRef" tone="dark" layout="stacked">
+          <div ref="exhibitionsAnchorEndRef" class="exhibitions-bridge-anchor mb-6" aria-hidden="true"></div>
+          <ExhibitionsSankey />
+        </PageSection>
+
+        <!-- Cluster explorer -->
+        <PageSection tone="light" layout="stacked" texture-preset="mixed" stacked-full-width>
+          <div class="grid grid-cols-12 gap-x-2 gap-y-4 md:gap-x-4">
+            <div class="col-span-12">
+              <label>
+                Cluster by:
+                <select v-model="groupBy" class="ml-2 border border-black bg-white px-2 py-1">
+                  <option value="theme">Theme</option>
+                  <option value="artist">Artist</option>
+                  <option value="institution">Institution</option>
+                  <option value="medium">Medium</option>
+                </select>
+              </label>
+            </div>
+            <div class="col-span-12">
+              <ClusterGrid
+                :groups="groupedArtworks"
+                @select="expandedCluster = $event"
+              />
+            </div>
+          </div>
+        </PageSection>
+      </main>
+    </div>
+  </div>
+
+  <div ref="floatingPersonaRef" class="floating-persona">
+    <img :src="personaSectionIllustrationSrc" alt="" class="floating-persona__img" />
+  </div>
+
+  <div ref="exhibitionsLabelRef" class="exhibitions-bridge-label">
+    <div class="mx-auto w-full max-w-[1600px] px-4 md:px-8">
+      <div class="grid grid-cols-12 gap-x-2 md:gap-x-4">
+        <div class="col-span-12 md:col-span-9 md:col-start-1">
+          <div class="exhibitions-bridge-label__track">
+            <span class="exhibitions-bridge-label__inner">
+              <span>Exhibitions</span><span class="exhibitions-bridge-label__suffix"> and artists</span>
+            </span>
+          </div>
         </div>
-        <p class="col-span-12 mt-8 md:row-start-3 md:self-end">
-          *A representation of artist identity constructed from texts that
-          contextualize their work.
-        </p>
       </div>
-    </PageSection>
+    </div>
+  </div>
 
-    <PageSection
-      tone="dark"
-      layout="stacked"
-      texture-preset="rightDual"
-      stacked-body-gap="relaxed"
-      subheading="...of modern and contemporary artists curated from exhibitions about the experience of mixed-race and Asian-American identity?"
-    >
-      <ExhibitionsSankey />
-    </PageSection>
-
-    <PageSection tone="light" layout="stacked" texture-preset="mixed" stacked-full-width>
-      <div class="grid grid-cols-12 gap-x-2 gap-y-4 md:gap-x-4">
-        <div class="col-span-12">
-          <label>
-            Cluster by:
-            <select v-model="groupBy" class="ml-2 border border-black bg-white px-2 py-1">
-              <option value="theme">Theme</option>
-              <option value="artist">Artist</option>
-              <option value="institution">Institution</option>
-              <option value="medium">Medium</option>
-            </select>
-          </label>
-        </div>
-        <div class="col-span-12">
-          <ClusterGrid
-            :groups="groupedArtworks"
-            @select="expandedCluster = $event"
-          />
-        </div>
-      </div>
-    </PageSection>
-
-    <ClusterView
-      v-if="expandedCluster"
-      :cluster="expandedCluster"
-      :groupBy="groupBy"
-      @close="expandedCluster = null"
-    />
-  </main>
+  <ClusterView
+    v-if="expandedCluster"
+    :cluster="expandedCluster"
+    :groupBy="groupBy"
+    @close="expandedCluster = null"
+  />
 </template>
