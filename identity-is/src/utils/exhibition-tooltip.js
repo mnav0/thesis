@@ -15,21 +15,14 @@ export function escapeHtml(s) {
  * @param {string} d.name
  * @param {string} [d.location]
  * @param {string | null} [d.startYear]
- * @param {number} artistCount
  */
-export function exhibitionTooltipShowOptions(d, artistCount) {
-  const year = d.startYear
-    ? `<div style="margin-top:2px">${escapeHtml(d.startYear)}</div>`
-    : "";
-  const loc = d.location
-    ? `<div style="margin-top:4px">${escapeHtml(d.location)}</div>`
-    : "";
-  const n = artistCount;
+export function exhibitionTooltipShowOptions(d) {
+  const year = d.startYear ? escapeHtml(d.startYear) : "-";
+  const loc = d.location ? escapeHtml(d.location) : "-";
   return {
     bg: "#fff",
     fg: "#111",
     border: "#111",
-    html: `<div><strong>${escapeHtml(d.name)}</strong></div>${year}${loc}
-                 <div style="margin-top:4px">${n} artist${n !== 1 ? "s" : ""}</div>`,
+    html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div><div>${year}</div><div>${loc}</div></div>`,
   };
 }

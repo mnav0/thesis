@@ -1,5 +1,5 @@
 import { ref, computed } from "vue";
-import { parseCSV } from "../utils/csv.js";
+import { csvParse } from "d3";
 
 import artistsCSV from "./artists.csv?raw";
 import institutionsCSV from "./institutions.csv?raw";
@@ -21,19 +21,19 @@ export const institutionThemesMap = ref({}); // theme_id -> Set of artist ids
 export const groupBy = ref("theme");
 
 // Pre-parsed theme rows (available after module load, no need to re-parse in components)
-export const artistThemeRows = parseCSV(artistThemesCSV);
-export const institutionThemeRows = parseCSV(institutionThemesCSV);
-export const themeRows = parseCSV(themesCSV);
+export const artistThemeRows = csvParse(artistThemesCSV);
+export const institutionThemeRows = csvParse(institutionThemesCSV);
+export const themeRows = csvParse(themesCSV);
 export const themePreviewTitles = computed(() =>
   themeRows.map((row) => row.theme_title).filter(Boolean),
 );
 
 export function fetchAndParseData() {
-  const artistArr = parseCSV(artistsCSV);
-  const institutionArr = parseCSV(institutionsCSV);
-  const artworkArr = parseCSV(artworksCSV);
-  const themeArr = parseCSV(themesCSV);
-  const mediumArr = parseCSV(mediumsCSV);
+  const artistArr = csvParse(artistsCSV);
+  const institutionArr = csvParse(institutionsCSV);
+  const artworkArr = csvParse(artworksCSV);
+  const themeArr = csvParse(themesCSV);
+  const mediumArr = csvParse(mediumsCSV);
 
   artistsById.value = Object.fromEntries(artistArr.map((a) => [a.id, a]));
 

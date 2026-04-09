@@ -18,9 +18,10 @@ import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
 
 const NODE_WIDTH = EXHIBITIONS_NODE_SIZE_PX;
-const NODE_PADDING = 20;
+const NODE_PADDING = 32;
 const LABEL_FONT_PX = 13;
 const LINK_STROKE = EXHIBITIONS_LINK_STROKE_PX;
+const BASE_REQUIRED_HEIGHT = 600;
 
 const containerRef = ref(null);
 
@@ -47,8 +48,8 @@ function artistLifeLine(row) {
   const by = String(row.birth_year ?? "").trim();
   const dy = String(row.death_year ?? "").trim();
   if (!by) return null;
-  if (dy) return `b. ${by}, d. ${dy}`;
-  return `b. ${by}`;
+  if (dy) return `(${by} - ${dy})`;
+  return `(${by} - )`;
 }
 
 function exhibitionStartYear(dateStart) {
@@ -291,8 +292,15 @@ function renderChart() {
   if (!nodes.length) return;
 
   const width = root.clientWidth || 900;
-  const height = root.clientHeight || 520;
+  const baseHeight = root.clientHeight || BASE_REQUIRED_HEIGHT;
   const margin = EXHIBITIONS_VIZ_MARGIN;
+  const exhibitionCount = nodes.filter((d) => d.type === "exhibition").length;
+  const artistCount = nodes.filter((d) => d.type === "artist").length;
+  const densestColumnCount = Math.max(exhibitionCount, artistCount, 1);
+  const requiredPlotHeight =
+    densestColumnCount * NODE_WIDTH + (densestColumnCount - 1) * NODE_PADDING;
+  const requiredHeight = Math.ceil(requiredPlotHeight + margin.top + margin.bottom);
+  const height = Math.max(baseHeight, requiredHeight);
 
   const sankeyLayout = d3Sankey()
     .nodeWidth(NODE_WIDTH)
@@ -359,18 +367,14 @@ function renderChart() {
     .on("mouseover", function (event, d) {
       d3.select(this).attr("fill", nodeFillHover(d)).attr("stroke-width", 2);
       if (d.type === "exhibition") {
-        show(event, exhibitionTooltipShowOptions(d, d.sourceLinks.length));
+        show(event, exhibitionTooltipShowOptions(d));
       } else {
-        const n = d.targetLinks.length;
-        const life = d.lifeLine
-          ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>`
-          : "";
+        const life = d.lifeLine ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>` : "";
         show(event, {
           bg: "#000",
           fg: "#fff",
           border: "#fff",
-          html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}
-                 <div style="margin-top:4px">${n} exhibition${n !== 1 ? "s" : ""}</div>`,
+          html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
         });
       }
     })

@@ -116,7 +116,7 @@ onBeforeUnmount(() => {
                 role="presentation"
               />
             </div>
-            <p class="col-span-12 mt-8 md:row-start-3 md:self-end">
+            <p class="col-span-12 md:row-start-3 md:self-end">
               *A representation of artist identity constructed from texts that
               contextualize their work.
             </p>
@@ -128,9 +128,10 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
-          heading="...for modern and contemporary artists selected from exhibitions about the experience of mixed-race and Asian-American identity?"
+          heading="...for modern & contemporary artists selected from exhibitions curated around the experience of global identity?"
+          subheading="*with a specific filter for mixed-race, Asian American identifying artists."
         >
-          <ExhibitionsTimeline />
+          <ExhibitionsTimeline class="mt-8" />
           <div ref="exhibitionsAnchorStartRef" class="exhibitions-bridge-anchor" aria-hidden="true"></div>
         </PageSection>
 
