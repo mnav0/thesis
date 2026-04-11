@@ -128,8 +128,8 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
-          heading="...for modern & contemporary artists selected from exhibitions curated around the experience of global identity?"
-          subheading="*with a specific filter for mixed-race, Asian American identifying artists."
+          heading="...for modern & contemporary artists selected from exhibitions about identity?"
+          subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
           <ExhibitionsTimeline class="mt-8" />
           <div ref="exhibitionsAnchorStartRef" class="exhibitions-bridge-anchor" aria-hidden="true"></div>
