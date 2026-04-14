@@ -84,8 +84,9 @@
 .cluster-section-canvas {
   position: relative;
   width: 100%;
-  min-height: clamp(480px, 78vh, 960px);
-  overflow-x: auto;
+  height: 600px;
+  min-height: 600px;
+  overflow-x: hidden;
   overflow-y: visible;
 }
 

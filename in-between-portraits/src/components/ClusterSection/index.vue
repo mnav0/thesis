@@ -24,14 +24,17 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["select-point", "select-cluster"]);
-const containerWidth = ref(0)
 
 const POINT_SIZE = 14;
 const CLUSTER_RADIUS = 118;
-const CANVAS_PADDING = 150;
+const CANVAS_PADDING = 50;
+/** for non-exhibition layouts to avoid overflow */
+const CLUSTER_SAFE_AREA_SCALE = 0.75;
+/** Norm-space inset for the exhibition grid (room for labels before spread). */
+const EXHIBITION_GRID_EDGE = 0.07;
+const EXHIBITION_CLUSTER_SPREAD = 1.4;
 const PACK_FALLBACK_W = 960;
 const PACK_FALLBACK_H = 720;
-const EXHIBITION_GRID_MARGIN = 0;
 
 const viewMode = ref(
   ["exhibitions", "artist", "institution"].includes(props.initialViewMode)
@@ -82,41 +85,124 @@ const currentJsonRows = computed(
     activeSummary.value?.filter((d) => d.n === selectedN.value) ?? [],
 );
 
-const currentPositionEntry = computed(() =>
-  activePositions.value?.find((p) => p.n === selectedN.value),
-);
-
 const currentClusterPositions = computed(
-  () => currentPositionEntry.value?.cluster_positions ?? {},
+  () =>
+    activePositions.value?.find((p) => p.n === selectedN.value)
+      ?.cluster_positions ?? {},
 );
 
-function normToCanvas(x, y) {
-  const { width, height } = svgSize.value;
+function canvasPaddingPx() {
+  return CANVAS_PADDING;
+}
+
+function clamp01(v, lo, hi) {
+  return Math.min(hi, Math.max(lo, v));
+}
+
+/**
+ * Keep cluster centers in a visible normalized window based on real pixel geometry.
+ * This prevents off-screen clusters for artist/institution layouts on narrower viewports.
+ */
+function visibleNormBounds() {
+  const pad = canvasPaddingPx();
+  const w = Math.max(1, svgSize.value.width);
+  const h = Math.max(1, svgSize.value.height);
+  const innerW = Math.max(1, w - pad * 2);
+  const innerH = Math.max(1, h - pad * 2);
+  const keepPx = CLUSTER_RADIUS + POINT_SIZE;
+  const minXBase = clamp01(keepPx / innerW, 0.02, 0.45);
+  const minYBase = clamp01(keepPx / innerH, 0.02, 0.45);
+  if (viewMode.value === "exhibitions") {
+    return {
+      minX: minXBase,
+      maxX: 1 - minXBase,
+      minY: minYBase,
+      maxY: 1 - minYBase,
+    };
+  }
+
+  const sx = clamp01(CLUSTER_SAFE_AREA_SCALE, 0.35, 1);
+  const sy = clamp01(CLUSTER_SAFE_AREA_SCALE, 0.35, 1);
+  const targetMinX = (1 - sx) / 2;
+  const targetMinY = (1 - sy) / 2;
+  const minX = Math.max(minXBase, targetMinX);
+  const minY = Math.max(minYBase, targetMinY);
   return {
-    x: CANVAS_PADDING + x * (width - CANVAS_PADDING * 2),
-    y: CANVAS_PADDING + y * (height - CANVAS_PADDING * 2),
+    minX,
+    maxX: 1 - minX,
+    minY,
+    maxY: 1 - minY,
   };
 }
 
-function clampRefNorm01(v) {
-  return Math.min(0.98, Math.max(0.02, Number(v) || 0.5));
+function normToCanvas(x, y) {
+  const pad = canvasPaddingPx();
+  const { width, height } = svgSize.value;
+  return {
+    x: pad + x * (width - pad * 2),
+    y: pad + y * (height - pad * 2),
+  };
 }
 
-/** Even grid in [margin, 1-margin]² for exhibition clusters. */
+function clampRefNormXY(x, y) {
+  const b = visibleNormBounds();
+  return {
+    nx: clamp01(Number(x) || 0.5, b.minX, b.maxX),
+    ny: clamp01(Number(y) || 0.5, b.minY, b.maxY),
+  };
+}
+
+function fitNormPointsWithinBounds(points) {
+  if (!points.length) return new Map();
+  const b = visibleNormBounds();
+  let minX = Infinity;
+  let maxX = -Infinity;
+  let minY = Infinity;
+  let maxY = -Infinity;
+  for (const p of points) {
+    if (p.x < minX) minX = p.x;
+    if (p.x > maxX) maxX = p.x;
+    if (p.y < minY) minY = p.y;
+    if (p.y > maxY) maxY = p.y;
+  }
+  const spanX = Math.max(maxX - minX, 1e-6);
+  const spanY = Math.max(maxY - minY, 1e-6);
+  const out = new Map();
+  for (const p of points) {
+    const tx = (p.x - minX) / spanX;
+    const ty = (p.y - minY) / spanY;
+    out.set(p.id, {
+      nx: b.minX + tx * (b.maxX - b.minX),
+      ny: b.minY + ty * (b.maxY - b.minY),
+    });
+  }
+  return out;
+}
+
+/** Even grid inside [edge, 1-edge]²; aspect drives row/column count like pack. */
 function exhibitionGridNormCell(k, index, aspectW, aspectH) {
-  const margin = 0;
-  const usable = 1 - 2 * margin;
+  const edge = EXHIBITION_GRID_EDGE;
+  const usable = Math.max(0.2, 1 - 2 * edge);
   const a = Math.max(0.5, aspectW / Math.max(aspectH, 1));
   const cols = Math.max(1, Math.ceil(Math.sqrt(k * a)));
   const rows = Math.ceil(k / cols);
   const col = index % cols;
   const row = Math.floor(index / cols);
   return {
-    nx: margin + usable * ((col + 0.5) / cols),
-    ny: margin + usable * ((row + 0.5) / rows),
+    nx: edge + usable * ((col + 0.5) / cols),
+    ny: edge + usable * ((row + 0.5) / rows),
     rows,
     cols,
   };
+}
+
+/** Radially separate exhibition cluster centers so they breathe on the canvas. */
+function spreadExhibitionNorm(nx, ny) {
+  const s = EXHIBITION_CLUSTER_SPREAD;
+  const x = 0.5 + (nx - 0.5) * s;
+  const y = 0.5 + (ny - 0.5) * s;
+  const c = clampRefNormXY(x, y);
+  return { normX: c.nx, normY: c.ny };
 }
 
 function centerLabelsForJsonCluster(clusterId, rowsInCluster) {
@@ -194,51 +280,6 @@ function jsonRowToDisplayItems(row, isInstitutionMode) {
   });
 }
 
-/**
- * Dandelion-style rings: sort by distance to center, split into a few layers,
- * equal spacing on angle within each ring, staggered phase between rings.
- */
-function enrichItemsWithLayerCoords(items, maxRadiusPx) {
-  const n = items.length;
-  if (n === 0) return [];
-
-  const layerCount = Math.min(
-    5,
-    Math.max(2, Math.ceil(Math.sqrt(n))),
-  );
-  const indexed = items.map((item, idx) => ({ item, idx }));
-  indexed.sort((a, b) => {
-    const d = a.item.distanceToCenter - b.item.distanceToCenter;
-    if (d !== 0) return d;
-    return a.idx - b.idx;
-  });
-
-  const perLayer = Math.ceil(n / layerCount);
-  const layers = [];
-  for (let L = 0; L < layerCount; L++) {
-    const slice = indexed.slice(L * perLayer, (L + 1) * perLayer);
-    if (slice.length) layers.push(slice.map((x) => x.item));
-  }
-
-  const rMin = maxRadiusPx * 0.16;
-  const rMax = maxRadiusPx;
-  const Ln = layers.length;
-  const out = [];
-
-  layers.forEach((layerItems, L) => {
-    const m = layerItems.length;
-    const frac = Ln <= 1 ? 1 : L / (Ln - 1);
-    const r = rMin + frac * (rMax - rMin);
-    const phase = L * (Math.PI / Math.max(m, 6));
-    layerItems.forEach((item, j) => {
-      const angle = (j / Math.max(m, 1)) * 2 * Math.PI + phase;
-      out.push({ ...item, _angle: angle, _radius: r });
-    });
-  });
-
-  return out;
-}
-
 const layoutGroups = computed(() => {
   if (viewMode.value === "exhibitions") {
   const rows = props.exhibitions ?? [];
@@ -246,25 +287,27 @@ const layoutGroups = computed(() => {
   const out = {};
   if (!k) return out;
 
-  const aw = Math.max(svgSize.value.width - CANVAS_PADDING * 2 || PACK_FALLBACK_W, 400);
-  const ah = Math.max(svgSize.value.height - CANVAS_PADDING * 2 || PACK_FALLBACK_H, 400);
+  const pad = CANVAS_PADDING;
+  const aw = Math.max(svgSize.value.width - pad * 2 || PACK_FALLBACK_W, 400);
+  const ah = Math.max(svgSize.value.height - pad * 2 || PACK_FALLBACK_H, 400);
 
   rows.forEach((ex, idx) => {
     const { nx, ny } = exhibitionGridNormCell(k, idx, aw, ah);
+    const { normX, normY } = spreadExhibitionNorm(nx, ny);
 
     out[idx] = {
       clusterId: idx,
       name: ex.name,
       refNormX: nx,
       refNormY: ny,
-      normX: nx,
-      normY: ny,
+      normX,
+      normY,
       centerLabels: ex.labels ?? [],
       // add artistName from lookup
       items: ex.items.map((item) => ({
         ...item,
         artistName: artistDisplayName(item.artistId),
-        distanceToCenter: item._radius_frac,   // keeps maxDistInView logic working
+        distanceToCenter: item._radius_frac,
         primaryCluster: idx,
         closestOtherCluster: null,
       })),
@@ -277,26 +320,35 @@ const layoutGroups = computed(() => {
   const data = currentJsonRows.value;
   const pos = currentClusterPositions.value;
   const out = {};
+  const rawCenters = [];
 
   for (let c = 0; c < n; c++) {
     const p = pos[String(c)];
     const rawX = p?.x ?? 0.5;
     const rawY = p?.y ?? 0.5;
-    const nx = clampRefNorm01(rawX);
-    const ny = clampRefNorm01(rawY);
+    rawCenters.push({ id: c, x: rawX, y: rawY });
     const rowsHere = data.filter((r) => r.primary_cluster === c);
     const centerLabels = centerLabelsForJsonCluster(c, rowsHere);
 
     out[c] = {
       clusterId: c,
       name: `Cluster ${c}`,
-      refNormX: nx,
-      refNormY: ny,
-      normX: nx,
-      normY: ny,
+      refNormX: rawX,
+      refNormY: rawY,
+      normX: rawX,
+      normY: rawY,
       centerLabels,
       items: [],
     };
+  }
+
+  const fitted = fitNormPointsWithinBounds(rawCenters);
+  for (const c of Object.keys(out)) {
+    const id = Number(c);
+    const p = fitted.get(id);
+    if (!p) continue;
+    out[id].normX = p.nx;
+    out[id].normY = p.ny;
   }
 
   const isInstitution = viewMode.value === "institution";
@@ -322,35 +374,14 @@ const placedLayoutGroups = computed(() =>
   layoutGroupsList.value.filter((g) => g.items?.length > 0)
 );
 
-const canvasLayoutStyle = computed(() => {
-  if (viewMode.value === "exhibitions") return { minHeight: "600px" };
-  const entry = activePositions.value?.find((p) => p.n === selectedN.value);
-  if (!entry) return { minHeight: "600px" };
-  const w = containerWidth.value || entry.canvas_min_w;
-  const h = Math.round(w / (entry.aspect_ratio ?? 1.5));
-  return {
-    width: "100%",
-    height: `${Math.max(h, 500)}px`,
-  };
-});
-
-const maxDistInView = computed(() => {
-  let m = 0.001;
-  for (const g of placedLayoutGroups.value) {
-    for (const a of g.items) {
-      if (a.distanceToCenter > m) m = a.distanceToCenter;
-    }
-  }
-  return m;
-});
-
 function getClusterCanvasPos(group) {
+  const pad = canvasPaddingPx();
   if (
     !group ||
     typeof group.normX !== "number" ||
     typeof group.normY !== "number"
   ) {
-    return { x: CANVAS_PADDING, y: CANVAS_PADDING };
+    return { x: pad, y: pad };
   }
   return normToCanvas(group.normX, group.normY);
 }
@@ -388,6 +419,21 @@ const allLines = computed(() => {
   const lines = [];
   if (!Object.keys(centers).length || !Object.keys(pts).length) return lines;
 
+  /** Exhibition mode: same artistId may appear in multiple shows — link dot-to-dot on hover. */
+  let peersByArtist = null;
+  if (viewMode.value === "exhibitions") {
+    peersByArtist = new Map();
+    for (const g of placedLayoutGroups.value) {
+      g.items.forEach((item, idx) => {
+        const pk = pointKey(g, item, idx);
+        const k = item.artistId == null ? NaN : Number(item.artistId);
+        if (Number.isNaN(k)) return;
+        if (!peersByArtist.has(k)) peersByArtist.set(k, []);
+        peersByArtist.get(k).push({ clusterId: g.clusterId, pointKey: pk });
+      });
+    }
+  }
+
   for (const group of placedLayoutGroups.value) {
     const cid = group.clusterId;
     const cx = centers[cid];
@@ -420,6 +466,25 @@ const allLines = computed(() => {
           isOther: true,
         });
       }
+
+      if (peersByArtist) {
+        const k = item.artistId == null ? NaN : Number(item.artistId);
+        if (Number.isNaN(k)) return;
+        for (const peer of peersByArtist.get(k) ?? []) {
+          if (peer.clusterId === group.clusterId) continue;
+          const opt = pts[peer.pointKey];
+          if (!opt) continue;
+          lines.push({
+            key: `${pk}-expeer-${peer.pointKey}`,
+            pointKey: pk,
+            x1: pt.x,
+            y1: pt.y,
+            x2: opt.x,
+            y2: opt.y,
+            isOther: true,
+          });
+        }
+      }
     });
   }
   return lines;
@@ -430,7 +495,6 @@ function recalcPositions() {
   const sectionRect = sectionRef.value.getBoundingClientRect();
   const w = sectionRect.width;
   const h = sectionRect.height;
-  containerWidth.value = w;          // ← add this
   if (svgSize.value.width !== w || svgSize.value.height !== h) {
     svgSize.value = { width: w, height: h };
   }
@@ -575,7 +639,6 @@ function displayLabelLine(i, group) {
     <div
       ref="sectionRef"
       class="cluster-section-canvas"
-      :style="canvasLayoutStyle"
     >
       <svg
         class="cluster-section-svg"
