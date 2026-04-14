@@ -17,12 +17,41 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
+const showDotTimeline = computed(
+  () => props.groupBy === "theme" || props.groupBy === "embedding",
+);
+
+/** Theme CSV uses string artist ids; cluster items may be number — normalize for Set.has */
+function timelineIdSet(cluster) {
+  if (!cluster?.items?.length) return new Set();
+  return new Set(
+    cluster.items
+      .map((art) =>
+        art.artist == null || art.artist === "" ? null : String(art.artist),
+      )
+      .filter(Boolean),
+  );
+}
+
+const timelineArtistIds = computed(() => timelineIdSet(props.cluster));
+
 const dotTimelineData = computed(() => {
-  if (props.groupBy !== "theme" || !props.cluster) return [];
-  const themeTitle = props.cluster.name;
+  if (!showDotTimeline.value || !props.cluster) return [];
+
+  let filterArtist;
+  let filterTheme;
+  if (props.groupBy === "embedding") {
+    filterArtist = timelineArtistIds.value;
+  } else {
+    filterTheme = props.cluster.name;
+  }
 
   const artistData = artistThemeRows
-    .filter((row) => row.theme_title === themeTitle)
+    .filter((row) =>
+      filterTheme
+        ? row.theme_title === filterTheme
+        : filterArtist.has(String(row.artist)),
+    )
     .map((row) => ({
       artist: row.artist,
       artistName: artistsById.value[row.artist]?.name || row.artist,
@@ -34,7 +63,11 @@ const dotTimelineData = computed(() => {
     }));
 
   const institutionData = institutionThemeRows
-    .filter((row) => row.theme_title === themeTitle)
+    .filter((row) =>
+      filterTheme
+        ? row.theme_title === filterTheme
+        : filterArtist.has(String(row.artist)),
+    )
     .map((row) => ({
       artist: row.artist,
       artistName: artistsById.value[row.artist]?.name || row.artist,
@@ -51,12 +84,11 @@ const dotTimelineData = computed(() => {
 });
 
 const dotTimelineArtworks = computed(() => {
-  if (props.groupBy !== "theme" || !props.cluster) return [];
-  const artistIds = new Set(props.cluster.items.map((art) => art.artist));
+  if (!showDotTimeline.value || !props.cluster) return [];
   return allArtworks.value
     .filter(
       (art) =>
-        artistIds.has(art.artist) &&
+        timelineArtistIds.value.has(String(art.artist)) &&
         art.date_created &&
         art.artistName &&
         art.image_url,
@@ -75,8 +107,12 @@ const dotTimelineArtworks = computed(() => {
   <div class="cluster-view-fullpage">
     <button class="close-btn" @click="emit('close')">×</button>
     <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
-    <div v-if="groupBy === 'theme'">
+    <div v-if="showDotTimeline">
+      <div v-if="dotTimelineData.length === 0 && dotTimelineArtworks.length === 0" class="cluster-view-empty">
+        No theme or artwork data found for this artist.
+      </div>
       <DotTimeline
+        v-else
         :data="dotTimelineData"
         :artworks="dotTimelineArtworks"
         :width="1100"

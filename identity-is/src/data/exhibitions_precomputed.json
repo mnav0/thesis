@@ -1,0 +1,202 @@
+[
+  {
+    "id": 0,
+    "name": "Part Asian, 100% Hapa",
+    "labels": [
+      "hapa",
+      "100",
+      "ancestry"
+    ],
+    "items": [
+      {
+        "artistId": 4,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85,
+        "isShared": true
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "War Baby / Love Child: Mixed Race Asian American Art",
+    "labels": [
+      "mixed",
+      "war",
+      "race"
+    ],
+    "items": [
+      {
+        "artistId": 1,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      },
+      {
+        "artistId": 2,
+        "_angle": 2.0944,
+        "_radius_frac": 0.35,
+        "isShared": false
+      },
+      {
+        "artistId": 3,
+        "_angle": 4.1888,
+        "_radius_frac": 0.35,
+        "isShared": false
+      },
+      {
+        "artistId": 4,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85,
+        "isShared": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Ruth Asawa: Citizen of the Universe",
+    "labels": [
+      "citizen",
+      "universe",
+      "life"
+    ],
+    "items": [
+      {
+        "artistId": 5,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Isamu Noguchi: Archaic/Modern",
+    "labels": [
+      "archaic",
+      "modern",
+      "ancient"
+    ],
+    "items": [
+      {
+        "artistId": 0,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85,
+        "isShared": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Dis/orient: Contemporary Art of the Asian Diaspora",
+    "labels": [
+      "orient",
+      "dis",
+      "diaspora"
+    ],
+    "items": [
+      {
+        "artistId": 6,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Legacies: Asian American Art Movements in New York City",
+    "labels": [
+      "legacies",
+      "artists",
+      "art"
+    ],
+    "items": [
+      {
+        "artistId": 0,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85,
+        "isShared": true
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Oscar yi Hou: East of sun, west of moon",
+    "labels": [
+      "east",
+      "like",
+      "west"
+    ],
+    "items": [
+      {
+        "artistId": 7,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Biennale Arte 2015: All the World's Futures",
+    "labels": [
+      "international",
+      "world",
+      "countries"
+    ],
+    "items": [
+      {
+        "artistId": 8,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      },
+      {
+        "artistId": 14,
+        "_angle": 3.1416,
+        "_radius_frac": 0.35,
+        "isShared": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Global Fascisms",
+    "labels": [
+      "ideologies",
+      "global",
+      "authoritarian"
+    ],
+    "items": [
+      {
+        "artistId": 13,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      },
+      {
+        "artistId": 15,
+        "_angle": 3.1416,
+        "_radius_frac": 0.35,
+        "isShared": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "You Sad Legend",
+    "labels": [
+      "documentary",
+      "filmmaker",
+      "dead"
+    ],
+    "items": [
+      {
+        "artistId": 9,
+        "_angle": 0.0,
+        "_radius_frac": 0.35,
+        "isShared": false
+      }
+    ]
+  }
+]

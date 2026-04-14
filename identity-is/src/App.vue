@@ -1,7 +1,13 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
-import { groupBy, groupedArtworks } from "./data/index.js";
-import ClusterGrid from "./components/ClusterGrid/index.vue";
+import {
+  artistSummary,
+  institutionSummary,
+  artistPositions,
+  institutionPositions,
+  exhibitionsPrecomputedData,
+} from "./data/index.js";
+import ClusterSection from "./components/ClusterSection/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
 import PageSection from "./components/PageSection/index.vue";
 import ClusterPreview from "./components/ClusterPreview/index.vue";
@@ -15,6 +21,7 @@ import {
 } from "./utils/scroll-app-animations.js";
 
 const expandedCluster = ref(null);
+const expandedClusterGroupBy = ref(null);
 const personaSectionIllustrationSrc = publicImgSrc("persona.svg");
 const shellReady = ref(false);
 const firstSectionTone = ref("dark");
@@ -37,6 +44,16 @@ const floatingPersonaRef = ref(null);
 
 let smoother = null;
 
+function openClusterFromEmbedding(cluster) {
+  expandedCluster.value = cluster;
+  expandedClusterGroupBy.value = "embedding";
+}
+
+function closeClusterView() {
+  expandedCluster.value = null;
+  expandedClusterGroupBy.value = null;
+}
+
 function getSectionEl(compRef) {
   return compRef.value?.sectionEl ?? compRef.value?.$el;
 }
@@ -49,20 +66,22 @@ onMounted(() => {
   Promise.race([fontWait, new Promise((r) => setTimeout(r, 500))]).then(() => {
     shellReady.value = true;
     nextTick(() => {
-      smoother = initAppScrollAnimations({
-        section1El: getSectionEl(section1Ref),
-        section2El: getSectionEl(section2Ref),
-        section3El: getSectionEl(section3Ref),
-        sectionAfterS3El: getSectionEl(timelineRef),
-        floatingPersonaEl: floatingPersonaRef.value,
-        section3PersonaImg: section3PersonaRef.value,
-        onFirstSectionToneChange: (tone) => {
-          firstSectionTone.value = tone;
-        },
-        exhibitionsLabelEl: exhibitionsLabelRef.value,
-        exhibitionsAnchorStartEl: exhibitionsAnchorStartRef.value,
-        exhibitionsAnchorEndEl: exhibitionsAnchorEndRef.value,
-        sankeySectionEl: getSectionEl(sankeyRef),
+      requestAnimationFrame(() => {
+        smoother = initAppScrollAnimations({
+          section1El: getSectionEl(section1Ref),
+          section2El: getSectionEl(section2Ref),
+          section3El: getSectionEl(section3Ref),
+          sectionAfterS3El: getSectionEl(timelineRef),
+          floatingPersonaEl: floatingPersonaRef.value,
+          section3PersonaImg: section3PersonaRef.value,
+          onFirstSectionToneChange: (tone) => {
+            firstSectionTone.value = tone;
+          },
+          exhibitionsLabelEl: exhibitionsLabelRef.value,
+          exhibitionsAnchorStartEl: exhibitionsAnchorStartRef.value,
+          exhibitionsAnchorEndEl: exhibitionsAnchorEndRef.value,
+          sankeySectionEl: getSectionEl(sankeyRef),
+        });
       });
     });
   });
@@ -128,7 +147,7 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
-          heading="...for modern & contemporary artists selected from exhibitions about identity?"
+          heading="...for modern and contemporary artists selected from exhibitions about identity?"
           subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
           <ExhibitionsTimeline class="mt-8" />
@@ -141,27 +160,18 @@ onBeforeUnmount(() => {
           <ExhibitionsSankey />
         </PageSection>
 
-        <!-- Cluster explorer -->
-        <PageSection tone="light" layout="stacked" texture-preset="mixed" stacked-full-width>
-          <div class="grid grid-cols-12 gap-x-2 gap-y-4 md:gap-x-4">
-            <div class="col-span-12">
-              <label>
-                Cluster by:
-                <select v-model="groupBy" class="ml-2 border border-black bg-white px-2 py-1">
-                  <option value="theme">Theme</option>
-                  <option value="artist">Artist</option>
-                  <option value="institution">Institution</option>
-                  <option value="medium">Medium</option>
-                </select>
-              </label>
-            </div>
-            <div class="col-span-12">
-              <ClusterGrid
-                :groups="groupedArtworks"
-                @select="expandedCluster = $event"
-              />
-            </div>
-          </div>
+        <!-- Text-embedding cluster visualization -->
+        <PageSection tone="light" layout="stacked" stacked-full-width>
+          <ClusterSection
+            :exhibitions="exhibitionsPrecomputedData"
+            :artist-data="artistSummary"
+            :institution-data="institutionSummary"
+            :artist-positions="artistPositions"
+            :institution-positions="institutionPositions"
+            initial-view-mode="exhibitions"
+            @select-point="openClusterFromEmbedding"
+            @select-cluster="openClusterFromEmbedding"
+          />
         </PageSection>
       </main>
     </div>
@@ -188,7 +198,7 @@ onBeforeUnmount(() => {
   <ClusterView
     v-if="expandedCluster"
     :cluster="expandedCluster"
-    :groupBy="groupBy"
-    @close="expandedCluster = null"
+    :groupBy="expandedClusterGroupBy"
+    @close="closeClusterView"
   />
 </template>

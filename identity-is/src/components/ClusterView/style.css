@@ -76,3 +76,10 @@
   color: #444;
   font-family: "Kosugi", sans-serif;
 }
+.cluster-view-empty {
+  text-align: center;
+  font-size: 1.2em;
+  color: #888;
+  padding: 4em 0;
+  font-family: "Instrument Serif", serif;
+}
