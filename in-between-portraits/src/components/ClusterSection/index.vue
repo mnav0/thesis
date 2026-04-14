@@ -28,6 +28,10 @@ const emit = defineEmits(["select-point", "select-cluster"]);
 const POINT_SIZE = 14;
 const CLUSTER_RADIUS = 118;
 const CANVAS_PADDING = 50;
+const CLUSTER_BOX_MIN_WIDTH = 150;
+const CLUSTER_BOX_MIN_HEIGHT = 170;
+const CLUSTER_BOX_PADDING = 18;
+const CLUSTER_LABEL_GAP = 10;
 /** for non-exhibition layouts to avoid overflow */
 const CLUSTER_SAFE_AREA_SCALE = 0.75;
 /** Norm-space inset for the exhibition grid (room for labels before spread). */
@@ -232,11 +236,9 @@ function artistIdForDisplayName(name) {
 }
 
 function baseItemFromJsonRow(row, c) {
-  const distKey = `avg_dist_to_cluster_${c}`;
   return {
     artistId: row.artist,
     artistName: artistDisplayName(row.artist),
-    distanceToCenter: row[distKey] ?? 0.5,
     primaryCluster: c,
     closestOtherCluster: row.closest_cluster_by_dist,
     _angle: row._angle ?? 0,
@@ -264,14 +266,11 @@ function jsonRowToDisplayItems(row, isInstitutionMode) {
   if (names.length <= 1) {
     return [baseItemFromJsonRow(row, c)];
   }
-  const distKey = `avg_dist_to_cluster_${c}`;
-  const dist = row[distKey] ?? 0.5;
   return names.map((name) => {
     const id = artistIdForDisplayName(name) ?? row.artist;
     return {
       artistId: id,
       artistName: artistDisplayName(id),
-      distanceToCenter: dist,
       primaryCluster: c,
       closestOtherCluster: row.closest_cluster_by_dist,
       _angle: row._angle ?? 0,
@@ -298,8 +297,6 @@ const layoutGroups = computed(() => {
     out[idx] = {
       clusterId: idx,
       name: ex.name,
-      refNormX: nx,
-      refNormY: ny,
       normX,
       normY,
       centerLabels: ex.labels ?? [],
@@ -307,7 +304,6 @@ const layoutGroups = computed(() => {
       items: ex.items.map((item) => ({
         ...item,
         artistName: artistDisplayName(item.artistId),
-        distanceToCenter: item._radius_frac,
         primaryCluster: idx,
         closestOtherCluster: null,
       })),
@@ -333,8 +329,6 @@ const layoutGroups = computed(() => {
     out[c] = {
       clusterId: c,
       name: `Cluster ${c}`,
-      refNormX: rawX,
-      refNormY: rawY,
       normX: rawX,
       normY: rawY,
       centerLabels,
@@ -410,8 +404,29 @@ function pointKey(group, item, index) {
 }
 
 const hoveredPoint = ref(null);
+const hoveredClusterId = ref(null);
 const clusterCenterPositions = ref({});
 const pointPositions = ref({});
+
+const pointDetailsByKey = computed(() => {
+  const out = {};
+  for (const group of placedLayoutGroups.value) {
+    group.items.forEach((item, idx) => {
+      const pk = pointKey(group, item, idx);
+      out[pk] = {
+        clusterId: group.clusterId,
+      };
+    });
+  }
+  return out;
+});
+
+const activeClusterId = computed(() => {
+  if (hoveredPoint.value && pointDetailsByKey.value[hoveredPoint.value]) {
+    return pointDetailsByKey.value[hoveredPoint.value].clusterId;
+  }
+  return hoveredClusterId.value;
+});
 
 const allLines = computed(() => {
   const centers = clusterCenterPositions.value;
@@ -446,7 +461,7 @@ const allLines = computed(() => {
 
       lines.push({
         key: `${pk}-own`,
-        pointKey: pk,
+        sourceClusterId: cid,
         x1: pt.x,
         y1: pt.y,
         x2: cx.x,
@@ -460,7 +475,7 @@ const allLines = computed(() => {
         const oc = centers[otherId];
         lines.push({
           key: `${pk}-other`,
-          pointKey: pk,
+          sourceClusterId: cid,
           x1: pt.x, y1: pt.y,
           x2: oc.x, y2: oc.y,
           isOther: true,
@@ -476,7 +491,8 @@ const allLines = computed(() => {
           if (!opt) continue;
           lines.push({
             key: `${pk}-expeer-${peer.pointKey}`,
-            pointKey: pk,
+            sourceClusterId: cid,
+            targetPointKey: peer.pointKey,
             x1: pt.x,
             y1: pt.y,
             x2: opt.x,
@@ -489,6 +505,98 @@ const allLines = computed(() => {
   }
   return lines;
 });
+
+const activeLineKeys = computed(() => {
+  const cid = activeClusterId.value;
+  if (cid == null) return new Set();
+  return new Set(
+    allLines.value
+      .filter((line) => line.sourceClusterId === cid)
+      .map((line) => line.key),
+  );
+});
+
+const activePointKeys = computed(() => {
+  const cid = activeClusterId.value;
+  if (cid == null) return new Set();
+  const keys = new Set();
+
+  for (const [pk, details] of Object.entries(pointDetailsByKey.value)) {
+    if (details.clusterId === cid) keys.add(pk);
+  }
+  for (const line of allLines.value) {
+    if (line.sourceClusterId !== cid) continue;
+    if (line.targetPointKey) keys.add(line.targetPointKey);
+  }
+  return keys;
+});
+
+function isClusterActive(clusterId) {
+  return activeClusterId.value != null && Number(activeClusterId.value) === Number(clusterId);
+}
+
+function initialsFromName(name) {
+  const parts = String(name ?? "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!parts.length) return "";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function getClusterBoxStyle(group) {
+  const box = getClusterBoxMetrics(group);
+  if (!box) return {};
+  return {
+    left: `${box.left}px`,
+    top: `${box.top}px`,
+    width: `${box.width}px`,
+    height: `${box.height}px`,
+  };
+}
+
+function getClusterLabelStyle(group) {
+  const box = getClusterBoxMetrics(group);
+  if (!box) return {};
+  return {
+    left: `${box.left + box.width / 2}px`,
+    top: `${box.top + box.height + CLUSTER_LABEL_GAP}px`,
+  };
+}
+
+function getClusterBoxMetrics(group) {
+  if (!group) return null;
+  let minX = -POINT_SIZE / 2;
+  let maxX = POINT_SIZE / 2;
+  let minY = -POINT_SIZE / 2;
+  let maxY = POINT_SIZE / 2;
+
+  for (const item of group.items ?? []) {
+    const r = (item._radius_frac ?? 0.5) * CLUSTER_RADIUS;
+    const angle = item._angle ?? 0;
+    const x = Math.cos(angle) * r;
+    const y = Math.sin(angle) * r;
+    minX = Math.min(minX, x - POINT_SIZE / 2);
+    maxX = Math.max(maxX, x + POINT_SIZE / 2);
+    minY = Math.min(minY, y - POINT_SIZE / 2);
+    maxY = Math.max(maxY, y + POINT_SIZE / 2);
+  }
+
+  const rawWidth = maxX - minX + CLUSTER_BOX_PADDING * 2;
+  const rawHeight = maxY - minY + CLUSTER_BOX_PADDING * 2;
+  const width = Math.max(CLUSTER_BOX_MIN_WIDTH, rawWidth);
+  const height = Math.max(CLUSTER_BOX_MIN_HEIGHT, rawHeight);
+  const cx = (minX + maxX) / 2;
+  const cy = (minY + maxY) / 2;
+
+  return {
+    width,
+    height,
+    left: cx - width / 2,
+    top: cy - height / 2,
+  };
+}
 
 function recalcPositions() {
   if (!sectionRef.value) return;
@@ -563,6 +671,11 @@ function handlePointClick(item) {
 }
 
 function handleCenterClick(group) {
+  const labels = (group.centerLabels ?? [])
+    .map((label) => String(label ?? "").trim())
+    .filter(Boolean);
+  const clusterTitle = labels.length ? labels.join(", ") : group.name;
+
   const seen = new Set();
   const uniqueArtists = [];
   for (const item of group.items) {
@@ -574,7 +687,7 @@ function handleCenterClick(group) {
     });
   }
   emit("select-cluster", {
-    name: group.name,
+    name: clusterTitle,
     items: uniqueArtists.map((a) => ({
       artist: a.artist == null ? a.artist : String(a.artist),
       artistName: a.artistName,
@@ -639,6 +752,10 @@ function displayLabelLine(i, group) {
     <div
       ref="sectionRef"
       class="cluster-section-canvas"
+      @mouseleave="
+        hoveredPoint = null;
+        hoveredClusterId = null;
+      "
     >
       <svg
         class="cluster-section-svg"
@@ -652,7 +769,7 @@ function displayLabelLine(i, group) {
           :x2="line.x2" :y2="line.y2"
           :class="[
             'cluster-line',
-            { 'cluster-line--active': hoveredPoint === line.pointKey },
+            { 'cluster-line--active': activeLineKeys.has(line.key) },
             { 'cluster-line--other': line.isOther },
           ]"
         />
@@ -662,18 +779,31 @@ function displayLabelLine(i, group) {
         v-for="group in placedLayoutGroups"
         :key="group.clusterId"
         class="cs-cluster-group"
+        :class="{ 'cs-cluster-group--active': isClusterActive(group.clusterId) }"
       >
         <div
           class="cs-center-anchor"
           :style="getClusterAnchorStyle(group)"
         >
           <div
+            class="cs-cluster-box-hit"
+            :class="{ 'cs-cluster-box-hit--active': isClusterActive(group.clusterId) }"
+            :style="getClusterBoxStyle(group)"
+            @mouseenter="hoveredClusterId = group.clusterId"
+            @mouseleave="hoveredClusterId = null"
+            @click.stop="handleCenterClick(group)"
+          />
+          <div
             class="cs-center-dot"
             :data-cluster-center="group.clusterId"
             aria-hidden="true"
             @click.stop="handleCenterClick(group)"
           />
-          <div class="cs-center-labels">
+          <div
+            v-if="isClusterActive(group.clusterId)"
+            class="cs-center-labels"
+            :style="getClusterLabelStyle(group)"
+          >
             <span v-if="displayLabelLine(0, group)" class="cs-center-label-line">{{
               displayLabelLine(0, group)
             }}</span>
@@ -691,14 +821,28 @@ function displayLabelLine(i, group) {
           v-for="(item, idx) in group.items"
           :key="pointKey(group, item, idx)"
           class="cs-point"
-          :class="{ 'cs-point--hovered': hoveredPoint === pointKey(group, item, idx) }"
+          :class="{
+            'cs-point--hovered': hoveredPoint === pointKey(group, item, idx),
+            'cs-point--active-cluster': activePointKeys.has(pointKey(group, item, idx)),
+          }"
           :style="getArtistStyle(item, group)"
           :data-point-id="pointKey(group, item, idx)"
           :title="item.artistName"
-          @mouseenter="hoveredPoint = pointKey(group, item, idx)"
-          @mouseleave="hoveredPoint = null"
+          @mouseenter="
+            hoveredClusterId = group.clusterId;
+            hoveredPoint = pointKey(group, item, idx);
+          "
+          @mouseleave="
+            hoveredPoint = null;
+          "
           @click.stop="handlePointClick(item)"
         >
+          <div
+            v-if="activePointKeys.has(pointKey(group, item, idx))"
+            class="cs-point-tag"
+          >
+            {{ initialsFromName(item.artistName) }}
+          </div>
           <div class="cs-tooltip">{{ item.artistName }}</div>
         </div>
       </div>
