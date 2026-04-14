@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  VUEDIR: identity-is
+  VUEDIR: in-between-portraits
 
 jobs:
   build:
