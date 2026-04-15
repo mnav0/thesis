@@ -36,6 +36,7 @@ const section2Ref = ref(null);
 const section3Ref = ref(null);
 const timelineRef = ref(null);
 const sankeyRef = ref(null);
+const clustersRef = ref(null);
 const exhibitionsLabelRef = ref(null);
 const exhibitionsAnchorStartRef = ref(null);
 const exhibitionsAnchorEndRef = ref(null);
@@ -81,6 +82,7 @@ onMounted(() => {
           exhibitionsAnchorStartEl: exhibitionsAnchorStartRef.value,
           exhibitionsAnchorEndEl: exhibitionsAnchorEndRef.value,
           sankeySectionEl: getSectionEl(sankeyRef),
+          clusterSectionEl: getSectionEl(clustersRef),
         });
       });
     });
@@ -161,7 +163,7 @@ onBeforeUnmount(() => {
         </PageSection>
 
         <!-- Text-embedding cluster visualization -->
-        <PageSection tone="light" layout="stacked" stacked-full-width>
+        <PageSection ref="clustersRef" tone="light" layout="stacked" stacked-full-width>
           <ClusterSection
             :exhibitions="exhibitionClustersMap"
             :artist-data="artistClustersMap"

@@ -354,6 +354,7 @@ function renderChart() {
   }
 
   nodeGroup
+    .filter((d) => d.type === "exhibition")
     .append("rect")
     .attr("x", (d) => d.x0)
     .attr("y", (d) => d.y0)
@@ -377,6 +378,32 @@ function renderChart() {
           html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
         });
       }
+    })
+    .on("mouseout", function (event, d) {
+      d3.select(this).attr("fill", nodeFill(d)).attr("stroke-width", 1);
+      hide();
+    });
+
+  nodeGroup
+    .filter((d) => d.type === "artist")
+    .append("circle")
+    .attr("data-artist-id", (d) => d.nodeId.slice(3))
+    .attr("cx", (d) => (d.x0 + d.x1) / 2 - 3)
+    .attr("cy", (d) => (d.y0 + d.y1) / 2)
+    .attr("r", 7)
+    .attr("fill", nodeFill)
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 1)
+    .style("cursor", "pointer")
+    .on("mouseover", function (event, d) {
+      d3.select(this).attr("fill", nodeFillHover(d)).attr("stroke-width", 2);
+      const life = d.lifeLine ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>` : "";
+      show(event, {
+        bg: "#000",
+        fg: "#fff",
+        border: "#fff",
+        html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
+      });
     })
     .on("mouseout", function (event, d) {
       d3.select(this).attr("fill", nodeFill(d)).attr("stroke-width", 1);

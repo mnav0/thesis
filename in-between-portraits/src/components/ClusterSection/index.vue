@@ -827,6 +827,7 @@ function displayLabelLine(i, group) {
           }"
           :style="getArtistStyle(item, group)"
           :data-point-id="pointKey(group, item, idx)"
+          :data-artist-id="item.artistId == null ? null : String(item.artistId)"
           :title="item.artistName"
           @mouseenter="
             hoveredClusterId = group.clusterId;

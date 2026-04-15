@@ -14,6 +14,8 @@ import { FONT_SANS } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 
 const LABEL_FONT_PX = 13;
+const TIMELINE_MARKER_HEIGHT_SCALE = 0.75;
+const MARKER_HEIGHT_PER_ARTIST_PX = EXHIBITIONS_NODE_SIZE_PX * TIMELINE_MARKER_HEIGHT_SCALE;
 
 function parseArtistIds(raw) {
   if (!raw) return [];
@@ -45,11 +47,21 @@ const exhibitions = computed(() => {
         location: r.location || "",
         startYear,
         yearNum,
+        artistIds,
         artistCount: artistIds.length,
       };
     })
     .filter((e) => Number.isFinite(e.yearNum));
 });
+
+const markerHeightByExhibitionId = computed(() =>
+  Object.fromEntries(
+    exhibitions.value.map((e) => [
+      e.id,
+      Math.max(1, e.artistCount * MARKER_HEIGHT_PER_ARTIST_PX),
+    ]),
+  ),
+);
 
 function layoutTimelineNodes(list) {
   const byYear = d3.group(list, (d) => d.yearNum);
@@ -79,7 +91,8 @@ function renderChart() {
   const margin = EXHIBITIONS_VIZ_MARGIN;
   const width = root.clientWidth || 900;
   const size = EXHIBITIONS_NODE_SIZE_PX;
-  const height = Math.max(48, size + 40);
+  const maxMarkerHeight = d3.max(items, (d) => markerHeightByExhibitionId.value[d.id] ?? size) ?? size;
+  const height = Math.max(48, maxMarkerHeight + 40);
   const innerLeft = margin.left;
   const innerRight = width - margin.right;
   const cy = height / 2;
@@ -150,9 +163,9 @@ function renderChart() {
     .append("rect")
     .attr("class", "exhibition-marker")
     .attr("x", (d) => xScale(d.yearNum) + d.xOffset - size / 2)
-    .attr("y", cy - size / 2)
+    .attr("y", (d) => cy - (markerHeightByExhibitionId.value[d.id] ?? size) / 2)
     .attr("width", size)
-    .attr("height", size)
+    .attr("height", (d) => markerHeightByExhibitionId.value[d.id] ?? size)
     .attr("rx", rx)
     .attr("fill", "#fff")
     .attr("stroke", "#fff")

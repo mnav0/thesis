@@ -251,6 +251,185 @@ function setupExhibitionsLabel({
   applyProgress(0);
 }
 
+function clamp01(v) {
+  return Math.max(0, Math.min(1, v));
+}
+
+function centerFromRect(rect, rootRect) {
+  return {
+    x: rect.left + rect.width / 2 - rootRect.left,
+    y: rect.top + rect.height / 2 - rootRect.top,
+  };
+}
+
+function setupSankeyToClusterDotTravel({
+  sankeySectionEl,
+  clusterSectionEl,
+}) {
+  if (!sankeySectionEl || !clusterSectionEl) return;
+
+  const GROUP_STAGGER_STEP = 0.03;
+  const GROUP_STAGGER_MAX = 0.24;
+  const TRAVEL_PROGRESS_SPAN = 0.7;
+  const LANDING_REVEAL_PROGRESS = 0.68;
+  const contentEl = document.querySelector(SMOOTH_CONTENT_ID);
+  if (!contentEl) return;
+  const overlayEl = document.createElement("div");
+  overlayEl.className = "sankey-cluster-travel-overlay";
+  contentEl.appendChild(overlayEl);
+
+  let pairs = [];
+  let sourceNodes = [];
+  let targetNodes = [];
+
+  function setClusterLayerHidden(hidden) {
+    clusterSectionEl.classList.toggle("cluster-travel-active", hidden);
+  }
+
+  function clearOverlayDots() {
+    overlayEl.replaceChildren();
+    pairs = [];
+  }
+
+  function resetOriginalDots() {
+    sourceNodes.forEach((node) => {
+      node.style.opacity = "";
+    });
+    targetNodes.forEach((node) => {
+      node.style.opacity = "";
+    });
+    setClusterLayerHidden(false);
+  }
+
+  function getGroupIndexByClusterId(nodes) {
+    const clusterIdSet = new Set();
+    nodes.forEach((node) => {
+      const pointId = node.dataset.pointId ?? "";
+      const clusterId = pointId.split("-")[0];
+      if (clusterId !== "") {
+        clusterIdSet.add(clusterId);
+      }
+    });
+    return new Map(
+      [...clusterIdSet]
+        .sort((a, b) => Number(a) - Number(b))
+        .map((clusterId, index) => [clusterId, index]),
+    );
+  }
+
+  function collectPairs() {
+    const contentRect = contentEl.getBoundingClientRect();
+    sourceNodes = [
+      ...sankeySectionEl.querySelectorAll("[data-artist-id]"),
+    ];
+    targetNodes = [
+      ...clusterSectionEl.querySelectorAll(".cs-point[data-artist-id]"),
+    ];
+
+    if (!sourceNodes.length || !targetNodes.length) return [];
+
+    const sourceByArtistId = new Map();
+    sourceNodes.forEach((node) => {
+      const artistId = node.dataset.artistId;
+      if (!artistId || sourceByArtistId.has(artistId)) return;
+      sourceByArtistId.set(artistId, node);
+    });
+
+    const groupIndexByClusterId = getGroupIndexByClusterId(targetNodes);
+    const out = [];
+    targetNodes.forEach((targetNode) => {
+      const artistId = targetNode.dataset.artistId;
+      const sourceNode = artistId ? sourceByArtistId.get(artistId) : null;
+      if (!sourceNode) return;
+
+      const sourceCenter = centerFromRect(sourceNode.getBoundingClientRect(), contentRect);
+      const targetCenter = centerFromRect(targetNode.getBoundingClientRect(), contentRect);
+      const clusterId = (targetNode.dataset.pointId ?? "").split("-")[0];
+      const groupIndex = groupIndexByClusterId.get(clusterId) ?? 0;
+      const delay = Math.min(groupIndex * GROUP_STAGGER_STEP, GROUP_STAGGER_MAX);
+
+      const proxyDotEl = document.createElement("div");
+      proxyDotEl.className = "sankey-cluster-travel-dot";
+      overlayEl.appendChild(proxyDotEl);
+
+      out.push({
+        sourceX: sourceCenter.x,
+        sourceY: sourceCenter.y,
+        targetX: targetCenter.x,
+        targetY: targetCenter.y,
+        delay,
+        proxyDotEl,
+      });
+    });
+
+    return out;
+  }
+
+  function applyProgress(progress) {
+    const p = clamp01(progress);
+    if (!pairs.length) {
+      resetOriginalDots();
+      return;
+    }
+
+    const hideClusterLayer = p < LANDING_REVEAL_PROGRESS;
+    setClusterLayerHidden(hideClusterLayer);
+
+    sourceNodes.forEach((node) => {
+      node.style.opacity = String(1 - p * 0.95);
+    });
+    targetNodes.forEach((node) => {
+      if (hideClusterLayer) {
+        node.style.opacity = "0";
+        return;
+      }
+      const revealP = clamp01((p - LANDING_REVEAL_PROGRESS) / (1 - LANDING_REVEAL_PROGRESS));
+      node.style.opacity = String(revealP);
+    });
+
+    pairs.forEach((pair) => {
+      const localProgress = clamp01((p - pair.delay) / TRAVEL_PROGRESS_SPAN);
+      const x = pair.sourceX + (pair.targetX - pair.sourceX) * localProgress;
+      const y = pair.sourceY + (pair.targetY - pair.sourceY) * localProgress;
+      pair.proxyDotEl.style.transform = `translate(${x}px, ${y}px)`;
+      pair.proxyDotEl.style.opacity = localProgress <= 0 ? "0" : "1";
+    });
+  }
+
+  function rebuild(progress = 0) {
+    clearOverlayDots();
+    resetOriginalDots();
+    pairs = collectPairs();
+    applyProgress(progress);
+  }
+
+  function cleanup() {
+    clearOverlayDots();
+    resetOriginalDots();
+  }
+
+  const trigger = ScrollTrigger.create({
+    trigger: sankeySectionEl,
+    start: "bottom bottom",
+    endTrigger: clusterSectionEl,
+    end: "top top",
+    scrub: 1,
+    onEnter: () => rebuild(0),
+    onEnterBack: () => rebuild(1),
+    onUpdate: (self) => applyProgress(self.progress),
+    onRefresh: (self) => rebuild(self.progress),
+    onLeave: () => cleanup(),
+    onLeaveBack: () => cleanup(),
+    onKill: () => cleanup(),
+  });
+
+  return () => {
+    cleanup();
+    trigger.kill();
+    overlayEl.remove();
+  };
+}
+
 /**
  * Initializes ScrollSmoother and all app section ScrollTriggers.
  *
@@ -266,6 +445,7 @@ function setupExhibitionsLabel({
  * @param {HTMLElement | null} [options.exhibitionsAnchorStartEl]
  * @param {HTMLElement | null} [options.exhibitionsAnchorEndEl]
  * @param {HTMLElement | null} [options.sankeySectionEl]
+ * @param {HTMLElement | null} [options.clusterSectionEl]
  * @returns {object | null} ScrollSmoother instance, or null if required sections missing
  */
 export function initAppScrollAnimations({
@@ -280,6 +460,7 @@ export function initAppScrollAnimations({
   exhibitionsAnchorStartEl,
   exhibitionsAnchorEndEl,
   sankeySectionEl,
+  clusterSectionEl,
 }) {
   if (!section1El || !section2El || !section3El || !sectionAfterS3El) return null;
 
@@ -322,6 +503,11 @@ export function initAppScrollAnimations({
     endAnchorEl: exhibitionsAnchorEndEl,
     timelineSectionEl: sectionAfterS3El,
     sankeySectionEl,
+  });
+
+  setupSankeyToClusterDotTravel({
+    sankeySectionEl,
+    clusterSectionEl,
   });
 
   return smoother;
