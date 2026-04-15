@@ -98,6 +98,16 @@ onBeforeUnmount(() => {
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
+        <!-- Title section -->
+        <PageSection 
+          layout="split"
+          >
+            <h1><i>In Between</i> Portraits</h1>
+            <div class="portrait-preview__container">
+              <p class="uppercase">An examination of persona in constructing an artist's public identity</p>
+            </div>
+        </PageSection>
+
         <!-- Section 1 ─ Identity intro -->
         <PageSection
           ref="section1Ref"
