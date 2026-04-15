@@ -1,11 +1,11 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import {
-  artistSummary,
-  institutionSummary,
-  artistPositions,
-  institutionPositions,
-  exhibitionsPrecomputedData,
+  artistClustersMap,
+  institutionClustersMap,
+  artistPositionsMap,
+  institutionPositionsMap,
+  exhibitionClustersMap,
 } from "./data/index.js";
 import ClusterSection from "./components/ClusterSection/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
@@ -163,11 +163,11 @@ onBeforeUnmount(() => {
         <!-- Text-embedding cluster visualization -->
         <PageSection tone="light" layout="stacked" stacked-full-width>
           <ClusterSection
-            :exhibitions="exhibitionsPrecomputedData"
-            :artist-data="artistSummary"
-            :institution-data="institutionSummary"
-            :artist-positions="artistPositions"
-            :institution-positions="institutionPositions"
+            :exhibitions="exhibitionClustersMap"
+            :artist-data="artistClustersMap"
+            :institution-data="institutionClustersMap"
+            :artist-positions="artistPositionsMap"
+            :institution-positions="institutionPositionsMap"
             initial-view-mode="exhibitions"
             @select-point="openClusterFromEmbedding"
             @select-cluster="openClusterFromEmbedding"

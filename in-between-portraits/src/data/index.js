@@ -8,11 +8,11 @@ import themesCSV from "./themes.csv?raw";
 import artistThemesCSV from "./artist_themes.csv?raw";
 import institutionThemesCSV from "./institution_themes.csv?raw";
 
-import artistArtistSummary from "./artist_artist_summary.json";
-import institutionArtistSummary from "./institution_artist_summary.json";
-import artistClusterPositions from "./artist_cluster_positions.json";
-import institutionClusterPositions from "./institution_cluster_positions.json";
-import exhibitionsData from "./exhibitions_precomputed.json";
+import artistClusters from "./clusters/artist_clusters.json";
+import institutionClusters from "./clusters/institution_clusters.json";
+import artistClusterPositions from "./clusters/artist_cluster_positions.json";
+import institutionClusterPositions from "./clusters/institution_cluster_positions.json";
+import exhibitionClusters from "./clusters/exhibition_clusters.json";
 
 // --- Reactive state ---
 
@@ -29,11 +29,11 @@ export const themePreviewTitles = computed(() =>
 );
 
 /** Precomputed cluster map data for ClusterSection (artist- vs institution-centric summaries + layouts). */
-export const artistSummary = artistArtistSummary;
-export const institutionSummary = institutionArtistSummary;
-export const artistPositions = artistClusterPositions;
-export const institutionPositions = institutionClusterPositions;
-export const exhibitionsPrecomputedData = exhibitionsData;
+export const artistClustersMap = artistClusters;
+export const institutionClustersMap = institutionClusters;
+export const artistPositionsMap = artistClusterPositions;
+export const institutionPositionsMap = institutionClusterPositions;
+export const exhibitionClustersMap = exhibitionClusters;
 
 export function fetchAndParseData() {
   const artistArr = csvParse(artistsCSV);

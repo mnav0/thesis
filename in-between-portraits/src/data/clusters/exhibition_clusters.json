@@ -10,9 +10,9 @@
     "items": [
       {
         "artistId": 4,
+        "isShared": true,
         "_angle": 0.5236,
-        "_radius_frac": 0.85,
-        "isShared": true
+        "_radius_frac": 0.85
       }
     ]
   },
@@ -27,27 +27,27 @@
     "items": [
       {
         "artistId": 1,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       },
       {
         "artistId": 2,
+        "isShared": false,
         "_angle": 2.0944,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       },
       {
         "artistId": 3,
+        "isShared": false,
         "_angle": 4.1888,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       },
       {
         "artistId": 4,
+        "isShared": true,
         "_angle": 0.5236,
-        "_radius_frac": 0.85,
-        "isShared": true
+        "_radius_frac": 0.85
       }
     ]
   },
@@ -62,9 +62,9 @@
     "items": [
       {
         "artistId": 5,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       }
     ]
   },
@@ -79,9 +79,9 @@
     "items": [
       {
         "artistId": 0,
+        "isShared": true,
         "_angle": 0.5236,
-        "_radius_frac": 0.85,
-        "isShared": true
+        "_radius_frac": 0.85
       }
     ]
   },
@@ -96,9 +96,9 @@
     "items": [
       {
         "artistId": 6,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       }
     ]
   },
@@ -113,9 +113,9 @@
     "items": [
       {
         "artistId": 0,
+        "isShared": true,
         "_angle": 0.5236,
-        "_radius_frac": 0.85,
-        "isShared": true
+        "_radius_frac": 0.85
       }
     ]
   },
@@ -130,9 +130,9 @@
     "items": [
       {
         "artistId": 7,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       }
     ]
   },
@@ -147,15 +147,15 @@
     "items": [
       {
         "artistId": 8,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       },
       {
         "artistId": 14,
+        "isShared": false,
         "_angle": 3.1416,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       }
     ]
   },
@@ -170,15 +170,15 @@
     "items": [
       {
         "artistId": 13,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       },
       {
         "artistId": 15,
+        "isShared": false,
         "_angle": 3.1416,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       }
     ]
   },
@@ -193,9 +193,9 @@
     "items": [
       {
         "artistId": 9,
+        "isShared": false,
         "_angle": 0.0,
-        "_radius_frac": 0.35,
-        "isShared": false
+        "_radius_frac": 0.35
       }
     ]
   }
