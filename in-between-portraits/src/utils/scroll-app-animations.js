@@ -4,44 +4,6 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
-const SCROLL_RESTORE_KEY = "ibp:smoother-scroll-y";
-
-let scrollRestoreListenersInstalled = false;
-
-/**
- * Persists ScrollSmoother scroll position before unload/refresh so the next load
- * can restore after pins and ScrollTrigger have been recalculated.
- */
-export function installScrollRestoreListeners() {
-  if (typeof window === "undefined" || scrollRestoreListenersInstalled) return;
-  scrollRestoreListenersInstalled = true;
-
-  window.addEventListener("pagehide", () => {
-    try {
-      const smoother = ScrollSmoother.get();
-      const y = smoother?.scrollTop?.() ?? window.scrollY ?? 0;
-      sessionStorage.setItem(SCROLL_RESTORE_KEY, String(Math.max(0, y)));
-    } catch {
-      /* ignore */
-    }
-  });
-}
-
-function restoreSavedScroll(smoother) {
-  if (!smoother || typeof window === "undefined") return;
-
-  const raw = sessionStorage.getItem(SCROLL_RESTORE_KEY);
-  if (raw == null) return;
-
-  sessionStorage.removeItem(SCROLL_RESTORE_KEY);
-  const y = Math.max(0, Number.parseFloat(raw));
-  if (!Number.isFinite(y)) return;
-
-  requestAnimationFrame(() => {
-    smoother.scrollTo(y, false);
-    ScrollTrigger.refresh();
-  });
-}
 
 /**
  * Measures floating-persona start (actors icon) and end (section 3 image) rects
@@ -167,6 +129,7 @@ function setupSection2PersonaGrow({
 
   s2Tl
     .set(personaIcon, { visibility: "hidden" }, 0.28)
+    .set(floatingEl, { opacity: 1 }, 0.28)
     .to(
       floatingEl,
       {
@@ -180,24 +143,6 @@ function setupSection2PersonaGrow({
       0.3
     );
 
-  function syncPersonaVisibility(self) {
-    const showFloating = self.isActive;
-    gsap.set(floatingEl, { opacity: showFloating ? 1 : 0 });
-    gsap.set(s3PersonaImg, { opacity: showFloating ? 0 : 1 });
-  }
-
-  // Root fix: visibility is derived from active scroll range, not enter/leave events.
-  ScrollTrigger.create({
-    trigger: s2El,
-    start: "top top",
-    endTrigger: s3El,
-    end: "top top",
-    invalidateOnRefresh: true,
-    onUpdate: syncPersonaVisibility,
-    onToggle: syncPersonaVisibility,
-    onRefresh: syncPersonaVisibility,
-  });
-
   gsap.set(sectionAfterS3El, { position: "relative", zIndex: 2 });
 
   ScrollTrigger.create({
@@ -207,6 +152,14 @@ function setupSection2PersonaGrow({
     end: "top top",
     pin: true,
     pinSpacing: false,
+    onEnter: () => {
+      gsap.set(floatingEl, { opacity: 0 });
+      gsap.set(s3PersonaImg, { opacity: 1 });
+    },
+    onLeaveBack: () => {
+      gsap.set(floatingEl, { opacity: 1 });
+      gsap.set(s3PersonaImg, { opacity: 0 });
+    },
   });
 }
 
@@ -370,9 +323,6 @@ export function initAppScrollAnimations({
     timelineSectionEl: sectionAfterS3El,
     sankeySectionEl,
   });
-
-  ScrollTrigger.refresh();
-  restoreSavedScroll(smoother);
 
   return smoother;
 }
