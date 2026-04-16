@@ -1,16 +1,19 @@
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import {
   artistClustersMap,
   institutionClustersMap,
   artistPositionsMap,
   institutionPositionsMap,
   exhibitionClustersMap,
+  artistCount,
 } from "./data/index.js";
+import { DOT_SIZE_PX } from "./constants.js";
+import { generateDotPositions } from "./utils/cluster-offsets.js";
 import ClusterSection from "./components/ClusterSection/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
 import PageSection from "./components/PageSection/index.vue";
-import ClusterPreview from "./components/ClusterPreview/index.vue";
+import IdentityStatesPreview from "./components/IdentityStatesPreview/index.vue";
 import ActorsPreview from "./components/ActorsPreview/index.vue";
 import ExhibitionsSankey from "./components/ExhibitionsSankey/index.vue";
 import ExhibitionsTimeline from "./components/ExhibitionsTimeline/index.vue";
@@ -24,15 +27,25 @@ const expandedCluster = ref(null);
 const expandedClusterGroupBy = ref(null);
 const personaSectionIllustrationSrc = publicImgSrc("persona.svg");
 const shellReady = ref(false);
-const firstSectionTone = ref("dark");
+const firstSectionTone = ref("light");
 
-const section1HeadingHtml = [
-  '<span class="s1-short">Identity is</span>',
-  '<span class="s1-expanded">Identity is<br/><i>not defined</i><br/><i>by one label</i><br/><i>or field.</i></span>',
+const dotSize = `${DOT_SIZE_PX}px`;
+const introDotsPositions = computed(() =>
+  generateDotPositions(artistCount, 5, 42, 18),
+);
+
+const section2HeadingHtml = [
+  "Identity is",
+  '<span class="identity-heading__descriptors">',
+  '<i class="identity-heading__descriptor identity-heading__descriptor--active" data-descriptor="descriptor1">collective</i>',
+  '<i class="identity-heading__descriptor" data-descriptor="descriptor2">multifaceted</i>',
+  '<i class="identity-heading__descriptor" data-descriptor="descriptor3">ever-developing</i>',
+  "</span>",
 ].join("");
 
 const section1Ref = ref(null);
 const section2Ref = ref(null);
+const actorsRef = ref(null);
 const section3Ref = ref(null);
 const timelineRef = ref(null);
 const sankeyRef = ref(null);
@@ -71,6 +84,7 @@ onMounted(() => {
         smoother = initAppScrollAnimations({
           section1El: getSectionEl(section1Ref),
           section2El: getSectionEl(section2Ref),
+          actorsSectionEl: getSectionEl(actorsRef),
           section3El: getSectionEl(section3Ref),
           sectionAfterS3El: getSectionEl(timelineRef),
           floatingPersonaEl: floatingPersonaRef.value,
@@ -80,7 +94,7 @@ onMounted(() => {
           },
           exhibitionsLabelEl: exhibitionsLabelRef.value,
           exhibitionsAnchorStartEl: exhibitionsAnchorStartRef.value,
-          exhibitionsAnchorEndEl: exhibitionsAnchorEndRef.value,
+          exhibitionsAnchorEndRef: exhibitionsAnchorEndRef.value,
           sankeySectionEl: getSectionEl(sankeyRef),
           clusterSectionEl: getSectionEl(clustersRef),
         });
@@ -98,29 +112,49 @@ onBeforeUnmount(() => {
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
-        <!-- Title section -->
-        <PageSection 
-          layout="split"
-          >
-            <h1><i>In Between</i> Portraits</h1>
-            <div class="portrait-preview__container">
-              <p class="uppercase">An examination of persona in constructing an artist's public identity</p>
+        <PageSection ref="section1Ref" :tone="firstSectionTone">
+          <template #heading>
+            <div class="grid h-full grid-cols-12 gap-x-2 gap-y-8 md:gap-x-4 relative">
+              <div class="col-span-5 col-start-8 row-start-1">
+                <div class="intro-portrait-block">
+                  <div class="intro-portrait-block__frame intro-portrait-block__frame--outer"></div>
+                  <div class="intro-portrait-block__frame intro-portrait-block__frame--inner"></div>
+                  <div class="intro-portrait-block__dots" aria-hidden="true">
+                    <span
+                      v-for="(pos, i) in introDotsPositions"
+                      :key="`intro-dot-${i}`"
+                      :style="{ left: pos.left, top: pos.top, width: dotSize, height: dotSize }"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute bottom-20 left-0 w-full">
+                <h1 class="mb-0"><i>In Between</i> Portraits</h1>
+
+                <div class="self-end text-right right-0">
+                  <p class="intro-subtitle uppercase mt-0">
+                    An examination of persona in constructing an artist's public identity
+                  </p>
+                </div>
+              </div>
             </div>
+          </template>
         </PageSection>
 
-        <!-- Section 1 ─ Identity intro -->
-        <PageSection
-          ref="section1Ref"
-          :tone="firstSectionTone"
-          layout="split"
-          :heading-html="section1HeadingHtml"
-        >
-          <ClusterPreview />
-        </PageSection>
-
-        <!-- Section 2 ─ Actors (pinned for persona growth) -->
+        <!-- Section 2 ─ Identity states -->
         <PageSection
           ref="section2Ref"
+          tone="dark"
+          layout="split"
+          :heading-html="section2HeadingHtml"
+        >
+          <IdentityStatesPreview :dot-count="artistCount" />
+        </PageSection>
+
+        <!-- Actors -->
+        <PageSection
+          ref="actorsRef"
           tone="light"
           layout="stacked"
           texture-preset="rightSoft"
@@ -129,7 +163,7 @@ onBeforeUnmount(() => {
           <ActorsPreview />
         </PageSection>
 
-        <!-- Section 3 ─ Persona content (always visible text) -->
+        <!-- Persona -->
         <PageSection ref="section3Ref" tone="light" layout="split" texture-preset="leftDual">
           <div
             class="grid h-full grid-cols-12 content-between gap-x-2 gap-y-8 md:grid-rows-[auto_1fr_auto] md:gap-x-4"

@@ -8,6 +8,7 @@ import {
   watch,
 } from "vue";
 import { artistsById } from "../../data/index.js";
+import { DOT_SIZE_PX } from "../../constants.js";
 
 const props = defineProps({
   exhibitions: { type: Array, default: () => [] },
@@ -25,7 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(["select-point", "select-cluster"]);
 
-const POINT_SIZE = 14;
+const POINT_SIZE = DOT_SIZE_PX;
 const CLUSTER_RADIUS = 118;
 const CANVAS_PADDING = 50;
 const CLUSTER_BOX_MIN_WIDTH = 150;

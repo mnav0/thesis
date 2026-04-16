@@ -5,14 +5,10 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
 
-/**
- * Measures floating-persona start (actors icon) and end (section 3 image) rects
- * in viewport / section-local coordinates for GSAP.
- */
-function measurePersonaPositions(section2El, section3El, personaIcon, section3PersonaImg) {
-  if (!personaIcon || !section3PersonaImg) return null;
+function measurePersonaPositions(actorsEl, section3El, personaIcon, section3PersonaImg) {
+  if (!actorsEl || !section3El || !personaIcon || !section3PersonaImg) return null;
 
-  const s2Rect = section2El.getBoundingClientRect();
+  const s2Rect = actorsEl.getBoundingClientRect();
   const iconRect = personaIcon.getBoundingClientRect();
   const s3Rect = section3El.getBoundingClientRect();
   const s3PRect = section3PersonaImg.getBoundingClientRect();
@@ -33,28 +29,35 @@ function measurePersonaPositions(section2El, section3El, personaIcon, section3Pe
   };
 }
 
-function setupSection1Intro(s1El, onFirstSectionToneChange) {
-  s1El.style.transition = "none";
-  s1El.querySelectorAll("h2, h3").forEach((el) => {
+/**
+ * Section 1 intro bridge:
+ * pin section 1, fade bg light→dark, transition portrait borders
+ * black→white, fade dots/title/subtitle, then release to section 2.
+ */
+function setupIntroBridge(section1El, onFirstSectionToneChange) {
+  const s1Bg = section1El.querySelector(".page-section-background");
+  const portraitBlock = section1El.querySelector(".intro-portrait-block");
+  const portraitFrames = section1El.querySelectorAll(".intro-portrait-block__frame");
+  const portraitDots = section1El.querySelectorAll(".intro-portrait-block__dots span");
+  const titleEl = section1El.querySelector("h1");
+  const subtitleEl = section1El.querySelector(".intro-subtitle");
+
+  section1El.style.transition = "none";
+  section1El.querySelectorAll("h1, h2, h3").forEach((el) => {
     el.style.transition = "none";
   });
+  if (portraitBlock) gsap.set(portraitBlock, { visibility: "visible" });
 
-  const shortH = s1El.querySelector(".s1-short");
-  const expandedH = s1El.querySelector(".s1-expanded");
-  const s1Bg = s1El.querySelector(".page-section-background");
-
-  if (!shortH || !expandedH) return;
-
-  let lastTone = null;
-  const s1Tl = gsap.timeline({
+  let lastTone = "light";
+  const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: s1El,
+      trigger: section1El,
       start: "top top",
       end: "+=100%",
       pin: true,
       scrub: 1,
       onUpdate: (self) => {
-        const tone = self.progress > 0.3 ? "light" : "dark";
+        const tone = self.progress > 0.4 ? "dark" : "light";
         if (tone !== lastTone) {
           lastTone = tone;
           onFirstSectionToneChange(tone);
@@ -63,44 +66,95 @@ function setupSection1Intro(s1El, onFirstSectionToneChange) {
     },
   });
 
-  s1Tl
-    .to(shortH, { opacity: 0, duration: 0.4 }, 0)
-    .to(expandedH, { opacity: 1, duration: 0.5 }, 0.15)
-    .to(
-      s1El,
-      {
-        backgroundColor: "#fff",
-        borderColor: "#000",
-        color: "#333",
-        duration: 0.7,
-      },
-      0
-    )
-    .to(s1Bg, { opacity: 1, duration: 0.7 }, 0);
-
-  const clusterItems = s1El.querySelectorAll(".cluster-preview-item");
-  if (clusterItems.length) {
-    s1Tl.to(clusterItems, { color: "#b8b8b8", duration: 0.7 }, 0);
+  // Phase 1 (0–0.4): Section goes dark
+  tl.to(
+    section1El,
+    { backgroundColor: "#000", borderColor: "transparent", color: "#fff", duration: 0.35 },
+    0.05,
+  );
+  if (s1Bg) {
+    tl.to(s1Bg, { opacity: 0, duration: 0.35 }, 0.05);
   }
+
+  // Portrait borders transition to white (matching section 2 dark style)
+  tl.to(portraitFrames, { borderColor: "rgba(255,255,255,0.45)", duration: 0.3 }, 0.1);
+  // Dots transition out
+  tl.to(portraitDots, { opacity: "0", duration: 0.3 }, 0.1);
+
+  // Phase 2 (0.4–0.7): Title and subtitle fade out, portrait stays
+  if (titleEl) tl.to(titleEl, { opacity: 0, duration: 0.25 }, 0.4);
+  if (subtitleEl) tl.to(subtitleEl, { opacity: 0, duration: 0.25 }, 0.4);
 }
 
-function setupSection2PersonaGrow({
-  s2El,
+function setIdentityState(sectionEl, stateId) {
+  const descriptorMap = {
+    descriptor1: "descriptor1",
+    descriptor2: "descriptor2",
+    descriptor3_1: "descriptor3",
+    descriptor3_2: "descriptor3",
+    descriptor3_3: "descriptor3",
+  };
+  const activeDescriptor = descriptorMap[stateId];
+  sectionEl.querySelectorAll("[data-descriptor]").forEach((node) => {
+    node.classList.toggle(
+      "identity-heading__descriptor--active",
+      node.dataset.descriptor === activeDescriptor,
+    );
+  });
+  sectionEl.querySelectorAll("[data-state]").forEach((node) => {
+    node.classList.toggle("identity-state--active", node.dataset.state === stateId);
+  });
+}
+
+function setupIdentitySectionTimeline(section2El) {
+  setIdentityState(section2El, "descriptor1");
+  const frames = section2El.querySelectorAll(".identity-states-preview__frame");
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section2El,
+      start: "top top",
+      end: "+=260%",
+      pin: true,
+      scrub: 1,
+    },
+  });
+
+  tl.call(() => {
+    setIdentityState(section2El, "descriptor1");
+    gsap.to(frames, { opacity: 1, duration: 0.2 });
+  }, null, 0)
+    .to({}, { duration: 0.55 })
+    .call(() => {
+      setIdentityState(section2El, "descriptor2");
+      gsap.to(frames, { opacity: 0, duration: 0.3 });
+    })
+    .to({}, { duration: 0.65 })
+    .call(() => setIdentityState(section2El, "descriptor3_1"))
+    .to({}, { duration: 0.45 })
+    .call(() => setIdentityState(section2El, "descriptor3_2"))
+    .to({}, { duration: 0.45 })
+    .call(() => setIdentityState(section2El, "descriptor3_3"))
+    .to({}, { duration: 0.4 });
+}
+
+function setupActorsToPersonaGrow({
+  actorsEl,
   s3El,
   sectionAfterS3El,
   floatingEl,
   s3PersonaImg,
   personaPos,
 }) {
-  const personaIcon = s2El.querySelector(
-    '[data-actor="persona"] .actors-preview__icon'
+  const personaIcon = actorsEl.querySelector(
+    '[data-actor="persona"] .actors-preview__icon',
   );
-  const personaCell = s2El.querySelector('[data-actor="persona"]');
-  const nonPersonaCells = s2El.querySelectorAll(
-    '.actors-preview__cell:not([data-actor="persona"])'
+  const personaCell = actorsEl.querySelector('[data-actor="persona"]');
+  const nonPersonaCells = actorsEl.querySelectorAll(
+    '.actors-preview__cell:not([data-actor="persona"])',
   );
   const personaLabel = personaCell?.querySelector("span");
-  const s2Heading = s2El.querySelector(".page-section-heading");
+  const s2Heading = actorsEl.querySelector(".page-section-heading");
 
   gsap.set(floatingEl, {
     left: personaPos.start.x,
@@ -114,7 +168,7 @@ function setupSection2PersonaGrow({
 
   const s2Tl = gsap.timeline({
     scrollTrigger: {
-      trigger: s2El,
+      trigger: actorsEl,
       start: "top top",
       end: "+=150%",
       pin: true,
@@ -140,7 +194,7 @@ function setupSection2PersonaGrow({
         duration: 0.55,
         ease: "power2.inOut",
       },
-      0.3
+      0.3,
     );
 
   gsap.set(sectionAfterS3El, { position: "relative", zIndex: 2 });
@@ -175,12 +229,6 @@ function setupSection3PinCoverFallback(s3El, sectionAfterS3El) {
   });
 }
 
-/**
- * Fixed label (outside #smooth-wrapper) tracks two anchors inside the scroll
- * content — one below the timeline SVG, one above the Sankey.  As the user
- * scrolls, the label's `top` interpolates between the anchors' live viewport
- * positions, creating visible downward travel.  Then x-shift and suffix fade.
- */
 function setupExhibitionsLabel({
   labelEl,
   startAnchorEl,
@@ -207,13 +255,11 @@ function setupExhibitionsLabel({
     gsap.set(labelEl, { top, opacity: 1 });
 
     const xP = gsap.utils.clamp(0, 1, (p - 0.15) / 0.06);
-    gsap.set(innerEl, { x: suffixWidth / 2 * (1 - xP) });
+    gsap.set(innerEl, { x: (suffixWidth / 2) * (1 - xP) });
 
     const fP = gsap.utils.clamp(0, 1, (p - 0.21) / 0.06);
     gsap.set(suffixEl, { opacity: fP });
   }
-
-  let arrived = false;
 
   function trackStartAnchor() {
     const top = startAnchorEl.getBoundingClientRect().top;
@@ -235,17 +281,11 @@ function setupExhibitionsLabel({
     start: "bottom bottom",
     endTrigger: sankeySectionEl,
     end: "bottom top",
-    onUpdate: (self) => {
-      applyProgress(self.progress);
-      arrived = self.progress >= 0.15;
-    },
+    onUpdate: (self) => applyProgress(self.progress),
     onLeave: () => gsap.set(labelEl, { opacity: 0 }),
     onLeaveBack: () => trackStartAnchor(),
     onEnter: () => applyProgress(0),
-    onEnterBack: () => {
-      arrived = true;
-      applyProgress(1);
-    },
+    onEnterBack: () => applyProgress(1),
   });
 
   applyProgress(0);
@@ -262,10 +302,7 @@ function centerFromRect(rect, rootRect) {
   };
 }
 
-function setupSankeyToClusterDotTravel({
-  sankeySectionEl,
-  clusterSectionEl,
-}) {
+function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
   if (!sankeySectionEl || !clusterSectionEl) return;
 
   const GROUP_STAGGER_STEP = 0.03;
@@ -292,12 +329,8 @@ function setupSankeyToClusterDotTravel({
   }
 
   function resetOriginalDots() {
-    sourceNodes.forEach((node) => {
-      node.style.opacity = "";
-    });
-    targetNodes.forEach((node) => {
-      node.style.opacity = "";
-    });
+    sourceNodes.forEach((node) => { node.style.opacity = ""; });
+    targetNodes.forEach((node) => { node.style.opacity = ""; });
     setClusterLayerHidden(false);
   }
 
@@ -306,9 +339,7 @@ function setupSankeyToClusterDotTravel({
     nodes.forEach((node) => {
       const pointId = node.dataset.pointId ?? "";
       const clusterId = pointId.split("-")[0];
-      if (clusterId !== "") {
-        clusterIdSet.add(clusterId);
-      }
+      if (clusterId !== "") clusterIdSet.add(clusterId);
     });
     return new Map(
       [...clusterIdSet]
@@ -319,13 +350,8 @@ function setupSankeyToClusterDotTravel({
 
   function collectPairs() {
     const contentRect = contentEl.getBoundingClientRect();
-    sourceNodes = [
-      ...sankeySectionEl.querySelectorAll("[data-artist-id]"),
-    ];
-    targetNodes = [
-      ...clusterSectionEl.querySelectorAll(".cs-point[data-artist-id]"),
-    ];
-
+    sourceNodes = [...sankeySectionEl.querySelectorAll("[data-artist-id]")];
+    targetNodes = [...clusterSectionEl.querySelectorAll(".cs-point[data-artist-id]")];
     if (!sourceNodes.length || !targetNodes.length) return [];
 
     const sourceByArtistId = new Map();
@@ -375,14 +401,9 @@ function setupSankeyToClusterDotTravel({
     const hideClusterLayer = p < LANDING_REVEAL_PROGRESS;
     setClusterLayerHidden(hideClusterLayer);
 
-    sourceNodes.forEach((node) => {
-      node.style.opacity = String(1 - p * 0.95);
-    });
+    sourceNodes.forEach((node) => { node.style.opacity = String(1 - p * 0.95); });
     targetNodes.forEach((node) => {
-      if (hideClusterLayer) {
-        node.style.opacity = "0";
-        return;
-      }
+      if (hideClusterLayer) { node.style.opacity = "0"; return; }
       const revealP = clamp01((p - LANDING_REVEAL_PROGRESS) / (1 - LANDING_REVEAL_PROGRESS));
       node.style.opacity = String(revealP);
     });
@@ -408,7 +429,7 @@ function setupSankeyToClusterDotTravel({
     resetOriginalDots();
   }
 
-  const trigger = ScrollTrigger.create({
+  ScrollTrigger.create({
     trigger: sankeySectionEl,
     start: "bottom bottom",
     endTrigger: clusterSectionEl,
@@ -422,35 +443,12 @@ function setupSankeyToClusterDotTravel({
     onLeaveBack: () => cleanup(),
     onKill: () => cleanup(),
   });
-
-  return () => {
-    cleanup();
-    trigger.kill();
-    overlayEl.remove();
-  };
 }
 
-/**
- * Initializes ScrollSmoother and all app section ScrollTriggers.
- *
- * @param {object} options
- * @param {HTMLElement} options.section1El
- * @param {HTMLElement} options.section2El
- * @param {HTMLElement} options.section3El
- * @param {HTMLElement} options.sectionAfterS3El First section after persona (pin end / z-index cover)
- * @param {HTMLElement | null} options.floatingPersonaEl
- * @param {HTMLImageElement | null} options.section3PersonaImg
- * @param {(tone: 'light' | 'dark') => void} options.onFirstSectionToneChange
- * @param {HTMLElement | null} [options.exhibitionsLabelEl]
- * @param {HTMLElement | null} [options.exhibitionsAnchorStartEl]
- * @param {HTMLElement | null} [options.exhibitionsAnchorEndEl]
- * @param {HTMLElement | null} [options.sankeySectionEl]
- * @param {HTMLElement | null} [options.clusterSectionEl]
- * @returns {object | null} ScrollSmoother instance, or null if required sections missing
- */
 export function initAppScrollAnimations({
   section1El,
   section2El,
+  actorsSectionEl,
   section3El,
   sectionAfterS3El,
   floatingPersonaEl,
@@ -458,21 +456,21 @@ export function initAppScrollAnimations({
   onFirstSectionToneChange,
   exhibitionsLabelEl,
   exhibitionsAnchorStartEl,
-  exhibitionsAnchorEndEl,
+  exhibitionsAnchorEndRef,
   sankeySectionEl,
   clusterSectionEl,
 }) {
-  if (!section1El || !section2El || !section3El || !sectionAfterS3El) return null;
+  if (!section1El || !section2El) return null;
 
-  const personaIcon = section2El.querySelector(
-    '[data-actor="persona"] .actors-preview__icon'
+  const personaIcon = actorsSectionEl?.querySelector(
+    '[data-actor="persona"] .actors-preview__icon',
   );
 
   const personaPos = measurePersonaPositions(
-    section2El,
+    actorsSectionEl,
     section3El,
     personaIcon,
-    section3PersonaImg
+    section3PersonaImg,
   );
 
   const smoother = ScrollSmoother.create({
@@ -482,25 +480,28 @@ export function initAppScrollAnimations({
     effects: true,
   });
 
-  setupSection1Intro(section1El, onFirstSectionToneChange);
+  setupIntroBridge(section1El, onFirstSectionToneChange);
+  setupIdentitySectionTimeline(section2El);
 
-  if (personaPos && floatingPersonaEl && section3PersonaImg) {
-    setupSection2PersonaGrow({
-      s2El: section2El,
-      s3El: section3El,
-      sectionAfterS3El,
-      floatingEl: floatingPersonaEl,
-      s3PersonaImg: section3PersonaImg,
-      personaPos,
-    });
-  } else {
-    setupSection3PinCoverFallback(section3El, sectionAfterS3El);
+  if (actorsSectionEl && section3El && sectionAfterS3El) {
+    if (personaPos && floatingPersonaEl && section3PersonaImg) {
+      setupActorsToPersonaGrow({
+        actorsEl: actorsSectionEl,
+        s3El: section3El,
+        sectionAfterS3El,
+        floatingEl: floatingPersonaEl,
+        s3PersonaImg: section3PersonaImg,
+        personaPos,
+      });
+    } else {
+      setupSection3PinCoverFallback(section3El, sectionAfterS3El);
+    }
   }
 
   setupExhibitionsLabel({
     labelEl: exhibitionsLabelEl,
     startAnchorEl: exhibitionsAnchorStartEl,
-    endAnchorEl: exhibitionsAnchorEndEl,
+    endAnchorEl: exhibitionsAnchorEndRef,
     timelineSectionEl: sectionAfterS3El,
     sankeySectionEl,
   });
@@ -513,10 +514,6 @@ export function initAppScrollAnimations({
   return smoother;
 }
 
-/**
- * Kills all ScrollTriggers and the ScrollSmoother instance from init.
- * @param {object | null | undefined} smoother
- */
 export function destroyAppScrollAnimations(smoother) {
   ScrollTrigger.getAll().forEach((t) => t.kill());
   smoother?.kill();

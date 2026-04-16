@@ -14,6 +14,11 @@ import artistClusterPositions from "./clusters/artist_cluster_positions.json";
 import institutionClusterPositions from "./clusters/institution_cluster_positions.json";
 import exhibitionClusters from "./clusters/exhibition_clusters.json";
 
+// --- Derived constants ---
+
+const _parsedArtists = csvParse(artistsCSV);
+export const artistCount = _parsedArtists.length;
+
 // --- Reactive state ---
 
 export const artistsById = ref({});

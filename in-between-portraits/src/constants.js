@@ -9,3 +9,6 @@ export const YEAR_PADDING = 5;
 
 export const FONT_SERIF = '"Instrument Serif", serif';
 export const FONT_SANS = '"Kosugi", sans-serif';
+
+/** Diameter in px for artist dots/points used across intro, clusters, sankey, and travel overlay. */
+export const DOT_SIZE_PX = 14;

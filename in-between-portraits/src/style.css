@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Mirrors DOT_SIZE_PX in constants.js */
+  --dot-size: 14px;
+}
+
 body {
   min-height: 100vh;
   min-width: 100vw;
@@ -64,29 +69,68 @@ select {
   opacity: 1;
 }
 
-.portrait-preview__container {
-  float: right;
-}
-
-.page-section-heading {
+.intro-portrait-block {
   position: relative;
+  width: 100%;
+  max-width: 28rem;
+  aspect-ratio: 1 / 1;
+  margin-left: auto;
 }
 
-.s1-short,
-.s1-expanded {
-  display: block;
-  font: inherit;
-  color: inherit;
-}
-
-.s1-expanded {
+.intro-portrait-block__frame {
   position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
+  border: 1px solid #111;
+  opacity: 0.45;
 }
 
-/* Floating persona for section 2→3 transition */
+.intro-portrait-block__frame--outer {
+  inset: 4% 4%;
+}
+
+.intro-portrait-block__frame--inner {
+  inset: 8% 8%;
+}
+
+.intro-portrait-block__dots {
+  position: absolute;
+  inset: 12% 12%;
+}
+
+.intro-portrait-block__dots span {
+  position: absolute;
+  border-radius: 999px;
+  background: #111;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Section 2: Identity heading descriptor swap ── */
+
+.identity-heading__descriptors {
+  position: relative;
+  display: block;
+  min-height: 1.15em;
+  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.identity-heading__descriptor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.identity-heading__descriptor--active {
+  opacity: 1;
+}
+
+/* ── Floating persona for actors→persona transition ── */
+
 .floating-persona {
   position: fixed;
   pointer-events: none;
@@ -117,13 +161,12 @@ select {
   opacity: 0;
 }
 
-/* Mirrors the viz container so text centres on the inner plot band */
 .exhibitions-bridge-label__track {
-  max-width: 1100px; /* EXHIBITIONS_VIZ_MAX_WIDTH_PX */
+  max-width: 1100px;
   margin-left: 0;
   margin-right: auto;
-  padding-left: 200px; /* EXHIBITIONS_VIZ_MARGIN.left */
-  padding-right: 220px; /* EXHIBITIONS_VIZ_MARGIN.right */
+  padding-left: 200px;
+  padding-right: 220px;
   text-align: center;
   box-sizing: border-box;
 }
@@ -154,14 +197,14 @@ select {
 
 .sankey-cluster-travel-dot {
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: var(--dot-size);
+  height: var(--dot-size);
   border-radius: 999px;
   background: #000;
   border: 1px solid #fff;
   transform: translate(0, 0);
-  margin-left: -7px;
-  margin-top: -7px;
+  margin-left: calc(var(--dot-size) / -2);
+  margin-top: calc(var(--dot-size) / -2);
   opacity: 0;
 }
 

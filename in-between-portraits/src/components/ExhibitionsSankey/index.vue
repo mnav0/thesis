@@ -13,7 +13,7 @@ import {
   EXHIBITIONS_VIZ_MARGIN,
   EXHIBITIONS_VIZ_MAX_WIDTH_PX,
 } from "../../constants/exhibitions-viz.js";
-import { FONT_SANS } from "../../constants.js";
+import { DOT_SIZE_PX, FONT_SANS } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
 
@@ -390,7 +390,7 @@ function renderChart() {
     .attr("data-artist-id", (d) => d.nodeId.slice(3))
     .attr("cx", (d) => (d.x0 + d.x1) / 2 - 3)
     .attr("cy", (d) => (d.y0 + d.y1) / 2)
-    .attr("r", 7)
+    .attr("r", DOT_SIZE_PX / 2)
     .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)

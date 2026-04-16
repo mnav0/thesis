@@ -196,8 +196,8 @@
 
 .cs-point {
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: var(--dot-size);
+  height: var(--dot-size);
   border-radius: 50%;
   background: #111;
   z-index: 2;

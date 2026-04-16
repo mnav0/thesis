@@ -1,0 +1,56 @@
+.identity-states-preview {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  aspect-ratio: 1 / 1;
+  margin-left: auto;
+}
+
+.identity-states-preview__frame {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+}
+
+.identity-states-preview__frame--outer {
+  inset: 4% 4%;
+}
+
+.identity-states-preview__frame--inner {
+  inset: 8% 8%;
+}
+
+/* ── State layers ── */
+
+.identity-state {
+  position: absolute;
+  inset: 12% 12%;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.identity-state--active {
+  opacity: 1;
+}
+
+/* ── Dots (size and position set via inline style from JS) ── */
+
+.identity-dot {
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transform: translate(-50%, -50%);
+}
+
+/* ── Labels (descriptor2 state) ── */
+
+.identity-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(0.5rem, 0.9vw, 0.72rem);
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-align: center;
+}
