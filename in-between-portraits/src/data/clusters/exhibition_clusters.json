@@ -4,8 +4,8 @@
     "name": "Part Asian, 100% Hapa",
     "labels": [
       "hapa",
-      "100",
-      "ancestry"
+      "ancestry",
+      "100"
     ],
     "items": [
       {
@@ -32,55 +32,39 @@
         "_radius_frac": 0.35
       },
       {
-        "artistId": 2,
+        "artistId": 3,
         "isShared": false,
-        "_angle": 2.0944,
+        "_angle": 1.5708,
         "_radius_frac": 0.35
       },
       {
-        "artistId": 3,
+        "artistId": 17,
         "isShared": false,
-        "_angle": 4.1888,
+        "_angle": 3.1416,
         "_radius_frac": 0.35
+      },
+      {
+        "artistId": 20,
+        "isShared": false,
+        "_angle": 4.7124,
+        "_radius_frac": 0.35
+      },
+      {
+        "artistId": 2,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
       },
       {
         "artistId": 4,
         "isShared": true,
-        "_angle": 0.5236,
+        "_angle": 2.618,
         "_radius_frac": 0.85
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Ruth Asawa: Citizen of the Universe",
-    "labels": [
-      "citizen",
-      "universe",
-      "life"
-    ],
-    "items": [
+      },
       {
-        "artistId": 5,
-        "isShared": false,
-        "_angle": 0.0,
-        "_radius_frac": 0.35
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Isamu Noguchi: Archaic/Modern",
-    "labels": [
-      "archaic",
-      "modern",
-      "ancient"
-    ],
-    "items": [
-      {
-        "artistId": 0,
+        "artistId": 18,
         "isShared": true,
-        "_angle": 0.5236,
+        "_angle": 4.7124,
         "_radius_frac": 0.85
       }
     ]
@@ -99,6 +83,12 @@
         "isShared": false,
         "_angle": 0.0,
         "_radius_frac": 0.35
+      },
+      {
+        "artistId": 15,
+        "isShared": false,
+        "_angle": 3.1416,
+        "_radius_frac": 0.35
       }
     ]
   },
@@ -107,14 +97,50 @@
     "name": "Legacies: Asian American Art Movements in New York City",
     "labels": [
       "legacies",
-      "artists",
-      "art"
+      "political",
+      "city"
     ],
     "items": [
+      {
+        "artistId": 14,
+        "isShared": false,
+        "_angle": 0.0,
+        "_radius_frac": 0.35
+      },
       {
         "artistId": 0,
         "isShared": true,
         "_angle": 0.5236,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 10,
+        "isShared": true,
+        "_angle": 1.5708,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 12,
+        "isShared": true,
+        "_angle": 2.618,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 13,
+        "isShared": true,
+        "_angle": 3.6652,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 16,
+        "isShared": true,
+        "_angle": 4.7124,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 19,
+        "isShared": true,
+        "_angle": 5.7596,
         "_radius_frac": 0.85
       }
     ]
@@ -124,8 +150,8 @@
     "name": "Oscar yi Hou: East of sun, west of moon",
     "labels": [
       "east",
-      "like",
-      "west"
+      "uovo",
+      "cowboy"
     ],
     "items": [
       {
@@ -140,8 +166,8 @@
     "id": 7,
     "name": "Biennale Arte 2015: All the World's Futures",
     "labels": [
-      "international",
-      "world",
+      "56th",
+      "arsenale",
       "countries"
     ],
     "items": [
@@ -152,10 +178,10 @@
         "_radius_frac": 0.35
       },
       {
-        "artistId": 14,
-        "isShared": false,
-        "_angle": 3.1416,
-        "_radius_frac": 0.35
+        "artistId": 28,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
       }
     ]
   },
@@ -169,13 +195,118 @@
     ],
     "items": [
       {
-        "artistId": 13,
+        "artistId": 11,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 16,
+        "isShared": true,
+        "_angle": 3.6652,
+        "_radius_frac": 0.85
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Across the Pacific: Contemporary Korean and Korean American Art",
+    "labels": [
+      "korean",
+      "english",
+      "art"
+    ],
+    "items": [
+      {
+        "artistId": 12,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 19,
+        "isShared": true,
+        "_angle": 3.6652,
+        "_radius_frac": 0.85
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "America is Hard to See",
+    "labels": [
+      "hard",
+      "america",
+      "title"
+    ],
+    "items": [
+      {
+        "artistId": 5,
         "isShared": false,
         "_angle": 0.0,
         "_radius_frac": 0.35
       },
       {
-        "artistId": 15,
+        "artistId": 9,
+        "isShared": false,
+        "_angle": 2.0944,
+        "_radius_frac": 0.35
+      },
+      {
+        "artistId": 21,
+        "isShared": false,
+        "_angle": 4.1888,
+        "_radius_frac": 0.35
+      },
+      {
+        "artistId": 0,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 10,
+        "isShared": true,
+        "_angle": 1.7802,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 11,
+        "isShared": true,
+        "_angle": 3.0369,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 13,
+        "isShared": true,
+        "_angle": 4.2935,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 19,
+        "isShared": true,
+        "_angle": 5.5501,
+        "_radius_frac": 0.85
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Portraiture Now: Asian American Portraits of Encounter",
+    "labels": [
+      "portraiture",
+      "smithsonian",
+      "encounter"
+    ],
+    "items": [
+      {
+        "artistId": 24,
+        "isShared": false,
+        "_angle": 0.0,
+        "_radius_frac": 0.35
+      },
+      {
+        "artistId": 25,
         "isShared": false,
         "_angle": 3.1416,
         "_radius_frac": 0.35
@@ -183,19 +314,89 @@
     ]
   },
   {
-    "id": 9,
-    "name": "You Sad Legend",
+    "id": 12,
+    "name": "Ascendancy: The Self in Contemporary Art",
     "labels": [
-      "documentary",
-      "filmmaker",
-      "dead"
+      "agency",
+      "ascendancy",
+      "self"
     ],
     "items": [
       {
-        "artistId": 9,
+        "artistId": 22,
         "isShared": false,
         "_angle": 0.0,
         "_radius_frac": 0.35
+      },
+      {
+        "artistId": 23,
+        "isShared": false,
+        "_angle": 3.1416,
+        "_radius_frac": 0.35
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "One Way or Another: Asian American Art Now",
+    "labels": [
+      "installation",
+      "way",
+      "references"
+    ],
+    "items": [
+      {
+        "artistId": 2,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 28,
+        "isShared": true,
+        "_angle": 3.6652,
+        "_radius_frac": 0.85
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "The Decade Show: Frameworks of Identity in the 1980s",
+    "labels": [
+      "decade",
+      "1980",
+      "studio"
+    ],
+    "items": [
+      {
+        "artistId": 27,
+        "isShared": false,
+        "_angle": 0.0,
+        "_radius_frac": 0.35
+      },
+      {
+        "artistId": 29,
+        "isShared": false,
+        "_angle": 3.1416,
+        "_radius_frac": 0.35
+      },
+      {
+        "artistId": 10,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 16,
+        "isShared": true,
+        "_angle": 2.618,
+        "_radius_frac": 0.85
+      },
+      {
+        "artistId": 18,
+        "isShared": true,
+        "_angle": 4.7124,
+        "_radius_frac": 0.85
       }
     ]
   }

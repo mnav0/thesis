@@ -1,17 +1,31 @@
-id,name,birth_year,death_year
-0,Isamu Noguchi,1904,1988
-1,Amanda Ross-Ho,1975,
-2,Laurel Nakadate,1975,
-3,Mequitta Ahuja,1976,
-4,Kip Fulbeck,1965,
-5,Ruth Asawa,1926,2013
-6,Do Ho Suh,1962,
-7,Oscar yi Hou,1998,
-8,Sarah Sze,1969,
-9,Wu Tsang,1982,
-10,Nam June Paik,1932,2006
-11,Martin Wong,1946,1999
-12,Theresa Hak Kyung Cha,1951,1982
-13,Josh Kline,1979,
-14,Tiffany Chung,1969,
-15,Shu Lea Cheang,1954,
+id,name,birth_year,death_year,exhibitions
+0,Isamu Noguchi,1904,1988,"[5, 10]"
+1,Amanda Ross-Ho,1975,,[1]
+2,Laurel Nakadate,1975,,"[1, 13]"
+3,Mequitta Ahuja,1976,,[1]
+4,Kip Fulbeck,1965,,"[0, 1]"
+5,Ruth Asawa,1926,2013,"[2, 10]"
+6,Do Ho Suh,1962,,[4]
+7,Oscar yi Hou,1998,,[6]
+8,Sarah Sze,1969,,[7]
+9,Wu Tsang,1982,,[10]
+10,Martin Wong,1946,1999,"[5, 10, 14]"
+11,Josh Kline,1979,,"[8, 10]"
+12,Byron Kim,1961,,"[5, 9]"
+13,Paul Pfeiffer,1966,,"[5, 10]"
+14,Carlos Villa,1936,2013,[5]
+15,Korakrit Arunanondchai,1986,,[4]
+16,Shu Lea Cheang,1954,,"[5, 8, 14]"
+17,Cristina Lei Rodriguez,1974,,[1]
+18,Albert Chong,1958,,"[1, 5, 14]"
+19,Michael Joo,1966,,"[9, 10, 5]"
+20,Laura Kina,1973,,[1]
+21,Alfonso Ossorio,1916,1990,[10]
+22,Stephanie Syjuco,1974,,[12]
+23,Saya Woolfalk,1979,,[12]
+24,Shizu Saldamando,1978,,[11]
+25,Roger Shimomura,1939,,[11]
+26,Tiffany Chung,1969,,[7]
+27,Tom Nakashima,1941,,[14]
+28,Patty Chang,1972,,[13]
+29,Hung Liu,1948,2021,[14]

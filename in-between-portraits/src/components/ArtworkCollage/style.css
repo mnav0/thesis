@@ -1,0 +1,34 @@
+.artwork-collage-section {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+}
+
+.artwork-collage-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 100%;
+  height: 100%;
+  gap: 1px;
+  padding: 1px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.artwork-collage-tile {
+  width: auto;
+  height: 32px;
+  flex: 0 0 auto;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.artwork-collage-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
