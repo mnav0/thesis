@@ -21,6 +21,7 @@ h1 {
   font-family: "Instrument Serif", serif;
   font-size: 6rem;
   letter-spacing: 0.01em;
+  line-height: 0.9;
 }
 
 h2 {
@@ -69,38 +70,40 @@ select {
   opacity: 1;
 }
 
-.intro-portrait-block {
-  position: relative;
+.intro-section .page-section-content {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .intro-section .page-section-content {
+    padding-right: 2rem;
+  }
+}
+
+.intro-section .page-section-texture {
+  display: none;
+}
+
+.intro-section__collage {
+  display: block;
+  width: calc(100% + 220px);
+  max-width: none;
+  height: 100svh;
+  object-fit: cover;
+  object-position: left top;
+}
+
+.intro-section__title-card {
   width: 100%;
-  max-width: 28rem;
-  aspect-ratio: 1 / 1;
-  margin-left: auto;
-}
-
-.intro-portrait-block__frame {
-  position: absolute;
-  border: 1px solid #111;
-  opacity: 0.45;
-}
-
-.intro-portrait-block__frame--outer {
-  inset: 4% 4%;
-}
-
-.intro-portrait-block__frame--inner {
-  inset: 8% 8%;
-}
-
-.intro-portrait-block__dots {
-  position: absolute;
-  inset: 12% 12%;
-}
-
-.intro-portrait-block__dots span {
-  position: absolute;
-  border-radius: 999px;
-  background: #111;
-  transform: translate(-50%, -50%);
+  max-width: 32rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 2.5rem;
 }
 
 /* ── Section 2: Identity heading descriptor swap ── */

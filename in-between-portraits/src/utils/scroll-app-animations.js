@@ -29,63 +29,6 @@ function measurePersonaPositions(actorsEl, section3El, personaIcon, section3Pers
   };
 }
 
-/**
- * Section 1 intro bridge:
- * pin section 1, fade bg light→dark, transition portrait borders
- * black→white, fade dots/title/subtitle, then release to section 2.
- */
-function setupIntroBridge(section1El, onFirstSectionToneChange) {
-  const s1Bg = section1El.querySelector(".page-section-background");
-  const portraitBlock = section1El.querySelector(".intro-portrait-block");
-  const portraitFrames = section1El.querySelectorAll(".intro-portrait-block__frame");
-  const portraitDots = section1El.querySelectorAll(".intro-portrait-block__dots span");
-  const titleEl = section1El.querySelector("h1");
-  const subtitleEl = section1El.querySelector(".intro-subtitle");
-
-  section1El.style.transition = "none";
-  section1El.querySelectorAll("h1, h2, h3").forEach((el) => {
-    el.style.transition = "none";
-  });
-  if (portraitBlock) gsap.set(portraitBlock, { visibility: "visible" });
-
-  let lastTone = "light";
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section1El,
-      start: "top top",
-      end: "+=100%",
-      pin: true,
-      scrub: 1,
-      onUpdate: (self) => {
-        const tone = self.progress > 0.4 ? "dark" : "light";
-        if (tone !== lastTone) {
-          lastTone = tone;
-          onFirstSectionToneChange(tone);
-        }
-      },
-    },
-  });
-
-  // Phase 1 (0–0.4): Section goes dark
-  tl.to(
-    section1El,
-    { backgroundColor: "#000", borderColor: "transparent", color: "#fff", duration: 0.35 },
-    0.05,
-  );
-  if (s1Bg) {
-    tl.to(s1Bg, { opacity: 0, duration: 0.35 }, 0.05);
-  }
-
-  // Portrait borders transition to white (matching section 2 dark style)
-  tl.to(portraitFrames, { borderColor: "rgba(255,255,255,0.45)", duration: 0.3 }, 0.1);
-  // Dots transition out
-  tl.to(portraitDots, { opacity: "0", duration: 0.3 }, 0.1);
-
-  // Phase 2 (0.4–0.7): Title and subtitle fade out, portrait stays
-  if (titleEl) tl.to(titleEl, { opacity: 0, duration: 0.25 }, 0.4);
-  if (subtitleEl) tl.to(subtitleEl, { opacity: 0, duration: 0.25 }, 0.4);
-}
-
 function setIdentityState(sectionEl, stateId) {
   const descriptorMap = {
     descriptor1: "descriptor1",
@@ -446,21 +389,19 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
 }
 
 export function initAppScrollAnimations({
-  section1El,
   section2El,
   actorsSectionEl,
   section3El,
   sectionAfterS3El,
   floatingPersonaEl,
   section3PersonaImg,
-  onFirstSectionToneChange,
   exhibitionsLabelEl,
   exhibitionsAnchorStartEl,
   exhibitionsAnchorEndRef,
   sankeySectionEl,
   clusterSectionEl,
 }) {
-  if (!section1El || !section2El) return null;
+  if (!section2El) return null;
 
   const personaIcon = actorsSectionEl?.querySelector(
     '[data-actor="persona"] .actors-preview__icon',
@@ -480,7 +421,6 @@ export function initAppScrollAnimations({
     effects: true,
   });
 
-  setupIntroBridge(section1El, onFirstSectionToneChange);
   setupIdentitySectionTimeline(section2El);
 
   if (actorsSectionEl && section3El && sectionAfterS3El) {
