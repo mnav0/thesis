@@ -21,8 +21,8 @@
     "name": "War Baby / Love Child: Mixed Race Asian American Art",
     "labels": [
       "mixed",
-      "war",
-      "race"
+      "asian",
+      "american"
     ],
     "items": [
       {
@@ -70,6 +70,23 @@
     ]
   },
   {
+    "id": 2,
+    "name": "Ruth Asawa: Citizen of the Universe",
+    "labels": [
+      "universe",
+      "citizen",
+      "life"
+    ],
+    "items": [
+      {
+        "artistId": 5,
+        "isShared": true,
+        "_angle": 0.5236,
+        "_radius_frac": 0.85
+      }
+    ]
+  },
+  {
     "id": 4,
     "name": "Dis/orient: Contemporary Art of the Asian Diaspora",
     "labels": [
@@ -97,8 +114,8 @@
     "name": "Legacies: Asian American Art Movements in New York City",
     "labels": [
       "legacies",
-      "political",
-      "city"
+      "asian",
+      "american"
     ],
     "items": [
       {
@@ -150,8 +167,8 @@
     "name": "Oscar yi Hou: East of sun, west of moon",
     "labels": [
       "east",
-      "uovo",
-      "cowboy"
+      "asian",
+      "chinese"
     ],
     "items": [
       {
@@ -191,7 +208,7 @@
     "labels": [
       "ideologies",
       "global",
-      "authoritarian"
+      "fascisms"
     ],
     "items": [
       {
@@ -236,26 +253,20 @@
     "name": "America is Hard to See",
     "labels": [
       "hard",
-      "america",
-      "title"
+      "american",
+      "america"
     ],
     "items": [
       {
-        "artistId": 5,
+        "artistId": 9,
         "isShared": false,
         "_angle": 0.0,
         "_radius_frac": 0.35
       },
       {
-        "artistId": 9,
-        "isShared": false,
-        "_angle": 2.0944,
-        "_radius_frac": 0.35
-      },
-      {
         "artistId": 21,
         "isShared": false,
-        "_angle": 4.1888,
+        "_angle": 3.1416,
         "_radius_frac": 0.35
       },
       {
@@ -265,27 +276,33 @@
         "_radius_frac": 0.85
       },
       {
+        "artistId": 5,
+        "isShared": true,
+        "_angle": 1.5708,
+        "_radius_frac": 0.85
+      },
+      {
         "artistId": 10,
         "isShared": true,
-        "_angle": 1.7802,
+        "_angle": 2.618,
         "_radius_frac": 0.85
       },
       {
         "artistId": 11,
         "isShared": true,
-        "_angle": 3.0369,
+        "_angle": 3.6652,
         "_radius_frac": 0.85
       },
       {
         "artistId": 13,
         "isShared": true,
-        "_angle": 4.2935,
+        "_angle": 4.7124,
         "_radius_frac": 0.85
       },
       {
         "artistId": 19,
         "isShared": true,
-        "_angle": 5.5501,
+        "_angle": 5.7596,
         "_radius_frac": 0.85
       }
     ]
@@ -295,8 +312,8 @@
     "name": "Portraiture Now: Asian American Portraits of Encounter",
     "labels": [
       "portraiture",
-      "smithsonian",
-      "encounter"
+      "asian",
+      "smithsonian"
     ],
     "items": [
       {
@@ -317,9 +334,9 @@
     "id": 12,
     "name": "Ascendancy: The Self in Contemporary Art",
     "labels": [
-      "agency",
       "ascendancy",
-      "self"
+      "agency",
+      "personal"
     ],
     "items": [
       {
@@ -340,9 +357,9 @@
     "id": 13,
     "name": "One Way or Another: Asian American Art Now",
     "labels": [
-      "installation",
-      "way",
-      "references"
+      "american",
+      "asian",
+      "chinese"
     ],
     "items": [
       {
@@ -365,7 +382,7 @@
     "labels": [
       "decade",
       "1980",
-      "studio"
+      "frameworks"
     ],
     "items": [
       {
