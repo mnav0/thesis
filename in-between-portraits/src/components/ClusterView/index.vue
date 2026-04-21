@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import DotTimeline from "../DotTimeline/index.vue";
+import ArtistClusterGrid from "../ArtistClusterGrid/index.vue";
 import {
   artistsById,
   institutionsById,
@@ -17,8 +18,13 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
+const showArtistClusterGrid = computed(
+  () => (props.cluster?.items?.length || 0) === 1,
+);
 const showDotTimeline = computed(
-  () => props.groupBy === "theme" || props.groupBy === "embedding",
+  () =>
+    props.groupBy === "theme" ||
+    (props.groupBy === "embedding" && !showArtistClusterGrid.value),
 );
 
 /** Theme CSV uses string artist ids; cluster items may be number — normalize for Set.has */
@@ -34,6 +40,11 @@ function timelineIdSet(cluster) {
 }
 
 const timelineArtistIds = computed(() => timelineIdSet(props.cluster));
+const singleArtistId = computed(() =>
+  showArtistClusterGrid.value && props.cluster?.items?.[0]?.artist != null
+    ? String(props.cluster.items[0].artist)
+    : "",
+);
 
 const dotTimelineData = computed(() => {
   if (!showDotTimeline.value || !props.cluster) return [];
@@ -107,7 +118,15 @@ const dotTimelineArtworks = computed(() => {
   <div class="cluster-view-fullpage">
     <button class="close-btn" @click="emit('close')">×</button>
     <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
-    <div v-if="showDotTimeline">
+    <div v-if="showArtistClusterGrid">
+      <ArtistClusterGrid
+        v-if="singleArtistId"
+        :artist-id="singleArtistId"
+        :n-clusters="cluster.n_clusters"
+      />
+      <div v-else class="cluster-view-empty">No artist data found for this view.</div>
+    </div>
+    <div v-else-if="showDotTimeline">
       <div v-if="dotTimelineData.length === 0 && dotTimelineArtworks.length === 0" class="cluster-view-empty">
         No theme or artwork data found for this artist.
       </div>

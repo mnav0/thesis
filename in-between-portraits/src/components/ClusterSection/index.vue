@@ -7,7 +7,7 @@ import {
   nextTick,
   watch,
 } from "vue";
-import { artistsById } from "../../data/index.js";
+import { artistsById, exhibitionEntryCount } from "../../data/index.js";
 import { DOT_SIZE_PX } from "../../constants.js";
 
 const props = defineProps({
@@ -668,6 +668,8 @@ function handlePointClick(item) {
   emit("select-point", {
     name: item.artistName,
     items: [{ artist: id == null ? id : String(id) }],
+    n_clusters:
+      viewMode.value === "exhibitions" ? exhibitionEntryCount : selectedN.value,
   });
 }
 
@@ -693,6 +695,8 @@ function handleCenterClick(group) {
       artist: a.artist == null ? a.artist : String(a.artist),
       artistName: a.artistName,
     })),
+    n_clusters:
+      viewMode.value === "exhibitions" ? exhibitionEntryCount : selectedN.value,
   });
 }
 

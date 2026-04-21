@@ -1,0 +1,67 @@
+.artist-cluster-grid-root {
+  width: 100%;
+  padding: 0 2.5vw 2.5vw;
+  box-sizing: border-box;
+}
+
+.artist-cluster-grid-empty {
+  text-align: center;
+  font-size: 1.2em;
+  color: #888;
+  padding: 4em 0;
+  font-family: "Instrument Serif", serif;
+}
+
+.artist-cluster-grid {
+  width: 100%;
+  display: grid;
+  gap: 4px;
+}
+
+.artist-cluster-cell {
+  min-height: 220px;
+  overflow: visible;
+}
+
+.artist-cluster-cell__canvas {
+  position: relative;
+  height: 220px;
+  overflow: visible;
+}
+
+.artist-cluster-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.artist-cluster-point--text {
+  border-radius: 999px;
+  border: 1px solid #fff;
+  background: #111;
+  padding: 0;
+}
+
+.artist-cluster-point--institution {
+  border: 1px solid #111;
+  background: #fff;
+}
+
+.artist-cluster-point--artwork-square {
+  border-radius: 0;
+}
+
+.artist-cluster-point--artist-link {
+  cursor: pointer;
+}
+
+.artist-cluster-point--artwork {
+  width: auto;
+  height: auto;
+  z-index: 1;
+}
+
+.artist-cluster-point--artwork-fallback {
+  background: #111;
+  border: 1px solid #111;
+  z-index: 1;
+}

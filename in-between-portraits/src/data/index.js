@@ -7,6 +7,10 @@ import artworksCSV from "./artworks.csv?raw";
 import themesCSV from "./themes.csv?raw";
 import artistThemesCSV from "./artist_themes.csv?raw";
 import institutionThemesCSV from "./institution_themes.csv?raw";
+import artistWordsCSV from "./artist_words.csv?raw";
+import institutionWordsCSV from "./institution_words.csv?raw";
+import exhibitionsCSV from "./exhibitions.csv?raw";
+import artistPointsJSON from "../../artist_points.json";
 
 import artistClusters from "./clusters/artist_clusters.json";
 import institutionClusters from "./clusters/institution_clusters.json";
@@ -18,6 +22,7 @@ import exhibitionClusters from "./clusters/exhibition_clusters.json";
 
 const _parsedArtists = csvParse(artistsCSV);
 export const artistCount = _parsedArtists.length;
+export const exhibitionEntryCount = csvParse(exhibitionsCSV).length;
 
 // --- Reactive state ---
 
@@ -29,6 +34,9 @@ export const artworks = ref([]);
 export const artistThemeRows = csvParse(artistThemesCSV);
 export const institutionThemeRows = csvParse(institutionThemesCSV);
 export const themeRows = csvParse(themesCSV);
+export const artistWordRows = csvParse(artistWordsCSV);
+export const institutionWordRows = csvParse(institutionWordsCSV);
+export const artistPointsRows = artistPointsJSON;
 export const themePreviewTitles = computed(() =>
   themeRows.map((row) => row.theme_title).filter(Boolean),
 );
