@@ -215,7 +215,7 @@ function centerLabelsForJsonCluster(clusterId, rowsInCluster) {
     rowsInCluster.find((r) => r.primary_cluster === clusterId) ??
     rowsInCluster[0];
   const kw = row?.cluster_keywords?.[String(clusterId)];
-  if (Array.isArray(kw) && kw.length) return kw.slice(0, 2).map(String);
+  if (Array.isArray(kw) && kw.length) return kw.slice(0, 1).map(String);
   return [];
 }
 
@@ -812,13 +812,7 @@ function displayLabelLine(i, group) {
             <span v-if="displayLabelLine(0, group)" class="cs-center-label-line">{{
               displayLabelLine(0, group)
             }}</span>
-            <span v-if="displayLabelLine(1, group)" class="cs-center-label-line">{{
-              displayLabelLine(1, group)
-            }}</span>
-            <span
-              v-if="!displayLabelLine(0, group) && !displayLabelLine(1, group)"
-              class="cs-center-label-line cs-center-label-line--empty"
-            >—</span>
+            <span v-if="!displayLabelLine(0, group)" class="cs-center-label-line cs-center-label-line--empty">—</span>
           </div>
         </div>
 

@@ -5,7 +5,7 @@
     "labels": [
       "hapa",
       "ancestry",
-      "100"
+      "asian"
     ],
     "items": [
       {
@@ -183,9 +183,9 @@
     "id": 7,
     "name": "Biennale Arte 2015: All the World's Futures",
     "labels": [
-      "56th",
-      "arsenale",
-      "countries"
+      "countries",
+      "international",
+      "world"
     ],
     "items": [
       {
@@ -208,7 +208,7 @@
     "labels": [
       "ideologies",
       "global",
-      "fascisms"
+      "authoritarian"
     ],
     "items": [
       {
@@ -231,7 +231,7 @@
     "labels": [
       "korean",
       "english",
-      "art"
+      "pacific"
     ],
     "items": [
       {
@@ -334,9 +334,9 @@
     "id": 12,
     "name": "Ascendancy: The Self in Contemporary Art",
     "labels": [
-      "ascendancy",
       "agency",
-      "personal"
+      "ascendancy",
+      "self"
     ],
     "items": [
       {
@@ -381,7 +381,7 @@
     "name": "The Decade Show: Frameworks of Identity in the 1980s",
     "labels": [
       "decade",
-      "1980",
+      "studio",
       "frameworks"
     ],
     "items": [
