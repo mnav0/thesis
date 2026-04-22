@@ -91,7 +91,7 @@
 }
 
 .cs-cluster-group--active {
-  z-index: 8;
+  z-index: 12;
 }
 
 .cluster-section-svg {
@@ -131,7 +131,7 @@
   position: absolute;
   width: 0;
   height: 0;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -140,6 +140,7 @@
   box-sizing: border-box;
   border: 1px solid transparent;
   background: rgba(255, 255, 255, 0);
+  z-index: 1;
   pointer-events: auto;
   cursor: pointer;
   transition:
@@ -163,12 +164,14 @@
   border-radius: 50%;
   background: transparent;
   border: 1px solid #6a6a6a;
+  z-index: 2;
   pointer-events: auto;
   cursor: pointer;
 }
 
 .cs-center-labels {
   position: absolute;
+  z-index: 30;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -200,9 +203,15 @@
   height: var(--dot-size);
   border-radius: 50%;
   background: #111;
-  z-index: 2;
+  z-index: 6;
   cursor: pointer;
-  transition: box-shadow 0.2s;
+  transition:
+    box-shadow 0.2s,
+    opacity 0.2s;
+}
+
+.cs-point--shared {
+  z-index: 12;
 }
 
 .cs-point--active-cluster {
@@ -211,6 +220,10 @@
 
 .cs-point--hovered {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.cs-point--dimmed {
+  opacity: 0.2;
 }
 
 .cs-point-tag {

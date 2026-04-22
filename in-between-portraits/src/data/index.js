@@ -46,7 +46,44 @@ export const artistClustersMap = artistClusters;
 export const institutionClustersMap = institutionClusters;
 export const artistPositionsMap = artistClusterPositions;
 export const institutionPositionsMap = institutionClusterPositions;
-export const exhibitionClustersMap = exhibitionClusters;
+function buildExhibitionClustersMap() {
+  const src =
+    exhibitionClusters && !Array.isArray(exhibitionClusters)
+      ? exhibitionClusters
+      : { exhibitions: [], artists: [] };
+  const exhibitions = Array.isArray(src.exhibitions)
+    ? src.exhibitions.map((row) => ({
+        id: Number(row.id),
+        name: row.name ?? `Exhibition ${row.id}`,
+        labels: Array.isArray(row.labels) ? row.labels : [],
+      }))
+    : [];
+  const artists = Array.isArray(src.artists)
+    ? src.artists
+        .map((row) => {
+          const exhibitionIds = Array.isArray(row.exhibitionIds)
+            ? row.exhibitionIds
+                .map((id) => Number(id))
+                .filter((id) => Number.isFinite(id))
+            : [];
+          return {
+            artistId: Number(row.artistId),
+            exhibitionIds,
+            isShared: Boolean(row.isShared ?? exhibitionIds.length > 1),
+            _radius_frac: Number(
+              row._radius_frac ?? (exhibitionIds.length > 1 ? 0.85 : 0.35),
+            ),
+            _angle: row._angle == null ? null : Number(row._angle),
+            _jitter_angle:
+              row._jitter_angle == null ? null : Number(row._jitter_angle),
+          };
+        })
+        .filter((row) => Number.isFinite(row.artistId))
+    : [];
+  return { exhibitions, artists };
+}
+
+export const exhibitionClustersMap = buildExhibitionClustersMap();
 
 export function fetchAndParseData() {
   const artistArr = csvParse(artistsCSV);

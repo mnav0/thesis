@@ -11,7 +11,10 @@ import { artistsById, exhibitionEntryCount } from "../../data/index.js";
 import { DOT_SIZE_PX } from "../../constants.js";
 
 const props = defineProps({
-  exhibitions: { type: Array, default: () => [] },
+  exhibitions: {
+    type: Object,
+    default: () => ({ exhibitions: [], artists: [] }),
+  },
   artistData: { type: Array, default: () => [] },
   institutionData: { type: Array, default: () => [] },
   artistPositions: { type: Array, default: () => [] },
@@ -70,6 +73,43 @@ const availableN = computed(() => {
 const selectedN = computed(() => availableN.value[selectedNIndex.value] ?? 0);
 
 const sliderDisabled = computed(() => viewMode.value === "exhibitions");
+
+const normalizedExhibitionData = computed(() => {
+  const src = props.exhibitions;
+  const exRows = Array.isArray(src?.exhibitions) ? src.exhibitions : [];
+  const artists = Array.isArray(src?.artists) ? src.artists : [];
+  return { exhibitions: exRows, artists };
+});
+
+const artistsByExhibitionId = computed(() => {
+  const map = new Map();
+  for (const artist of normalizedExhibitionData.value.artists ?? []) {
+    for (const exhibitionId of artist.exhibitionIds ?? []) {
+      const id = Number(exhibitionId);
+      if (!Number.isFinite(id)) continue;
+      if (!map.has(id)) map.set(id, []);
+      map.get(id).push(artist);
+    }
+  }
+  return map;
+});
+
+const sharedArtistItems = computed(() => {
+  if (viewMode.value !== "exhibitions") return [];
+  const artists = normalizedExhibitionData.value.artists ?? [];
+  return artists
+    .filter((a) => a.isShared)
+    .map((a) => ({
+      artistId: a.artistId,
+      artistName: artistDisplayName(a.artistId),
+      exhibitionIds: a.exhibitionIds,
+      isShared: true,
+      _jitter_angle: a._jitter_angle ?? 0,
+      _radius_frac: a._radius_frac ?? 0.85,
+      primaryCluster: a.exhibitionIds[0],
+      closestOtherCluster: a.exhibitionIds[1] ?? null,
+    }));
+});
 
 watch(availableN, (vals) => {
   if (selectedNIndex.value >= vals.length) {
@@ -210,6 +250,37 @@ function spreadExhibitionNorm(nx, ny) {
   return { normX: c.nx, normY: c.ny };
 }
 
+const SHARED_JITTER_PX = 24; // spread shared artists apart at their midpoint
+
+function getSharedArtistCanvasPos(artist) {
+  const positions = artist.exhibitionIds
+    .map((eid) => {
+      const g = placedLayoutGroups.value.find((g) => g.clusterId === eid);
+      return g ? getClusterCanvasPos(g) : null;
+    })
+    .filter(Boolean);
+
+  if (!positions.length) return null;
+
+  const avgX = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+  const avgY = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+
+  // Jitter so multiple shared artists at the same midpoint don't stack
+  return {
+    x: avgX + Math.cos(artist._jitter_angle) * SHARED_JITTER_PX,
+    y: avgY + Math.sin(artist._jitter_angle) * SHARED_JITTER_PX,
+  };
+}
+
+function getSharedArtistStyle(artist) {
+  const pos = getSharedArtistCanvasPos(artist);
+  if (!pos) return { display: "none" };
+  return {
+    left: `${pos.x - POINT_SIZE / 2}px`,
+    top: `${pos.y - POINT_SIZE / 2}px`,
+  };
+}
+
 function centerLabelsForJsonCluster(clusterId, rowsInCluster) {
   const row =
     rowsInCluster.find((r) => r.primary_cluster === clusterId) ??
@@ -219,7 +290,7 @@ function centerLabelsForJsonCluster(clusterId, rowsInCluster) {
   return [];
 }
 
-/** Display label from artists.csv via reactive lookup (not JSON `artist_name`). */
+/** Resolve display labels from the canonical artists table by id. */
 function artistDisplayName(artistId) {
   const id = Number(artistId);
   if (Number.isNaN(id)) return `Artist ${artistId}`;
@@ -282,36 +353,54 @@ function jsonRowToDisplayItems(row, isInstitutionMode) {
 
 const layoutGroups = computed(() => {
   if (viewMode.value === "exhibitions") {
-  const rows = props.exhibitions ?? [];
-  const k = rows.length;
-  const out = {};
-  if (!k) return out;
+    const exRows = normalizedExhibitionData.value.exhibitions ?? [];
+    const artists = normalizedExhibitionData.value.artists ?? [];
+    const k = exRows.length;
+    const out = {};
+    if (!k) return out;
 
-  const pad = CANVAS_PADDING;
-  const aw = Math.max(svgSize.value.width - pad * 2 || PACK_FALLBACK_W, 400);
-  const ah = Math.max(svgSize.value.height - pad * 2 || PACK_FALLBACK_H, 400);
+    const aw = Math.max(svgSize.value.width - CANVAS_PADDING * 2 || PACK_FALLBACK_W, 400);
+    const ah = Math.max(svgSize.value.height - CANVAS_PADDING * 2 || PACK_FALLBACK_H, 400);
 
-  rows.forEach((ex, idx) => {
-    const { nx, ny } = exhibitionGridNormCell(k, idx, aw, ah);
-    const { normX, normY } = spreadExhibitionNorm(nx, ny);
+    exRows.forEach((ex, idx) => {
+      const { nx, ny } = exhibitionGridNormCell(k, idx, aw, ah);
+      const { normX, normY } = spreadExhibitionNorm(nx, ny);
+      const clusterId = Number(ex.id);
 
-    out[idx] = {
-      clusterId: idx,
-      name: ex.name,
-      normX,
-      normY,
-      centerLabels: ex.labels ?? [],
-      // add artistName from lookup
-      items: ex.items.map((item) => ({
-        ...item,
-        artistName: artistDisplayName(item.artistId),
-        primaryCluster: idx,
-        closestOtherCluster: null,
-      })),
-    };
-  });
-  return out;
-}
+      // Shared artists render as midpoint nodes; per-cluster rings show exclusives only.
+      const rawExclusive = (artistsByExhibitionId.value.get(clusterId) ?? [])
+        .filter((a) => !a.isShared)
+        .map((a) => ({
+          artistId: a.artistId,
+          artistName: artistDisplayName(a.artistId),
+          _angle: a._angle,
+          _radius_frac: a._radius_frac ?? 0.35,
+          primaryCluster: clusterId,
+          closestOtherCluster: null,
+          isShared: false,
+        }));
+      const missingAngleCount = rawExclusive.filter((item) => item._angle == null).length;
+      const exclusiveItems = missingAngleCount
+        ? rawExclusive.map((item, itemIdx) => ({
+            ...item,
+            _angle:
+              item._angle == null
+                ? (itemIdx / Math.max(rawExclusive.length, 1)) * Math.PI * 2
+                : item._angle,
+          }))
+        : rawExclusive;
+
+      out[clusterId] = {
+        clusterId,
+        name: ex.name,
+        normX,
+        normY,
+        centerLabels: ex.labels ?? [],
+        items: exclusiveItems,
+      };
+    });
+    return out;
+  }
 
   const n = selectedN.value;
   const data = currentJsonRows.value;
@@ -366,7 +455,9 @@ const layoutGroupsList = computed(() =>
 );
 
 const placedLayoutGroups = computed(() =>
-  layoutGroupsList.value.filter((g) => g.items?.length > 0)
+  viewMode.value === "exhibitions"
+    ? layoutGroupsList.value
+    : layoutGroupsList.value.filter((g) => g.items?.length > 0)
 );
 
 function getClusterCanvasPos(group) {
@@ -416,17 +507,53 @@ const pointDetailsByKey = computed(() => {
       const pk = pointKey(group, item, idx);
       out[pk] = {
         clusterId: group.clusterId,
+        artistId: item.artistId,
       };
     });
+  }
+  if (viewMode.value === "exhibitions") {
+    for (const artist of sharedArtistItems.value) {
+      out[`shared-${artist.artistId}`] = {
+        clusterIds: (artist.exhibitionIds ?? []).map((id) => Number(id)),
+        artistId: artist.artistId,
+      };
+    }
   }
   return out;
 });
 
-const activeClusterId = computed(() => {
-  if (hoveredPoint.value && pointDetailsByKey.value[hoveredPoint.value]) {
-    return pointDetailsByKey.value[hoveredPoint.value].clusterId;
+const hoveredPointDetails = computed(() =>
+  hoveredPoint.value ? pointDetailsByKey.value[hoveredPoint.value] : null,
+);
+
+const activeClusterIds = computed(() => {
+  const ids = new Set();
+  if (hoveredPointDetails.value) {
+    const details = hoveredPointDetails.value;
+    if (Array.isArray(details.clusterIds)) {
+      for (const id of details.clusterIds) {
+        const n = Number(id);
+        ids.add(n);
+      }
+    } else if (details.clusterId != null) {
+      const n = Number(details.clusterId);
+      ids.add(n);
+      if (viewMode.value === "exhibitions") {
+        const artistId = Number(details.artistId);
+        const shared = sharedArtistItems.value.find(
+          (artist) => Number(artist.artistId) === artistId,
+        );
+        if (shared) {
+          for (const id of shared.exhibitionIds ?? []) ids.add(Number(id));
+        }
+      }
+    }
   }
-  return hoveredClusterId.value;
+  if (hoveredClusterId.value != null) {
+    const n = Number(hoveredClusterId.value);
+    ids.add(n);
+  }
+  return ids;
 });
 
 const allLines = computed(() => {
@@ -504,36 +631,62 @@ const allLines = computed(() => {
       }
     });
   }
+
+  if (viewMode.value === "exhibitions") {
+    for (const artist of sharedArtistItems.value) {
+      const pk = `shared-${artist.artistId}`;
+      const pt = pts[pk];
+      if (!pt) continue;
+
+      for (const eid of artist.exhibitionIds) {
+        const cx = centers[eid];
+        if (!cx) continue;
+        lines.push({
+          key: `${pk}-to-${eid}`,
+          sourceClusterId: eid,
+          targetPointKey: pk,
+          x1: pt.x, y1: pt.y,
+          x2: cx.x, y2: cx.y,
+          isOther: false,
+        });
+      }
+    }
+  }
+    
   return lines;
 });
 
 const activeLineKeys = computed(() => {
-  const cid = activeClusterId.value;
-  if (cid == null) return new Set();
+  if (!activeClusterIds.value.size) return new Set();
   return new Set(
     allLines.value
-      .filter((line) => line.sourceClusterId === cid)
+      .filter((line) => activeClusterIds.value.has(Number(line.sourceClusterId)))
       .map((line) => line.key),
   );
 });
 
 const activePointKeys = computed(() => {
-  const cid = activeClusterId.value;
-  if (cid == null) return new Set();
+  if (!activeClusterIds.value.size) return new Set();
   const keys = new Set();
 
   for (const [pk, details] of Object.entries(pointDetailsByKey.value)) {
-    if (details.clusterId === cid) keys.add(pk);
+    if (details.clusterId != null && activeClusterIds.value.has(Number(details.clusterId))) {
+      keys.add(pk);
+    }
   }
   for (const line of allLines.value) {
-    if (line.sourceClusterId !== cid) continue;
+    if (!activeClusterIds.value.has(Number(line.sourceClusterId))) continue;
     if (line.targetPointKey) keys.add(line.targetPointKey);
   }
   return keys;
 });
 
+const hasActiveHoverContext = computed(
+  () => activeClusterIds.value.size > 0 || hoveredPoint.value != null,
+);
+
 function isClusterActive(clusterId) {
-  return activeClusterId.value != null && Number(activeClusterId.value) === Number(clusterId);
+  return activeClusterIds.value.has(Number(clusterId));
 }
 
 function initialsFromName(name) {
@@ -823,6 +976,10 @@ function displayLabelLine(i, group) {
           :class="{
             'cs-point--hovered': hoveredPoint === pointKey(group, item, idx),
             'cs-point--active-cluster': activePointKeys.has(pointKey(group, item, idx)),
+            'cs-point--dimmed':
+              hasActiveHoverContext &&
+              hoveredPoint !== pointKey(group, item, idx) &&
+              !activePointKeys.has(pointKey(group, item, idx)),
           }"
           :style="getArtistStyle(item, group)"
           :data-point-id="pointKey(group, item, idx)"
@@ -844,6 +1001,36 @@ function displayLabelLine(i, group) {
             {{ initialsFromName(item.artistName) }}
           </div>
           <div class="cs-tooltip">{{ item.artistName }}</div>
+        </div>
+      </div>
+      <div v-if="viewMode === 'exhibitions'">
+        <div
+          v-for="artist in sharedArtistItems"
+          :key="`shared-${artist.artistId}`"
+          class="cs-point cs-point--shared"
+          :class="{
+            'cs-point--hovered': hoveredPoint === `shared-${artist.artistId}`,
+            'cs-point--active-cluster': activePointKeys.has(`shared-${artist.artistId}`),
+            'cs-point--dimmed':
+              hasActiveHoverContext &&
+              hoveredPoint !== `shared-${artist.artistId}` &&
+              !activePointKeys.has(`shared-${artist.artistId}`),
+          }"
+          :style="getSharedArtistStyle(artist)"
+          :data-point-id="`shared-${artist.artistId}`"
+          :data-artist-id="String(artist.artistId)"
+          :title="artist.artistName"
+          @mouseenter="hoveredPoint = `shared-${artist.artistId}`"
+          @mouseleave="hoveredPoint = null"
+          @click.stop="handlePointClick(artist)"
+        >
+          <div
+            v-if="activePointKeys.has(`shared-${artist.artistId}`)"
+            class="cs-point-tag"
+          >
+            {{ initialsFromName(artist.artistName) }}
+          </div>
+          <div class="cs-tooltip">{{ artist.artistName }}</div>
         </div>
       </div>
     </div>
