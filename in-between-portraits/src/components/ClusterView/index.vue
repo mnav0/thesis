@@ -122,7 +122,6 @@ const dotTimelineArtworks = computed(() => {
       <ArtistClusterGrid
         v-if="singleArtistId"
         :artist-id="singleArtistId"
-        :n-clusters="cluster.n_clusters"
       />
       <div v-else class="cluster-view-empty">No artist data found for this view.</div>
     </div>

@@ -10,7 +10,7 @@ import institutionThemesCSV from "./institution_themes.csv?raw";
 import artistWordsCSV from "./artist_words.csv?raw";
 import institutionWordsCSV from "./institution_words.csv?raw";
 import exhibitionsCSV from "./exhibitions.csv?raw";
-import artistPointsJSON from "../../artist_points.json";
+import artistPointsJSON from "./artist_points_flat.json";
 
 import artistClusters from "./clusters/artist_clusters.json";
 import institutionClusters from "./clusters/institution_clusters.json";

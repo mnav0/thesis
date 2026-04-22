@@ -1,32 +1,46 @@
 .artist-cluster-grid-root {
   width: 100%;
-  padding: 0 2.5vw 2.5vw;
+  padding: 0 0.2rem 1.25rem;
   box-sizing: border-box;
 }
 
 .artist-cluster-grid-empty {
-  text-align: center;
-  font-size: 1.2em;
+  text-align: left;
+  font-size: 1.1em;
   color: #888;
-  padding: 4em 0;
+  padding: 2em 0;
   font-family: "Instrument Serif", serif;
 }
 
 .artist-cluster-grid {
   width: 100%;
-  display: grid;
-  gap: 4px;
-}
-
-.artist-cluster-cell {
-  min-height: 220px;
-  overflow: visible;
+  overflow-x: hidden;
 }
 
 .artist-cluster-cell__canvas {
   position: relative;
-  height: 220px;
+  min-height: 700px;
   overflow: visible;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+  background: #fff;
+}
+
+.artist-cluster-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.artist-cluster-lane--text {
+  left: 0;
+  width: 18%;
+}
+
+.artist-cluster-lane--artwork {
+  left: 24%;
+  width: 74%;
 }
 
 .artist-cluster-point {
@@ -39,6 +53,7 @@
   border: 1px solid #fff;
   background: #111;
   padding: 0;
+  z-index: 2;
 }
 
 .artist-cluster-point--institution {
@@ -48,6 +63,10 @@
 
 .artist-cluster-point--artwork-square {
   border-radius: 0;
+  border: 1px solid #111;
+  background: #fff;
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px #fff;
 }
 
 .artist-cluster-point--artist-link {
@@ -55,13 +74,34 @@
 }
 
 .artist-cluster-point--artwork {
-  width: auto;
-  height: auto;
-  z-index: 1;
+  object-fit: contain;
+  background: #fff;
+  z-index: 2;
+  transition: transform 120ms ease, z-index 120ms ease;
+}
+
+.artist-cluster-point--artwork:hover {
+  z-index: 50;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .artist-cluster-point--artwork-fallback {
   background: #111;
   border: 1px solid #111;
-  z-index: 1;
+  z-index: 0;
+}
+
+@media (max-width: 920px) {
+  .artist-cluster-grid-root {
+    padding-bottom: 0.8rem;
+  }
+
+  .artist-cluster-lane--text {
+    width: 21%;
+  }
+
+  .artist-cluster-lane--artwork {
+    left: 27%;
+    width: 69%;
+  }
 }
