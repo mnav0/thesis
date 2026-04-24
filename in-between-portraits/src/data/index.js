@@ -4,7 +4,7 @@ import { csvParse } from "d3";
 import artistsCSV from "./artists.csv?raw";
 import institutionsCSV from "./institutions.csv?raw";
 import artworksCSV from "./artworks.csv?raw";
-import themesCSV from "./themes.csv?raw";
+import keywordsCSV from "./keywords.csv?raw";
 import artistThemesCSV from "./artist_themes.csv?raw";
 import institutionThemesCSV from "./institution_themes.csv?raw";
 import artistWordsCSV from "./artist_words.csv?raw";
@@ -33,12 +33,12 @@ export const artworks = ref([]);
 // Pre-parsed theme rows (available after module load, no need to re-parse in components)
 export const artistThemeRows = csvParse(artistThemesCSV);
 export const institutionThemeRows = csvParse(institutionThemesCSV);
-export const themeRows = csvParse(themesCSV);
+export const themeRows = csvParse(keywordsCSV);
 export const artistWordRows = csvParse(artistWordsCSV);
 export const institutionWordRows = csvParse(institutionWordsCSV);
 export const artistPointsRows = artistPointsJSON;
 export const themePreviewTitles = computed(() =>
-  themeRows.map((row) => row.theme_title).filter(Boolean),
+  themeRows.map((row) => row.word).filter(Boolean),
 );
 
 /** Precomputed cluster map data for ClusterSection (artist- vs institution-centric summaries + layouts). */
