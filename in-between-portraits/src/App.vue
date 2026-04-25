@@ -13,6 +13,7 @@ import ClusterView from "./components/ClusterView/index.vue";
 import PageSection from "./components/PageSection/index.vue";
 import IdentityStatesPreview from "./components/IdentityStatesPreview/index.vue";
 import ActorsPreview from "./components/ActorsPreview/index.vue";
+import ArtworkCollage from "./components/ArtworkCollage/index.vue";
 import ExhibitionsSankey from "./components/ExhibitionsSankey/index.vue";
 import ExhibitionsTimeline from "./components/ExhibitionsTimeline/index.vue";
 import { publicImgSrc } from "./utils/public-img-src.js";
@@ -100,16 +101,17 @@ onBeforeUnmount(() => {
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
+        <!-- <ArtworkCollage /> -->
         <PageSection class="intro-section" tone="light" layout="stacked" stacked-full-width>
           <div class="grid min-h-[100svh] grid-cols-12 gap-x-2 md:gap-x-4">
-            <div class="col-span-12 overflow-visible md:col-span-7">
+            <div class="col-span-12 overflow-visible lg:col-span-6 sm:col-span-1">
               <img :src="introCollageSrc" alt="" class="intro-section__collage" role="presentation" />
             </div>
-            <div class="col-span-12 flex items-end py-8 md:col-span-4 md:col-start-9 mb-8">
+            <div class="col-span-12 flex items-end justify-end py-8 lg:col-span-5 lg:col-start-8 mb-8 sm:col-span-12 sm:col-start-2">
               <div class="intro-section__title-card">
                 <h1 class="mb-8"><i>In Between</i> Portraits</h1>
                 <p class="mb-8">
-                  An examination of persona in constructing an artist's public identity
+                  The matter of persona in constructing an artist's public identity
                 </p>
                 <p>c. 2026</p>
               </div>
@@ -144,7 +146,7 @@ onBeforeUnmount(() => {
             class="grid h-full grid-cols-12 content-between gap-x-2 gap-y-8 md:grid-rows-[auto_1fr_auto] md:gap-x-4"
           >
             <h2 class="col-span-12 m-0 md:col-span-5">
-              What makes up a persona?*
+              What makes up a persona...*
             </h2>
             <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
             <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
@@ -168,7 +170,7 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
-          heading="...for modern and contemporary artists selected from exhibitions about identity?"
+          heading="for artists selected from modern exhibitions about identity?"
           subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
           <ExhibitionsTimeline class="mt-8" />

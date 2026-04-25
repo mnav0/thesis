@@ -22,6 +22,10 @@ h1 {
   font-size: 6rem;
   letter-spacing: 0.01em;
   line-height: 0.9;
+
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
 }
 
 h2 {
@@ -30,6 +34,10 @@ h2 {
   font-size: 6rem;
   line-height: 1.05;
   font-family: "Instrument Serif", serif;
+
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
 }
 
 .page-section--dark h2 {
@@ -41,6 +49,10 @@ h3 {
   font-size: 1.5rem;
   line-height: 1.25;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
 
 p,
@@ -49,6 +61,10 @@ span {
   font-family: "Kosugi", sans-serif;
   font-size: 1.5rem;
   line-height: 1.25;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
 
 select {
@@ -91,7 +107,6 @@ select {
 
 .intro-section__collage {
   display: block;
-  width: calc(100% + 220px);
   max-width: none;
   height: 100svh;
   object-fit: cover;
@@ -104,6 +119,7 @@ select {
   border: 1px solid rgba(0, 0, 0, 0.2);
   background: rgba(255, 255, 255, 0.92);
   padding: 2.5rem;
+  float: right;
 }
 
 /* ── Section 2: Identity heading descriptor swap ── */
