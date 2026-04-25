@@ -1,1082 +1,4543 @@
 [
   {
-    "n": 2,
-    "cluster_positions": {
-      "0": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "1": {
-        "x": 0.98,
-        "y": 0.98
-      }
-    },
-    "canvas_min_w": 1280,
-    "canvas_min_h": 880,
-    "aspect_ratio": 1.4545
-  },
-  {
-    "n": 3,
-    "cluster_positions": {
-      "0": {
-        "x": 0.02,
-        "y": 0.5981
-      },
-      "1": {
-        "x": 0.98,
-        "y": 0.98
-      },
-      "2": {
-        "x": 0.8643,
-        "y": 0.02
-      }
-    },
-    "canvas_min_w": 1289,
-    "canvas_min_h": 917,
-    "aspect_ratio": 1.4057
-  },
-  {
-    "n": 4,
-    "cluster_positions": {
-      "0": {
-        "x": 0.311,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.505,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.754
-      },
-      "3": {
-        "x": 0.98,
-        "y": 0.98
-      }
-    },
-    "canvas_min_w": 1280,
-    "canvas_min_h": 894,
-    "aspect_ratio": 1.4318
-  },
-  {
-    "n": 5,
-    "cluster_positions": {
-      "0": {
-        "x": 0.4113,
-        "y": 0.3493
-      },
-      "1": {
-        "x": 0.98,
-        "y": 0.7148
-      },
-      "2": {
-        "x": 0.8953,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.7402,
-        "y": 0.98
-      },
-      "4": {
-        "x": 0.02,
-        "y": 0.7456
-      }
-    },
-    "canvas_min_w": 1403,
-    "canvas_min_h": 989,
-    "aspect_ratio": 1.4186
-  },
-  {
-    "n": 6,
-    "cluster_positions": {
-      "0": {
-        "x": 0.7457,
-        "y": 0.02
-      },
-      "1": {
-        "x": 0.3337,
-        "y": 0.98
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.3252
-      },
-      "3": {
-        "x": 0.8199,
-        "y": 0.98
-      },
-      "4": {
-        "x": 0.98,
-        "y": 0.02
-      },
-      "5": {
-        "x": 0.1784,
-        "y": 0.3043
-      }
-    },
-    "canvas_min_w": 1516,
-    "canvas_min_h": 1032,
-    "aspect_ratio": 1.469
-  },
-  {
-    "n": 7,
-    "cluster_positions": {
-      "0": {
-        "x": 0.7359,
-        "y": 0.4637
-      },
-      "1": {
-        "x": 0.4096,
-        "y": 0.98
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.115
-      },
-      "3": {
-        "x": 0.98,
-        "y": 0.98
-      },
-      "4": {
-        "x": 0.3152,
-        "y": 0.2707
-      },
-      "5": {
-        "x": 0.7476,
-        "y": 0.02
-      },
-      "6": {
-        "x": 0.02,
-        "y": 0.02
-      }
-    },
-    "canvas_min_w": 1598,
-    "canvas_min_h": 1086,
-    "aspect_ratio": 1.4715
-  },
-  {
-    "n": 8,
-    "cluster_positions": {
-      "0": {
-        "x": 0.5294,
-        "y": 0.6859
-      },
-      "1": {
-        "x": 0.9251,
-        "y": 0.9489
-      },
-      "2": {
-        "x": 0.7791,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.4002,
-        "y": 0.0929
-      },
-      "4": {
-        "x": 0.826,
-        "y": 0.3526
-      },
-      "5": {
-        "x": 0.98,
-        "y": 0.0662
-      },
-      "6": {
-        "x": 0.02,
-        "y": 0.0428
-      },
-      "7": {
-        "x": 0.3448,
-        "y": 0.98
-      }
-    },
-    "canvas_min_w": 1856,
-    "canvas_min_h": 1321,
-    "aspect_ratio": 1.405
-  },
-  {
-    "n": 9,
-    "cluster_positions": {
-      "0": {
-        "x": 0.5944,
-        "y": 0.7296
-      },
-      "1": {
-        "x": 0.4351,
-        "y": 0.98
-      },
-      "2": {
-        "x": 0.1256,
-        "y": 0.1493
-      },
-      "3": {
-        "x": 0.735,
-        "y": 0.253
-      },
-      "4": {
-        "x": 0.4409,
-        "y": 0.202
-      },
-      "5": {
-        "x": 0.02,
-        "y": 0.4922
-      },
-      "6": {
-        "x": 0.98,
-        "y": 0.02
-      },
-      "7": {
-        "x": 0.8669,
-        "y": 0.98
-      },
-      "8": {
-        "x": 0.2887,
-        "y": 0.7049
-      }
-    },
-    "canvas_min_w": 1939,
-    "canvas_min_h": 1467,
-    "aspect_ratio": 1.3217
-  },
-  {
-    "n": 10,
-    "cluster_positions": {
-      "0": {
-        "x": 0.4623,
-        "y": 0.2555
-      },
-      "1": {
-        "x": 0.6281,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.1416
-      },
-      "3": {
-        "x": 0.4598,
-        "y": 0.7308
-      },
-      "4": {
-        "x": 0.1821,
-        "y": 0.9444
-      },
-      "5": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "6": {
-        "x": 0.4371,
-        "y": 0.98
-      },
-      "7": {
-        "x": 0.7808,
-        "y": 0.6797
-      },
-      "8": {
-        "x": 0.217,
-        "y": 0.4858
-      },
-      "9": {
-        "x": 0.98,
-        "y": 0.02
-      }
-    },
-    "canvas_min_w": 2144,
-    "canvas_min_h": 1645,
-    "aspect_ratio": 1.3033
-  },
-  {
-    "n": 11,
-    "cluster_positions": {
-      "0": {
-        "x": 0.4969,
-        "y": 0.514
-      },
-      "1": {
-        "x": 0.3975,
-        "y": 0.98
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.6889
-      },
-      "3": {
-        "x": 0.7319,
-        "y": 0.1572
-      },
-      "4": {
-        "x": 0.733,
-        "y": 0.5646
-      },
-      "5": {
-        "x": 0.578,
-        "y": 0.8923
-      },
-      "6": {
-        "x": 0.5136,
-        "y": 0.02
-      },
-      "7": {
-        "x": 0.3138,
-        "y": 0.7625
-      },
-      "8": {
-        "x": 0.8167,
-        "y": 0.9583
-      },
-      "9": {
-        "x": 0.02,
-        "y": 0.8949
-      },
-      "10": {
-        "x": 0.98,
-        "y": 0.98
-      }
-    },
-    "canvas_min_w": 2414,
-    "canvas_min_h": 1779,
-    "aspect_ratio": 1.3569
-  },
-  {
     "n": 12,
     "cluster_positions": {
       "0": {
-        "x": 0.6115,
-        "y": 0.5498
+        "x": 0.3165,
+        "y": 0.5241,
+        "keywords": [
+          "university",
+          "american",
+          "arts",
+          "born",
+          "fine"
+        ]
       },
       "1": {
-        "x": 0.5344,
-        "y": 0.98
+        "x": 0.8153,
+        "y": 0.2775,
+        "keywords": [
+          "sculpture",
+          "tall",
+          "wall",
+          "stone",
+          "paper"
+        ]
       },
       "2": {
-        "x": 0.1427,
-        "y": 0.6879
+        "x": 0.3506,
+        "y": 0.1304,
+        "keywords": [
+          "work",
+          "sculpture",
+          "everyday",
+          "architectural",
+          "abstract elements"
+        ]
       },
       "3": {
-        "x": 0.5909,
-        "y": 0.1863
+        "x": 0.4998,
+        "y": 0.8011,
+        "keywords": [
+          "film",
+          "films",
+          "filmmaker",
+          "silver platter",
+          "platter"
+        ]
       },
       "4": {
-        "x": 0.3909,
-        "y": 0.5579
+        "x": 0.02,
+        "y": 0.3955,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "lower",
+          "street",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.7534,
-        "y": 0.8318
+        "x": 0.8318,
+        "y": 0.02,
+        "keywords": [
+          "shapes",
+          "background",
+          "image",
+          "lines",
+          "abstract"
+        ]
       },
       "6": {
-        "x": 0.3884,
-        "y": 0.0651
+        "x": 0.7377,
+        "y": 0.98,
+        "keywords": [
+          "american",
+          "born",
+          "american born",
+          "active",
+          "american american"
+        ]
       },
       "7": {
-        "x": 0.5053,
-        "y": 0.8686
+        "x": 0.592,
+        "y": 0.1575,
+        "keywords": [
+          "background",
+          "ink",
+          "paper",
+          "passport style",
+          "blue"
+        ]
       },
       "8": {
-        "x": 0.219,
-        "y": 0.307
+        "x": 0.084,
+        "y": 0.4485,
+        "keywords": [
+          "black mountain",
+          "college",
+          "mountain",
+          "mountain college",
+          "japanese"
+        ]
       },
       "9": {
-        "x": 0.98,
-        "y": 0.8617
+        "x": 0.6504,
+        "y": 0.5155,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "box",
+          "engagement"
+        ]
       },
       "10": {
-        "x": 0.02,
-        "y": 0.7969
+        "x": 0.1144,
+        "y": 0.0869,
+        "keywords": [
+          "japanese",
+          "american",
+          "sculpture",
+          "table",
+          "sculptor"
+        ]
       },
       "11": {
-        "x": 0.8494,
-        "y": 0.02
+        "x": 0.98,
+        "y": 0.4278,
+        "keywords": [
+          "person",
+          "hair",
+          "shows",
+          "barbed wire",
+          "barbed"
+        ]
       }
     },
-    "canvas_min_w": 2576,
-    "canvas_min_h": 2026,
-    "aspect_ratio": 1.2715
+    "canvas_min_w": 2598,
+    "canvas_min_h": 1744,
+    "aspect_ratio": 1.4897
   },
   {
     "n": 13,
     "cluster_positions": {
       "0": {
-        "x": 0.6947,
-        "y": 0.5465
+        "x": 0.1703,
+        "y": 0.6169,
+        "keywords": [
+          "born",
+          "american",
+          "university",
+          "california",
+          "arts"
+        ]
       },
       "1": {
-        "x": 0.6893,
-        "y": 0.02
+        "x": 0.8931,
+        "y": 0.2984,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged",
+          "aged paper",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.0653
+        "x": 0.4223,
+        "y": 0.1802,
+        "keywords": [
+          "abstract",
+          "abstract elements",
+          "work",
+          "elements",
+          "form"
+        ]
       },
       "3": {
-        "x": 0.8334,
-        "y": 0.8021
+        "x": 0.3877,
+        "y": 0.6312,
+        "keywords": [
+          "film",
+          "films",
+          "filmmaker",
+          "silver platter",
+          "platter"
+        ]
       },
       "4": {
-        "x": 0.98,
-        "y": 0.428
+        "x": 0.02,
+        "y": 0.3329,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.8013,
-        "y": 0.1741
+        "x": 0.8845,
+        "y": 0.02,
+        "keywords": [
+          "shapes",
+          "lines",
+          "background",
+          "image",
+          "abstract"
+        ]
       },
       "6": {
-        "x": 0.98,
-        "y": 0.7526
+        "x": 0.6343,
+        "y": 0.98,
+        "keywords": [
+          "born",
+          "american",
+          "american born",
+          "american american",
+          "active"
+        ]
       },
       "7": {
-        "x": 0.6034,
-        "y": 0.247
+        "x": 0.7003,
+        "y": 0.1861,
+        "keywords": [
+          "background",
+          "actor",
+          "ink",
+          "kabuki",
+          "striped"
+        ]
       },
       "8": {
-        "x": 0.9015,
-        "y": 0.4782
+        "x": 0.0424,
+        "y": 0.0886,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "francisco"
+        ]
       },
       "9": {
-        "x": 0.02,
-        "y": 0.288
+        "x": 0.5579,
+        "y": 0.4243,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "materials",
+          "engagement"
+        ]
       },
       "10": {
-        "x": 0.9365,
-        "y": 0.02
+        "x": 0.2206,
+        "y": 0.269,
+        "keywords": [
+          "japanese",
+          "american",
+          "university",
+          "japanese american",
+          "war"
+        ]
       },
       "11": {
-        "x": 0.7477,
-        "y": 0.98
+        "x": 0.98,
+        "y": 0.5389,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "image",
+          "mouth"
+        ]
       },
       "12": {
-        "x": 0.5006,
-        "y": 0.6402
+        "x": 0.525,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "interlocking",
+          "bronze",
+          "marble"
+        ]
       }
     },
-    "canvas_min_w": 3036,
-    "canvas_min_h": 2043,
-    "aspect_ratio": 1.486
+    "canvas_min_w": 2868,
+    "canvas_min_h": 1887,
+    "aspect_ratio": 1.5199
   },
   {
     "n": 14,
     "cluster_positions": {
       "0": {
-        "x": 0.6635,
-        "y": 0.4757
+        "x": 0.1452,
+        "y": 0.6384,
+        "keywords": [
+          "american",
+          "born",
+          "university",
+          "california",
+          "whitney"
+        ]
       },
       "1": {
-        "x": 0.5256,
-        "y": 0.8171
+        "x": 0.7934,
+        "y": 0.2828,
+        "keywords": [
+          "paper",
+          "aged paper",
+          "aged",
+          "connectors",
+          "wall"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.7474
+        "x": 0.3432,
+        "y": 0.1517,
+        "keywords": [
+          "work",
+          "abstract elements",
+          "abstract",
+          "elements",
+          "sense"
+        ]
       },
       "3": {
-        "x": 0.7931,
-        "y": 0.1611
+        "x": 0.3477,
+        "y": 0.6691,
+        "keywords": [
+          "film",
+          "films",
+          "filmmaker",
+          "platter",
+          "silver platter"
+        ]
       },
       "4": {
-        "x": 0.9077,
-        "y": 0.7882
+        "x": 0.02,
+        "y": 0.3247,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.8271,
-        "y": 0.98
+        "x": 0.7818,
+        "y": 0.02,
+        "keywords": [
+          "shapes",
+          "lines",
+          "background",
+          "image",
+          "abstract"
+        ]
       },
       "6": {
-        "x": 0.98,
-        "y": 0.3103
+        "x": 0.5602,
+        "y": 0.98,
+        "keywords": [
+          "american",
+          "born",
+          "american born",
+          "active",
+          "american american"
+        ]
       },
       "7": {
-        "x": 0.6398,
-        "y": 0.98
+        "x": 0.6091,
+        "y": 0.2122,
+        "keywords": [
+          "passport",
+          "ink",
+          "image",
+          "passport style",
+          "person"
+        ]
       },
       "8": {
-        "x": 0.862,
-        "y": 0.4689
+        "x": 0.0337,
+        "y": 0.0809,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "san"
+        ]
       },
       "9": {
-        "x": 0.02,
-        "y": 0.7123
+        "x": 0.4579,
+        "y": 0.3996,
+        "keywords": [
+          "value",
+          "material",
+          "materials",
+          "plastic",
+          "engagement"
+        ]
       },
       "10": {
-        "x": 0.98,
-        "y": 0.98
+        "x": 0.1708,
+        "y": 0.3098,
+        "keywords": [
+          "american",
+          "japanese",
+          "university",
+          "war",
+          "japanese american"
+        ]
       },
       "11": {
-        "x": 0.6679,
-        "y": 0.02
+        "x": 0.8667,
+        "y": 0.5665,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "wire",
+          "stylized",
+          "man"
+        ]
       },
       "12": {
-        "x": 0.4777,
-        "y": 0.5157
+        "x": 0.4773,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "interlocking",
+          "bronze",
+          "marble"
+        ]
       },
       "13": {
-        "x": 0.714,
-        "y": 0.7742
+        "x": 0.98,
+        "y": 0.3681,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
       }
     },
-    "canvas_min_w": 3280,
-    "canvas_min_h": 2174,
-    "aspect_ratio": 1.5087
+    "canvas_min_w": 3040,
+    "canvas_min_h": 2032,
+    "aspect_ratio": 1.4961
   },
   {
     "n": 15,
     "cluster_positions": {
       "0": {
-        "x": 0.7126,
-        "y": 0.5428
+        "x": 0.18,
+        "y": 0.7276,
+        "keywords": [
+          "american",
+          "born",
+          "california",
+          "university",
+          "san"
+        ]
       },
       "1": {
-        "x": 0.5918,
-        "y": 0.3279
+        "x": 0.8322,
+        "y": 0.2547,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged",
+          "aged paper",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.0816
+        "x": 0.2943,
+        "y": 0.1401,
+        "keywords": [
+          "work",
+          "everyday",
+          "abstract elements",
+          "strange attractor",
+          "strange"
+        ]
       },
       "3": {
-        "x": 0.8144,
-        "y": 0.7911
+        "x": 0.3795,
+        "y": 0.6738,
+        "keywords": [
+          "film",
+          "films",
+          "filmmaker",
+          "platter",
+          "silver platter"
+        ]
       },
       "4": {
-        "x": 0.98,
-        "y": 0.3862
+        "x": 0.02,
+        "y": 0.4822,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.8934,
-        "y": 0.055
+        "x": 0.5699,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "base",
+          "bronze",
+          "work"
+        ]
       },
       "6": {
-        "x": 0.98,
-        "y": 0.7368
+        "x": 0.7505,
+        "y": 0.98,
+        "keywords": [
+          "american",
+          "born",
+          "american born",
+          "active",
+          "american american"
+        ]
       },
       "7": {
-        "x": 0.7185,
-        "y": 0.02
+        "x": 0.4846,
+        "y": 0.2295,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "person",
+          "face"
+        ]
       },
       "8": {
-        "x": 0.8961,
-        "y": 0.5182
+        "x": 0.0846,
+        "y": 0.3204,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "ink"
+        ]
       },
       "9": {
-        "x": 0.02,
-        "y": 0.3314
+        "x": 0.542,
+        "y": 0.5057,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "engagement",
+          "g"
+        ]
       },
       "10": {
-        "x": 0.98,
-        "y": 0.02
+        "x": 0.2544,
+        "y": 0.4368,
+        "keywords": [
+          "american",
+          "japanese",
+          "university",
+          "war",
+          "years"
+        ]
       },
       "11": {
-        "x": 0.7566,
-        "y": 0.98
+        "x": 0.968,
+        "y": 0.5281,
+        "keywords": [
+          "barbed wire",
+          "barbed",
+          "large",
+          "man",
+          "wire"
+        ]
       },
       "12": {
-        "x": 0.5439,
-        "y": 0.0469
+        "x": 0.02,
+        "y": 0.0773,
+        "keywords": [
+          "sculpture",
+          "table",
+          "sculptor",
+          "forms",
+          "designed"
+        ]
       },
       "13": {
-        "x": 0.776,
-        "y": 0.2709
+        "x": 0.98,
+        "y": 0.2466,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "short"
+        ]
       },
       "14": {
-        "x": 0.5512,
-        "y": 0.6605
+        "x": 0.7493,
+        "y": 0.02,
+        "keywords": [
+          "background",
+          "shapes",
+          "lines",
+          "image",
+          "abstract"
+        ]
       }
     },
-    "canvas_min_w": 3514,
-    "canvas_min_h": 2302,
-    "aspect_ratio": 1.5265
+    "canvas_min_w": 3247,
+    "canvas_min_h": 2176,
+    "aspect_ratio": 1.4922
   },
   {
     "n": 16,
     "cluster_positions": {
       "0": {
-        "x": 0.7259,
-        "y": 0.5031
+        "x": 0.2068,
+        "y": 0.6171,
+        "keywords": [
+          "american",
+          "born",
+          "california",
+          "university",
+          "performance"
+        ]
       },
       "1": {
-        "x": 0.5915,
-        "y": 0.3356
+        "x": 0.8427,
+        "y": 0.2244,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged",
+          "aged paper",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.1372
+        "x": 0.2972,
+        "y": 0.1271,
+        "keywords": [
+          "work",
+          "everyday",
+          "sense",
+          "strange",
+          "abstract elements"
+        ]
       },
       "3": {
-        "x": 0.8112,
-        "y": 0.7408
+        "x": 0.377,
+        "y": 0.5223,
+        "keywords": [
+          "film",
+          "films",
+          "filmmaker",
+          "silver platter",
+          "platter"
+        ]
       },
       "4": {
-        "x": 0.8821,
-        "y": 0.3733
+        "x": 0.02,
+        "y": 0.53,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.8545,
-        "y": 0.02
+        "x": 0.5795,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "bronze",
+          "base",
+          "work"
+        ]
       },
       "6": {
-        "x": 0.98,
-        "y": 0.8705
+        "x": 0.758,
+        "y": 0.98,
+        "keywords": [
+          "american",
+          "american born",
+          "born",
+          "american american",
+          "active"
+        ]
       },
       "7": {
-        "x": 0.6825,
-        "y": 0.02
+        "x": 0.4758,
+        "y": 0.2166,
+        "keywords": [
+          "actor",
+          "passport style",
+          "ink",
+          "blue",
+          "face"
+        ]
       },
       "8": {
-        "x": 0.98,
-        "y": 0.396
+        "x": 0.1862,
+        "y": 0.3386,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "mountain college",
+          "college",
+          "san francisco"
+        ]
       },
       "9": {
-        "x": 0.02,
-        "y": 0.2757
+        "x": 0.5594,
+        "y": 0.4558,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "engagement",
+          "g"
+        ]
       },
       "10": {
-        "x": 0.98,
-        "y": 0.02
+        "x": 0.02,
+        "y": 0.3091,
+        "keywords": [
+          "dubuffet",
+          "early",
+          "pollock",
+          "works",
+          "fine"
+        ]
       },
       "11": {
-        "x": 0.7367,
-        "y": 0.98
+        "x": 0.962,
+        "y": 0.5041,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "wire",
+          "stylized",
+          "large"
+        ]
       },
       "12": {
-        "x": 0.5329,
-        "y": 0.0776
+        "x": 0.02,
+        "y": 0.0291,
+        "keywords": [
+          "sculpture",
+          "table",
+          "sculptor",
+          "forms",
+          "japanese"
+        ]
       },
       "13": {
-        "x": 0.7485,
-        "y": 0.204
+        "x": 0.98,
+        "y": 0.2433,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "short"
+        ]
       },
       "14": {
-        "x": 0.5693,
-        "y": 0.6238
+        "x": 0.7552,
+        "y": 0.02,
+        "keywords": [
+          "background",
+          "shapes",
+          "lines",
+          "image",
+          "abstract"
+        ]
       },
       "15": {
-        "x": 0.9654,
-        "y": 0.6128
+        "x": 0.354,
+        "y": 0.8066,
+        "keywords": [
+          "japanese",
+          "american",
+          "war",
+          "japanese american",
+          "ii"
+        ]
       }
     },
-    "canvas_min_w": 3677,
+    "canvas_min_w": 3469,
     "canvas_min_h": 2320,
-    "aspect_ratio": 1.5849
+    "aspect_ratio": 1.4953
   },
   {
     "n": 17,
     "cluster_positions": {
       "0": {
-        "x": 0.707,
-        "y": 0.3871
+        "x": 0.1149,
+        "y": 0.4956,
+        "keywords": [
+          "american",
+          "born",
+          "performance",
+          "california",
+          "san"
+        ]
       },
       "1": {
-        "x": 0.546,
-        "y": 0.3633
+        "x": 0.8407,
+        "y": 0.2167,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged",
+          "aged paper",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.14
+        "x": 0.3034,
+        "y": 0.0679,
+        "keywords": [
+          "everyday",
+          "abstract elements",
+          "attractor",
+          "strange attractor",
+          "strange"
+        ]
       },
       "3": {
-        "x": 0.6925,
-        "y": 0.7502
+        "x": 0.4538,
+        "y": 0.5638,
+        "keywords": [
+          "film",
+          "films",
+          "silver platter",
+          "platter",
+          "video"
+        ]
       },
       "4": {
-        "x": 0.98,
-        "y": 0.3791
+        "x": 0.02,
+        "y": 0.5042,
+        "keywords": [
+          "graffiti",
+          "street",
+          "lower east",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.8104,
-        "y": 0.02
+        "x": 0.5688,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "bronze",
+          "metal",
+          "work"
+        ]
       },
       "6": {
-        "x": 0.9159,
-        "y": 0.8024
+        "x": 0.743,
+        "y": 0.98,
+        "keywords": [
+          "american",
+          "american born",
+          "born",
+          "active",
+          "american american"
+        ]
       },
       "7": {
-        "x": 0.6697,
-        "y": 0.1221
+        "x": 0.4633,
+        "y": 0.186,
+        "keywords": [
+          "actor",
+          "passport style",
+          "portraits",
+          "kabuki",
+          "ukiyo e"
+        ]
       },
       "8": {
-        "x": 0.8231,
-        "y": 0.5795
+        "x": 0.1923,
+        "y": 0.2574,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "ink"
+        ]
       },
       "9": {
-        "x": 0.02,
-        "y": 0.3759
+        "x": 0.5722,
+        "y": 0.3788,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "engagement",
+          "ways"
+        ]
       },
       "10": {
-        "x": 0.9628,
-        "y": 0.02
+        "x": 0.02,
+        "y": 0.2684,
+        "keywords": [
+          "fine",
+          "sculpture",
+          "arts",
+          "painting",
+          "works"
+        ]
       },
       "11": {
-        "x": 0.719,
-        "y": 0.98
+        "x": 0.9608,
+        "y": 0.492,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "wire",
+          "stylized",
+          "large"
+        ]
       },
       "12": {
-        "x": 0.5088,
-        "y": 0.1094
+        "x": 0.0355,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "table",
+          "forms",
+          "sculptor",
+          "japanese"
+        ]
       },
       "13": {
-        "x": 0.8253,
-        "y": 0.2131
+        "x": 0.98,
+        "y": 0.2449,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "short"
+        ]
       },
       "14": {
-        "x": 0.5507,
-        "y": 0.6239
+        "x": 0.7622,
+        "y": 0.02,
+        "keywords": [
+          "background",
+          "shapes",
+          "lines",
+          "image",
+          "abstract"
+        ]
       },
       "15": {
-        "x": 0.9484,
-        "y": 0.4026
+        "x": 0.364,
+        "y": 0.79,
+        "keywords": [
+          "japanese",
+          "american",
+          "war",
+          "japanese american",
+          "internment"
+        ]
       },
       "16": {
-        "x": 0.98,
-        "y": 0.6261
+        "x": 0.2087,
+        "y": 0.7175,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
       }
     },
-    "canvas_min_w": 3993,
-    "canvas_min_h": 2493,
-    "aspect_ratio": 1.6017
+    "canvas_min_w": 3678,
+    "canvas_min_h": 2464,
+    "aspect_ratio": 1.4927
   },
   {
     "n": 18,
     "cluster_positions": {
       "0": {
-        "x": 0.6677,
-        "y": 0.5049
+        "x": 0.2926,
+        "y": 0.3738,
+        "keywords": [
+          "american",
+          "born",
+          "performance",
+          "california",
+          "whitney"
+        ]
       },
       "1": {
-        "x": 0.5298,
-        "y": 0.6186
+        "x": 0.8521,
+        "y": 0.2575,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged paper",
+          "aged",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.6317
+        "x": 0.3063,
+        "y": 0.0851,
+        "keywords": [
+          "work",
+          "everyday",
+          "sense",
+          "strange",
+          "abstract elements"
+        ]
       },
       "3": {
-        "x": 0.7239,
-        "y": 0.2711
+        "x": 0.4806,
+        "y": 0.6414,
+        "keywords": [
+          "film",
+          "video",
+          "silver platter",
+          "platter",
+          "silver"
+        ]
       },
       "4": {
-        "x": 0.7964,
-        "y": 0.6828
+        "x": 0.02,
+        "y": 0.4444,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.873,
-        "y": 0.8961
+        "x": 0.6124,
+        "y": 0.02,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "bronze",
+          "base",
+          "metal"
+        ]
       },
       "6": {
-        "x": 0.8634,
-        "y": 0.1628
+        "x": 0.6961,
+        "y": 0.98,
+        "keywords": [
+          "american born",
+          "american",
+          "born",
+          "active",
+          "american american"
+        ]
       },
       "7": {
-        "x": 0.7294,
-        "y": 0.98
+        "x": 0.5939,
+        "y": 0.2182,
+        "keywords": [
+          "ink",
+          "blue",
+          "passport style",
+          "person",
+          "passport"
+        ]
       },
       "8": {
-        "x": 0.8457,
-        "y": 0.4396
+        "x": 0.1659,
+        "y": 0.2226,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "francisco"
+        ]
       },
       "9": {
-        "x": 0.02,
-        "y": 0.98
+        "x": 0.4795,
+        "y": 0.3856,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "engagement",
+          "purchased"
+        ]
       },
       "10": {
-        "x": 0.98,
-        "y": 0.8081
+        "x": 0.02,
+        "y": 0.2465,
+        "keywords": [
+          "worked",
+          "produced",
+          "sculptor",
+          "furniture",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.5653,
-        "y": 0.248
+        "x": 0.9468,
+        "y": 0.4987,
+        "keywords": [
+          "barbed wire",
+          "barbed",
+          "wire",
+          "stylized",
+          "man"
+        ]
       },
       "12": {
-        "x": 0.5264,
-        "y": 0.9088
+        "x": 0.0542,
+        "y": 0.02,
+        "keywords": [
+          "table",
+          "sculpture",
+          "forms",
+          "sculptor",
+          "japanese"
+        ]
       },
       "13": {
-        "x": 0.6528,
-        "y": 0.7695
+        "x": 0.98,
+        "y": 0.278,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "short"
+        ]
       },
       "14": {
-        "x": 0.3751,
-        "y": 0.6301
+        "x": 0.7856,
+        "y": 0.02,
+        "keywords": [
+          "background",
+          "shapes",
+          "lines",
+          "image",
+          "abstract"
+        ]
       },
       "15": {
-        "x": 0.98,
-        "y": 0.5642
+        "x": 0.3009,
+        "y": 0.7934,
+        "keywords": [
+          "japanese",
+          "american",
+          "war",
+          "japanese american",
+          "internment"
+        ]
       },
       "16": {
-        "x": 0.98,
-        "y": 0.3165
+        "x": 0.2112,
+        "y": 0.5909,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
       },
       "17": {
-        "x": 0.1397,
-        "y": 0.02
+        "x": 0.0708,
+        "y": 0.486,
+        "keywords": [
+          "korean",
+          "revolution",
+          "retrospective",
+          "korean american",
+          "american"
+        ]
       }
     },
-    "canvas_min_w": 4387,
+    "canvas_min_w": 3921,
     "canvas_min_h": 2608,
-    "aspect_ratio": 1.6821
+    "aspect_ratio": 1.5035
   },
   {
     "n": 19,
     "cluster_positions": {
       "0": {
-        "x": 0.6648,
-        "y": 0.4118
+        "x": 0.7059,
+        "y": 0.2024,
+        "keywords": [
+          "american",
+          "born",
+          "whitney",
+          "collections",
+          "feminist"
+        ]
       },
       "1": {
-        "x": 0.5183,
-        "y": 0.6656
+        "x": 0.6184,
+        "y": 0.9267,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged paper",
+          "aged",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.1614
+        "x": 0.9544,
+        "y": 0.7461,
+        "keywords": [
+          "work",
+          "everyday",
+          "sense",
+          "strange attractor",
+          "attractor"
+        ]
       },
       "3": {
-        "x": 0.6109,
-        "y": 0.19
+        "x": 0.6673,
+        "y": 0.5149,
+        "keywords": [
+          "film",
+          "silver platter",
+          "platter",
+          "silver",
+          "films"
+        ]
       },
       "4": {
-        "x": 0.8375,
-        "y": 0.4906
+        "x": 0.98,
+        "y": 0.0829,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.9291,
-        "y": 0.6753
+        "x": 0.8239,
+        "y": 0.9465,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "bronze",
+          "base",
+          "tall"
+        ]
       },
       "6": {
-        "x": 0.731,
-        "y": 0.0495
+        "x": 0.5514,
+        "y": 0.2491,
+        "keywords": [
+          "american born",
+          "american",
+          "born",
+          "american american",
+          "active"
+        ]
       },
       "7": {
-        "x": 0.8112,
-        "y": 0.817
+        "x": 0.7277,
+        "y": 0.762,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "person",
+          "ukiyo e"
+        ]
       },
       "8": {
-        "x": 0.9516,
-        "y": 0.3277
+        "x": 0.8171,
+        "y": 0.367,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "ink",
+          "college",
+          "mountain college"
+        ]
       },
       "9": {
-        "x": 0.3717,
-        "y": 0.98
+        "x": 0.8386,
+        "y": 0.6001,
+        "keywords": [
+          "value",
+          "photographs",
+          "material",
+          "engagement",
+          "purchased"
+        ]
       },
       "10": {
         "x": 0.98,
-        "y": 0.5258
+        "y": 0.3205,
+        "keywords": [
+          "worked",
+          "produced",
+          "sculptor",
+          "furniture",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.4749,
-        "y": 0.0779
+        "x": 0.4857,
+        "y": 0.8239,
+        "keywords": [
+          "barbed wire",
+          "barbed",
+          "man",
+          "large",
+          "wearing"
+        ]
       },
       "12": {
-        "x": 0.6486,
-        "y": 0.98
+        "x": 0.98,
+        "y": 0.5955,
+        "keywords": [
+          "table",
+          "forms",
+          "sculpture",
+          "sculptor",
+          "designed"
+        ]
       },
       "13": {
-        "x": 0.719,
-        "y": 0.6309
+        "x": 0.5357,
+        "y": 0.98,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "short"
+        ]
       },
       "14": {
-        "x": 0.6313,
-        "y": 0.8204
+        "x": 0.7148,
+        "y": 0.98,
+        "keywords": [
+          "background",
+          "shapes",
+          "lines",
+          "image",
+          "abstract"
+        ]
       },
       "15": {
-        "x": 0.7866,
-        "y": 0.2683
+        "x": 0.8198,
+        "y": 0.0228,
+        "keywords": [
+          "japanese",
+          "american",
+          "japanese american",
+          "war",
+          "internment"
+        ]
       },
       "16": {
-        "x": 0.8902,
-        "y": 0.1008
+        "x": 0.9591,
+        "y": 0.4361,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
       },
       "17": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.9212,
+        "y": 0.1969,
+        "keywords": [
+          "korean",
+          "multimedia",
+          "born",
+          "american",
+          "installation"
+        ]
       },
       "18": {
-        "x": 0.3668,
-        "y": 0.6393
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "formed"
+        ]
       }
     },
-    "canvas_min_w": 4355,
-    "canvas_min_h": 2873,
-    "aspect_ratio": 1.5158
+    "canvas_min_w": 4411,
+    "canvas_min_h": 3024,
+    "aspect_ratio": 1.4587
   },
   {
     "n": 20,
     "cluster_positions": {
       "0": {
-        "x": 0.8017,
-        "y": 0.5787
+        "x": 0.7157,
+        "y": 0.1953,
+        "keywords": [
+          "american",
+          "born",
+          "performance",
+          "california",
+          "whitney"
+        ]
       },
       "1": {
-        "x": 0.4822,
-        "y": 0.7363
+        "x": 0.6241,
+        "y": 0.8814,
+        "keywords": [
+          "paper",
+          "wall",
+          "aged paper",
+          "aged",
+          "connectors"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.2577
+        "x": 0.929,
+        "y": 0.7404,
+        "keywords": [
+          "work",
+          "sense",
+          "abstract elements",
+          "strange attractor",
+          "strange"
+        ]
       },
       "3": {
-        "x": 0.5669,
-        "y": 0.3533
+        "x": 0.6816,
+        "y": 0.4289,
+        "keywords": [
+          "film",
+          "films",
+          "silver platter",
+          "platter",
+          "video"
+        ]
       },
       "4": {
-        "x": 0.7084,
-        "y": 0.3965
+        "x": 0.98,
+        "y": 0.0914,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "east"
+        ]
       },
       "5": {
-        "x": 0.8703,
-        "y": 0.777
+        "x": 0.8331,
+        "y": 0.98,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "base",
+          "bronze",
+          "metal"
+        ]
       },
       "6": {
-        "x": 0.7311,
-        "y": 0.1729
+        "x": 0.5534,
+        "y": 0.2265,
+        "keywords": [
+          "american born",
+          "american",
+          "born",
+          "american american",
+          "active"
+        ]
       },
       "7": {
-        "x": 0.7486,
-        "y": 0.8941
+        "x": 0.7584,
+        "y": 0.795,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "person",
+          "kabuki actor",
+          "face"
+        ]
       },
       "8": {
-        "x": 0.9464,
-        "y": 0.4816
+        "x": 0.9475,
+        "y": 0.4981,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "ink",
+          "mountain college"
+        ]
       },
       "9": {
-        "x": 0.3016,
-        "y": 0.98
+        "x": 0.8158,
+        "y": 0.5833,
+        "keywords": [
+          "value",
+          "materials",
+          "engagement",
+          "material",
+          "purchased"
+        ]
       },
       "10": {
         "x": 0.98,
-        "y": 0.6981
+        "y": 0.3201,
+        "keywords": [
+          "produced",
+          "worked",
+          "sculptor",
+          "american",
+          "furniture"
+        ]
       },
       "11": {
-        "x": 0.4914,
-        "y": 0.1403
+        "x": 0.4859,
+        "y": 0.8279,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "man",
+          "wearing",
+          "wire"
+        ]
       },
       "12": {
-        "x": 0.6071,
-        "y": 0.98
+        "x": 0.98,
+        "y": 0.5486,
+        "keywords": [
+          "sculpture",
+          "table",
+          "japanese",
+          "forms",
+          "sculptor"
+        ]
       },
       "13": {
-        "x": 0.6157,
-        "y": 0.5682
+        "x": 0.5469,
+        "y": 0.98,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
       },
       "14": {
-        "x": 0.6209,
-        "y": 0.7945
+        "x": 0.7105,
+        "y": 0.98,
+        "keywords": [
+          "background",
+          "shapes",
+          "lines",
+          "image",
+          "abstract"
+        ]
       },
       "15": {
-        "x": 0.8415,
-        "y": 0.3167
+        "x": 0.8481,
+        "y": 0.0956,
+        "keywords": [
+          "japanese",
+          "american",
+          "japanese american",
+          "war",
+          "internment"
+        ]
       },
       "16": {
-        "x": 0.9084,
-        "y": 0.1169
+        "x": 0.8208,
+        "y": 0.357,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
       },
       "17": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.9498,
+        "y": 0.2568,
+        "keywords": [
+          "korean",
+          "arts",
+          "american",
+          "retrospective",
+          "korean american"
+        ]
       },
       "18": {
-        "x": 0.3116,
-        "y": 0.6627
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "garlic"
+        ]
       },
       "19": {
-        "x": 0.98,
-        "y": 0.5121
+        "x": 0.6378,
+        "y": 0.6531,
+        "keywords": [
+          "photographs",
+          "source",
+          "ethnographic",
+          "series",
+          "passport"
+        ]
       }
     },
-    "canvas_min_w": 4654,
-    "canvas_min_h": 2943,
-    "aspect_ratio": 1.5814
+    "canvas_min_w": 4648,
+    "canvas_min_h": 3150,
+    "aspect_ratio": 1.4756
   },
   {
     "n": 21,
     "cluster_positions": {
       "0": {
-        "x": 0.7761,
-        "y": 0.528
+        "x": 0.7187,
+        "y": 0.3373,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "performance",
+          "california"
+        ]
       },
       "1": {
-        "x": 0.65,
-        "y": 0.6197
+        "x": 0.5629,
+        "y": 0.9751,
+        "keywords": [
+          "wire",
+          "aged paper",
+          "aged",
+          "connectors",
+          "paper"
+        ]
       },
       "2": {
-        "x": 0.7385,
-        "y": 0.8551
+        "x": 0.9175,
+        "y": 0.7141,
+        "keywords": [
+          "abstract elements",
+          "architectural",
+          "details",
+          "abstract",
+          "form"
+        ]
       },
       "3": {
-        "x": 0.9138,
-        "y": 0.3645
+        "x": 0.98,
+        "y": 0.1378,
+        "keywords": [
+          "graffiti",
+          "street",
+          "lower east",
+          "lower",
+          "paintings"
+        ]
       },
       "4": {
-        "x": 0.5496,
-        "y": 0.1671
+        "x": 0.02,
+        "y": 0.5018,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "g"
+        ]
       },
       "5": {
-        "x": 0.98,
-        "y": 0.0362
+        "x": 0.8169,
+        "y": 0.8629,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "metal",
+          "tall",
+          "work"
+        ]
       },
       "6": {
-        "x": 0.98,
-        "y": 0.5529
+        "x": 0.8362,
+        "y": 0.4687,
+        "keywords": [
+          "work",
+          "installation",
+          "explores",
+          "filmmaker",
+          "film"
+        ]
       },
       "7": {
-        "x": 0.3867,
-        "y": 0.98
+        "x": 0.8519,
+        "y": 0.98,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "lines",
+          "image"
+        ]
       },
       "8": {
-        "x": 0.8449,
-        "y": 0.7169
+        "x": 0.98,
+        "y": 0.3531,
+        "keywords": [
+          "table",
+          "sculpture",
+          "forms",
+          "sculptor",
+          "designed"
+        ]
       },
       "9": {
-        "x": 0.9538,
-        "y": 0.5836
+        "x": 0.972,
+        "y": 0.5138,
+        "keywords": [
+          "paper",
+          "japanese",
+          "sculptures",
+          "furniture",
+          "produced"
+        ]
       },
       "10": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.7098,
+        "y": 0.02,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "internment",
+          "ii"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.3358
+        "x": 0.6795,
+        "y": 0.8504,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
       },
       "12": {
-        "x": 0.4647,
-        "y": 0.8346
+        "x": 0.8998,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "army",
+          "japanese",
+          "p",
+          "v"
+        ]
       },
       "13": {
-        "x": 0.6666,
-        "y": 0.98
+        "x": 0.793,
+        "y": 0.1443,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
       },
       "14": {
-        "x": 0.7154,
-        "y": 0.108
+        "x": 0.7669,
+        "y": 0.6595,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo",
+          "ukiyo e"
+        ]
       },
       "15": {
-        "x": 0.6489,
-        "y": 0.3995
+        "x": 0.3867,
+        "y": 0.02,
+        "keywords": [
+          "american american",
+          "american",
+          "american born",
+          "born american",
+          "born"
+        ]
       },
       "16": {
-        "x": 0.8867,
-        "y": 0.1404
+        "x": 0.5103,
+        "y": 0.1495,
+        "keywords": [
+          "born",
+          "active",
+          "philippines",
+          "united states",
+          "united"
+        ]
       },
       "17": {
-        "x": 0.7742,
-        "y": 0.3097
+        "x": 0.6456,
+        "y": 0.5407,
+        "keywords": [
+          "photographs",
+          "source",
+          "judith",
+          "cultural",
+          "holofernes"
+        ]
       },
       "18": {
-        "x": 0.5139,
-        "y": 0.5674
+        "x": 0.7093,
+        "y": 0.98,
+        "keywords": [
+          "image",
+          "shapes",
+          "left",
+          "flower",
+          "cluster"
+        ]
       },
       "19": {
-        "x": 0.6022,
-        "y": 0.8265
+        "x": 0.5657,
+        "y": 0.7279,
+        "keywords": [
+          "garlic",
+          "g",
+          "rich",
+          "organic",
+          "network"
+        ]
       },
       "20": {
-        "x": 0.972,
-        "y": 0.8002
+        "x": 0.903,
+        "y": 0.2757,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "san"
+        ]
       }
     },
-    "canvas_min_w": 4879,
-    "canvas_min_h": 3143,
-    "aspect_ratio": 1.5523
+    "canvas_min_w": 4780,
+    "canvas_min_h": 3226,
+    "aspect_ratio": 1.4817
+  },
+  {
+    "n": 22,
+    "cluster_positions": {
+      "0": {
+        "x": 0.793,
+        "y": 0.4058,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "california",
+          "san"
+        ]
+      },
+      "1": {
+        "x": 0.5661,
+        "y": 0.9575,
+        "keywords": [
+          "wire",
+          "aged paper",
+          "aged",
+          "connectors",
+          "paper"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.6371,
+        "keywords": [
+          "form",
+          "work",
+          "similar",
+          "abstract",
+          "title"
+        ]
+      },
+      "3": {
+        "x": 0.98,
+        "y": 0.1265,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "paintings"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.5004,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "g"
+        ]
+      },
+      "5": {
+        "x": 0.8002,
+        "y": 0.8392,
+        "keywords": [
+          "sculpture",
+          "tall",
+          "stone",
+          "bronze",
+          "metal"
+        ]
+      },
+      "6": {
+        "x": 0.8837,
+        "y": 0.6747,
+        "keywords": [
+          "everyday",
+          "explores",
+          "installation",
+          "strange",
+          "attractor"
+        ]
+      },
+      "7": {
+        "x": 0.8448,
+        "y": 0.98,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "lines",
+          "paper"
+        ]
+      },
+      "8": {
+        "x": 0.98,
+        "y": 0.3517,
+        "keywords": [
+          "table",
+          "sculpture",
+          "forms",
+          "sculptor",
+          "designed"
+        ]
+      },
+      "9": {
+        "x": 0.9268,
+        "y": 0.4751,
+        "keywords": [
+          "paper",
+          "sculptures",
+          "furniture",
+          "produced",
+          "japanese"
+        ]
+      },
+      "10": {
+        "x": 0.727,
+        "y": 0.02,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "internment",
+          "ii"
+        ]
+      },
+      "11": {
+        "x": 0.6674,
+        "y": 0.8205,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "features"
+        ]
+      },
+      "12": {
+        "x": 0.8785,
+        "y": 0.0288,
+        "keywords": [
+          "university",
+          "army",
+          "war",
+          "japanese",
+          "p"
+        ]
+      },
+      "13": {
+        "x": 0.7874,
+        "y": 0.1871,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.7511,
+        "y": 0.6358,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo",
+          "ukiyo e"
+        ]
+      },
+      "15": {
+        "x": 0.3731,
+        "y": 0.02,
+        "keywords": [
+          "american american",
+          "american",
+          "american born",
+          "born american",
+          "born"
+        ]
+      },
+      "16": {
+        "x": 0.4972,
+        "y": 0.1307,
+        "keywords": [
+          "born",
+          "active",
+          "philippines",
+          "united states",
+          "united"
+        ]
+      },
+      "17": {
+        "x": 0.6563,
+        "y": 0.477,
+        "keywords": [
+          "photographs",
+          "source",
+          "judith",
+          "cultural",
+          "holofernes"
+        ]
+      },
+      "18": {
+        "x": 0.704,
+        "y": 0.98,
+        "keywords": [
+          "image",
+          "shapes",
+          "left",
+          "flower",
+          "cluster"
+        ]
+      },
+      "19": {
+        "x": 0.5689,
+        "y": 0.6785,
+        "keywords": [
+          "garlic",
+          "g",
+          "rich",
+          "organic",
+          "network"
+        ]
+      },
+      "20": {
+        "x": 0.9111,
+        "y": 0.2656,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "san"
+        ]
+      },
+      "21": {
+        "x": 0.6604,
+        "y": 0.2568,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "silver platter",
+          "platter",
+          "silver"
+        ]
+      }
+    },
+    "canvas_min_w": 4883,
+    "canvas_min_h": 3285,
+    "aspect_ratio": 1.4865
+  },
+  {
+    "n": 23,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7978,
+        "y": 0.3841,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "california",
+          "san"
+        ]
+      },
+      "1": {
+        "x": 0.6093,
+        "y": 0.98,
+        "keywords": [
+          "wire",
+          "aged paper",
+          "aged",
+          "connectors",
+          "paper"
+        ]
+      },
+      "2": {
+        "x": 0.9161,
+        "y": 0.4875,
+        "keywords": [
+          "work",
+          "conveys",
+          "form",
+          "similar",
+          "abstract"
+        ]
+      },
+      "3": {
+        "x": 0.9625,
+        "y": 0.0477,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "paintings"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.8928,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "funny"
+        ]
+      },
+      "5": {
+        "x": 0.8073,
+        "y": 0.8124,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "tall",
+          "metal",
+          "bronze"
+        ]
+      },
+      "6": {
+        "x": 0.9282,
+        "y": 0.6967,
+        "keywords": [
+          "everyday",
+          "explores",
+          "installation",
+          "digital",
+          "strange"
+        ]
+      },
+      "7": {
+        "x": 0.8928,
+        "y": 0.966,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "lines",
+          "paper"
+        ]
+      },
+      "8": {
+        "x": 0.98,
+        "y": 0.2675,
+        "keywords": [
+          "sculpture",
+          "forms",
+          "sculptor",
+          "designed",
+          "sculptures"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.4655,
+        "keywords": [
+          "paper",
+          "sculptures",
+          "furniture",
+          "produced",
+          "surfaces"
+        ]
+      },
+      "10": {
+        "x": 0.6557,
+        "y": 0.0348,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "internment",
+          "war ii"
+        ]
+      },
+      "11": {
+        "x": 0.6885,
+        "y": 0.8937,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
+      },
+      "12": {
+        "x": 0.8085,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "army",
+          "war",
+          "japanese",
+          "represents"
+        ]
+      },
+      "13": {
+        "x": 0.7421,
+        "y": 0.1871,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.8115,
+        "y": 0.608,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.2425,
+        "y": 0.1483,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.43,
+        "y": 0.2604,
+        "keywords": [
+          "active",
+          "united states",
+          "united",
+          "states",
+          "died"
+        ]
+      },
+      "17": {
+        "x": 0.6807,
+        "y": 0.5621,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "judith",
+          "holofernes"
+        ]
+      },
+      "18": {
+        "x": 0.7725,
+        "y": 0.98,
+        "keywords": [
+          "image",
+          "shapes",
+          "left",
+          "flower",
+          "cluster"
+        ]
+      },
+      "19": {
+        "x": 0.6053,
+        "y": 0.737,
+        "keywords": [
+          "garlic",
+          "g",
+          "rich",
+          "organic",
+          "network"
+        ]
+      },
+      "20": {
+        "x": 0.8711,
+        "y": 0.2048,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "francisco"
+        ]
+      },
+      "21": {
+        "x": 0.6626,
+        "y": 0.3507,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "silver platter",
+          "platter",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.3113,
+        "y": 0.02,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "philippines",
+          "born american"
+        ]
+      }
+    },
+    "canvas_min_w": 5150,
+    "canvas_min_h": 3483,
+    "aspect_ratio": 1.4786
+  },
+  {
+    "n": 24,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7985,
+        "y": 0.3443,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "california",
+          "san"
+        ]
+      },
+      "1": {
+        "x": 0.6623,
+        "y": 0.98,
+        "keywords": [
+          "aged",
+          "aged paper",
+          "connectors",
+          "paper",
+          "wire"
+        ]
+      },
+      "2": {
+        "x": 0.9112,
+        "y": 0.4509,
+        "keywords": [
+          "form",
+          "judith",
+          "conveys",
+          "work",
+          "alludes"
+        ]
+      },
+      "3": {
+        "x": 0.9745,
+        "y": 0.0708,
+        "keywords": [
+          "graffiti",
+          "street",
+          "lower east",
+          "lower",
+          "paintings"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.8207,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "furniture"
+        ]
+      },
+      "5": {
+        "x": 0.8298,
+        "y": 0.7877,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "bronze",
+          "base",
+          "metal"
+        ]
+      },
+      "6": {
+        "x": 0.9353,
+        "y": 0.6734,
+        "keywords": [
+          "everyday",
+          "explores",
+          "digital",
+          "strange",
+          "strange attractor"
+        ]
+      },
+      "7": {
+        "x": 0.9071,
+        "y": 0.9445,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "lines",
+          "paper"
+        ]
+      },
+      "8": {
+        "x": 0.98,
+        "y": 0.2705,
+        "keywords": [
+          "sculpture",
+          "forms",
+          "sculptor",
+          "designed",
+          "sculptures"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.4701,
+        "keywords": [
+          "paper",
+          "japanese",
+          "sculptures",
+          "furniture",
+          "produced"
+        ]
+      },
+      "10": {
+        "x": 0.6539,
+        "y": 0.02,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "internment",
+          "order"
+        ]
+      },
+      "11": {
+        "x": 0.7099,
+        "y": 0.8489,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
+      },
+      "12": {
+        "x": 0.8095,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "army",
+          "japanese",
+          "v",
+          "college"
+        ]
+      },
+      "13": {
+        "x": 0.7286,
+        "y": 0.169,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.821,
+        "y": 0.5897,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.2391,
+        "y": 0.1737,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.4209,
+        "y": 0.2723,
+        "keywords": [
+          "active",
+          "united states",
+          "united",
+          "states",
+          "died"
+        ]
+      },
+      "17": {
+        "x": 0.6944,
+        "y": 0.5483,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "series",
+          "identity"
+        ]
+      },
+      "18": {
+        "x": 0.7872,
+        "y": 0.98,
+        "keywords": [
+          "shapes",
+          "image",
+          "flower",
+          "cluster",
+          "left"
+        ]
+      },
+      "19": {
+        "x": 0.6181,
+        "y": 0.7127,
+        "keywords": [
+          "garlic",
+          "g",
+          "rich",
+          "organic",
+          "network"
+        ]
+      },
+      "20": {
+        "x": 0.8552,
+        "y": 0.1576,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "san francisco"
+        ]
+      },
+      "21": {
+        "x": 0.666,
+        "y": 0.3477,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "platter",
+          "silver platter",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.3062,
+        "y": 0.02,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "philippines",
+          "born american"
+        ]
+      },
+      "23": {
+        "x": 0.5685,
+        "y": 0.8979,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "large",
+          "person",
+          "cap"
+        ]
+      }
+    },
+    "canvas_min_w": 5338,
+    "canvas_min_h": 3572,
+    "aspect_ratio": 1.4944
+  },
+  {
+    "n": 25,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7872,
+        "y": 0.3898,
+        "keywords": [
+          "american",
+          "born",
+          "california",
+          "san",
+          "history"
+        ]
+      },
+      "1": {
+        "x": 0.602,
+        "y": 0.98,
+        "keywords": [
+          "aged paper",
+          "aged",
+          "connectors",
+          "paper",
+          "wire"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.5551,
+        "keywords": [
+          "abstract elements",
+          "elements",
+          "architectural",
+          "abstract",
+          "conveys"
+        ]
+      },
+      "3": {
+        "x": 0.9422,
+        "y": 0.1243,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "lower",
+          "paintings",
+          "street"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.6919,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "gallery"
+        ]
+      },
+      "5": {
+        "x": 0.7814,
+        "y": 0.809,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "tall",
+          "base",
+          "metal"
+        ]
+      },
+      "6": {
+        "x": 0.8929,
+        "y": 0.7275,
+        "keywords": [
+          "everyday",
+          "explores",
+          "attractor",
+          "strange attractor",
+          "strange"
+        ]
+      },
+      "7": {
+        "x": 0.8465,
+        "y": 0.98,
+        "keywords": [
+          "background",
+          "lines",
+          "abstract",
+          "shapes",
+          "image"
+        ]
+      },
+      "8": {
+        "x": 0.98,
+        "y": 0.1876,
+        "keywords": [
+          "stone",
+          "gardens",
+          "sculptor",
+          "sculpture",
+          "sculptures"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.3624,
+        "keywords": [
+          "table",
+          "paper",
+          "judith",
+          "japanese",
+          "sculpture"
+        ]
+      },
+      "10": {
+        "x": 0.6605,
+        "y": 0.02,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "internment",
+          "war"
+        ]
+      },
+      "11": {
+        "x": 0.6601,
+        "y": 0.8403,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
+      },
+      "12": {
+        "x": 0.812,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "japanese",
+          "v",
+          "college",
+          "career"
+        ]
+      },
+      "13": {
+        "x": 0.6999,
+        "y": 0.1834,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.7506,
+        "y": 0.5826,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.2367,
+        "y": 0.1295,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.3975,
+        "y": 0.2582,
+        "keywords": [
+          "active",
+          "united",
+          "united states",
+          "states",
+          "died"
+        ]
+      },
+      "17": {
+        "x": 0.625,
+        "y": 0.5657,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "series",
+          "identity"
+        ]
+      },
+      "18": {
+        "x": 0.7236,
+        "y": 0.98,
+        "keywords": [
+          "left",
+          "flower",
+          "cluster",
+          "image",
+          "shapes"
+        ]
+      },
+      "19": {
+        "x": 0.5578,
+        "y": 0.7332,
+        "keywords": [
+          "garlic",
+          "rich",
+          "organic",
+          "network",
+          "project"
+        ]
+      },
+      "20": {
+        "x": 0.8226,
+        "y": 0.1964,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "college",
+          "mountain college",
+          "francisco"
+        ]
+      },
+      "21": {
+        "x": 0.6589,
+        "y": 0.3675,
+        "keywords": [
+          "filmmaker",
+          "silver platter",
+          "platter",
+          "film",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.3065,
+        "y": 0.02,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "philippines",
+          "born american"
+        ]
+      },
+      "23": {
+        "x": 0.503,
+        "y": 0.9061,
+        "keywords": [
+          "barbed wire",
+          "barbed",
+          "large",
+          "person",
+          "cap"
+        ]
+      },
+      "24": {
+        "x": 0.875,
+        "y": 0.5364,
+        "keywords": [
+          "furniture",
+          "sculptures",
+          "humpty",
+          "project",
+          "designs"
+        ]
+      }
+    },
+    "canvas_min_w": 5694,
+    "canvas_min_h": 3723,
+    "aspect_ratio": 1.5294
+  },
+  {
+    "n": 26,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7615,
+        "y": 0.282,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "san",
+          "university"
+        ]
+      },
+      "1": {
+        "x": 0.6026,
+        "y": 0.98,
+        "keywords": [
+          "aged paper",
+          "aged",
+          "connectors",
+          "wire",
+          "paper"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.5011,
+        "keywords": [
+          "architectural",
+          "abstract elements",
+          "abstract",
+          "elements",
+          "conveys"
+        ]
+      },
+      "3": {
+        "x": 0.887,
+        "y": 0.2294,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "lower",
+          "paintings",
+          "street"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.6848,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "forced"
+        ]
+      },
+      "5": {
+        "x": 0.8138,
+        "y": 0.8196,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "base",
+          "tall",
+          "metal"
+        ]
+      },
+      "6": {
+        "x": 0.8885,
+        "y": 0.608,
+        "keywords": [
+          "everyday",
+          "explores",
+          "strange attractor",
+          "strange",
+          "attractor"
+        ]
+      },
+      "7": {
+        "x": 0.8455,
+        "y": 0.98,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "lines",
+          "image"
+        ]
+      },
+      "8": {
+        "x": 0.98,
+        "y": 0.1102,
+        "keywords": [
+          "stone",
+          "gardens",
+          "sculptor",
+          "forms",
+          "sculpture"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.3144,
+        "keywords": [
+          "table",
+          "judith",
+          "chess",
+          "page",
+          "sculpture"
+        ]
+      },
+      "10": {
+        "x": 0.6207,
+        "y": 0.02,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "order",
+          "internment"
+        ]
+      },
+      "11": {
+        "x": 0.606,
+        "y": 0.8543,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
+      },
+      "12": {
+        "x": 0.7445,
+        "y": 0.02,
+        "keywords": [
+          "virginia",
+          "university",
+          "v",
+          "japanese",
+          "college"
+        ]
+      },
+      "13": {
+        "x": 0.7132,
+        "y": 0.1011,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.756,
+        "y": 0.5752,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.2194,
+        "y": 0.1415,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.3661,
+        "y": 0.2287,
+        "keywords": [
+          "active",
+          "united",
+          "united states",
+          "states",
+          "died"
+        ]
+      },
+      "17": {
+        "x": 0.6446,
+        "y": 0.4933,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "series",
+          "identity"
+        ]
+      },
+      "18": {
+        "x": 0.724,
+        "y": 0.98,
+        "keywords": [
+          "image",
+          "shapes",
+          "flower",
+          "cluster",
+          "image shows"
+        ]
+      },
+      "19": {
+        "x": 0.5577,
+        "y": 0.6798,
+        "keywords": [
+          "garlic",
+          "rich",
+          "organic",
+          "network",
+          "swirling lines"
+        ]
+      },
+      "20": {
+        "x": 0.8299,
+        "y": 0.0549,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "mountain college",
+          "san francisco",
+          "francisco"
+        ]
+      },
+      "21": {
+        "x": 0.636,
+        "y": 0.2988,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "platter",
+          "silver platter",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.2731,
+        "y": 0.02,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "philippines",
+          "born american"
+        ]
+      },
+      "23": {
+        "x": 0.4863,
+        "y": 0.8391,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "large",
+          "person",
+          "cap"
+        ]
+      },
+      "24": {
+        "x": 0.8378,
+        "y": 0.4373,
+        "keywords": [
+          "furniture",
+          "sculptures",
+          "humpty",
+          "designs",
+          "stone"
+        ]
+      },
+      "25": {
+        "x": 0.7036,
+        "y": 0.7447,
+        "keywords": [
+          "ink",
+          "paper",
+          "potato",
+          "sheet",
+          "japanese paper"
+        ]
+      }
+    },
+    "canvas_min_w": 5618,
+    "canvas_min_h": 3896,
+    "aspect_ratio": 1.442
+  },
+  {
+    "n": 27,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7437,
+        "y": 0.2703,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "performance",
+          "san"
+        ]
+      },
+      "1": {
+        "x": 0.6103,
+        "y": 0.98,
+        "keywords": [
+          "aged paper",
+          "aged",
+          "connectors",
+          "wire",
+          "paper"
+        ]
+      },
+      "2": {
+        "x": 0.9567,
+        "y": 0.4578,
+        "keywords": [
+          "abstract elements",
+          "architectural",
+          "abstract",
+          "elements",
+          "conveys"
+        ]
+      },
+      "3": {
+        "x": 0.8595,
+        "y": 0.1891,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "paintings",
+          "street",
+          "lower"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.6878,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "forming"
+        ]
+      },
+      "5": {
+        "x": 0.8562,
+        "y": 0.7856,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "metal",
+          "tall",
+          "bronze"
+        ]
+      },
+      "6": {
+        "x": 0.8596,
+        "y": 0.5627,
+        "keywords": [
+          "everyday",
+          "explores",
+          "attractor",
+          "strange attractor",
+          "strange"
+        ]
+      },
+      "7": {
+        "x": 0.8288,
+        "y": 0.9644,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "image",
+          "lines"
+        ]
+      },
+      "8": {
+        "x": 0.9519,
+        "y": 0.0589,
+        "keywords": [
+          "stone",
+          "gardens",
+          "american",
+          "fountain",
+          "sculpture"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.2869,
+        "keywords": [
+          "table",
+          "judith",
+          "interlocking",
+          "chess",
+          "page"
+        ]
+      },
+      "10": {
+        "x": 0.607,
+        "y": 0.02,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "war",
+          "internment"
+        ]
+      },
+      "11": {
+        "x": 0.6041,
+        "y": 0.802,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
+      },
+      "12": {
+        "x": 0.7213,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "v",
+          "japanese",
+          "college",
+          "career"
+        ]
+      },
+      "13": {
+        "x": 0.6952,
+        "y": 0.0947,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.749,
+        "y": 0.4898,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.2089,
+        "y": 0.1597,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.3518,
+        "y": 0.2258,
+        "keywords": [
+          "active",
+          "united",
+          "united states",
+          "states",
+          "died"
+        ]
+      },
+      "17": {
+        "x": 0.6302,
+        "y": 0.4604,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "identity",
+          "series"
+        ]
+      },
+      "18": {
+        "x": 0.7222,
+        "y": 0.98,
+        "keywords": [
+          "image",
+          "shapes",
+          "flower",
+          "cluster",
+          "image shows"
+        ]
+      },
+      "19": {
+        "x": 0.5509,
+        "y": 0.6381,
+        "keywords": [
+          "garlic",
+          "g",
+          "rich",
+          "air",
+          "organic"
+        ]
+      },
+      "20": {
+        "x": 0.8218,
+        "y": 0.02,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "mountain college",
+          "college",
+          "san francisco"
+        ]
+      },
+      "21": {
+        "x": 0.6205,
+        "y": 0.2712,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "platter",
+          "silver platter",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.2549,
+        "y": 0.02,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "philippines",
+          "born american"
+        ]
+      },
+      "23": {
+        "x": 0.4867,
+        "y": 0.81,
+        "keywords": [
+          "barbed wire",
+          "barbed",
+          "person",
+          "man",
+          "cap"
+        ]
+      },
+      "24": {
+        "x": 0.8435,
+        "y": 0.3806,
+        "keywords": [
+          "furniture",
+          "sculptures",
+          "designs",
+          "produced",
+          "worked"
+        ]
+      },
+      "25": {
+        "x": 0.7187,
+        "y": 0.8421,
+        "keywords": [
+          "ink",
+          "paper",
+          "potato",
+          "surface",
+          "sheet"
+        ]
+      },
+      "26": {
+        "x": 0.7637,
+        "y": 0.6722,
+        "keywords": [
+          "paper",
+          "black",
+          "japanese paper",
+          "ink",
+          "inches"
+        ]
+      }
+    },
+    "canvas_min_w": 5815,
+    "canvas_min_h": 4043,
+    "aspect_ratio": 1.4383
+  },
+  {
+    "n": 28,
+    "cluster_positions": {
+      "0": {
+        "x": 0.723,
+        "y": 0.276,
+        "keywords": [
+          "american",
+          "born",
+          "history",
+          "performance",
+          "installation"
+        ]
+      },
+      "1": {
+        "x": 0.6298,
+        "y": 0.98,
+        "keywords": [
+          "aged paper",
+          "aged",
+          "connectors",
+          "wire",
+          "paper"
+        ]
+      },
+      "2": {
+        "x": 0.9467,
+        "y": 0.4236,
+        "keywords": [
+          "abstract elements",
+          "architectural",
+          "abstract",
+          "elements",
+          "work"
+        ]
+      },
+      "3": {
+        "x": 0.8328,
+        "y": 0.1493,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "city"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.8588,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "flowers"
+        ]
+      },
+      "5": {
+        "x": 0.8557,
+        "y": 0.7553,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "tall",
+          "metal",
+          "bronze"
+        ]
+      },
+      "6": {
+        "x": 0.864,
+        "y": 0.5484,
+        "keywords": [
+          "everyday",
+          "explores",
+          "strange attractor",
+          "strange",
+          "attractor"
+        ]
+      },
+      "7": {
+        "x": 0.84,
+        "y": 0.9335,
+        "keywords": [
+          "background",
+          "abstract",
+          "image",
+          "shapes",
+          "lines"
+        ]
+      },
+      "8": {
+        "x": 0.9392,
+        "y": 0.0425,
+        "keywords": [
+          "stone",
+          "gardens",
+          "fountain",
+          "forms",
+          "sculpture"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.248,
+        "keywords": [
+          "table",
+          "judith",
+          "interlocking",
+          "chess",
+          "page"
+        ]
+      },
+      "10": {
+        "x": 0.6188,
+        "y": 0.02,
+        "keywords": [
+          "american",
+          "japanese",
+          "culture",
+          "japanese american",
+          "war"
+        ]
+      },
+      "11": {
+        "x": 0.6212,
+        "y": 0.8242,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "image"
+        ]
+      },
+      "12": {
+        "x": 0.7679,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "v",
+          "japanese",
+          "college",
+          "paintings"
+        ]
+      },
+      "13": {
+        "x": 0.6316,
+        "y": 0.151,
+        "keywords": [
+          "pollock",
+          "dubuffet",
+          "creeks",
+          "paris",
+          "early"
+        ]
+      },
+      "14": {
+        "x": 0.7509,
+        "y": 0.5126,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.133,
+        "y": 0.2386,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.2983,
+        "y": 0.1636,
+        "keywords": [
+          "born",
+          "died",
+          "philippines",
+          "manila philippines",
+          "korean"
+        ]
+      },
+      "17": {
+        "x": 0.6332,
+        "y": 0.5077,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "identity",
+          "series"
+        ]
+      },
+      "18": {
+        "x": 0.7458,
+        "y": 0.98,
+        "keywords": [
+          "image",
+          "shapes",
+          "flower",
+          "cluster",
+          "image shows"
+        ]
+      },
+      "19": {
+        "x": 0.538,
+        "y": 0.7002,
+        "keywords": [
+          "garlic",
+          "rich",
+          "organic",
+          "swirling lines",
+          "network"
+        ]
+      },
+      "20": {
+        "x": 0.7298,
+        "y": 0.0574,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "mountain college",
+          "college",
+          "san francisco"
+        ]
+      },
+      "21": {
+        "x": 0.6055,
+        "y": 0.3275,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "platter",
+          "silver platter",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.1413,
+        "y": 0.0593,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "born american",
+          "philippines american"
+        ]
+      },
+      "23": {
+        "x": 0.4948,
+        "y": 0.8731,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "person",
+          "man",
+          "cap"
+        ]
+      },
+      "24": {
+        "x": 0.8255,
+        "y": 0.3758,
+        "keywords": [
+          "furniture",
+          "sculptures",
+          "designs",
+          "produced",
+          "architecture"
+        ]
+      },
+      "25": {
+        "x": 0.7324,
+        "y": 0.8703,
+        "keywords": [
+          "ink",
+          "paper",
+          "potato",
+          "surface",
+          "sheet"
+        ]
+      },
+      "26": {
+        "x": 0.748,
+        "y": 0.6922,
+        "keywords": [
+          "paper",
+          "black",
+          "japanese paper",
+          "ink",
+          "tall"
+        ]
+      },
+      "27": {
+        "x": 0.2092,
+        "y": 0.4037,
+        "keywords": [
+          "active",
+          "states active",
+          "united",
+          "united states",
+          "states"
+        ]
+      }
+    },
+    "canvas_min_w": 6032,
+    "canvas_min_h": 4219,
+    "aspect_ratio": 1.4297
+  },
+  {
+    "n": 29,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7215,
+        "y": 0.2716,
+        "keywords": [
+          "american",
+          "born",
+          "california",
+          "san",
+          "performance"
+        ]
+      },
+      "1": {
+        "x": 0.6366,
+        "y": 0.98,
+        "keywords": [
+          "aged paper",
+          "aged",
+          "connectors",
+          "wire",
+          "paper"
+        ]
+      },
+      "2": {
+        "x": 0.9456,
+        "y": 0.4347,
+        "keywords": [
+          "abstract elements",
+          "architectural",
+          "abstract",
+          "elements",
+          "work"
+        ]
+      },
+      "3": {
+        "x": 0.8679,
+        "y": 0.1825,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "street",
+          "lower",
+          "city"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.8015,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "fluid"
+        ]
+      },
+      "5": {
+        "x": 0.8709,
+        "y": 0.7729,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "tall",
+          "bronze",
+          "base"
+        ]
+      },
+      "6": {
+        "x": 0.8493,
+        "y": 0.5263,
+        "keywords": [
+          "everyday",
+          "explores",
+          "strange attractor",
+          "strange",
+          "attractor"
+        ]
+      },
+      "7": {
+        "x": 0.8402,
+        "y": 0.9422,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "image",
+          "lines"
+        ]
+      },
+      "8": {
+        "x": 0.939,
+        "y": 0.038,
+        "keywords": [
+          "stone",
+          "gardens",
+          "fountain",
+          "sculpture",
+          "forms"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.2456,
+        "keywords": [
+          "table",
+          "judith",
+          "interlocking",
+          "chess",
+          "page"
+        ]
+      },
+      "10": {
+        "x": 0.6984,
+        "y": 0.02,
+        "keywords": [
+          "american",
+          "japanese",
+          "japanese american",
+          "arts",
+          "war"
+        ]
+      },
+      "11": {
+        "x": 0.6615,
+        "y": 0.6963,
+        "keywords": [
+          "passport",
+          "passport style",
+          "person",
+          "portrait",
+          "portraits"
+        ]
+      },
+      "12": {
+        "x": 0.809,
+        "y": 0.0262,
+        "keywords": [
+          "university",
+          "v",
+          "represents",
+          "japanese",
+          "college"
+        ]
+      },
+      "13": {
+        "x": 0.5912,
+        "y": 0.1055,
+        "keywords": [
+          "pollock",
+          "dubuffet",
+          "creeks",
+          "paris",
+          "early"
+        ]
+      },
+      "14": {
+        "x": 0.7367,
+        "y": 0.5169,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.145,
+        "y": 0.2259,
+        "keywords": [
+          "american american",
+          "american",
+          "asian",
+          "asian american",
+          "heritage"
+        ]
+      },
+      "16": {
+        "x": 0.3164,
+        "y": 0.1578,
+        "keywords": [
+          "born",
+          "died",
+          "philippines",
+          "manila philippines",
+          "manila"
+        ]
+      },
+      "17": {
+        "x": 0.6274,
+        "y": 0.4591,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "identity",
+          "engagement"
+        ]
+      },
+      "18": {
+        "x": 0.7472,
+        "y": 0.98,
+        "keywords": [
+          "shapes",
+          "image",
+          "flower",
+          "cluster",
+          "image shows"
+        ]
+      },
+      "19": {
+        "x": 0.5491,
+        "y": 0.6827,
+        "keywords": [
+          "garlic",
+          "rich",
+          "organic",
+          "network",
+          "swirling lines"
+        ]
+      },
+      "20": {
+        "x": 0.6968,
+        "y": 0.0438,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "mountain college",
+          "college",
+          "san"
+        ]
+      },
+      "21": {
+        "x": 0.6027,
+        "y": 0.2819,
+        "keywords": [
+          "filmmaker",
+          "film",
+          "platter",
+          "silver platter",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.1559,
+        "y": 0.0509,
+        "keywords": [
+          "american born",
+          "born",
+          "american",
+          "born american",
+          "philippines american"
+        ]
+      },
+      "23": {
+        "x": 0.4753,
+        "y": 0.8353,
+        "keywords": [
+          "barbed wire",
+          "barbed",
+          "man",
+          "wire",
+          "large"
+        ]
+      },
+      "24": {
+        "x": 0.8275,
+        "y": 0.3526,
+        "keywords": [
+          "furniture",
+          "sculptures",
+          "designs",
+          "produced",
+          "pieces"
+        ]
+      },
+      "25": {
+        "x": 0.721,
+        "y": 0.8493,
+        "keywords": [
+          "ink",
+          "paper",
+          "potato",
+          "surface",
+          "sheet"
+        ]
+      },
+      "26": {
+        "x": 0.774,
+        "y": 0.6829,
+        "keywords": [
+          "paper",
+          "black",
+          "japanese paper",
+          "ink",
+          "tall"
+        ]
+      },
+      "27": {
+        "x": 0.2136,
+        "y": 0.3838,
+        "keywords": [
+          "active",
+          "states active",
+          "united states",
+          "united",
+          "states"
+        ]
+      },
+      "28": {
+        "x": 0.5878,
+        "y": 0.8485,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "features"
+        ]
+      }
+    },
+    "canvas_min_w": 6248,
+    "canvas_min_h": 4345,
+    "aspect_ratio": 1.438
+  },
+  {
+    "n": 30,
+    "cluster_positions": {
+      "0": {
+        "x": 0.7101,
+        "y": 0.2224,
+        "keywords": [
+          "american",
+          "born",
+          "san",
+          "california",
+          "university"
+        ]
+      },
+      "1": {
+        "x": 0.7295,
+        "y": 0.9438,
+        "keywords": [
+          "aged paper",
+          "aged",
+          "connectors",
+          "paper",
+          "wire"
+        ]
+      },
+      "2": {
+        "x": 0.9566,
+        "y": 0.3535,
+        "keywords": [
+          "abstract elements",
+          "elements",
+          "architectural",
+          "abstract",
+          "form"
+        ]
+      },
+      "3": {
+        "x": 0.8111,
+        "y": 0.1238,
+        "keywords": [
+          "graffiti",
+          "lower east",
+          "paintings",
+          "street",
+          "lower"
+        ]
+      },
+      "4": {
+        "x": 0.02,
+        "y": 0.98,
+        "keywords": [
+          "female",
+          "female female",
+          "male male",
+          "male",
+          "floor"
+        ]
+      },
+      "5": {
+        "x": 0.9134,
+        "y": 0.6848,
+        "keywords": [
+          "sculpture",
+          "stone",
+          "tall",
+          "bronze",
+          "base"
+        ]
+      },
+      "6": {
+        "x": 0.8799,
+        "y": 0.4779,
+        "keywords": [
+          "everyday",
+          "explores",
+          "strange attractor",
+          "attractor",
+          "strange"
+        ]
+      },
+      "7": {
+        "x": 0.9365,
+        "y": 0.8534,
+        "keywords": [
+          "background",
+          "abstract",
+          "shapes",
+          "image",
+          "lines"
+        ]
+      },
+      "8": {
+        "x": 0.8934,
+        "y": 0.02,
+        "keywords": [
+          "stone",
+          "gardens",
+          "fountain",
+          "sculpture",
+          "american"
+        ]
+      },
+      "9": {
+        "x": 0.98,
+        "y": 0.1624,
+        "keywords": [
+          "table",
+          "judith",
+          "interlocking",
+          "chess",
+          "page"
+        ]
+      },
+      "10": {
+        "x": 0.5114,
+        "y": 0.0516,
+        "keywords": [
+          "japanese",
+          "american",
+          "family",
+          "war",
+          "internment"
+        ]
+      },
+      "11": {
+        "x": 0.7068,
+        "y": 0.6666,
+        "keywords": [
+          "passport",
+          "passport style",
+          "person",
+          "portrait",
+          "portraits"
+        ]
+      },
+      "12": {
+        "x": 0.6229,
+        "y": 0.02,
+        "keywords": [
+          "university",
+          "v",
+          "japanese",
+          "college",
+          "paintings"
+        ]
+      },
+      "13": {
+        "x": 0.5921,
+        "y": 0.1697,
+        "keywords": [
+          "dubuffet",
+          "creeks",
+          "pollock",
+          "early",
+          "filipino"
+        ]
+      },
+      "14": {
+        "x": 0.7702,
+        "y": 0.4549,
+        "keywords": [
+          "actor",
+          "kabuki",
+          "kabuki actor",
+          "ukiyo e",
+          "ukiyo"
+        ]
+      },
+      "15": {
+        "x": 0.02,
+        "y": 0.3734,
+        "keywords": [
+          "american american",
+          "american",
+          "asian american",
+          "asian",
+          "female"
+        ]
+      },
+      "16": {
+        "x": 0.3,
+        "y": 0.2243,
+        "keywords": [
+          "died",
+          "born",
+          "known",
+          "china",
+          "san francisco"
+        ]
+      },
+      "17": {
+        "x": 0.6618,
+        "y": 0.5013,
+        "keywords": [
+          "photographs",
+          "source",
+          "cultural",
+          "identity",
+          "engagement"
+        ]
+      },
+      "18": {
+        "x": 0.8402,
+        "y": 0.9385,
+        "keywords": [
+          "shapes",
+          "image",
+          "flower",
+          "cluster",
+          "image shows"
+        ]
+      },
+      "19": {
+        "x": 0.5976,
+        "y": 0.6952,
+        "keywords": [
+          "garlic",
+          "rich",
+          "organic",
+          "swirling lines",
+          "network"
+        ]
+      },
+      "20": {
+        "x": 0.7333,
+        "y": 0.02,
+        "keywords": [
+          "black mountain",
+          "mountain",
+          "mountain college",
+          "college",
+          "san"
+        ]
+      },
+      "21": {
+        "x": 0.6177,
+        "y": 0.3388,
+        "keywords": [
+          "filmmaker",
+          "platter",
+          "silver platter",
+          "film",
+          "silver"
+        ]
+      },
+      "22": {
+        "x": 0.0435,
+        "y": 0.225,
+        "keywords": [
+          "born",
+          "american born",
+          "american",
+          "born american",
+          "born born"
+        ]
+      },
+      "23": {
+        "x": 0.5226,
+        "y": 0.8526,
+        "keywords": [
+          "barbed",
+          "barbed wire",
+          "man",
+          "wire",
+          "large"
+        ]
+      },
+      "24": {
+        "x": 0.8295,
+        "y": 0.3094,
+        "keywords": [
+          "furniture",
+          "pieces",
+          "sculptures",
+          "designs",
+          "worked"
+        ]
+      },
+      "25": {
+        "x": 0.7898,
+        "y": 0.784,
+        "keywords": [
+          "ink",
+          "paper",
+          "potato",
+          "surface",
+          "sheet"
+        ]
+      },
+      "26": {
+        "x": 0.8123,
+        "y": 0.6144,
+        "keywords": [
+          "paper",
+          "black",
+          "japanese paper",
+          "ink",
+          "tall"
+        ]
+      },
+      "27": {
+        "x": 0.1638,
+        "y": 0.5316,
+        "keywords": [
+          "active",
+          "states active",
+          "united",
+          "united states",
+          "states"
+        ]
+      },
+      "28": {
+        "x": 0.6332,
+        "y": 0.8588,
+        "keywords": [
+          "person",
+          "hair",
+          "facial",
+          "facial features",
+          "features"
+        ]
+      },
+      "29": {
+        "x": 0.152,
+        "y": 0.2589,
+        "keywords": [
+          "philippines",
+          "born",
+          "born philippines",
+          "manila philippines",
+          "manila"
+        ]
+      }
+    },
+    "canvas_min_w": 6464,
+    "canvas_min_h": 4336,
+    "aspect_ratio": 1.4908
   }
 ]

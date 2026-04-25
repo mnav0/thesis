@@ -281,7 +281,12 @@ function getSharedArtistStyle(artist) {
   };
 }
 
-function centerLabelsForJsonCluster(clusterId, rowsInCluster) {
+function centerLabelsForJsonCluster(clusterId, rowsInCluster, clusterPosition) {
+  const kwFromPosition = clusterPosition?.keywords;
+  if (Array.isArray(kwFromPosition) && kwFromPosition.length) {
+    return kwFromPosition.slice(0, 1).map(String);
+  }
+  // Backward-compatible fallback for older row-level payloads.
   const row =
     rowsInCluster.find((r) => r.primary_cluster === clusterId) ??
     rowsInCluster[0];
@@ -414,7 +419,7 @@ const layoutGroups = computed(() => {
     const rawY = p?.y ?? 0.5;
     rawCenters.push({ id: c, x: rawX, y: rawY });
     const rowsHere = data.filter((r) => r.primary_cluster === c);
-    const centerLabels = centerLabelsForJsonCluster(c, rowsHere);
+    const centerLabels = centerLabelsForJsonCluster(c, rowsHere, p);
 
     out[c] = {
       clusterId: c,

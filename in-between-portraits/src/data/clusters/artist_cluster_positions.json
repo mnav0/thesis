@@ -1,1082 +1,4543 @@
 [
   {
-    "n": 2,
-    "cluster_positions": {
-      "0": {
-        "x": 0.02,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.98,
-        "y": 0.02
-      }
-    },
-    "canvas_min_w": 1280,
-    "canvas_min_h": 880,
-    "aspect_ratio": 1.4545
-  },
-  {
-    "n": 3,
-    "cluster_positions": {
-      "0": {
-        "x": 0.182,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.98,
-        "y": 0.3614
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.02
-      }
-    },
-    "canvas_min_w": 1280,
-    "canvas_min_h": 907,
-    "aspect_ratio": 1.4112
-  },
-  {
-    "n": 4,
-    "cluster_positions": {
-      "0": {
-        "x": 0.1861,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.9142,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.98,
-        "y": 0.98
-      }
-    },
-    "canvas_min_w": 1284,
-    "canvas_min_h": 936,
-    "aspect_ratio": 1.3718
-  },
-  {
-    "n": 5,
-    "cluster_positions": {
-      "0": {
-        "x": 0.3077,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.8219,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.98,
-        "y": 0.8921
-      },
-      "4": {
-        "x": 0.02,
-        "y": 0.6085
-      }
-    },
-    "canvas_min_w": 1307,
-    "canvas_min_h": 1032,
-    "aspect_ratio": 1.2665
-  },
-  {
-    "n": 6,
-    "cluster_positions": {
-      "0": {
-        "x": 0.4841,
-        "y": 0.4905
-      },
-      "1": {
-        "x": 0.8195,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.98,
-        "y": 0.7493
-      },
-      "4": {
-        "x": 0.02,
-        "y": 0.5081
-      },
-      "5": {
-        "x": 0.1846,
-        "y": 0.98
-      }
-    },
-    "canvas_min_w": 1339,
-    "canvas_min_h": 1025,
-    "aspect_ratio": 1.3063
-  },
-  {
-    "n": 7,
-    "cluster_positions": {
-      "0": {
-        "x": 0.6037,
-        "y": 0.9062
-      },
-      "1": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.2306
-      },
-      "3": {
-        "x": 0.1803,
-        "y": 0.98
-      },
-      "4": {
-        "x": 0.8367,
-        "y": 0.02
-      },
-      "5": {
-        "x": 0.98,
-        "y": 0.7733
-      },
-      "6": {
-        "x": 0.2898,
-        "y": 0.3745
-      }
-    },
-    "canvas_min_w": 1810,
-    "canvas_min_h": 1147,
-    "aspect_ratio": 1.578
-  },
-  {
-    "n": 8,
-    "cluster_positions": {
-      "0": {
-        "x": 0.98,
-        "y": 0.9624
-      },
-      "1": {
-        "x": 0.8081,
-        "y": 0.7591
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.02,
-        "y": 0.0571
-      },
-      "4": {
-        "x": 0.6104,
-        "y": 0.2024
-      },
-      "5": {
-        "x": 0.98,
-        "y": 0.3431
-      },
-      "6": {
-        "x": 0.552,
-        "y": 0.98
-      },
-      "7": {
-        "x": 0.8734,
-        "y": 0.02
-      }
-    },
-    "canvas_min_w": 1980,
-    "canvas_min_h": 1327,
-    "aspect_ratio": 1.4921
-  },
-  {
-    "n": 9,
-    "cluster_positions": {
-      "0": {
-        "x": 0.98,
-        "y": 0.8121
-      },
-      "1": {
-        "x": 0.8291,
-        "y": 0.5756
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.02
-      },
-      "3": {
-        "x": 0.02,
-        "y": 0.02
-      },
-      "4": {
-        "x": 0.6177,
-        "y": 0.217
-      },
-      "5": {
-        "x": 0.98,
-        "y": 0.2532
-      },
-      "6": {
-        "x": 0.7286,
-        "y": 0.98
-      },
-      "7": {
-        "x": 0.87,
-        "y": 0.02
-      },
-      "8": {
-        "x": 0.5853,
-        "y": 0.9252
-      }
-    },
-    "canvas_min_w": 2100,
-    "canvas_min_h": 1667,
-    "aspect_ratio": 1.2597
-  },
-  {
-    "n": 10,
-    "cluster_positions": {
-      "0": {
-        "x": 0.6637,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.5591,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.6504
-      },
-      "3": {
-        "x": 0.02,
-        "y": 0.98
-      },
-      "4": {
-        "x": 0.98,
-        "y": 0.4313
-      },
-      "5": {
-        "x": 0.98,
-        "y": 0.9631
-      },
-      "6": {
-        "x": 0.4244,
-        "y": 0.6765
-      },
-      "7": {
-        "x": 0.8851,
-        "y": 0.98
-      },
-      "8": {
-        "x": 0.7862,
-        "y": 0.1224
-      },
-      "9": {
-        "x": 0.7053,
-        "y": 0.5911
-      }
-    },
-    "canvas_min_w": 2714,
-    "canvas_min_h": 1730,
-    "aspect_ratio": 1.5688
-  },
-  {
-    "n": 11,
-    "cluster_positions": {
-      "0": {
-        "x": 0.7731,
-        "y": 0.98
-      },
-      "1": {
-        "x": 0.4922,
-        "y": 0.02
-      },
-      "2": {
-        "x": 0.98,
-        "y": 0.7035
-      },
-      "3": {
-        "x": 0.02,
-        "y": 0.98
-      },
-      "4": {
-        "x": 0.865,
-        "y": 0.386
-      },
-      "5": {
-        "x": 0.98,
-        "y": 0.4054
-      },
-      "6": {
-        "x": 0.3656,
-        "y": 0.4409
-      },
-      "7": {
-        "x": 0.8417,
-        "y": 0.7892
-      },
-      "8": {
-        "x": 0.6527,
-        "y": 0.2089
-      },
-      "9": {
-        "x": 0.5989,
-        "y": 0.6396
-      },
-      "10": {
-        "x": 0.98,
-        "y": 0.8461
-      }
-    },
-    "canvas_min_w": 2901,
-    "canvas_min_h": 1814,
-    "aspect_ratio": 1.5992
-  },
-  {
     "n": 12,
     "cluster_positions": {
       "0": {
-        "x": 0.8097,
-        "y": 0.98
+        "x": 0.4409,
+        "y": 0.1552,
+        "keywords": [
+          "oriental",
+          "masterprints",
+          "masterprint series",
+          "masterprint",
+          "series oriental"
+        ]
       },
       "1": {
-        "x": 0.4795,
-        "y": 0.02
+        "x": 0.7654,
+        "y": 0.0424,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.4708
+        "x": 0.8516,
+        "y": 0.98,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "t",
+          "mixed"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.98
+        "x": 0.9305,
+        "y": 0.2985,
+        "keywords": [
+          "self",
+          "portraiture",
+          "work",
+          "self portraiture",
+          "painting"
+        ]
       },
       "4": {
-        "x": 0.7386,
-        "y": 0.02
+        "x": 0.98,
+        "y": 0.3435,
+        "keywords": [
+          "asian",
+          "asian american",
+          "american",
+          "artists",
+          "mixed"
+        ]
       },
       "5": {
-        "x": 0.8592,
-        "y": 0.2867
+        "x": 0.5715,
+        "y": 0.7172,
+        "keywords": [
+          "cults",
+          "cargo cults",
+          "lamp",
+          "cargo",
+          "nude"
+        ]
       },
       "6": {
-        "x": 0.4198,
-        "y": 0.3863
+        "x": 0.98,
+        "y": 0.98,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "just",
+          "mixed"
+        ]
       },
       "7": {
-        "x": 0.8266,
-        "y": 0.8114
+        "x": 0.6299,
+        "y": 0.3273,
+        "keywords": [
+          "comparative",
+          "comparative morphologies",
+          "morphologies",
+          "morphologies comparative",
+          "plane"
+        ]
       },
       "8": {
-        "x": 0.6405,
-        "y": 0.2499
+        "x": 0.8103,
+        "y": 0.6318,
+        "keywords": [
+          "history",
+          "people",
+          "like",
+          "culture",
+          "work"
+        ]
       },
       "9": {
-        "x": 0.6039,
-        "y": 0.6432
+        "x": 0.58,
+        "y": 0.02,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "portfolio flowers",
+          "flowers"
+        ]
       },
       "10": {
         "x": 0.98,
-        "y": 0.8812
+        "y": 0.6531,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.575
+        "x": 0.02,
+        "y": 0.98,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "figurative painting",
+          "figurative tradition",
+          "figure"
+        ]
       }
     },
-    "canvas_min_w": 3031,
-    "canvas_min_h": 1983,
-    "aspect_ratio": 1.5285
+    "canvas_min_w": 2896,
+    "canvas_min_h": 1792,
+    "aspect_ratio": 1.6161
   },
   {
     "n": 13,
     "cluster_positions": {
       "0": {
-        "x": 0.7002,
-        "y": 0.8256
+        "x": 0.7104,
+        "y": 0.98,
+        "keywords": [
+          "oriental",
+          "oriental masterprint",
+          "oriental masterprints",
+          "series oriental",
+          "masterprints"
+        ]
       },
       "1": {
-        "x": 0.4261,
-        "y": 0.0755
+        "x": 0.4066,
+        "y": 0.854,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.5749
+        "x": 0.8625,
+        "y": 0.02,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "t",
+          "mixed"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.98
+        "x": 0.887,
+        "y": 0.8335,
+        "keywords": [
+          "self",
+          "portraiture",
+          "painting",
+          "self portraiture",
+          "work"
+        ]
       },
       "4": {
-        "x": 0.7037,
-        "y": 0.02
+        "x": 0.98,
+        "y": 0.7228,
+        "keywords": [
+          "asian",
+          "american",
+          "asian american",
+          "identity",
+          "mixed"
+        ]
       },
       "5": {
-        "x": 0.8934,
-        "y": 0.269
+        "x": 0.5844,
+        "y": 0.3387,
+        "keywords": [
+          "nude",
+          "cults",
+          "cargo",
+          "lamp",
+          "photos"
+        ]
       },
       "6": {
-        "x": 0.62,
-        "y": 0.1935
+        "x": 0.98,
+        "y": 0.0631,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "just",
+          "like"
+        ]
       },
       "7": {
-        "x": 0.892,
-        "y": 0.9626
+        "x": 0.5933,
+        "y": 0.7353,
+        "keywords": [
+          "morphologies",
+          "comparative morphologies",
+          "comparative",
+          "morphologies comparative",
+          "plane"
+        ]
       },
       "8": {
-        "x": 0.4305,
-        "y": 0.8576
+        "x": 0.764,
+        "y": 0.5624,
+        "keywords": [
+          "history",
+          "kong",
+          "hong kong",
+          "hong",
+          "people"
+        ]
       },
       "9": {
-        "x": 0.515,
-        "y": 0.5246
+        "x": 0.5254,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "portfolio flowers",
+          "flowers"
+        ]
       },
       "10": {
         "x": 0.98,
-        "y": 0.8243
+        "y": 0.3899,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.9183,
-        "y": 0.6187
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "fiction",
+          "fictional",
+          "field"
+        ]
       },
       "12": {
-        "x": 0.7311,
-        "y": 0.4827
+        "x": 0.9391,
+        "y": 0.3607,
+        "keywords": [
+          "work",
+          "people",
+          "identity",
+          "like",
+          "bodies"
+        ]
       }
     },
-    "canvas_min_w": 3274,
-    "canvas_min_h": 1887,
-    "aspect_ratio": 1.735
+    "canvas_min_w": 3140,
+    "canvas_min_h": 2067,
+    "aspect_ratio": 1.5191
   },
   {
     "n": 14,
     "cluster_positions": {
       "0": {
-        "x": 0.7336,
-        "y": 0.7452
+        "x": 0.3483,
+        "y": 0.7815,
+        "keywords": [
+          "oriental",
+          "oriental masterprint",
+          "series oriental",
+          "masterprints",
+          "oriental masterprints"
+        ]
       },
       "1": {
-        "x": 0.4058,
-        "y": 0.024
+        "x": 0.702,
+        "y": 0.8532,
+        "keywords": [
+          "photos migrants",
+          "applicant photos",
+          "migrants",
+          "photos",
+          "applicant"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.5591
+        "x": 0.88,
+        "y": 0.0403,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "t",
+          "mixed"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.98
+        "x": 0.8928,
+        "y": 0.8831,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "painting",
+          "work"
+        ]
       },
       "4": {
-        "x": 0.6874,
-        "y": 0.02
+        "x": 0.98,
+        "y": 0.7968,
+        "keywords": [
+          "asian",
+          "american",
+          "asian american",
+          "identity",
+          "mixed"
+        ]
       },
       "5": {
-        "x": 0.8829,
-        "y": 0.2538
+        "x": 0.5225,
+        "y": 0.3838,
+        "keywords": [
+          "cults",
+          "lamp",
+          "cargo cults",
+          "cargo",
+          "table"
+        ]
       },
       "6": {
-        "x": 0.5765,
-        "y": 0.1664
+        "x": 0.98,
+        "y": 0.1513,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "just",
+          "mixed"
+        ]
       },
       "7": {
-        "x": 0.8981,
-        "y": 0.9246
+        "x": 0.532,
+        "y": 0.7214,
+        "keywords": [
+          "comparative",
+          "comparative morphologies",
+          "morphologies",
+          "morphologies comparative",
+          "plane"
+        ]
       },
       "8": {
-        "x": 0.3197,
-        "y": 0.6307
+        "x": 0.7976,
+        "y": 0.5882,
+        "keywords": [
+          "history",
+          "kong",
+          "hong",
+          "hong kong",
+          "american"
+        ]
       },
       "9": {
-        "x": 0.5191,
-        "y": 0.7114
+        "x": 0.3963,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "portfolio flowers",
+          "portfolio"
+        ]
       },
       "10": {
         "x": 0.98,
-        "y": 0.764
+        "y": 0.488,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.9058,
-        "y": 0.573
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "female",
+          "fiction",
+          "fictional"
+        ]
       },
       "12": {
-        "x": 0.6773,
-        "y": 0.4339
+        "x": 0.9352,
+        "y": 0.3555,
+        "keywords": [
+          "work",
+          "identity",
+          "people",
+          "bodies",
+          "like"
+        ]
       },
       "13": {
-        "x": 0.4455,
-        "y": 0.3959
+        "x": 0.579,
+        "y": 0.98,
+        "keywords": [
+          "flower",
+          "flowers",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       }
     },
-    "canvas_min_w": 3500,
-    "canvas_min_h": 2032,
-    "aspect_ratio": 1.7224
+    "canvas_min_w": 3325,
+    "canvas_min_h": 2264,
+    "aspect_ratio": 1.4686
   },
   {
     "n": 15,
     "cluster_positions": {
       "0": {
-        "x": 0.9426,
-        "y": 0.1222
+        "x": 0.6876,
+        "y": 0.98,
+        "keywords": [
+          "umakichi",
+          "cults",
+          "cargo",
+          "cargo cults",
+          "umakichi umakichi"
+        ]
       },
       "1": {
-        "x": 0.4611,
-        "y": 0.98
+        "x": 0.3126,
+        "y": 0.7759,
+        "keywords": [
+          "oriental",
+          "oriental masterprints",
+          "oriental masterprint",
+          "series oriental",
+          "masterprints"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.6446
+        "x": 0.896,
+        "y": 0.0846,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "t",
+          "mixed"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.8911,
+        "y": 0.8715,
+        "keywords": [
+          "self",
+          "portraiture",
+          "painting",
+          "self portraiture",
+          "work"
+        ]
       },
       "4": {
-        "x": 0.7472,
-        "y": 0.2164
+        "x": 0.98,
+        "y": 0.7944,
+        "keywords": [
+          "asian",
+          "american",
+          "asian american",
+          "mixed",
+          "identity"
+        ]
       },
       "5": {
-        "x": 0.7724,
-        "y": 0.6345
+        "x": 0.574,
+        "y": 0.3943,
+        "keywords": [
+          "lamp",
+          "table",
+          "akari",
+          "site",
+          "nude"
+        ]
       },
       "6": {
-        "x": 0.4164,
-        "y": 0.863
+        "x": 0.98,
+        "y": 0.191,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "just",
+          "like"
+        ]
       },
       "7": {
-        "x": 0.98,
-        "y": 0.3327
+        "x": 0.6414,
+        "y": 0.7368,
+        "keywords": [
+          "morphologies",
+          "comparative morphologies",
+          "comparative",
+          "morphologies comparative",
+          "plane"
+        ]
       },
       "8": {
-        "x": 0.3203,
-        "y": 0.3466
+        "x": 0.8026,
+        "y": 0.6112,
+        "keywords": [
+          "history",
+          "hong",
+          "kong",
+          "hong kong",
+          "american"
+        ]
       },
       "9": {
-        "x": 0.5771,
-        "y": 0.3731
+        "x": 0.4055,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "portfolio flowers",
+          "flowers"
+        ]
       },
       "10": {
-        "x": 0.8864,
-        "y": 0.3991
+        "x": 0.98,
+        "y": 0.5092,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.9626,
-        "y": 0.6662
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "feel",
+          "feeling",
+          "feels"
+        ]
       },
       "12": {
-        "x": 0.6005,
-        "y": 0.7341
+        "x": 0.9407,
+        "y": 0.3989,
+        "keywords": [
+          "work",
+          "people",
+          "identity",
+          "like",
+          "bodies"
+        ]
       },
       "13": {
-        "x": 0.4284,
-        "y": 0.575
+        "x": 0.5102,
+        "y": 0.9575,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "14": {
-        "x": 0.6389,
-        "y": 0.98
+        "x": 0.4724,
+        "y": 0.6523,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "tiger lucky",
+          "ii"
+        ]
       }
     },
-    "canvas_min_w": 3609,
-    "canvas_min_h": 2411,
-    "aspect_ratio": 1.4969
+    "canvas_min_w": 3552,
+    "canvas_min_h": 2490,
+    "aspect_ratio": 1.4265
   },
   {
     "n": 16,
     "cluster_positions": {
       "0": {
-        "x": 0.7515,
-        "y": 0.7562
+        "x": 0.6766,
+        "y": 0.98,
+        "keywords": [
+          "umakichi",
+          "cargo cults",
+          "cargo",
+          "cults",
+          "umakichi umakichi"
+        ]
       },
       "1": {
-        "x": 0.4459,
-        "y": 0.98
+        "x": 0.2781,
+        "y": 0.7541,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "oriental masterprint",
+          "oriental masterprints",
+          "masterprints"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.7318
+        "x": 0.8539,
+        "y": 0.2649,
+        "keywords": [
+          "race",
+          "people",
+          "identity",
+          "mixed",
+          "mixed race"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.8456,
+        "y": 0.9501,
+        "keywords": [
+          "self",
+          "portraiture",
+          "painting",
+          "self portraiture",
+          "work"
+        ]
       },
       "4": {
-        "x": 0.6489,
-        "y": 0.4861
+        "x": 0.98,
+        "y": 0.8314,
+        "keywords": [
+          "american",
+          "asian",
+          "race",
+          "artists",
+          "asian american"
+        ]
       },
       "5": {
-        "x": 0.8868,
-        "y": 0.5684
+        "x": 0.5521,
+        "y": 0.461,
+        "keywords": [
+          "lamp",
+          "table",
+          "akari",
+          "site",
+          "nude"
+        ]
       },
       "6": {
-        "x": 0.4355,
-        "y": 0.8713
+        "x": 0.98,
+        "y": 0.2622,
+        "keywords": [
+          "asian",
+          "t",
+          "american",
+          "just",
+          "mixed"
+        ]
       },
       "7": {
-        "x": 0.98,
-        "y": 0.206
+        "x": 0.6058,
+        "y": 0.7477,
+        "keywords": [
+          "comparative morphologies",
+          "morphologies",
+          "comparative",
+          "morphologies comparative",
+          "plane"
+        ]
       },
       "8": {
-        "x": 0.2304,
-        "y": 0.4461
+        "x": 0.7443,
+        "y": 0.488,
+        "keywords": [
+          "history",
+          "hong",
+          "kong",
+          "hong kong",
+          "american"
+        ]
       },
       "9": {
-        "x": 0.4711,
-        "y": 0.4139
+        "x": 0.3479,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "flowers",
+          "portfolio flowers"
+        ]
       },
       "10": {
-        "x": 0.9449,
-        "y": 0.2236
+        "x": 0.98,
+        "y": 0.5879,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "american",
+          "t"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.4546
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "filled",
+          "filled men",
+          "film"
+        ]
       },
       "12": {
-        "x": 0.5807,
-        "y": 0.7348
+        "x": 0.886,
+        "y": 0.6631,
+        "keywords": [
+          "work",
+          "identity",
+          "people",
+          "like",
+          "ghost"
+        ]
       },
       "13": {
-        "x": 0.3501,
-        "y": 0.637
+        "x": 0.482,
+        "y": 0.9682,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "14": {
-        "x": 0.6144,
-        "y": 0.98
+        "x": 0.4415,
+        "y": 0.6924,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "ii",
+          "nude"
+        ]
       },
       "15": {
-        "x": 0.7887,
-        "y": 0.3306
+        "x": 0.98,
+        "y": 0.4271,
+        "keywords": [
+          "people",
+          "identity",
+          "race",
+          "mixed",
+          "community"
+        ]
       }
     },
-    "canvas_min_w": 3821,
-    "canvas_min_h": 2577,
-    "aspect_ratio": 1.4827
+    "canvas_min_w": 3814,
+    "canvas_min_h": 2557,
+    "aspect_ratio": 1.4916
   },
   {
     "n": 17,
     "cluster_positions": {
       "0": {
-        "x": 0.8534,
-        "y": 0.7888
+        "x": 0.6682,
+        "y": 0.98,
+        "keywords": [
+          "umakichi",
+          "cults",
+          "cargo",
+          "cargo cults",
+          "umakichi umakichi"
+        ]
       },
       "1": {
-        "x": 0.4473,
-        "y": 0.98
+        "x": 0.2757,
+        "y": 0.743,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "masterprints",
+          "masterprint series",
+          "masterprint"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.7285
+        "x": 0.8082,
+        "y": 0.3147,
+        "keywords": [
+          "race",
+          "people",
+          "identity",
+          "mixed",
+          "mixed race"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.8309,
+        "y": 0.98,
+        "keywords": [
+          "portraiture",
+          "self",
+          "painting",
+          "self portraiture",
+          "work"
+        ]
       },
       "4": {
-        "x": 0.7134,
-        "y": 0.6437
+        "x": 0.98,
+        "y": 0.849,
+        "keywords": [
+          "asian",
+          "american",
+          "asian american",
+          "race",
+          "artists"
+        ]
       },
       "5": {
-        "x": 0.5651,
-        "y": 0.5462
+        "x": 0.5514,
+        "y": 0.4911,
+        "keywords": [
+          "lamp",
+          "table",
+          "akari",
+          "site",
+          "nude"
+        ]
       },
       "6": {
-        "x": 0.3865,
-        "y": 0.8643
+        "x": 0.98,
+        "y": 0.2508,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "mixed",
+          "just"
+        ]
       },
       "7": {
-        "x": 0.98,
-        "y": 0.1258
+        "x": 0.5889,
+        "y": 0.7606,
+        "keywords": [
+          "comparative",
+          "comparative morphologies",
+          "morphologies",
+          "morphologies comparative",
+          "plane"
+        ]
       },
       "8": {
-        "x": 0.2042,
-        "y": 0.4672
+        "x": 0.7349,
+        "y": 0.5472,
+        "keywords": [
+          "history",
+          "american",
+          "culture",
+          "images",
+          "people"
+        ]
       },
       "9": {
-        "x": 0.4239,
-        "y": 0.381
+        "x": 0.3436,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "flowers",
+          "portfolio flowers"
+        ]
       },
       "10": {
-        "x": 0.8529,
-        "y": 0.517
+        "x": 0.98,
+        "y": 0.5412,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "american"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.4915
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "field",
+          "figurative",
+          "figurative painting"
+        ]
       },
       "12": {
-        "x": 0.5418,
-        "y": 0.8017
+        "x": 0.859,
+        "y": 0.7338,
+        "keywords": [
+          "work",
+          "identity",
+          "people",
+          "time",
+          "space"
+        ]
       },
       "13": {
-        "x": 0.3328,
-        "y": 0.6211
+        "x": 0.4729,
+        "y": 0.9642,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "14": {
-        "x": 0.6027,
-        "y": 0.98
+        "x": 0.4335,
+        "y": 0.699,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "ii",
+          "nude"
+        ]
       },
       "15": {
-        "x": 0.7835,
-        "y": 0.2563
+        "x": 0.9683,
+        "y": 0.3511,
+        "keywords": [
+          "people",
+          "identity",
+          "t",
+          "community",
+          "mixed"
+        ]
       },
       "16": {
         "x": 0.98,
-        "y": 0.3535
+        "y": 0.6044,
+        "keywords": [
+          "chinese",
+          "language",
+          "anonymous",
+          "video",
+          "hong"
+        ]
       }
     },
-    "canvas_min_w": 4043,
-    "canvas_min_h": 2664,
-    "aspect_ratio": 1.5176
+    "canvas_min_w": 4168,
+    "canvas_min_h": 2690,
+    "aspect_ratio": 1.5494
   },
   {
     "n": 18,
     "cluster_positions": {
       "0": {
-        "x": 0.8653,
-        "y": 0.8134
+        "x": 0.5541,
+        "y": 0.6003,
+        "keywords": [
+          "umakichi",
+          "cults",
+          "cargo",
+          "cargo cults",
+          "umakichi umakichi"
+        ]
       },
       "1": {
-        "x": 0.4424,
-        "y": 0.98
+        "x": 0.4513,
+        "y": 0.9266,
+        "keywords": [
+          "oriental",
+          "masterprint series",
+          "series oriental",
+          "masterprints",
+          "masterprint"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.7437
+        "x": 0.9261,
+        "y": 0.3058,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "racial",
+          "t"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.7033,
+        "y": 0.6863,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "painting",
+          "comparative morphologies"
+        ]
       },
       "4": {
-        "x": 0.7382,
-        "y": 0.6592
+        "x": 0.98,
+        "y": 0.9485,
+        "keywords": [
+          "asian",
+          "american",
+          "race",
+          "artists",
+          "asian american"
+        ]
       },
       "5": {
-        "x": 0.6005,
-        "y": 0.5509
+        "x": 0.4188,
+        "y": 0.4216,
+        "keywords": [
+          "lamp",
+          "table",
+          "akari",
+          "site",
+          "nude"
+        ]
       },
       "6": {
-        "x": 0.3854,
-        "y": 0.8285
+        "x": 0.98,
+        "y": 0.6596,
+        "keywords": [
+          "asian",
+          "t",
+          "american",
+          "just",
+          "like"
+        ]
       },
       "7": {
-        "x": 0.98,
-        "y": 0.2285
+        "x": 0.239,
+        "y": 0.8747,
+        "keywords": [
+          "untitled",
+          "portfolio flowers",
+          "portfolio",
+          "flowers untitled",
+          "flowers"
+        ]
       },
       "8": {
-        "x": 0.2136,
-        "y": 0.4452
+        "x": 0.7334,
+        "y": 0.3443,
+        "keywords": [
+          "history",
+          "american",
+          "people",
+          "culture",
+          "maps"
+        ]
       },
       "9": {
-        "x": 0.4571,
-        "y": 0.4143
+        "x": 0.0763,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "version",
+          "wash",
+          "day"
+        ]
       },
       "10": {
-        "x": 0.7928,
-        "y": 0.4292
+        "x": 0.98,
+        "y": 0.3869,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "american",
+          "filipino american"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.4858
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "feminist",
+          "fiction",
+          "fictional"
+        ]
       },
       "12": {
-        "x": 0.5348,
-        "y": 0.7734
+        "x": 0.7838,
+        "y": 0.9225,
+        "keywords": [
+          "work",
+          "people",
+          "ghost",
+          "time",
+          "idea"
+        ]
       },
       "13": {
-        "x": 0.3347,
-        "y": 0.5962
+        "x": 0.2626,
+        "y": 0.6276,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "14": {
-        "x": 0.5918,
-        "y": 0.98
+        "x": 0.4111,
+        "y": 0.689,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "tiger lucky",
+          "ii"
+        ]
       },
       "15": {
-        "x": 0.8979,
-        "y": 0.0943
+        "x": 0.98,
+        "y": 0.5579,
+        "keywords": [
+          "critical",
+          "race",
+          "people",
+          "mixed",
+          "mixed race"
+        ]
       },
       "16": {
-        "x": 0.9447,
-        "y": 0.5862
+        "x": 0.8993,
+        "y": 0.7498,
+        "keywords": [
+          "hong kong",
+          "kong",
+          "hong",
+          "chinese",
+          "paintings"
+        ]
       },
       "17": {
-        "x": 0.9347,
-        "y": 0.3358
+        "x": 0.8446,
+        "y": 0.5172,
+        "keywords": [
+          "human",
+          "bodies",
+          "empathic",
+          "humans",
+          "universe"
+        ]
       }
     },
-    "canvas_min_w": 4185,
-    "canvas_min_h": 2727,
-    "aspect_ratio": 1.5347
+    "canvas_min_w": 4385,
+    "canvas_min_h": 2608,
+    "aspect_ratio": 1.6814
   },
   {
     "n": 19,
     "cluster_positions": {
       "0": {
-        "x": 0.8645,
-        "y": 0.8622
+        "x": 0.5103,
+        "y": 0.6234,
+        "keywords": [
+          "umakichi",
+          "cults",
+          "cargo",
+          "cargo cults",
+          "umakichi umakichi"
+        ]
       },
       "1": {
-        "x": 0.4187,
-        "y": 0.98
+        "x": 0.4104,
+        "y": 0.9324,
+        "keywords": [
+          "oriental",
+          "oriental masterprints",
+          "oriental masterprint",
+          "masterprints",
+          "masterprint series"
+        ]
       },
       "2": {
         "x": 0.98,
-        "y": 0.8224
+        "y": 0.2448,
+        "keywords": [
+          "identity",
+          "hapa",
+          "people",
+          "language",
+          "project"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.6405,
+        "y": 0.807,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "painting",
+          "portraits"
+        ]
       },
       "4": {
-        "x": 0.6431,
-        "y": 0.6359
+        "x": 0.9443,
+        "y": 0.98,
+        "keywords": [
+          "asian",
+          "asian american",
+          "american",
+          "artists",
+          "race"
+        ]
       },
       "5": {
-        "x": 0.7904,
-        "y": 0.6457
+        "x": 0.3829,
+        "y": 0.4554,
+        "keywords": [
+          "lamp",
+          "table",
+          "akari",
+          "nude",
+          "site"
+        ]
       },
       "6": {
-        "x": 0.2516,
-        "y": 0.887
+        "x": 0.98,
+        "y": 0.8048,
+        "keywords": [
+          "asian",
+          "t",
+          "american",
+          "chinese",
+          "japanese"
+        ]
       },
       "7": {
-        "x": 0.98,
-        "y": 0.3034
+        "x": 0.2071,
+        "y": 0.8857,
+        "keywords": [
+          "untitled",
+          "portfolio flowers",
+          "portfolio",
+          "flowers untitled",
+          "flowers"
+        ]
       },
       "8": {
-        "x": 0.5301,
-        "y": 0.4845
+        "x": 0.7766,
+        "y": 0.3878,
+        "keywords": [
+          "american",
+          "history",
+          "culture",
+          "people",
+          "images"
+        ]
       },
       "9": {
-        "x": 0.3708,
-        "y": 0.5097
+        "x": 0.0362,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "version",
+          "wash",
+          "day"
+        ]
       },
       "10": {
-        "x": 0.9644,
-        "y": 0.2729
+        "x": 0.98,
+        "y": 0.4676,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "american",
+          "filipino american"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.5355
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "feeling",
+          "feels",
+          "felt"
+        ]
       },
       "12": {
-        "x": 0.5251,
-        "y": 0.7772
+        "x": 0.8197,
+        "y": 0.8827,
+        "keywords": [
+          "work",
+          "people",
+          "ghost",
+          "time",
+          "idea"
+        ]
       },
       "13": {
-        "x": 0.2219,
-        "y": 0.6035
+        "x": 0.2245,
+        "y": 0.6424,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "14": {
-        "x": 0.5699,
-        "y": 0.98
+        "x": 0.3662,
+        "y": 0.7076,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "tiger lucky",
+          "ii"
+        ]
       },
       "15": {
-        "x": 0.7329,
-        "y": 0.3087
+        "x": 0.98,
+        "y": 0.6197,
+        "keywords": [
+          "people",
+          "identity",
+          "mixed",
+          "race",
+          "t"
+        ]
       },
       "16": {
-        "x": 0.9405,
-        "y": 0.6385
+        "x": 0.9227,
+        "y": 0.433,
+        "keywords": [
+          "kong",
+          "hong",
+          "hong kong",
+          "chinese",
+          "refugees"
+        ]
       },
       "17": {
-        "x": 0.8584,
-        "y": 0.4366
+        "x": 0.7363,
+        "y": 0.6192,
+        "keywords": [
+          "human",
+          "humans",
+          "bodies",
+          "body",
+          "gens"
+        ]
       },
       "18": {
-        "x": 0.3778,
-        "y": 0.7653
+        "x": 0.883,
+        "y": 0.66,
+        "keywords": [
+          "race",
+          "people",
+          "critical",
+          "color",
+          "social"
+        ]
       }
     },
-    "canvas_min_w": 4482,
-    "canvas_min_h": 2755,
-    "aspect_ratio": 1.6269
+    "canvas_min_w": 4590,
+    "canvas_min_h": 2824,
+    "aspect_ratio": 1.6254
   },
   {
     "n": 20,
     "cluster_positions": {
       "0": {
-        "x": 0.7114,
-        "y": 0.4384
+        "x": 0.3716,
+        "y": 0.3894,
+        "keywords": [
+          "umakichi",
+          "cargo cults",
+          "cargo",
+          "cults",
+          "umakichi umakichi"
+        ]
       },
       "1": {
-        "x": 0.375,
-        "y": 0.98
+        "x": 0.4571,
+        "y": 0.8407,
+        "keywords": [
+          "oriental",
+          "oriental masterprints",
+          "oriental masterprint",
+          "masterprints",
+          "masterprint series"
+        ]
       },
       "2": {
-        "x": 0.98,
-        "y": 0.6649
+        "x": 0.9581,
+        "y": 0.3218,
+        "keywords": [
+          "identity",
+          "hapa",
+          "people",
+          "language",
+          "t"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.02
+        "x": 0.6637,
+        "y": 0.8554,
+        "keywords": [
+          "portraiture",
+          "self",
+          "self portraiture",
+          "painting",
+          "portraits"
+        ]
       },
       "4": {
-        "x": 0.7133,
-        "y": 0.6754
+        "x": 0.98,
+        "y": 0.8805,
+        "keywords": [
+          "asian",
+          "asian american",
+          "american",
+          "artists",
+          "race"
+        ]
       },
       "5": {
-        "x": 0.8926,
-        "y": 0.8897
+        "x": 0.4449,
+        "y": 0.6004,
+        "keywords": [
+          "lamp",
+          "table",
+          "akari",
+          "nude",
+          "floor lamp"
+        ]
       },
       "6": {
-        "x": 0.2811,
-        "y": 0.8538
+        "x": 0.98,
+        "y": 0.7562,
+        "keywords": [
+          "asian",
+          "t",
+          "american",
+          "chinese",
+          "japanese"
+        ]
       },
       "7": {
-        "x": 0.9602,
-        "y": 0.2572
+        "x": 0.2394,
+        "y": 0.919,
+        "keywords": [
+          "untitled",
+          "portfolio flowers",
+          "portfolio",
+          "flowers untitled",
+          "flowers"
+        ]
       },
       "8": {
-        "x": 0.4885,
-        "y": 0.6083
+        "x": 0.8044,
+        "y": 0.2678,
+        "keywords": [
+          "history",
+          "american",
+          "culture",
+          "people",
+          "images"
+        ]
       },
       "9": {
-        "x": 0.3673,
-        "y": 0.4116
+        "x": 0.0464,
+        "y": 0.98,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "version",
+          "wash",
+          "day"
+        ]
       },
       "10": {
-        "x": 0.8554,
-        "y": 0.6689
+        "x": 0.98,
+        "y": 0.3677,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "american",
+          "filipino american"
+        ]
       },
       "11": {
-        "x": 0.98,
-        "y": 0.4491
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "feels",
+          "felt",
+          "felt like"
+        ]
       },
       "12": {
-        "x": 0.4555,
-        "y": 0.8346
+        "x": 0.8218,
+        "y": 0.845,
+        "keywords": [
+          "work",
+          "people",
+          "time",
+          "ghost",
+          "idea"
+        ]
       },
       "13": {
-        "x": 0.175,
-        "y": 0.703
+        "x": 0.1618,
+        "y": 0.7252,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
       },
       "14": {
-        "x": 0.5586,
-        "y": 0.98
+        "x": 0.2993,
+        "y": 0.6666,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "tiger lucky",
+          "ii"
+        ]
       },
       "15": {
-        "x": 0.8092,
-        "y": 0.2499
+        "x": 0.98,
+        "y": 0.578,
+        "keywords": [
+          "people",
+          "identity",
+          "mixed",
+          "race",
+          "t"
+        ]
       },
       "16": {
-        "x": 0.98,
-        "y": 0.6717
+        "x": 0.9213,
+        "y": 0.6717,
+        "keywords": [
+          "hong",
+          "hong kong",
+          "kong",
+          "chinese",
+          "refugees"
+        ]
       },
       "17": {
-        "x": 0.8823,
-        "y": 0.4466
+        "x": 0.7306,
+        "y": 0.646,
+        "keywords": [
+          "human",
+          "humans",
+          "body",
+          "bodies",
+          "gens"
+        ]
       },
       "18": {
-        "x": 0.3494,
-        "y": 0.6553
+        "x": 0.8359,
+        "y": 0.4908,
+        "keywords": [
+          "race",
+          "people",
+          "critical",
+          "color",
+          "social"
+        ]
       },
       "19": {
-        "x": 0.221,
-        "y": 0.4888
+        "x": 0.2033,
+        "y": 0.4996,
+        "keywords": [
+          "site",
+          "near",
+          "far",
+          "felt like",
+          "female"
+        ]
       }
     },
-    "canvas_min_w": 4842,
-    "canvas_min_h": 2952,
-    "aspect_ratio": 1.6402
+    "canvas_min_w": 4827,
+    "canvas_min_h": 2896,
+    "aspect_ratio": 1.6668
   },
   {
     "n": 21,
     "cluster_positions": {
       "0": {
-        "x": 0.7653,
-        "y": 0.9208
+        "x": 0.3001,
+        "y": 0.8207,
+        "keywords": [
+          "umakichi",
+          "umakichi umakichi",
+          "cargo",
+          "cargo cults",
+          "cults"
+        ]
       },
       "1": {
-        "x": 0.4429,
-        "y": 0.98
+        "x": 0.3947,
+        "y": 0.98,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "oriental masterprint",
+          "oriental masterprints",
+          "masterprint"
+        ]
       },
       "2": {
         "x": 0.98,
-        "y": 0.9291
+        "y": 0.742,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "paintings"
+        ]
       },
       "3": {
-        "x": 0.02,
-        "y": 0.7037
+        "x": 0.7744,
+        "y": 0.1831,
+        "keywords": [
+          "photos",
+          "photos migrants",
+          "migrants",
+          "applicant",
+          "applicant photos"
+        ]
       },
       "4": {
-        "x": 0.3686,
-        "y": 0.9202
+        "x": 0.8923,
+        "y": 0.8886,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "people",
+          "world"
+        ]
       },
       "5": {
-        "x": 0.9651,
-        "y": 0.4271
+        "x": 0.5246,
+        "y": 0.5233,
+        "keywords": [
+          "chair",
+          "cargo",
+          "cargo cults",
+          "nude",
+          "cults"
+        ]
       },
       "6": {
-        "x": 0.98,
-        "y": 0.6679
+        "x": 0.5037,
+        "y": 0.8598,
+        "keywords": [
+          "flowers",
+          "portfolio flowers",
+          "desert",
+          "flower",
+          "portfolio"
+        ]
       },
       "7": {
-        "x": 0.7508,
-        "y": 0.4791
+        "x": 0.7755,
+        "y": 0.4053,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "people",
+          "t"
+        ]
       },
       "8": {
-        "x": 0.7639,
-        "y": 0.7025
+        "x": 0.6717,
+        "y": 0.5544,
+        "keywords": [
+          "human",
+          "humans",
+          "information",
+          "bodies",
+          "body"
+        ]
       },
       "9": {
-        "x": 0.6004,
-        "y": 0.98
+        "x": 0.7391,
+        "y": 0.7483,
+        "keywords": [
+          "paintings",
+          "painting",
+          "history",
+          "chinese",
+          "funny names"
+        ]
       },
       "10": {
-        "x": 0.5004,
-        "y": 0.8577
+        "x": 0.1632,
+        "y": 0.537,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "owl",
+          "wildness"
+        ]
       },
       "11": {
-        "x": 0.4662,
-        "y": 0.02
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "filipinx",
+          "filled",
+          "filled men"
+        ]
       },
       "12": {
-        "x": 0.9016,
-        "y": 0.9487
+        "x": 0.98,
+        "y": 0.4356,
+        "keywords": [
+          "artists",
+          "color",
+          "representation",
+          "artists color",
+          "american"
+        ]
       },
       "13": {
-        "x": 0.8896,
-        "y": 0.6143
+        "x": 0.9655,
+        "y": 0.6945,
+        "keywords": [
+          "asian",
+          "mixed",
+          "asian american",
+          "race",
+          "mixed race"
+        ]
       },
       "14": {
-        "x": 0.2638,
-        "y": 0.4498
+        "x": 0.4144,
+        "y": 0.676,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "lamp",
+          "table",
+          "plane"
+        ]
       },
       "15": {
-        "x": 0.432,
-        "y": 0.6481
+        "x": 0.3007,
+        "y": 0.53,
+        "keywords": [
+          "site",
+          "near",
+          "far",
+          "prison",
+          "filled men"
+        ]
       },
       "16": {
-        "x": 0.1506,
-        "y": 0.6107
+        "x": 0.98,
+        "y": 0.226,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "mixed",
+          "t"
+        ]
       },
       "17": {
-        "x": 0.98,
-        "y": 0.7735
+        "x": 0.841,
+        "y": 0.6017,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "chinese",
+          "mixed"
+        ]
       },
       "18": {
-        "x": 0.0979,
-        "y": 0.8494
+        "x": 0.6239,
+        "y": 0.98,
+        "keywords": [
+          "comparative",
+          "comparative morphologies",
+          "morphologies",
+          "morphologies comparative",
+          "fluid"
+        ]
       },
       "19": {
-        "x": 0.2348,
-        "y": 0.8698
+        "x": 0.98,
+        "y": 0.5107,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "way"
+        ]
       },
       "20": {
-        "x": 0.2836,
-        "y": 0.6658
+        "x": 0.9155,
+        "y": 0.4169,
+        "keywords": [
+          "history",
+          "memories",
+          "people",
+          "colonial",
+          "like"
+        ]
       }
     },
-    "canvas_min_w": 4941,
-    "canvas_min_h": 3301,
-    "aspect_ratio": 1.4968
+    "canvas_min_w": 5195,
+    "canvas_min_h": 3040,
+    "aspect_ratio": 1.7089
+  },
+  {
+    "n": 22,
+    "cluster_positions": {
+      "0": {
+        "x": 0.3817,
+        "y": 0.4767,
+        "keywords": [
+          "umakichi",
+          "umakichi umakichi",
+          "cargo",
+          "cargo cults",
+          "cults"
+        ]
+      },
+      "1": {
+        "x": 0.2408,
+        "y": 0.8249,
+        "keywords": [
+          "plane",
+          "tree",
+          "plane tree",
+          "table",
+          "plane trees"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.7942,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.809,
+        "y": 0.2428,
+        "keywords": [
+          "applicant photos",
+          "applicant",
+          "migrants",
+          "photos migrants",
+          "photos"
+        ]
+      },
+      "4": {
+        "x": 0.8649,
+        "y": 0.8633,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "people",
+          "world"
+        ]
+      },
+      "5": {
+        "x": 0.5034,
+        "y": 0.6654,
+        "keywords": [
+          "cargo",
+          "cargo cults",
+          "cults",
+          "post",
+          "rasquache"
+        ]
+      },
+      "6": {
+        "x": 0.4442,
+        "y": 0.8743,
+        "keywords": [
+          "flowers",
+          "portfolio flowers",
+          "desert",
+          "flower",
+          "portfolio"
+        ]
+      },
+      "7": {
+        "x": 0.7857,
+        "y": 0.4543,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "people",
+          "t"
+        ]
+      },
+      "8": {
+        "x": 0.6741,
+        "y": 0.5765,
+        "keywords": [
+          "human",
+          "humans",
+          "information",
+          "bodies",
+          "body"
+        ]
+      },
+      "9": {
+        "x": 0.7352,
+        "y": 0.7656,
+        "keywords": [
+          "painting",
+          "paintings",
+          "history",
+          "chinese",
+          "images"
+        ]
+      },
+      "10": {
+        "x": 0.1365,
+        "y": 0.639,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "tiger lucky",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "fiction",
+          "fictional",
+          "field"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.4365,
+        "keywords": [
+          "artists",
+          "color",
+          "race",
+          "representation",
+          "works"
+        ]
+      },
+      "13": {
+        "x": 0.9702,
+        "y": 0.7214,
+        "keywords": [
+          "asian",
+          "mixed",
+          "asian american",
+          "mixed race",
+          "race"
+        ]
+      },
+      "14": {
+        "x": 0.3573,
+        "y": 0.6974,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "lamp",
+          "akari",
+          "nude"
+        ]
+      },
+      "15": {
+        "x": 0.2549,
+        "y": 0.5422,
+        "keywords": [
+          "site",
+          "prison",
+          "finally",
+          "film",
+          "filled"
+        ]
+      },
+      "16": {
+        "x": 0.98,
+        "y": 0.2842,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "mixed",
+          "t"
+        ]
+      },
+      "17": {
+        "x": 0.8454,
+        "y": 0.6471,
+        "keywords": [
+          "asian",
+          "american",
+          "t",
+          "chinese",
+          "mixed"
+        ]
+      },
+      "18": {
+        "x": 0.6071,
+        "y": 0.98,
+        "keywords": [
+          "morphologies",
+          "comparative morphologies",
+          "comparative",
+          "morphologies comparative",
+          "flower"
+        ]
+      },
+      "19": {
+        "x": 0.98,
+        "y": 0.5475,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "way"
+        ]
+      },
+      "20": {
+        "x": 0.9209,
+        "y": 0.4731,
+        "keywords": [
+          "history",
+          "memories",
+          "people",
+          "colonial",
+          "like"
+        ]
+      },
+      "21": {
+        "x": 0.3563,
+        "y": 0.98,
+        "keywords": [
+          "oriental",
+          "masterprint",
+          "masterprint series",
+          "oriental masterprints",
+          "oriental masterprint"
+        ]
+      }
+    },
+    "canvas_min_w": 5406,
+    "canvas_min_h": 3271,
+    "aspect_ratio": 1.6527
+  },
+  {
+    "n": 23,
+    "cluster_positions": {
+      "0": {
+        "x": 0.3729,
+        "y": 0.6135,
+        "keywords": [
+          "umakichi",
+          "cargo",
+          "cargo cults",
+          "cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.2497,
+        "y": 0.5496,
+        "keywords": [
+          "plane",
+          "table",
+          "plane trees",
+          "trees",
+          "tree"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.288,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.7589,
+        "y": 0.9434,
+        "keywords": [
+          "applicant",
+          "applicant photos",
+          "migrants",
+          "photos",
+          "photos migrants"
+        ]
+      },
+      "4": {
+        "x": 0.8107,
+        "y": 0.3487,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.33,
+        "y": 0.8213,
+        "keywords": [
+          "lamp",
+          "akari",
+          "nude",
+          "aleyda",
+          "cost"
+        ]
+      },
+      "6": {
+        "x": 0.297,
+        "y": 0.3593,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
+      },
+      "7": {
+        "x": 0.98,
+        "y": 0.8311,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7341,
+        "y": 0.7343,
+        "keywords": [
+          "identity",
+          "human",
+          "ghosts",
+          "information",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.7083,
+        "y": 0.4878,
+        "keywords": [
+          "painting",
+          "history",
+          "chinese",
+          "images",
+          "funny names"
+        ]
+      },
+      "10": {
+        "x": 0.1835,
+        "y": 0.7537,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "tiger lucky",
+          "filled"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.9435,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "feminist",
+          "fiction",
+          "fictional"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.6994,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "white",
+          "black"
+        ]
+      },
+      "13": {
+        "x": 0.8241,
+        "y": 0.5835,
+        "keywords": [
+          "critical",
+          "critical mixed",
+          "race",
+          "race studies",
+          "mixed race"
+        ]
+      },
+      "14": {
+        "x": 0.2858,
+        "y": 0.1557,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "flowers",
+          "portfolio flowers"
+        ]
+      },
+      "15": {
+        "x": 0.1538,
+        "y": 0.98,
+        "keywords": [
+          "site",
+          "far",
+          "near",
+          "filipinx",
+          "filipinos"
+        ]
+      },
+      "16": {
+        "x": 0.9,
+        "y": 0.98,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "racial",
+          "color"
+        ]
+      },
+      "17": {
+        "x": 0.8552,
+        "y": 0.8065,
+        "keywords": [
+          "asian",
+          "t",
+          "american",
+          "language",
+          "chinese"
+        ]
+      },
+      "18": {
+        "x": 0.5903,
+        "y": 0.02,
+        "keywords": [
+          "comparative",
+          "comparative morphologies",
+          "morphologies",
+          "morphologies comparative",
+          "filled"
+        ]
+      },
+      "19": {
+        "x": 0.9286,
+        "y": 0.4531,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "way"
+        ]
+      },
+      "20": {
+        "x": 0.9455,
+        "y": 0.6599,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.366,
+        "y": 0.02,
+        "keywords": [
+          "oriental",
+          "masterprint",
+          "masterprint series",
+          "masterprints",
+          "oriental masterprint"
+        ]
+      },
+      "22": {
+        "x": 0.98,
+        "y": 0.532,
+        "keywords": [
+          "asian",
+          "identity",
+          "asian american",
+          "american",
+          "race"
+        ]
+      }
+    },
+    "canvas_min_w": 5494,
+    "canvas_min_h": 3328,
+    "aspect_ratio": 1.6508
+  },
+  {
+    "n": 24,
+    "cluster_positions": {
+      "0": {
+        "x": 0.1711,
+        "y": 0.7447,
+        "keywords": [
+          "umakichi",
+          "cults",
+          "cargo",
+          "cargo cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.3647,
+        "y": 0.6804,
+        "keywords": [
+          "table",
+          "chair",
+          "portrait",
+          "portfolio",
+          "lamp"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.8244,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "paintings"
+        ]
+      },
+      "3": {
+        "x": 0.7502,
+        "y": 0.2613,
+        "keywords": [
+          "applicant photos",
+          "photos",
+          "photos migrants",
+          "applicant",
+          "migrants"
+        ]
+      },
+      "4": {
+        "x": 0.9205,
+        "y": 0.8343,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.4681,
+        "y": 0.5667,
+        "keywords": [
+          "shape",
+          "post",
+          "statement",
+          "rasquache",
+          "right"
+        ]
+      },
+      "6": {
+        "x": 0.284,
+        "y": 0.8329,
+        "keywords": [
+          "untitled",
+          "portfolio flowers",
+          "portfolio",
+          "flowers untitled",
+          "flowers"
+        ]
+      },
+      "7": {
+        "x": 0.9001,
+        "y": 0.1318,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7002,
+        "y": 0.4472,
+        "keywords": [
+          "identity",
+          "human",
+          "information",
+          "ghosts",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.688,
+        "y": 0.6992,
+        "keywords": [
+          "painting",
+          "history",
+          "chinese",
+          "images",
+          "funny names"
+        ]
+      },
+      "10": {
+        "x": 0.1352,
+        "y": 0.5373,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "owl",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.02,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "figure",
+          "figures",
+          "filipino"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.6044,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "black",
+          "white"
+        ]
+      },
+      "13": {
+        "x": 0.8149,
+        "y": 0.7109,
+        "keywords": [
+          "critical",
+          "race",
+          "critical mixed",
+          "mixed",
+          "race studies"
+        ]
+      },
+      "14": {
+        "x": 0.3611,
+        "y": 0.4312,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "lamp",
+          "akari",
+          "nude"
+        ]
+      },
+      "15": {
+        "x": 0.2286,
+        "y": 0.3788,
+        "keywords": [
+          "site",
+          "far",
+          "near",
+          "prison",
+          "figures"
+        ]
+      },
+      "16": {
+        "x": 0.98,
+        "y": 0.3119,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "racial",
+          "mixed"
+        ]
+      },
+      "17": {
+        "x": 0.869,
+        "y": 0.3277,
+        "keywords": [
+          "asian",
+          "t",
+          "american",
+          "language",
+          "chinese"
+        ]
+      },
+      "18": {
+        "x": 0.5814,
+        "y": 0.98,
+        "keywords": [
+          "comparative morphologies",
+          "morphologies",
+          "comparative",
+          "morphologies comparative",
+          "flower"
+        ]
+      },
+      "19": {
+        "x": 0.98,
+        "y": 0.623,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "way"
+        ]
+      },
+      "20": {
+        "x": 0.8192,
+        "y": 0.5125,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.3565,
+        "y": 0.98,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "oriental masterprint",
+          "oriental masterprints",
+          "masterprints"
+        ]
+      },
+      "22": {
+        "x": 0.9443,
+        "y": 0.487,
+        "keywords": [
+          "asian",
+          "identity",
+          "asian american",
+          "american",
+          "mixed"
+        ]
+      },
+      "23": {
+        "x": 0.2594,
+        "y": 0.5713,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
+      }
+    },
+    "canvas_min_w": 5919,
+    "canvas_min_h": 3472,
+    "aspect_ratio": 1.7048
+  },
+  {
+    "n": 25,
+    "cluster_positions": {
+      "0": {
+        "x": 0.2556,
+        "y": 0.588,
+        "keywords": [
+          "umakichi",
+          "cargo",
+          "cargo cults",
+          "cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.3534,
+        "y": 0.7208,
+        "keywords": [
+          "plane",
+          "table",
+          "plane trees",
+          "chair",
+          "trees"
+        ]
+      },
+      "2": {
+        "x": 0.98,
+        "y": 0.8864,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "paintings"
+        ]
+      },
+      "3": {
+        "x": 0.928,
+        "y": 0.2018,
+        "keywords": [
+          "american",
+          "people",
+          "culture",
+          "western",
+          "americans"
+        ]
+      },
+      "4": {
+        "x": 0.8933,
+        "y": 0.869,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.4144,
+        "y": 0.5532,
+        "keywords": [
+          "rasquache",
+          "post",
+          "cults",
+          "cargo cults",
+          "cargo"
+        ]
+      },
+      "6": {
+        "x": 0.2422,
+        "y": 0.9712,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "flowers",
+          "portfolio flowers"
+        ]
+      },
+      "7": {
+        "x": 0.98,
+        "y": 0.3487,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7132,
+        "y": 0.4153,
+        "keywords": [
+          "human",
+          "identity",
+          "information",
+          "ghosts",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.6984,
+        "y": 0.6716,
+        "keywords": [
+          "chinese",
+          "painting",
+          "history",
+          "images",
+          "funny names"
+        ]
+      },
+      "10": {
+        "x": 0.145,
+        "y": 0.5037,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "owl",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.3257,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "filled men",
+          "film",
+          "films"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.7658,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "white",
+          "black"
+        ]
+      },
+      "13": {
+        "x": 0.8221,
+        "y": 0.6998,
+        "keywords": [
+          "critical",
+          "race",
+          "critical mixed",
+          "mixed",
+          "mixed race"
+        ]
+      },
+      "14": {
+        "x": 0.318,
+        "y": 0.4105,
+        "keywords": [
+          "lamp",
+          "akari",
+          "nude",
+          "paris abstraction",
+          "paris"
+        ]
+      },
+      "15": {
+        "x": 0.1388,
+        "y": 0.3108,
+        "keywords": [
+          "site",
+          "near",
+          "far",
+          "film",
+          "finally"
+        ]
+      },
+      "16": {
+        "x": 0.9365,
+        "y": 0.4035,
+        "keywords": [
+          "people",
+          "race",
+          "mixed",
+          "social",
+          "white"
+        ]
+      },
+      "17": {
+        "x": 0.827,
+        "y": 0.312,
+        "keywords": [
+          "asian",
+          "t",
+          "chinese",
+          "language",
+          "mixed"
+        ]
+      },
+      "18": {
+        "x": 0.5738,
+        "y": 0.98,
+        "keywords": [
+          "comparative morphologies",
+          "comparative",
+          "morphologies",
+          "morphologies comparative",
+          "focused"
+        ]
+      },
+      "19": {
+        "x": 0.98,
+        "y": 0.6896,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "way"
+        ]
+      },
+      "20": {
+        "x": 0.8221,
+        "y": 0.505,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.3647,
+        "y": 0.98,
+        "keywords": [
+          "oriental",
+          "masterprint",
+          "masterprint series",
+          "masterprints",
+          "oriental masterprints"
+        ]
+      },
+      "22": {
+        "x": 0.9304,
+        "y": 0.5964,
+        "keywords": [
+          "asian",
+          "identity",
+          "asian american",
+          "american",
+          "mixed"
+        ]
+      },
+      "23": {
+        "x": 0.2349,
+        "y": 0.7784,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
+      },
+      "24": {
+        "x": 0.5198,
+        "y": 0.02,
+        "keywords": [
+          "applicant",
+          "photos migrants",
+          "migrants",
+          "applicant photos",
+          "photos"
+        ]
+      }
+    },
+    "canvas_min_w": 6118,
+    "canvas_min_h": 3616,
+    "aspect_ratio": 1.6919
+  },
+  {
+    "n": 26,
+    "cluster_positions": {
+      "0": {
+        "x": 0.2491,
+        "y": 0.4681,
+        "keywords": [
+          "umakichi",
+          "cargo",
+          "cargo cults",
+          "cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.326,
+        "y": 0.3226,
+        "keywords": [
+          "plane",
+          "table",
+          "plane trees",
+          "chair",
+          "trees"
+        ]
+      },
+      "2": {
+        "x": 0.9476,
+        "y": 0.1656,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.8655,
+        "y": 0.9142,
+        "keywords": [
+          "american",
+          "people",
+          "culture",
+          "western",
+          "immigrants"
+        ]
+      },
+      "4": {
+        "x": 0.8233,
+        "y": 0.2062,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.3782,
+        "y": 0.4922,
+        "keywords": [
+          "post",
+          "rasquache",
+          "cargo cults",
+          "cults",
+          "cargo"
+        ]
+      },
+      "6": {
+        "x": 0.2588,
+        "y": 0.066,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "portfolio flowers",
+          "portfolio"
+        ]
+      },
+      "7": {
+        "x": 0.9141,
+        "y": 0.5628,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.6768,
+        "y": 0.6197,
+        "keywords": [
+          "human",
+          "ghosts",
+          "information",
+          "identity",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.7288,
+        "y": 0.3661,
+        "keywords": [
+          "chinese",
+          "paintings",
+          "painting",
+          "images",
+          "history"
+        ]
+      },
+      "10": {
+        "x": 0.145,
+        "y": 0.5656,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "owl",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.6794,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "filled",
+          "filled men",
+          "film"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.5831,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "white",
+          "black"
+        ]
+      },
+      "13": {
+        "x": 0.98,
+        "y": 0.2271,
+        "keywords": [
+          "asian american",
+          "asian",
+          "mixed",
+          "race",
+          "mixed race"
+        ]
+      },
+      "14": {
+        "x": 0.2773,
+        "y": 0.6607,
+        "keywords": [
+          "lamp",
+          "akari",
+          "nude",
+          "lamp akari",
+          "paris"
+        ]
+      },
+      "15": {
+        "x": 0.1096,
+        "y": 0.775,
+        "keywords": [
+          "site",
+          "near",
+          "far",
+          "film",
+          "films"
+        ]
+      },
+      "16": {
+        "x": 0.9746,
+        "y": 0.7464,
+        "keywords": [
+          "people",
+          "race",
+          "social",
+          "mixed",
+          "racial"
+        ]
+      },
+      "17": {
+        "x": 0.8515,
+        "y": 0.7272,
+        "keywords": [
+          "asian",
+          "t",
+          "chinese",
+          "language",
+          "mixed"
+        ]
+      },
+      "18": {
+        "x": 0.5664,
+        "y": 0.02,
+        "keywords": [
+          "comparative morphologies",
+          "comparative",
+          "morphologies",
+          "morphologies comparative",
+          "focus"
+        ]
+      },
+      "19": {
+        "x": 0.9697,
+        "y": 0.3577,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "portraits"
+        ]
+      },
+      "20": {
+        "x": 0.8522,
+        "y": 0.3969,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.366,
+        "y": 0.02,
+        "keywords": [
+          "oriental",
+          "masterprint",
+          "series oriental",
+          "oriental masterprint",
+          "oriental masterprints"
+        ]
+      },
+      "22": {
+        "x": 0.98,
+        "y": 0.4123,
+        "keywords": [
+          "asian",
+          "identity",
+          "american",
+          "asian american",
+          "artists"
+        ]
+      },
+      "23": {
+        "x": 0.2172,
+        "y": 0.2427,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
+      },
+      "24": {
+        "x": 0.5025,
+        "y": 0.98,
+        "keywords": [
+          "applicant photos",
+          "photos",
+          "applicant",
+          "migrants",
+          "photos migrants"
+        ]
+      },
+      "25": {
+        "x": 0.7921,
+        "y": 0.5617,
+        "keywords": [
+          "critical",
+          "critical mixed",
+          "mixed",
+          "race studies",
+          "race"
+        ]
+      }
+    },
+    "canvas_min_w": 6032,
+    "canvas_min_h": 3759,
+    "aspect_ratio": 1.6047
+  },
+  {
+    "n": 27,
+    "cluster_positions": {
+      "0": {
+        "x": 0.3522,
+        "y": 0.7024,
+        "keywords": [
+          "umakichi",
+          "cargo",
+          "cargo cults",
+          "cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.243,
+        "y": 0.7704,
+        "keywords": [
+          "table",
+          "chair",
+          "portrait",
+          "lamp",
+          "ii"
+        ]
+      },
+      "2": {
+        "x": 0.9588,
+        "y": 0.8758,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.8807,
+        "y": 0.1855,
+        "keywords": [
+          "american",
+          "people",
+          "culture",
+          "western",
+          "immigrants"
+        ]
+      },
+      "4": {
+        "x": 0.8187,
+        "y": 0.8899,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.3955,
+        "y": 0.5315,
+        "keywords": [
+          "en",
+          "shape",
+          "rasquache",
+          "post",
+          "statement"
+        ]
+      },
+      "6": {
+        "x": 0.2957,
+        "y": 0.9347,
+        "keywords": [
+          "untitled",
+          "portfolio",
+          "portfolio flowers",
+          "flowers untitled",
+          "flowers"
+        ]
+      },
+      "7": {
+        "x": 0.8689,
+        "y": 0.714,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7004,
+        "y": 0.5635,
+        "keywords": [
+          "human",
+          "ghosts",
+          "information",
+          "identity",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.7434,
+        "y": 0.7362,
+        "keywords": [
+          "chinese",
+          "paintings",
+          "painting",
+          "images",
+          "history"
+        ]
+      },
+      "10": {
+        "x": 0.0549,
+        "y": 0.5508,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "tiger lucky",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.4331,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "felt",
+          "felt like",
+          "female"
+        ]
+      },
+      "12": {
+        "x": 0.9453,
+        "y": 0.5192,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "davis",
+          "white"
+        ]
+      },
+      "13": {
+        "x": 0.98,
+        "y": 0.7573,
+        "keywords": [
+          "asian american",
+          "asian",
+          "mixed",
+          "race",
+          "mixed race"
+        ]
+      },
+      "14": {
+        "x": 0.2868,
+        "y": 0.4408,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "lamp",
+          "akari",
+          "nude"
+        ]
+      },
+      "15": {
+        "x": 0.0895,
+        "y": 0.3492,
+        "keywords": [
+          "site",
+          "far",
+          "filipino american",
+          "filipino",
+          "figures"
+        ]
+      },
+      "16": {
+        "x": 0.98,
+        "y": 0.3408,
+        "keywords": [
+          "people",
+          "race",
+          "social",
+          "mixed",
+          "racial"
+        ]
+      },
+      "17": {
+        "x": 0.8717,
+        "y": 0.3688,
+        "keywords": [
+          "asian",
+          "t",
+          "chinese",
+          "language",
+          "mixed"
+        ]
+      },
+      "18": {
+        "x": 0.566,
+        "y": 0.98,
+        "keywords": [
+          "morphologies",
+          "comparative",
+          "comparative morphologies",
+          "morphologies comparative",
+          "filipino american"
+        ]
+      },
+      "19": {
+        "x": 0.98,
+        "y": 0.6928,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "portraits"
+        ]
+      },
+      "20": {
+        "x": 0.8285,
+        "y": 0.5398,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.3843,
+        "y": 0.98,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "masterprint",
+          "oriental masterprint",
+          "oriental masterprints"
+        ]
+      },
+      "22": {
+        "x": 0.98,
+        "y": 0.5562,
+        "keywords": [
+          "asian",
+          "identity",
+          "american",
+          "asian american",
+          "artists"
+        ]
+      },
+      "23": {
+        "x": 0.1456,
+        "y": 0.6677,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
+      },
+      "24": {
+        "x": 0.4985,
+        "y": 0.02,
+        "keywords": [
+          "applicant",
+          "applicant photos",
+          "migrants",
+          "photos",
+          "photos migrants"
+        ]
+      },
+      "25": {
+        "x": 0.7533,
+        "y": 0.3965,
+        "keywords": [
+          "critical",
+          "critical mixed",
+          "mixed",
+          "race studies",
+          "race"
+        ]
+      },
+      "26": {
+        "x": 0.1673,
+        "y": 0.487,
+        "keywords": [
+          "owl",
+          "cost living",
+          "cost",
+          "living",
+          "ii"
+        ]
+      }
+    },
+    "canvas_min_w": 6326,
+    "canvas_min_h": 4090,
+    "aspect_ratio": 1.5467
+  },
+  {
+    "n": 28,
+    "cluster_positions": {
+      "0": {
+        "x": 0.3302,
+        "y": 0.4165,
+        "keywords": [
+          "umakichi",
+          "cargo",
+          "cargo cults",
+          "cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.2152,
+        "y": 0.4204,
+        "keywords": [
+          "table",
+          "chair",
+          "portrait",
+          "lamp",
+          "prints"
+        ]
+      },
+      "2": {
+        "x": 0.9385,
+        "y": 0.1671,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.9264,
+        "y": 0.9246,
+        "keywords": [
+          "american",
+          "people",
+          "culture",
+          "western",
+          "americans"
+        ]
+      },
+      "4": {
+        "x": 0.8428,
+        "y": 0.2837,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.3676,
+        "y": 0.5864,
+        "keywords": [
+          "en",
+          "rasquache",
+          "post",
+          "cults",
+          "cargo"
+        ]
+      },
+      "6": {
+        "x": 0.2103,
+        "y": 0.0565,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "flowers untitled",
+          "portfolio flowers",
+          "flowers"
+        ]
+      },
+      "7": {
+        "x": 0.9297,
+        "y": 0.5405,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7242,
+        "y": 0.595,
+        "keywords": [
+          "human",
+          "ghosts",
+          "information",
+          "identity",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.7225,
+        "y": 0.3753,
+        "keywords": [
+          "chinese",
+          "paintings",
+          "painting",
+          "images",
+          "history"
+        ]
+      },
+      "10": {
+        "x": 0.0753,
+        "y": 0.7011,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "tiger lucky",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.8197,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "feel",
+          "feeling",
+          "feels"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.5874,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "white",
+          "black"
+        ]
+      },
+      "13": {
+        "x": 0.98,
+        "y": 0.2387,
+        "keywords": [
+          "asian american",
+          "asian",
+          "mixed",
+          "race",
+          "mixed race"
+        ]
+      },
+      "14": {
+        "x": 0.2504,
+        "y": 0.6318,
+        "keywords": [
+          "lamp",
+          "akari",
+          "nude",
+          "akari floor",
+          "paris abstraction"
+        ]
+      },
+      "15": {
+        "x": 0.1066,
+        "y": 0.874,
+        "keywords": [
+          "site",
+          "near",
+          "far",
+          "feels",
+          "felt"
+        ]
+      },
+      "16": {
+        "x": 0.968,
+        "y": 0.7403,
+        "keywords": [
+          "people",
+          "race",
+          "social",
+          "mixed",
+          "racial"
+        ]
+      },
+      "17": {
+        "x": 0.8292,
+        "y": 0.8286,
+        "keywords": [
+          "asian",
+          "t",
+          "chinese",
+          "language",
+          "mixed"
+        ]
+      },
+      "18": {
+        "x": 0.5322,
+        "y": 0.02,
+        "keywords": [
+          "morphologies",
+          "comparative",
+          "comparative morphologies",
+          "morphologies comparative",
+          "figure"
+        ]
+      },
+      "19": {
+        "x": 0.9668,
+        "y": 0.3689,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "portraits"
+        ]
+      },
+      "20": {
+        "x": 0.8222,
+        "y": 0.4677,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.3212,
+        "y": 0.02,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "masterprint",
+          "masterprint series",
+          "oriental masterprints"
+        ]
+      },
+      "22": {
+        "x": 0.98,
+        "y": 0.4185,
+        "keywords": [
+          "asian",
+          "identity",
+          "american",
+          "asian american",
+          "artists"
+        ]
+      },
+      "23": {
+        "x": 0.2349,
+        "y": 0.2434,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "desert flower",
+          "chrysanthemums"
+        ]
+      },
+      "24": {
+        "x": 0.5084,
+        "y": 0.98,
+        "keywords": [
+          "migrants",
+          "applicant",
+          "photos migrants",
+          "photos",
+          "applicant photos"
+        ]
+      },
+      "25": {
+        "x": 0.8352,
+        "y": 0.6477,
+        "keywords": [
+          "critical",
+          "critical mixed",
+          "mixed",
+          "race studies",
+          "race"
+        ]
+      },
+      "26": {
+        "x": 0.1323,
+        "y": 0.545,
+        "keywords": [
+          "aleyda",
+          "cost",
+          "cost living",
+          "owl",
+          "ii"
+        ]
+      },
+      "27": {
+        "x": 0.1153,
+        "y": 0.3267,
+        "keywords": [
+          "plane",
+          "plane trees",
+          "trees",
+          "plane tree",
+          "tree"
+        ]
+      }
+    },
+    "canvas_min_w": 6478,
+    "canvas_min_h": 4048,
+    "aspect_ratio": 1.6003
+  },
+  {
+    "n": 29,
+    "cluster_positions": {
+      "0": {
+        "x": 0.2618,
+        "y": 0.5298,
+        "keywords": [
+          "umakichi",
+          "cults",
+          "cargo cults",
+          "cargo",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.16,
+        "y": 0.6055,
+        "keywords": [
+          "table",
+          "chair",
+          "portrait",
+          "lamp",
+          "ii"
+        ]
+      },
+      "2": {
+        "x": 0.9019,
+        "y": 0.2039,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.9441,
+        "y": 0.98,
+        "keywords": [
+          "american",
+          "people",
+          "culture",
+          "western",
+          "immigrants"
+        ]
+      },
+      "4": {
+        "x": 0.8316,
+        "y": 0.3539,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "world",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.3615,
+        "y": 0.6148,
+        "keywords": [
+          "abstraction",
+          "paris",
+          "paris abstraction",
+          "en",
+          "c"
+        ]
+      },
+      "6": {
+        "x": 0.1701,
+        "y": 0.1872,
+        "keywords": [
+          "portfolio flowers",
+          "portfolio",
+          "flowers",
+          "flowers untitled",
+          "untitled"
+        ]
+      },
+      "7": {
+        "x": 0.9375,
+        "y": 0.701,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7155,
+        "y": 0.6366,
+        "keywords": [
+          "human",
+          "identity",
+          "information",
+          "ghosts",
+          "memories"
+        ]
+      },
+      "9": {
+        "x": 0.736,
+        "y": 0.4622,
+        "keywords": [
+          "chinese",
+          "paintings",
+          "painting",
+          "images",
+          "history"
+        ]
+      },
+      "10": {
+        "x": 0.0799,
+        "y": 0.7293,
+        "keywords": [
+          "lucky tiger",
+          "tiger",
+          "lucky",
+          "tiger lucky",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.8952,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "fiction",
+          "fictional",
+          "field"
+        ]
+      },
+      "12": {
+        "x": 0.9777,
+        "y": 0.5351,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "white",
+          "black"
+        ]
+      },
+      "13": {
+        "x": 0.98,
+        "y": 0.2342,
+        "keywords": [
+          "asian american",
+          "asian",
+          "mixed",
+          "race",
+          "american"
+        ]
+      },
+      "14": {
+        "x": 0.1082,
+        "y": 0.02,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "form",
+          "hanging",
+          "nature"
+        ]
+      },
+      "15": {
+        "x": 0.0943,
+        "y": 0.98,
+        "keywords": [
+          "site",
+          "near",
+          "far",
+          "field",
+          "figurative"
+        ]
+      },
+      "16": {
+        "x": 0.98,
+        "y": 0.8421,
+        "keywords": [
+          "people",
+          "race",
+          "social",
+          "mixed",
+          "racial"
+        ]
+      },
+      "17": {
+        "x": 0.8764,
+        "y": 0.8505,
+        "keywords": [
+          "asian",
+          "t",
+          "chinese",
+          "language",
+          "mixed"
+        ]
+      },
+      "18": {
+        "x": 0.5065,
+        "y": 0.1065,
+        "keywords": [
+          "morphologies",
+          "comparative",
+          "comparative morphologies",
+          "morphologies comparative",
+          "filled men"
+        ]
+      },
+      "19": {
+        "x": 0.9537,
+        "y": 0.3632,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "identity",
+          "portraits"
+        ]
+      },
+      "20": {
+        "x": 0.8649,
+        "y": 0.5291,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.2736,
+        "y": 0.1174,
+        "keywords": [
+          "oriental",
+          "series oriental",
+          "masterprint",
+          "oriental masterprints",
+          "oriental masterprint"
+        ]
+      },
+      "22": {
+        "x": 0.98,
+        "y": 0.4534,
+        "keywords": [
+          "asian",
+          "identity",
+          "american",
+          "asian american",
+          "artists"
+        ]
+      },
+      "23": {
+        "x": 0.1575,
+        "y": 0.4297,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "chrysanthemums",
+          "desert flower"
+        ]
+      },
+      "24": {
+        "x": 0.5015,
+        "y": 0.9127,
+        "keywords": [
+          "photos migrants",
+          "photos",
+          "migrants",
+          "applicant",
+          "applicant photos"
+        ]
+      },
+      "25": {
+        "x": 0.823,
+        "y": 0.6939,
+        "keywords": [
+          "critical",
+          "critical mixed",
+          "mixed",
+          "race studies",
+          "race"
+        ]
+      },
+      "26": {
+        "x": 0.1494,
+        "y": 0.8678,
+        "keywords": [
+          "aleyda",
+          "living aleyda",
+          "living",
+          "figurative",
+          "figurative painting"
+        ]
+      },
+      "27": {
+        "x": 0.0826,
+        "y": 0.2982,
+        "keywords": [
+          "plane",
+          "tree",
+          "plane tree",
+          "trees",
+          "plane trees"
+        ]
+      },
+      "28": {
+        "x": 0.2361,
+        "y": 0.7448,
+        "keywords": [
+          "lamp",
+          "akari",
+          "owl",
+          "nude",
+          "akari floor"
+        ]
+      }
+    },
+    "canvas_min_w": 6692,
+    "canvas_min_h": 4270,
+    "aspect_ratio": 1.5672
+  },
+  {
+    "n": 30,
+    "cluster_positions": {
+      "0": {
+        "x": 0.2705,
+        "y": 0.5075,
+        "keywords": [
+          "umakichi",
+          "cargo",
+          "cargo cults",
+          "cults",
+          "umakichi umakichi"
+        ]
+      },
+      "1": {
+        "x": 0.1819,
+        "y": 0.6109,
+        "keywords": [
+          "table",
+          "chair",
+          "portrait",
+          "lamp",
+          "ii"
+        ]
+      },
+      "2": {
+        "x": 0.9267,
+        "y": 0.2414,
+        "keywords": [
+          "painting",
+          "work",
+          "self",
+          "figurative",
+          "tradition"
+        ]
+      },
+      "3": {
+        "x": 0.9065,
+        "y": 0.9689,
+        "keywords": [
+          "american",
+          "people",
+          "western",
+          "culture",
+          "americans"
+        ]
+      },
+      "4": {
+        "x": 0.8122,
+        "y": 0.2903,
+        "keywords": [
+          "work",
+          "language",
+          "ghost",
+          "chantri",
+          "people"
+        ]
+      },
+      "5": {
+        "x": 0.3521,
+        "y": 0.6261,
+        "keywords": [
+          "paris abstraction",
+          "paris",
+          "sculpture",
+          "shape",
+          "en"
+        ]
+      },
+      "6": {
+        "x": 0.1869,
+        "y": 0.1892,
+        "keywords": [
+          "portfolio flowers",
+          "portfolio",
+          "flowers",
+          "flowers untitled",
+          "untitled"
+        ]
+      },
+      "7": {
+        "x": 0.98,
+        "y": 0.7399,
+        "keywords": [
+          "filipinos",
+          "filipino",
+          "philippines",
+          "t",
+          "cultural"
+        ]
+      },
+      "8": {
+        "x": 0.7824,
+        "y": 0.7054,
+        "keywords": [
+          "ghosts",
+          "memories",
+          "t",
+          "life",
+          "psychological"
+        ]
+      },
+      "9": {
+        "x": 0.7577,
+        "y": 0.4491,
+        "keywords": [
+          "chinese",
+          "history",
+          "paintings",
+          "funny names",
+          "painting"
+        ]
+      },
+      "10": {
+        "x": 0.0889,
+        "y": 0.7043,
+        "keywords": [
+          "lucky tiger",
+          "lucky",
+          "tiger",
+          "tiger lucky",
+          "wildness"
+        ]
+      },
+      "11": {
+        "x": 0.02,
+        "y": 0.8785,
+        "keywords": [
+          "yellow yellow",
+          "yellow",
+          "film",
+          "films",
+          "finally"
+        ]
+      },
+      "12": {
+        "x": 0.98,
+        "y": 0.5793,
+        "keywords": [
+          "color",
+          "hair",
+          "people color",
+          "works",
+          "artists"
+        ]
+      },
+      "13": {
+        "x": 0.98,
+        "y": 0.2794,
+        "keywords": [
+          "asian",
+          "asian american",
+          "american",
+          "race",
+          "history"
+        ]
+      },
+      "14": {
+        "x": 0.128,
+        "y": 0.02,
+        "keywords": [
+          "untitled",
+          "untitled untitled",
+          "form",
+          "hanging",
+          "nature"
+        ]
+      },
+      "15": {
+        "x": 0.0886,
+        "y": 0.98,
+        "keywords": [
+          "site",
+          "far",
+          "near",
+          "focused",
+          "focus"
+        ]
+      },
+      "16": {
+        "x": 0.8139,
+        "y": 0.872,
+        "keywords": [
+          "people",
+          "race",
+          "identity",
+          "t",
+          "white"
+        ]
+      },
+      "17": {
+        "x": 0.9227,
+        "y": 0.7946,
+        "keywords": [
+          "asian",
+          "t",
+          "chinese",
+          "american",
+          "language"
+        ]
+      },
+      "18": {
+        "x": 0.5169,
+        "y": 0.1043,
+        "keywords": [
+          "comparative morphologies",
+          "morphologies",
+          "comparative",
+          "morphologies comparative",
+          "fojas"
+        ]
+      },
+      "19": {
+        "x": 0.8946,
+        "y": 0.4113,
+        "keywords": [
+          "self",
+          "portraiture",
+          "self portraiture",
+          "portraits",
+          "identity"
+        ]
+      },
+      "20": {
+        "x": 0.8505,
+        "y": 0.5694,
+        "keywords": [
+          "history",
+          "colonial",
+          "people",
+          "power",
+          "political"
+        ]
+      },
+      "21": {
+        "x": 0.2882,
+        "y": 0.1196,
+        "keywords": [
+          "oriental",
+          "masterprint series",
+          "masterprint",
+          "series oriental",
+          "oriental masterprints"
+        ]
+      },
+      "22": {
+        "x": 0.98,
+        "y": 0.4431,
+        "keywords": [
+          "asian",
+          "identity",
+          "american",
+          "asian american",
+          "hapa"
+        ]
+      },
+      "23": {
+        "x": 0.1493,
+        "y": 0.4461,
+        "keywords": [
+          "flowers",
+          "flower",
+          "desert",
+          "chrysanthemums",
+          "desert flower"
+        ]
+      },
+      "24": {
+        "x": 0.4804,
+        "y": 0.9554,
+        "keywords": [
+          "photos migrants",
+          "photos",
+          "migrants",
+          "applicant",
+          "applicant photos"
+        ]
+      },
+      "25": {
+        "x": 0.9589,
+        "y": 0.6041,
+        "keywords": [
+          "critical",
+          "critical mixed",
+          "race studies",
+          "race",
+          "studies"
+        ]
+      },
+      "26": {
+        "x": 0.1319,
+        "y": 0.8631,
+        "keywords": [
+          "living aleyda",
+          "living",
+          "folks",
+          "fojas",
+          "focused"
+        ]
+      },
+      "27": {
+        "x": 0.0985,
+        "y": 0.2929,
+        "keywords": [
+          "plane",
+          "tree",
+          "plane tree",
+          "plane trees",
+          "trees"
+        ]
+      },
+      "28": {
+        "x": 0.2299,
+        "y": 0.7721,
+        "keywords": [
+          "lamp",
+          "akari",
+          "owl",
+          "nude",
+          "floor lamp"
+        ]
+      },
+      "29": {
+        "x": 0.696,
+        "y": 0.5955,
+        "keywords": [
+          "human",
+          "humans",
+          "gens",
+          "bodies",
+          "empathic"
+        ]
+      }
+    },
+    "canvas_min_w": 6887,
+    "canvas_min_h": 4419,
+    "aspect_ratio": 1.5585
   }
 ]
