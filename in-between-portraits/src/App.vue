@@ -170,7 +170,7 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
-          heading="for artists selected from modern exhibitions about identity?"
+          heading="for artists selected from exhibitions about identity?"
           subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
           <ExhibitionsTimeline class="mt-8" />
@@ -209,8 +209,12 @@ onBeforeUnmount(() => {
       <div class="grid grid-cols-12 gap-x-2 md:gap-x-4">
         <div class="col-span-12 md:col-span-9 md:col-start-1">
           <div class="exhibitions-bridge-label__track">
-            <span class="exhibitions-bridge-label__inner">
-              <span>Exhibitions</span><span class="exhibitions-bridge-label__suffix"> and artists</span>
+            <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--exhibitions">
+              Exhibitions
+            </span>
+            <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--and">and</span>
+            <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--artists">
+              artists
             </span>
           </div>
         </div>

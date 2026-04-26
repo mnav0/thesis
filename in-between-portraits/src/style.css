@@ -181,17 +181,20 @@ select {
 }
 
 .exhibitions-bridge-label__track {
+  position: relative;
   max-width: 1100px;
   margin-left: 0;
   margin-right: auto;
   padding-left: 200px;
   padding-right: 220px;
-  text-align: center;
+  height: 2.25rem;
   box-sizing: border-box;
 }
 
-.exhibitions-bridge-label__inner {
-  display: inline-block;
+.exhibitions-bridge-label__token {
+  position: absolute;
+  left: 0;
+  top: 50%;
   font-family: "Kosugi", sans-serif;
   font-size: 1.5rem;
   line-height: 1.25;
@@ -201,7 +204,8 @@ select {
   white-space: nowrap;
 }
 
-.exhibitions-bridge-label__suffix {
+.exhibitions-bridge-label__token--and,
+.exhibitions-bridge-label__token--artists {
   opacity: 0;
 }
 
@@ -224,6 +228,23 @@ select {
   transform: translate(0, 0);
   margin-left: calc(var(--dot-size) / -2);
   margin-top: calc(var(--dot-size) / -2);
+  opacity: 0;
+}
+
+.timeline-sankey-travel-overlay {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 85;
+}
+
+.timeline-sankey-travel-rect {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #fff;
+  transform: translate(0, 0);
   opacity: 0;
 }
 

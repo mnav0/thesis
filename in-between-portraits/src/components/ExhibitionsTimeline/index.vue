@@ -3,36 +3,22 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import * as d3 from "d3";
 import { createTooltip } from "../../utils/d3/tooltip.js";
 import { exhibitionTooltipShowOptions } from "../../utils/exhibition-tooltip.js";
+import { EXHIBITION_ERA, getExhibitionEraById } from "../../utils/exhibition-era.js";
+import { exhibitionStartYear, parseArtistIds } from "../../utils/exhibition-data.js";
 import {
+  exhibitionMarkHeightPx,
   EXHIBITIONS_LINK_STROKE_PX,
   EXHIBITIONS_NODE_RX_PX,
   EXHIBITIONS_NODE_SIZE_PX,
   EXHIBITIONS_VIZ_MARGIN,
-  EXHIBITIONS_VIZ_MAX_WIDTH_PX,
 } from "../../constants/exhibitions-viz.js";
 import { FONT_SANS } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 
-const LABEL_FONT_PX = 13;
-const TIMELINE_MARKER_HEIGHT_SCALE = 0.75;
-const MARKER_HEIGHT_PER_ARTIST_PX = EXHIBITIONS_NODE_SIZE_PX * TIMELINE_MARKER_HEIGHT_SCALE;
-
-function parseArtistIds(raw) {
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(String(raw).replace(/'/g, '"'));
-    return Array.isArray(parsed) ? parsed.map(String) : [];
-  } catch {
-    return [];
-  }
-}
-
-function exhibitionStartYear(dateStart) {
-  if (!dateStart) return null;
-  const parts = String(dateStart).split("/");
-  const year = Number(parts[parts.length - 1]);
-  return Number.isFinite(year) ? String(year) : null;
-}
+const LABEL_FONT_PX = 16;
+const LANE_LABEL_FONT_PX = 16;
+const LANE_LINE_GAP_PX = 60;
+const TOP_BOTTOM_PADDING_PX = 24;
 
 const exhibitions = computed(() => {
   const rows = d3.csvParse(exhibitionsCSV);
@@ -49,18 +35,14 @@ const exhibitions = computed(() => {
         yearNum,
         artistIds,
         artistCount: artistIds.length,
+        era: getExhibitionEraById(r.id),
       };
     })
     .filter((e) => Number.isFinite(e.yearNum));
 });
 
 const markerHeightByExhibitionId = computed(() =>
-  Object.fromEntries(
-    exhibitions.value.map((e) => [
-      e.id,
-      Math.max(1, e.artistCount * MARKER_HEIGHT_PER_ARTIST_PX),
-    ]),
-  ),
+  Object.fromEntries(exhibitions.value.map((e) => [e.id, exhibitionMarkHeightPx(e.artistCount)])),
 );
 
 function layoutTimelineNodes(list) {
@@ -77,12 +59,21 @@ function layoutTimelineNodes(list) {
   return out;
 }
 
+function markerYForEra(cy, markerHeight, era) {
+  if (era === EXHIBITION_ERA.CONTEMPORARY) return cy - markerHeight;
+  if (era === EXHIBITION_ERA.MODERN) return cy;
+  return cy - markerHeight / 2;
+}
+
 const containerRef = ref(null);
 let resizeObserver = null;
+let destroyTooltip = null;
 
 function renderChart() {
   const root = containerRef.value;
   if (!root) return;
+  destroyTooltip?.();
+  destroyTooltip = null;
   d3.select(root).selectAll("*").remove();
 
   const items = exhibitions.value;
@@ -92,10 +83,15 @@ function renderChart() {
   const width = root.clientWidth || 900;
   const size = EXHIBITIONS_NODE_SIZE_PX;
   const maxMarkerHeight = d3.max(items, (d) => markerHeightByExhibitionId.value[d.id] ?? size) ?? size;
-  const height = Math.max(48, maxMarkerHeight + 40);
+  const minHeightForLaneGuides = LANE_LINE_GAP_PX * 2 + 72;
+  const height = Math.max(
+    minHeightForLaneGuides,
+    maxMarkerHeight * 2 + TOP_BOTTOM_PADDING_PX * 2,
+  );
   const innerLeft = margin.left;
   const innerRight = width - margin.right;
   const cy = height / 2;
+  const laneOffset = Math.max(LANE_LINE_GAP_PX, size + 4);
 
   const yearNums = items.map((d) => d.yearNum);
   const lo = d3.min(yearNums);
@@ -118,10 +114,33 @@ function renderChart() {
     .attr("viewBox", `0 0 ${width} ${height}`)
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-  const { show, hide } = createTooltip(root);
+  const { show, hide, destroy } = createTooltip(root);
+  destroyTooltip = destroy;
 
   const lineX1 = xScale(domainLo);
   const lineX2 = xScale(domainHi);
+
+  svg
+    .append("line")
+    .attr("x1", lineX1)
+    .attr("x2", lineX2)
+    .attr("y1", cy - laneOffset)
+    .attr("y2", cy - laneOffset)
+    .attr("stroke", "#fff")
+    .attr("stroke-opacity", 0.7)
+    .attr("stroke-width", EXHIBITIONS_LINK_STROKE_PX)
+    .attr("stroke-dasharray", "2.5 3");
+
+  svg
+    .append("line")
+    .attr("x1", lineX1)
+    .attr("x2", lineX2)
+    .attr("y1", cy + laneOffset)
+    .attr("y2", cy + laneOffset)
+    .attr("stroke", "#fff")
+    .attr("stroke-opacity", 0.7)
+    .attr("stroke-width", EXHIBITIONS_LINK_STROKE_PX)
+    .attr("stroke-dasharray", "2.5 3");
 
   svg
     .append("line")
@@ -137,11 +156,35 @@ function renderChart() {
     .attr("x", innerLeft - 10)
     .attr("y", cy)
     .attr("text-anchor", "end")
-    .attr("dominant-baseline", "middle")
+    .attr("dominant-baseline", "central")
     .attr("fill", "#fff")
     .style("font-family", FONT_SANS)
     .style("font-size", `${LABEL_FONT_PX}px`)
     .text(String(lo));
+
+  svg
+    .append("text")
+    .attr("x", innerLeft - 10)
+    .attr("y", cy - laneOffset)
+    .attr("text-anchor", "end")
+    .attr("dominant-baseline", "middle")
+    .attr("fill", "#fff")
+    .attr("fill-opacity", 0.75)
+    .style("font-family", FONT_SANS)
+    .style("font-size", `${LANE_LABEL_FONT_PX}px`)
+    .text("CONTEMPORARY");
+
+  svg
+    .append("text")
+    .attr("x", innerLeft - 10)
+    .attr("y", cy + laneOffset)
+    .attr("text-anchor", "end")
+    .attr("dominant-baseline", "middle")
+    .attr("fill", "#fff")
+    .attr("fill-opacity", 0.75)
+    .style("font-family", FONT_SANS)
+    .style("font-size", `${LANE_LABEL_FONT_PX}px`)
+    .text("MODERN");
 
   svg
     .append("text")
@@ -156,27 +199,68 @@ function renderChart() {
 
   const rx = EXHIBITIONS_NODE_RX_PX;
 
-  svg
+  const markers = svg
     .selectAll("rect.exhibition-marker")
     .data(laidOut)
     .enter()
     .append("rect")
     .attr("class", "exhibition-marker")
+    .attr("data-exhibition-id", (d) => d.id)
+    .attr("data-era", (d) => d.era)
     .attr("x", (d) => xScale(d.yearNum) + d.xOffset - size / 2)
-    .attr("y", (d) => cy - (markerHeightByExhibitionId.value[d.id] ?? size) / 2)
+    .attr("y", (d) => markerYForEra(cy, markerHeightByExhibitionId.value[d.id] ?? size, d.era))
     .attr("width", size)
     .attr("height", (d) => markerHeightByExhibitionId.value[d.id] ?? size)
     .attr("rx", rx)
     .attr("fill", "#fff")
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
-    .style("cursor", "pointer")
-    .on("mouseover", function (event, d) {
-      d3.select(this).attr("fill", "#eee").attr("stroke-width", 2);
-      show(event, exhibitionTooltipShowOptions(d, d.artistCount));
+    .style("cursor", "pointer");
+  markers.each(function (d) {
+    d._markerEl = this;
+  });
+
+  // Wider invisible targets help recover hover on narrow timeline bars.
+  const hitWidth = Math.max(size, 14);
+  const hitOffset = (hitWidth - size) / 2;
+  const markerHits = svg
+    .selectAll("rect.exhibition-marker-hit")
+    .data(laidOut)
+    .enter()
+    .append("rect")
+    .attr("class", "exhibition-marker-hit")
+    .attr("data-exhibition-id", (d) => d.id)
+    .attr("data-era", (d) => d.era)
+    .attr("x", (d) => xScale(d.yearNum) + d.xOffset - size / 2 - hitOffset)
+    .attr("y", (d) => markerYForEra(cy, markerHeightByExhibitionId.value[d.id] ?? size, d.era))
+    .attr("width", hitWidth)
+    .attr("height", (d) => markerHeightByExhibitionId.value[d.id] ?? size)
+    .attr("fill", "transparent")
+    .style("cursor", "pointer");
+
+  markers
+    .on("mouseenter", function (event, d) {
+      d3.select(this).attr("stroke-width", 2);
+      show(event, exhibitionTooltipShowOptions(d));
     })
-    .on("mouseout", function () {
-      d3.select(this).attr("fill", "#fff").attr("stroke-width", 1);
+    .on("mousemove", function (event, d) {
+      show(event, exhibitionTooltipShowOptions(d));
+    })
+    .on("mouseleave", function () {
+      d3.select(this).attr("stroke-width", 1);
+      hide();
+    });
+
+  markerHits
+    .on("mouseenter", function (event, d) {
+      d3.select(d._markerEl).attr("stroke-width", 2);
+      show(event, exhibitionTooltipShowOptions(d));
+    })
+    .on("mousemove", function (event, d) {
+      show(event, exhibitionTooltipShowOptions(d));
+    })
+    .on("mouseleave", function (event, d) {
+      d3.select(d._markerEl).attr("stroke-width", 1);
       hide();
     });
 }
@@ -197,17 +281,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener("resize", handleResize);
   resizeObserver?.disconnect();
+  destroyTooltip?.();
+  destroyTooltip = null;
 });
 
 watch(exhibitions, renderChart, { deep: true });
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    class="exhibitions-timeline"
-    :style="{ maxWidth: `${EXHIBITIONS_VIZ_MAX_WIDTH_PX}px` }"
-  ></div>
+  <div ref="containerRef" class="exhibitions-timeline"></div>
 </template>
 
 <style scoped src="./style.css"></style>

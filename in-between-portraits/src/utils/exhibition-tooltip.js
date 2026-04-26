@@ -19,10 +19,19 @@ export function escapeHtml(s) {
 export function exhibitionTooltipShowOptions(d) {
   const year = d.startYear ? escapeHtml(d.startYear) : "-";
   const loc = d.location ? escapeHtml(d.location) : "-";
+  const artistCount = Array.isArray(d.artistIds)
+    ? d.artistIds.length
+    : Number.isFinite(Number(d.artistCount))
+      ? Number(d.artistCount)
+      : null;
+  const artistLine =
+    artistCount == null
+      ? ""
+      : `<div>${artistCount} ${artistCount === 1 ? "artist" : "artists"}</div>`;
   return {
     bg: "#fff",
     fg: "#111",
     border: "#111",
-    html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div><div>${year}</div><div>${loc}</div></div>`,
+    html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div><div style="height:0.8em"></div><div>${loc} (${year})</div>${artistLine}</div>`,
   };
 }

@@ -13,8 +13,9 @@ import { FONT_SANS } from "../../constants.js";
  *     – hides the tooltip.
  */
 export function createTooltip(container) {
+  const mountTarget = document.body ?? container;
   const tooltip = d3
-    .select(container)
+    .select(mountTarget)
     .append("div")
     .attr("class", "d3-tooltip")
     .style("position", "fixed")
@@ -73,5 +74,9 @@ export function createTooltip(container) {
     tooltip.style("display", "none");
   }
 
-  return { tooltip, show, hide };
+  function destroy() {
+    tooltip.remove();
+  }
+
+  return { tooltip, show, hide, destroy };
 }

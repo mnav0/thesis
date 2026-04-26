@@ -1,9 +1,16 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
+import {
+  EXHIBITIONS_NODE_RX_PX,
+} from "../constants/exhibitions-viz.js";
 
 const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
+const EXHIBITIONS_LABEL_END_Y_OFFSET_PX = -4;
+const EXHIBITIONS_LABEL_START_X_OFFSET_PX = 6;
+const EXHIBITIONS_LABEL_END_X_NUDGE_PX = 2;
+const ARTISTS_LABEL_END_X_NUDGE_PX = -2;
 
 function measurePersonaPositions(actorsEl, section3El, personaIcon, section3PersonaImg) {
   if (!actorsEl || !section3El || !personaIcon || !section3PersonaImg) return null;
@@ -181,32 +188,128 @@ function setupExhibitionsLabel({
 }) {
   if (!labelEl || !startAnchorEl || !endAnchorEl || !timelineSectionEl || !sankeySectionEl) return;
 
-  const innerEl = labelEl.querySelector(".exhibitions-bridge-label__inner");
-  const suffixEl = labelEl.querySelector(".exhibitions-bridge-label__suffix");
-  if (!innerEl || !suffixEl) return;
+  const trackEl = labelEl.querySelector(".exhibitions-bridge-label__track");
+  const exhibitionsEl = labelEl.querySelector(".exhibitions-bridge-label__token--exhibitions");
+  const andEl = labelEl.querySelector(".exhibitions-bridge-label__token--and");
+  const artistsEl = labelEl.querySelector(".exhibitions-bridge-label__token--artists");
+  if (!trackEl || !exhibitionsEl || !andEl || !artistsEl) return;
+  gsap.set([exhibitionsEl, andEl, artistsEl], { yPercent: -50 });
 
-  const suffixWidth = suffixEl.getBoundingClientRect().width;
-  gsap.set(innerEl, { x: suffixWidth / 2 });
-  gsap.set(suffixEl, { opacity: 0 });
+  function yFromTimelineBaseline() {
+    const baselineLine = [...timelineSectionEl.querySelectorAll(".exhibitions-timeline line")]
+      .find((node) => !node.hasAttribute("stroke-dasharray"));
+    if (baselineLine) {
+      const { top, height } = baselineLine.getBoundingClientRect();
+      return top + height / 2;
+    }
+    return startAnchorEl.getBoundingClientRect().top;
+  }
+
+  function labelTopForTokenCenter(targetCenterY) {
+    const labelRect = labelEl.getBoundingClientRect();
+    const exhibitionsRect = exhibitionsEl.getBoundingClientRect();
+    const tokenCenterOffset = exhibitionsRect.top + exhibitionsRect.height / 2 - labelRect.top;
+    return targetCenterY - tokenCenterOffset;
+  }
+
+  function getSankeyColumnTargets() {
+    const labelNodes = [...sankeySectionEl.querySelectorAll(".sankey-node-label")];
+    const exhibitionLabelRects = labelNodes
+      .filter((node) => node.getAttribute("text-anchor") === "end")
+      .map((node) => node.getBoundingClientRect());
+    const artistLabelRects = labelNodes
+      .filter((node) => node.getAttribute("text-anchor") === "start")
+      .map((node) => node.getBoundingClientRect());
+
+    if (!exhibitionLabelRects.length || !artistLabelRects.length) return null;
+
+    const exhibitionRight = Math.max(...exhibitionLabelRects.map((rect) => rect.right));
+    const artistLeft = Math.min(...artistLabelRects.map((rect) => rect.left));
+    return { exhibitionRight, artistLeft };
+  }
+
+  function getTokenTargets() {
+    const trackRect = trackEl.getBoundingClientRect();
+    const exhibitionWidth = exhibitionsEl.getBoundingClientRect().width;
+    const andWidth = andEl.getBoundingClientRect().width;
+    const artistsWidth = artistsEl.getBoundingClientRect().width;
+    const trackWidth = trackRect.width;
+    const startAnchoredExhibitionsX = EXHIBITIONS_LABEL_START_X_OFFSET_PX;
+    const sankeyTargets = getSankeyColumnTargets();
+    if (!sankeyTargets) {
+      const fallbackAndX = trackWidth / 2 - andWidth / 2;
+      return {
+        exhibitionsStartX: startAnchoredExhibitionsX,
+        exhibitionsEndX: startAnchoredExhibitionsX,
+        andTargetX: fallbackAndX,
+        artistsTargetX: fallbackAndX + andWidth + 12,
+      };
+    }
+
+    const clampToTrack = (x, tokenWidth) =>
+      gsap.utils.clamp(0, Math.max(0, trackWidth - tokenWidth), x);
+
+    const exhibitionsEndX = clampToTrack(
+      sankeyTargets.exhibitionRight - trackRect.left - exhibitionWidth + EXHIBITIONS_LABEL_END_X_NUDGE_PX,
+      exhibitionWidth,
+    );
+    const artistsTargetX = clampToTrack(
+      sankeyTargets.artistLeft - trackRect.left + ARTISTS_LABEL_END_X_NUDGE_PX,
+      artistsWidth,
+    );
+    const andTargetX = clampToTrack(
+      (sankeyTargets.exhibitionRight + sankeyTargets.artistLeft) / 2 - trackRect.left - andWidth / 2,
+      andWidth,
+    );
+
+    return {
+      exhibitionsStartX: clampToTrack(startAnchoredExhibitionsX, exhibitionWidth),
+      exhibitionsEndX,
+      andTargetX,
+      artistsTargetX,
+    };
+  }
 
   function applyProgress(p) {
-    const startTop = startAnchorEl.getBoundingClientRect().top;
-    const endTop = endAnchorEl.getBoundingClientRect().top;
+    const startCenterY = yFromTimelineBaseline();
+    const endCenterY = endAnchorEl.getBoundingClientRect().top + EXHIBITIONS_LABEL_END_Y_OFFSET_PX;
+    const {
+      exhibitionsStartX,
+      exhibitionsEndX,
+      andTargetX,
+      artistsTargetX,
+    } = getTokenTargets();
 
     const yP = Math.min(p / 0.15, 1);
-    const top = yP >= 1 ? endTop : startTop + (endTop - startTop) * yP;
+    const tokenCenterY =
+      yP >= 1 ? endCenterY : startCenterY + (endCenterY - startCenterY) * yP;
+    const top = labelTopForTokenCenter(tokenCenterY);
     gsap.set(labelEl, { top, opacity: 1 });
 
     const xP = gsap.utils.clamp(0, 1, (p - 0.15) / 0.06);
-    gsap.set(innerEl, { x: (suffixWidth / 2) * (1 - xP) });
+    gsap.set(exhibitionsEl, {
+      x: exhibitionsStartX + (exhibitionsEndX - exhibitionsStartX) * xP,
+      opacity: 1,
+    });
 
     const fP = gsap.utils.clamp(0, 1, (p - 0.21) / 0.06);
-    gsap.set(suffixEl, { opacity: fP });
+    gsap.set(andEl, {
+      x: andTargetX,
+      opacity: fP,
+    });
+    gsap.set(artistsEl, {
+      x: artistsTargetX,
+      opacity: fP,
+    });
   }
 
-  function trackStartAnchor() {
-    const top = startAnchorEl.getBoundingClientRect().top;
-    gsap.set(labelEl, { top, opacity: 1 });
+  function setStartAnchorState(labelOpacity = 1) {
+    const { exhibitionsStartX } = getTokenTargets();
+    const top = labelTopForTokenCenter(yFromTimelineBaseline());
+    gsap.set(labelEl, { top, opacity: labelOpacity });
+    gsap.set(exhibitionsEl, { x: exhibitionsStartX, opacity: 1 });
+    gsap.set(andEl, { opacity: 0 });
+    gsap.set(artistsEl, { opacity: 0 });
   }
 
   ScrollTrigger.create({
@@ -214,8 +317,9 @@ function setupExhibitionsLabel({
     start: "top bottom",
     endTrigger: timelineSectionEl,
     end: "bottom bottom",
-    onUpdate: () => trackStartAnchor(),
-    onEnter: () => trackStartAnchor(),
+    onUpdate: (self) => setStartAnchorState(gsap.utils.clamp(0, 1, self.progress / 0.25)),
+    onEnter: () => setStartAnchorState(0),
+    onEnterBack: () => setStartAnchorState(1),
     onLeaveBack: () => gsap.set(labelEl, { opacity: 0 }),
   });
 
@@ -226,7 +330,7 @@ function setupExhibitionsLabel({
     end: "bottom top",
     onUpdate: (self) => applyProgress(self.progress),
     onLeave: () => gsap.set(labelEl, { opacity: 0 }),
-    onLeaveBack: () => trackStartAnchor(),
+    onLeaveBack: () => setStartAnchorState(),
     onEnter: () => applyProgress(0),
     onEnterBack: () => applyProgress(1),
   });
@@ -243,6 +347,195 @@ function centerFromRect(rect, rootRect) {
     x: rect.left + rect.width / 2 - rootRect.left,
     y: rect.top + rect.height / 2 - rootRect.top,
   };
+}
+
+function rectInRootSpace(rect, rootRect) {
+  return {
+    x: rect.left - rootRect.left,
+    y: rect.top - rootRect.top,
+    width: rect.width,
+    height: rect.height,
+  };
+}
+
+function setupTimelineToSankeyExhibitionTravel({ timelineSectionEl, sankeySectionEl }) {
+  if (!timelineSectionEl || !sankeySectionEl) return;
+
+  // Keep this transition quick/subtle so the Sankey is fully settled at section top.
+  const GROUP_STAGGER_STEP = 0.008;
+  const GROUP_STAGGER_MAX = 0.045;
+  const TRAVEL_PROGRESS_SPAN = 0.5;
+  const SOURCE_HIDE_PROGRESS = 0.05;
+  const SANKEY_REVEAL_PROGRESS = 0.5;
+  const contentEl = document.querySelector(SMOOTH_CONTENT_ID);
+  if (!contentEl) return;
+
+  const overlayEl = document.createElement("div");
+  overlayEl.className = "timeline-sankey-travel-overlay";
+  contentEl.appendChild(overlayEl);
+
+  let pairs = [];
+  let sourceNodes = [];
+  let targetNodes = [];
+  let latestProgress = 0;
+  let timelineObserver = null;
+  let sankeyObserver = null;
+
+  function setNodesOpacity(nodes, opacity) {
+    nodes.forEach((node) => {
+      node.style.opacity = opacity;
+    });
+  }
+
+  function clearOverlayRects() {
+    overlayEl.replaceChildren();
+    pairs = [];
+  }
+
+  function resetOriginalRects() {
+    setNodesOpacity(sourceNodes, "");
+    setNodesOpacity(targetNodes, "");
+  }
+
+  function collectPairs() {
+    const contentRect = contentEl.getBoundingClientRect();
+    sourceNodes = [
+      ...timelineSectionEl.querySelectorAll(".exhibition-marker[data-exhibition-id]"),
+    ];
+    targetNodes = [...sankeySectionEl.querySelectorAll("rect.sankey-node-mark[data-exhibition-id]")];
+    if (!sourceNodes.length || !targetNodes.length) return [];
+
+    const sourceById = new Map();
+    sourceNodes.forEach((node) => {
+      const exhibitionId = node.dataset.exhibitionId;
+      if (!exhibitionId || sourceById.has(exhibitionId)) return;
+      sourceById.set(exhibitionId, node);
+    });
+
+    const out = [];
+    targetNodes.forEach((targetNode, index) => {
+      const exhibitionId = targetNode.dataset.exhibitionId;
+      const sourceNode = exhibitionId ? sourceById.get(exhibitionId) : null;
+      if (!sourceNode) return;
+
+      const sourceRect = rectInRootSpace(sourceNode.getBoundingClientRect(), contentRect);
+      const targetRect = rectInRootSpace(targetNode.getBoundingClientRect(), contentRect);
+
+      const proxyRectEl = document.createElement("div");
+      proxyRectEl.className = "timeline-sankey-travel-rect";
+      proxyRectEl.style.width = `${sourceRect.width}px`;
+      proxyRectEl.style.height = `${sourceRect.height}px`;
+      proxyRectEl.style.borderRadius = `${EXHIBITIONS_NODE_RX_PX}px`;
+      overlayEl.appendChild(proxyRectEl);
+
+      const delay = Math.min(index * GROUP_STAGGER_STEP, GROUP_STAGGER_MAX);
+      out.push({
+        sourceRect,
+        targetRect,
+        delay,
+        proxyRectEl,
+      });
+    });
+
+    return out;
+  }
+
+  function applyProgress(progress) {
+    const p = clamp01(progress);
+    if (!pairs.length) {
+      resetOriginalRects();
+      return;
+    }
+
+    // Solid handoff: avoid opacity blending between source/proxy/target.
+    const sourceOpacity = p <= SOURCE_HIDE_PROGRESS ? "1" : "0";
+    sourceNodes.forEach((node) => { node.style.opacity = sourceOpacity; });
+    targetNodes.forEach((node) => {
+      node.style.opacity = p >= SANKEY_REVEAL_PROGRESS ? "1" : "0";
+    });
+
+    pairs.forEach((pair) => {
+      const localProgress = clamp01((p - pair.delay) / TRAVEL_PROGRESS_SPAN);
+      const x = pair.sourceRect.x + (pair.targetRect.x - pair.sourceRect.x) * localProgress;
+      const y = pair.sourceRect.y + (pair.targetRect.y - pair.sourceRect.y) * localProgress;
+      const width = pair.sourceRect.width + (pair.targetRect.width - pair.sourceRect.width) * localProgress;
+      const height = pair.sourceRect.height + (pair.targetRect.height - pair.sourceRect.height) * localProgress;
+      pair.proxyRectEl.style.transform = `translate(${x}px, ${y}px)`;
+      pair.proxyRectEl.style.width = `${width}px`;
+      pair.proxyRectEl.style.height = `${height}px`;
+      pair.proxyRectEl.style.opacity = localProgress > 0 && localProgress < 1 ? "1" : "0";
+    });
+  }
+
+  function rebuild(progress = 0) {
+    clearOverlayRects();
+    resetOriginalRects();
+    pairs = collectPairs();
+    applyProgress(progress);
+  }
+
+  function cleanup() {
+    clearOverlayRects();
+    resetOriginalRects();
+    timelineObserver?.disconnect();
+    sankeyObserver?.disconnect();
+    timelineObserver = null;
+    sankeyObserver = null;
+  }
+
+  function observeSection(sectionEl, observerRefSetter) {
+    const observer = new MutationObserver(() => {
+      requestAnimationFrame(() => rebuild(latestProgress));
+    });
+    observer.observe(sectionEl, {
+      subtree: true,
+      childList: true,
+    });
+    observerRefSetter(observer);
+  }
+
+  function setupSectionMutationObservers() {
+    if (!timelineObserver) {
+      observeSection(timelineSectionEl, (observer) => {
+        timelineObserver = observer;
+      });
+    }
+    if (!sankeyObserver) {
+      observeSection(sankeySectionEl, (observer) => {
+        sankeyObserver = observer;
+      });
+    }
+  }
+
+  ScrollTrigger.create({
+    trigger: timelineSectionEl,
+    start: "bottom bottom",
+    endTrigger: sankeySectionEl,
+    end: "top top",
+    scrub: 1,
+    onEnter: () => {
+      latestProgress = 0;
+      rebuild(0);
+      setupSectionMutationObservers();
+    },
+    onEnterBack: () => {
+      latestProgress = 1;
+      rebuild(1);
+      setupSectionMutationObservers();
+    },
+    onUpdate: (self) => {
+      latestProgress = self.progress;
+      applyProgress(self.progress);
+    },
+    onRefresh: (self) => {
+      latestProgress = self.progress;
+      rebuild(self.progress);
+      setupSectionMutationObservers();
+    },
+    onLeave: () => cleanup(),
+    onLeaveBack: () => cleanup(),
+    onKill: () => cleanup(),
+  });
 }
 
 function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
@@ -472,6 +765,11 @@ export function initAppScrollAnimations({
     labelEl: exhibitionsLabelEl,
     startAnchorEl: exhibitionsAnchorStartEl,
     endAnchorEl: exhibitionsAnchorEndRef,
+    timelineSectionEl: sectionAfterS3El,
+    sankeySectionEl,
+  });
+
+  setupTimelineToSankeyExhibitionTravel({
     timelineSectionEl: sectionAfterS3El,
     sankeySectionEl,
   });

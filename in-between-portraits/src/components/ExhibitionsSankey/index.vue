@@ -7,11 +7,13 @@ import {
   escapeHtml,
   exhibitionTooltipShowOptions,
 } from "../../utils/exhibition-tooltip.js";
+import { exhibitionStartYear, parseArtistIds } from "../../utils/exhibition-data.js";
 import {
+  exhibitionMarkHeightPx,
   EXHIBITIONS_LINK_STROKE_PX,
+  EXHIBITIONS_NODE_RX_PX,
   EXHIBITIONS_NODE_SIZE_PX,
   EXHIBITIONS_VIZ_MARGIN,
-  EXHIBITIONS_VIZ_MAX_WIDTH_PX,
 } from "../../constants/exhibitions-viz.js";
 import { DOT_SIZE_PX, FONT_SANS } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
@@ -19,11 +21,15 @@ import artistsCSV from "../../data/artists.csv?raw";
 
 const NODE_WIDTH = EXHIBITIONS_NODE_SIZE_PX;
 const NODE_PADDING = 32;
-const LABEL_FONT_PX = 13;
+const LABEL_FONT_PX = 16;
+const LABEL_OFFSET_PX = 8;
+const LABEL_LINE_HEIGHT_EM = 1.1;
+const LABEL_SINGLE_LINE_DY_EM = 0.35;
 const LINK_STROKE = EXHIBITIONS_LINK_STROKE_PX;
 const BASE_REQUIRED_HEIGHT = 600;
 
 const containerRef = ref(null);
+let destroyTooltip = null;
 
 const artistsById = computed(() => {
   const rows = d3.csvParse(artistsCSV);
@@ -31,16 +37,6 @@ const artistsById = computed(() => {
   rows.forEach((r) => (map[r.id] = r));
   return map;
 });
-
-function parseArtistIds(raw) {
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(String(raw).replace(/'/g, '"'));
-    return Array.isArray(parsed) ? parsed.map(String) : [];
-  } catch {
-    return [];
-  }
-}
 
 /** Tooltip only: birth/death line, or null if no birth year. */
 function artistLifeLine(row) {
@@ -52,14 +48,7 @@ function artistLifeLine(row) {
   return `(${by} - )`;
 }
 
-function exhibitionStartYear(dateStart) {
-  if (!dateStart) return null;
-  const parts = String(dateStart).split("/");
-  const year = Number(parts[parts.length - 1]);
-  return Number.isFinite(year) ? String(year) : null;
-}
-
-/** Longest line width */
+/** Longest label line width for exhibition names. */
 const EXHIBITION_LINE_MAX_CHARS = 28;
 
 /** Greedy word wrap; used as fallback and for long segments. */
@@ -96,79 +85,83 @@ function wrapGreedyWords(trimmed, max) {
 }
 
 /**
- * Two lines at a word boundary closest to the string midpoint (both lines <= max).
+ * Dynamic-programming line wrap at word boundaries.
+ * Uses the minimum needed line count and minimizes unevenness.
  */
-function wrapBalancedNearMiddle(trimmed, max) {
-  const words = trimmed.split(/\s+/);
+function wrapBalancedWords(trimmed, max) {
+  const words = trimmed.split(/\s+/).filter(Boolean);
   if (words.length <= 1) return wrapGreedyWords(trimmed, max);
 
-  const L = trimmed.length;
-  let bestK = -1;
-  let bestScore = Infinity;
+  const n = words.length;
+  const lens = words.map((word) => word.length);
+  const prefix = [0];
+  for (let i = 0; i < n; i++) prefix.push(prefix[i] + lens[i]);
 
-  for (let k = 1; k < words.length; k++) {
-    const line1 = words.slice(0, k).join(" ");
-    const line2 = words.slice(k).join(" ");
-    if (line1.length > max || line2.length > max) continue;
-    const score =
-      Math.abs(line1.length - L / 2) + 0.01 * Math.abs(line1.length - line2.length);
-    if (score < bestScore) {
-      bestScore = score;
-      bestK = k;
+  function segmentLength(i, jExclusive) {
+    const wordsLen = prefix[jExclusive] - prefix[i];
+    const spaces = Math.max(0, jExclusive - i - 1);
+    return wordsLen + spaces;
+  }
+
+  const lineCount = Math.max(1, Math.ceil(trimmed.length / max));
+  const targetLen = trimmed.length / lineCount;
+  const dp = Array.from({ length: lineCount + 1 }, () => Array(n + 1).fill(Infinity));
+  const prev = Array.from({ length: lineCount + 1 }, () => Array(n + 1).fill(-1));
+  dp[0][0] = 0;
+
+  for (let k = 1; k <= lineCount; k++) {
+    for (let end = 1; end <= n; end++) {
+      for (let start = 0; start < end; start++) {
+        if (!Number.isFinite(dp[k - 1][start])) continue;
+        const len = segmentLength(start, end);
+        if (len > max) continue;
+        const cost = dp[k - 1][start] + (len - targetLen) ** 2;
+        if (cost < dp[k][end]) {
+          dp[k][end] = cost;
+          prev[k][end] = start;
+        }
+      }
     }
   }
 
-  if (bestK !== -1) {
-    return [words.slice(0, bestK).join(" "), words.slice(bestK).join(" ")];
+  if (!Number.isFinite(dp[lineCount][n])) return wrapGreedyWords(trimmed, max);
+
+  const lines = [];
+  let end = n;
+  for (let k = lineCount; k >= 1; k--) {
+    const start = prev[k][end];
+    if (start < 0) break;
+    lines.push(words.slice(start, end).join(" "));
+    end = start;
   }
-  return wrapGreedyWords(trimmed, max);
+  lines.reverse();
+  return lines.length ? lines : wrapGreedyWords(trimmed, max);
 }
 
-/**
- * Split on ":" or ", " only when the separator sits near the string midpoint and
- * both sides are substantial — avoids "Short:" + long remainder (e.g. Legacies:, Dis/orient:).
- */
-function trySplitAtCenterPunctuation(trimmed, max) {
-  const L = trimmed.length;
-  const mid = L / 2;
-  if (Math.abs(mid - max) > max * 0.5) return null;
-  if (L <= max) return null;
+function wrapColonFirst(trimmed, max) {
+  const colonIdx = trimmed.indexOf(":");
+  if (colonIdx <= 0 || colonIdx >= trimmed.length - 1) return null;
 
-  const minSeg = 10;
-  /** Separators must sit this close to the string midpoint (not just "early" title: subtitle). */
-  const window = max * 0.5;
+  const prefix = trimmed.slice(0, colonIdx + 1).trim();
+  const suffix = trimmed.slice(colonIdx + 1).trim();
+  if (!suffix || prefix.length > max) return null;
 
-  let best = null;
-  let bestScore = Infinity;
+  // Preferred behavior: clean two-line title/subtitle split when possible.
+  if (suffix.length <= max) return [prefix, suffix];
 
-  for (let i = 0; i < L; i++) {
-    const ch = trimmed[i];
-    if (ch === ",") {
-      if (i + 1 >= L || trimmed[i + 1] !== " ") continue;
-    } else if (ch !== ":") {
-      continue;
-    }
-
-    let splitEnd = i + 1;
-    while (splitEnd < L && trimmed[splitEnd] === " ") splitEnd++;
-
-    const line1 = trimmed.slice(0, splitEnd).trimEnd();
-    const line2 = trimmed.slice(splitEnd).trimStart();
+  // Try to keep a two-line split by pulling some suffix words up to line 1.
+  const suffixWords = suffix.split(/\s+/).filter(Boolean);
+  let bestTwoLine = null;
+  for (let i = 1; i < suffixWords.length; i++) {
+    const line1 = `${prefix} ${suffixWords.slice(0, i).join(" ")}`.trim();
+    const line2 = suffixWords.slice(i).join(" ");
     if (!line2) continue;
-    if (line1.length < minSeg || line2.length < minSeg) continue;
-
-    const dist = Math.abs(i - mid);
-    if (dist > window) continue;
-
-    const score =
-      dist + 0.02 * Math.abs(line1.length - line2.length);
-    if (score < bestScore) {
-      bestScore = score;
-      best = { line1, line2 };
-    }
+    if (line1.length > max || line2.length > max) continue;
+    bestTwoLine = [line1, line2];
   }
+  if (bestTwoLine) return bestTwoLine;
 
-  return best;
+  return [prefix, ...wrapBalancedWords(suffix, max)];
 }
 
 /**
@@ -209,28 +202,52 @@ function wrapExhibitionTitle(name) {
   const max = EXHIBITION_LINE_MAX_CHARS;
   const trimmed = name.trim();
   if (!trimmed) return [name];
-  const L = trimmed.length;
+  if (trimmed.length <= max) return [trimmed];
 
-  if (L <= max) return [trimmed];
+  const colonFirst = wrapColonFirst(trimmed, max);
+  const lines = colonFirst?.length ? colonFirst : wrapBalancedWords(trimmed, max);
+  return fixWidowLastLine(lines, max);
+}
 
-  const punct = trySplitAtCenterPunctuation(trimmed, max);
-  if (punct) {
-    const { line1, line2 } = punct;
-    const out = [];
-    out.push(
-      ...(line1.length <= max ? [line1] : wrapGreedyWords(line1, max)),
-    );
-    out.push(
-      ...(line2.length <= max ? [line2] : wrapGreedyWords(line2, max)),
-    );
-    return fixWidowLastLine(out, max);
+function drawNodeLabel(g, d) {
+  const y = (d.y0 + d.y1) / 2;
+  const x = d.type === "exhibition" ? d.x0 - LABEL_OFFSET_PX : d.x1 + LABEL_OFFSET_PX;
+  const anchor = d.type === "exhibition" ? "end" : "start";
+
+  const text = g
+    .append("text")
+    .attr("class", "sankey-node-label")
+    .attr("x", x)
+    .attr("y", y)
+    .attr("text-anchor", anchor)
+    .attr("fill", "#fff")
+    .style("font-family", FONT_SANS)
+    .style("font-size", `${LABEL_FONT_PX}px`);
+
+  if (d.type !== "exhibition") {
+    text.attr("dy", `${LABEL_SINGLE_LINE_DY_EM}em`).text(d.name);
+    return;
   }
 
-  if (L <= max * 2.6) {
-    return fixWidowLastLine(wrapBalancedNearMiddle(trimmed, max), max);
+  const lines = wrapExhibitionTitle(d.name);
+  if (lines.length === 1) {
+    text.attr("dy", `${LABEL_SINGLE_LINE_DY_EM}em`).text(lines[0]);
+    return;
   }
 
-  return fixWidowLastLine(wrapGreedyWords(trimmed, max), max);
+  text
+    .append("tspan")
+    .attr("x", x)
+    .attr("dy", `${-((lines.length - 1) * LABEL_LINE_HEIGHT_EM) / 4}em`)
+    .text(lines[0]);
+
+  for (let i = 1; i < lines.length; i++) {
+    text
+      .append("tspan")
+      .attr("x", x)
+      .attr("dy", `${LABEL_LINE_HEIGHT_EM}em`)
+      .text(lines[i]);
+  }
 }
 
 const graphData = computed(() => {
@@ -252,6 +269,7 @@ const graphData = computed(() => {
       name: e.name,
       location: e.location,
       startYear: e.startYear,
+      artistCount: e.artistIds.length,
       type: "exhibition",
     })),
     ...[...artistIdSet].map((id) => {
@@ -286,6 +304,8 @@ const graphData = computed(() => {
 function renderChart() {
   const root = containerRef.value;
   if (!root) return;
+  destroyTooltip?.();
+  destroyTooltip = null;
   d3.select(root).selectAll("*").remove();
 
   const { nodes, links } = graphData.value;
@@ -324,9 +344,41 @@ function renderChart() {
     .attr("viewBox", `0 0 ${width} ${height}`)
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-  const { show, hide } = createTooltip(root);
+  const { show, hide, destroy } = createTooltip(root);
+  destroyTooltip = destroy;
+  let hoveredNodeId = null;
 
-  svg
+  function tooltipOptionsForNode(d) {
+    if (d.type === "exhibition") {
+      return exhibitionTooltipShowOptions(d);
+    }
+    const life = d.lifeLine
+      ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>`
+      : "";
+    return {
+      bg: "#000",
+      fg: "#fff",
+      border: "#fff",
+      html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
+    };
+  }
+
+  function connectedContext(nodeId) {
+    const activeLinkKeys = new Set();
+    const activeNodeIds = new Set([nodeId]);
+    for (const link of graph.links) {
+      const sourceId = link.source?.nodeId;
+      const targetId = link.target?.nodeId;
+      const isConnected = sourceId === nodeId || targetId === nodeId;
+      if (!isConnected) continue;
+      activeLinkKeys.add(`${sourceId}->${targetId}`);
+      if (sourceId) activeNodeIds.add(sourceId);
+      if (targetId) activeNodeIds.add(targetId);
+    }
+    return { activeLinkKeys, activeNodeIds };
+  }
+
+  const linkSelection = svg
     .append("g")
     .selectAll("path")
     .data(graph.links)
@@ -336,6 +388,7 @@ function renderChart() {
     .attr("fill", "none")
     .attr("stroke", "#fff")
     .attr("stroke-width", LINK_STROKE)
+    .attr("stroke-opacity", 1)
     .style("pointer-events", "none");
 
   const nodeGroup = svg
@@ -350,43 +403,34 @@ function renderChart() {
   }
 
   function nodeFillHover(d) {
-    return d.type === "exhibition" ? "#eee" : "#111";
+    return d.type === "exhibition" ? "#fff" : "#111";
   }
 
-  nodeGroup
+  function exhibitionNodeHeight(d) {
+    return exhibitionMarkHeightPx(d.artistCount);
+  }
+
+  const exhibitionNodes = nodeGroup
     .filter((d) => d.type === "exhibition")
     .append("rect")
+    .attr("class", "sankey-node-mark")
+    .attr("data-node-id", (d) => d.nodeId)
+    .attr("data-exhibition-id", (d) => d.nodeId.slice(3))
     .attr("x", (d) => d.x0)
-    .attr("y", (d) => d.y0)
-    .attr("height", (d) => Math.max(1, d.y1 - d.y0))
+    .attr("y", (d) => (d.y0 + d.y1) / 2 - exhibitionNodeHeight(d) / 2)
+    .attr("height", exhibitionNodeHeight)
     .attr("width", (d) => d.x1 - d.x0)
     .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
-    .attr("rx", 1)
-    .style("cursor", "pointer")
-    .on("mouseover", function (event, d) {
-      d3.select(this).attr("fill", nodeFillHover(d)).attr("stroke-width", 2);
-      if (d.type === "exhibition") {
-        show(event, exhibitionTooltipShowOptions(d));
-      } else {
-        const life = d.lifeLine ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>` : "";
-        show(event, {
-          bg: "#000",
-          fg: "#fff",
-          border: "#fff",
-          html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
-        });
-      }
-    })
-    .on("mouseout", function (event, d) {
-      d3.select(this).attr("fill", nodeFill(d)).attr("stroke-width", 1);
-      hide();
-    });
+    .attr("rx", EXHIBITIONS_NODE_RX_PX)
+    .style("cursor", "pointer");
 
-  nodeGroup
+  const artistNodes = nodeGroup
     .filter((d) => d.type === "artist")
     .append("circle")
+    .attr("class", "sankey-node-mark")
+    .attr("data-node-id", (d) => d.nodeId)
     .attr("data-artist-id", (d) => d.nodeId.slice(3))
     .attr("cx", (d) => (d.x0 + d.x1) / 2 - 3)
     .attr("cy", (d) => (d.y0 + d.y1) / 2)
@@ -394,69 +438,87 @@ function renderChart() {
     .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
-    .style("cursor", "pointer")
-    .on("mouseover", function (event, d) {
-      d3.select(this).attr("fill", nodeFillHover(d)).attr("stroke-width", 2);
-      const life = d.lifeLine ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>` : "";
-      show(event, {
-        bg: "#000",
-        fg: "#fff",
-        border: "#fff",
-        html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
+    .style("cursor", "pointer");
+
+  // Increase hover affordance for tiny artist dots.
+  nodeGroup
+    .filter((d) => d.type === "artist")
+    .append("circle")
+    .attr("class", "sankey-node-hit")
+    .attr("cx", (d) => (d.x0 + d.x1) / 2 - 3)
+    .attr("cy", (d) => (d.y0 + d.y1) / 2)
+    .attr("r", Math.max(DOT_SIZE_PX, 8))
+    .attr("fill", "transparent")
+    .style("cursor", "pointer");
+
+  function applyHoverState(nodeId = null) {
+    hoveredNodeId = nodeId;
+    if (!nodeId) {
+      linkSelection
+        .attr("stroke-opacity", 1)
+        .attr("stroke-width", LINK_STROKE);
+      svg
+        .selectAll(".sankey-node-mark")
+        .attr("stroke-opacity", 1)
+        .attr("opacity", 1)
+        .attr("stroke-width", 1)
+        .attr("fill", (d) => nodeFill(d));
+      svg.selectAll(".sankey-node-label").attr("opacity", 1).style("font-weight", 400);
+      return;
+    }
+
+    const { activeLinkKeys, activeNodeIds } = connectedContext(nodeId);
+    linkSelection
+      .attr("stroke-opacity", (d) =>
+        activeLinkKeys.has(`${d.source?.nodeId}->${d.target?.nodeId}`) ? 1 : 0.4,
+      )
+      .attr("stroke-width", (d) =>
+        activeLinkKeys.has(`${d.source?.nodeId}->${d.target?.nodeId}`)
+          ? LINK_STROKE + 0.35
+          : LINK_STROKE,
+      );
+    svg
+      .selectAll("rect.sankey-node-mark")
+      .attr("opacity", (d) => (activeNodeIds.has(d.nodeId) ? 1 : 0.25))
+      .attr("stroke-width", (d) => (d.nodeId === nodeId ? 2 : 1))
+      .attr("fill", (d) =>
+        d.nodeId === nodeId || activeNodeIds.has(d.nodeId) ? nodeFillHover(d) : nodeFill(d),
+      );
+    svg
+      .selectAll("circle.sankey-node-mark")
+      .attr("stroke-opacity", (d) => (activeNodeIds.has(d.nodeId) ? 1 : 0.25))
+    svg
+      .selectAll(".sankey-node-label")
+      .attr("opacity", (d) => (activeNodeIds.has(d.nodeId) ? 1 : 0.6))
+      .style("font-weight", (d) => (d.nodeId === nodeId ? 600 : 400));
+  }
+
+  function bindNodeHover(selection) {
+    selection
+      .on("mouseenter", function (event, d) {
+        applyHoverState(d.nodeId);
+        show(event, tooltipOptionsForNode(d));
+      })
+      .on("mousemove", function (event, d) {
+        if (hoveredNodeId !== d.nodeId) applyHoverState(d.nodeId);
+        show(event, tooltipOptionsForNode(d));
+      })
+      .on("mouseleave", function () {
+        applyHoverState(null);
+        hide();
       });
-    })
-    .on("mouseout", function (event, d) {
-      d3.select(this).attr("fill", nodeFill(d)).attr("stroke-width", 1);
-      hide();
-    });
+  }
+
+  [exhibitionNodes, artistNodes, svg.selectAll(".sankey-node-hit")].forEach(
+    bindNodeHover,
+  );
 
   nodeGroup.each(function (d) {
     const g = d3.select(this);
-    const cx = (d.y0 + d.y1) / 2;
-    const labelX =
-      d.type === "exhibition" ? d.x0 - 8 : d.x1 + 8;
-    const anchor = d.type === "exhibition" ? "end" : "start";
-    const lineDyEm = 1.1;
-
-    if (d.type === "exhibition") {
-      const text = g
-        .append("text")
-        .attr("x", labelX)
-        .attr("y", cx)
-        .attr("text-anchor", anchor)
-        .attr("fill", "#fff")
-        .style("font-family", FONT_SANS)
-        .style("font-size", `${LABEL_FONT_PX}px`);
-
-      const lines = wrapExhibitionTitle(d.name);
-      if (lines.length === 1) {
-        text.attr("dy", "0.35em").text(lines[0]);
-      } else {
-        text
-          .append("tspan")
-          .attr("x", labelX)
-          .attr("dy", `${-((lines.length - 1) * lineDyEm) / 4}em`)
-          .text(lines[0]);
-        for (let i = 1; i < lines.length; i++) {
-          text
-            .append("tspan")
-            .attr("x", labelX)
-            .attr("dy", `${lineDyEm}em`)
-            .text(lines[i]);
-        }
-      }
-    } else {
-      g.append("text")
-        .attr("x", labelX)
-        .attr("y", cx)
-        .attr("text-anchor", anchor)
-        .attr("fill", "#fff")
-        .style("font-family", FONT_SANS)
-        .style("font-size", `${LABEL_FONT_PX}px`)
-        .attr("dy", "0.35em")
-        .text(d.name);
-    }
+    drawNodeLabel(g, d);
   });
+
+  bindNodeHover(nodeGroup.selectAll(".sankey-node-label"));
 }
 
 function handleResize() {
@@ -477,17 +539,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener("resize", handleResize);
   resizeObserver?.disconnect();
+  destroyTooltip?.();
+  destroyTooltip = null;
 });
 
 watch(graphData, renderChart, { deep: true });
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    class="exhibitions-sankey"
-    :style="{ maxWidth: `${EXHIBITIONS_VIZ_MAX_WIDTH_PX}px` }"
-  ></div>
+  <div ref="containerRef" class="exhibitions-sankey"></div>
 </template>
 
 <style scoped src="./style.css"></style>
