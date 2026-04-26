@@ -58,7 +58,6 @@
       "id": 7,
       "name": "Biennale Arte 2015: All the World's Futures",
       "labels": [
-        "countries",
         "international",
         "world"
       ]
@@ -85,8 +84,6 @@
       "id": 10,
       "name": "America is Hard to See",
       "labels": [
-        "hard",
-        "american",
         "america"
       ]
     },

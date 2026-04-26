@@ -261,6 +261,8 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
   let pairs = [];
   let sourceNodes = [];
   let targetNodes = [];
+  let latestProgress = 0;
+  let observer = null;
 
   function setClusterLayerHidden(hidden) {
     clusterSectionEl.classList.toggle("cluster-travel-active", hidden);
@@ -370,6 +372,19 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
   function cleanup() {
     clearOverlayDots();
     resetOriginalDots();
+    observer?.disconnect();
+    observer = null;
+  }
+
+  function setupClusterMutationObserver() {
+    if (observer || !clusterSectionEl) return;
+    observer = new MutationObserver(() => {
+      requestAnimationFrame(() => rebuild(latestProgress));
+    });
+    observer.observe(clusterSectionEl, {
+      subtree: true,
+      childList: true,
+    });
   }
 
   ScrollTrigger.create({
@@ -378,10 +393,25 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
     endTrigger: clusterSectionEl,
     end: "top top",
     scrub: 1,
-    onEnter: () => rebuild(0),
-    onEnterBack: () => rebuild(1),
-    onUpdate: (self) => applyProgress(self.progress),
-    onRefresh: (self) => rebuild(self.progress),
+    onEnter: () => {
+      latestProgress = 0;
+      rebuild(0);
+      setupClusterMutationObserver();
+    },
+    onEnterBack: () => {
+      latestProgress = 1;
+      rebuild(1);
+      setupClusterMutationObserver();
+    },
+    onUpdate: (self) => {
+      latestProgress = self.progress;
+      applyProgress(self.progress);
+    },
+    onRefresh: (self) => {
+      latestProgress = self.progress;
+      rebuild(self.progress);
+      setupClusterMutationObserver();
+    },
     onLeave: () => cleanup(),
     onLeaveBack: () => cleanup(),
     onKill: () => cleanup(),
