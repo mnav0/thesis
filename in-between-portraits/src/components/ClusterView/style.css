@@ -18,6 +18,16 @@
   border-left: 1px solid #111;
   box-shadow: -8px 0 28px rgba(0, 0, 0, 0.18);
 }
+
+/* When ArtistGallery is rendered inside, hand internal scroll over to the
+   gallery component so the timeline bar / dots column stay pinned. */
+.cluster-view-fullpage--gallery {
+  overflow: hidden;
+  padding: 1.25rem 0 0;
+}
+.cluster-view-fullpage--gallery .cluster-view-heading {
+  margin: 0.4rem 2.4rem 1rem 1.5rem;
+}
 .close-btn {
   position: absolute;
   right: 1.25rem;
@@ -30,12 +40,16 @@
   font-family: "Instrument Serif", serif;
   z-index: 10;
 }
+/* Matches the gallery hero quote scale so the modal title and hero copy
+   read at the same size. */
 .cluster-view-heading {
   font-family: "Instrument Serif", serif;
-  font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+  font-size: clamp(2rem, 3.4vw, 3.6rem);
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  font-weight: 400;
   margin: 0.4rem 2.4rem 1rem 0.2rem;
   text-align: left;
-  line-height: 1.06;
 }
 .cluster-view-artworks {
   display: flex;

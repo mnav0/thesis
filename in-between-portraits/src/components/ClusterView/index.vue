@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import DotTimeline from "../DotTimeline/index.vue";
-import ArtistClusterGrid from "../ArtistClusterGrid/index.vue";
+import ArtistGallery from "../ArtistGallery/index.vue";
 import {
   artistsById,
   institutionsById,
@@ -18,13 +18,13 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
-const showArtistClusterGrid = computed(
+const showArtistGallery = computed(
   () => (props.cluster?.items?.length || 0) === 1,
 );
 const showDotTimeline = computed(
   () =>
     props.groupBy === "theme" ||
-    (props.groupBy === "embedding" && !showArtistClusterGrid.value),
+    (props.groupBy === "embedding" && !showArtistGallery.value),
 );
 
 /** Theme CSV uses string artist ids; cluster items may be number — normalize for Set.has */
@@ -40,11 +40,17 @@ function timelineIdSet(cluster) {
 }
 
 const timelineArtistIds = computed(() => timelineIdSet(props.cluster));
-const singleArtistId = computed(() =>
-  showArtistClusterGrid.value && props.cluster?.items?.[0]?.artist != null
-    ? String(props.cluster.items[0].artist)
-    : "",
-);
+
+/**
+ * Artist ids fed to <ArtistGallery>. Currently only the single-artist branch
+ * is wired up, but the prop is an array so the gallery can later aggregate
+ * a cluster's artists without changing its shape.
+ */
+const galleryArtistIds = computed(() => {
+  if (!showArtistGallery.value) return [];
+  const first = props.cluster?.items?.[0]?.artist;
+  return first == null ? [] : [String(first)];
+});
 
 const dotTimelineData = computed(() => {
   if (!showDotTimeline.value || !props.cluster) return [];
@@ -115,16 +121,20 @@ const dotTimelineArtworks = computed(() => {
 </script>
 
 <template>
-  <div class="cluster-view-fullpage">
+  <div
+    class="cluster-view-fullpage"
+    :class="{ 'cluster-view-fullpage--gallery': showArtistGallery }"
+  >
     <button class="close-btn" @click="emit('close')">×</button>
     <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
-    <div v-if="showArtistClusterGrid">
-      <ArtistClusterGrid
-        v-if="singleArtistId"
-        :artist-id="singleArtistId"
-      />
-      <div v-else class="cluster-view-empty">No artist data found for this view.</div>
-    </div>
+    <ArtistGallery
+      v-if="showArtistGallery && galleryArtistIds.length"
+      :artist-ids="galleryArtistIds"
+    />
+    <div
+      v-else-if="showArtistGallery"
+      class="cluster-view-empty"
+    >No artist data found for this view.</div>
     <div v-else-if="showDotTimeline">
       <div v-if="dotTimelineData.length === 0 && dotTimelineArtworks.length === 0" class="cluster-view-empty">
         No theme or artwork data found for this artist.

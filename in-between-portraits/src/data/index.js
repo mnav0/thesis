@@ -10,6 +10,7 @@ import institutionThemesCSV from "./institution_themes.csv?raw";
 import artistWordsCSV from "./artist_words.csv?raw";
 import institutionWordsCSV from "./institution_words.csv?raw";
 import exhibitionsCSV from "./exhibitions.csv?raw";
+import featuredQuotesCSV from "./featured_quotes.csv?raw";
 import artistPointsJSON from "./artist_points_flat.json";
 
 import artistClusters from "./clusters/artist_clusters.json";
@@ -37,6 +38,18 @@ export const themeRows = csvParse(keywordsCSV);
 export const artistWordRows = csvParse(artistWordsCSV);
 export const institutionWordRows = csvParse(institutionWordsCSV);
 export const artistPointsRows = artistPointsJSON;
+
+/** Map of artist_id (string) -> featured point UUID. Rows without a UUID are skipped. */
+export const featuredQuotesByArtistId = (() => {
+  const rows = csvParse(featuredQuotesCSV);
+  const map = new Map();
+  rows.forEach((row) => {
+    const aid = String(row.artist_id ?? "").trim();
+    const uuid = String(row.point ?? "").trim();
+    if (aid && uuid) map.set(aid, uuid);
+  });
+  return map;
+})();
 export const themePreviewTitles = computed(() =>
   themeRows.map((row) => row.word).filter(Boolean),
 );
