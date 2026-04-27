@@ -25,11 +25,10 @@
 .gallery-hero {
   background: #111;
   color: #fff;
-  min-height: 50vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 3rem 3.5rem 3rem 2rem;
+  justify-content: flex-start;
+  padding: 2rem 2rem 3.5rem;
   margin: 0;
   box-sizing: border-box;
 }
@@ -330,29 +329,6 @@
   height: 100%;
   background: #111;
   transition: width 0.35s ease;
-}
-.gallery-timeline__marker {
-  position: absolute;
-  top: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: #111;
-  transform: translate(-50%, -50%);
-  transition: left 0.35s ease;
-}
-/* Year labels follow the global paragraph styling (Kosugi sans-serif,
-   line-height 1.25), just at a much smaller scale. */
-.gallery-timeline__marker-label {
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: "Kosugi", sans-serif;
-  font-size: 0.62rem;
-  line-height: 1.25;
-  white-space: nowrap;
-  color: #111;
 }
 .gallery-timeline__labels {
   display: flex;

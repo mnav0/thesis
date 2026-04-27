@@ -26,6 +26,8 @@ const props = defineProps({
   artistIds: { type: Array, required: true },
 });
 
+const emit = defineEmits(["pastHeroChange"]);
+
 // ---------- enrichment ----------
 
 const artistWordsById = new Map(
@@ -248,6 +250,26 @@ function measureHero() {
   heroPx.value = heroRef.value ? heroRef.value.offsetHeight : 0;
 }
 
+let lastEmittedPastHero = null;
+/** Notifies parent (modal chrome) when the featured hero is fully scrolled past. */
+function syncPastHeroToParent() {
+  const el = scrollRef.value;
+  if (!el) return;
+  let past;
+  if (!featuredQuote.value) {
+    past = true;
+  } else if (heroPx.value <= 0) {
+    // Before layout, hero height is 0 so `scrollTop >= heroPx` would wrongly read "past".
+    past = false;
+  } else {
+    past = el.scrollTop >= heroPx.value;
+  }
+  if (lastEmittedPastHero !== past) {
+    lastEmittedPastHero = past;
+    emit("pastHeroChange", past);
+  }
+}
+
 /**
  * Map scrollTop → fractional active index. Index 0 is anchored to the moment
  * the gallery body's top reaches the viewport top (i.e. the hero is fully
@@ -262,11 +284,13 @@ function recomputeActive() {
   const total = chronoPoints.value.length;
   if (!total) {
     activeIdx.value = 0;
+    syncPastHeroToParent();
     return;
   }
   const offset = el.scrollTop - heroPx.value;
   const raw = offset / segmentPx;
   activeIdx.value = Math.max(0, Math.min(total - 1, raw));
+  syncPastHeroToParent();
 }
 
 let rafScheduled = false;
@@ -304,6 +328,7 @@ onBeforeUnmount(() => {
     resizeObs.disconnect();
     resizeObs = null;
   }
+  lastEmittedPastHero = null;
 });
 
 // Hero is conditionally rendered (depends on async-loaded data); re-observe
@@ -366,17 +391,17 @@ const activePoint = computed(() => {
 });
 
 /**
- * Timeline year = the latest year across the featured slots, per the spec.
- * Falls back to the active point's year (and finally to the timeline min).
+ * Timeline year matches the attribution on the featured text card
+ * `(sourceName) (displayDate)` — i.e. `featuredText.year`. When no text
+ * slot is shown, use the rounded scroll segment’s point so the bar still
+ * tracks chronology.
  */
 const activeYear = computed(() => {
-  const candidates = [
-    featuredArtwork.value?.year,
-    featuredText.value?.year,
-    activePoint.value?.year,
-  ].filter((y) => Number.isFinite(y));
-  if (!candidates.length) return null;
-  return Math.max(...candidates);
+  const text = featuredText.value;
+  if (text && Number.isFinite(text.year)) return text.year;
+  const pt = activePoint.value;
+  if (pt && Number.isFinite(pt.year)) return pt.year;
+  return null;
 });
 
 const timelineProgress = computed(() => {
@@ -652,14 +677,6 @@ const canvasItems = computed(() =>
           class="gallery-timeline__progress"
           :style="{ width: timelineProgress * 100 + '%' }"
         ></div>
-        <div
-          class="gallery-timeline__marker"
-          :style="{ left: timelineProgress * 100 + '%' }"
-        >
-          <span v-if="activeYear" class="gallery-timeline__marker-label">{{
-            activeYear
-          }}</span>
-        </div>
       </div>
       <div class="gallery-timeline__labels">
         <span>{{ yearBounds.min }}</span>

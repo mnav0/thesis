@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import DotTimeline from "../DotTimeline/index.vue";
 import ArtistGallery from "../ArtistGallery/index.vue";
 import {
@@ -8,6 +8,7 @@ import {
   artworks as allArtworks,
   artistThemeRows,
   institutionThemeRows,
+  featuredQuotesByArtistId,
 } from "../../data/index.js";
 import { COLOR_MAP } from "../../constants.js";
 
@@ -17,6 +18,19 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["close"]);
+
+/** When false, single-artist gallery hero is still in view — modal header matches hero (#111). */
+const galleryPastHero = ref(true);
+
+/** Same artist-id lookup as ArtistGallery’s featured-quote wiring (CSV map only). */
+function hasFeaturedQuoteUuid(ids) {
+  if (!ids?.length) return false;
+  const aid = String(ids[0]);
+  return Boolean(
+    featuredQuotesByArtistId.get(aid) ||
+      featuredQuotesByArtistId.get(String(Number(aid) - 1)),
+  );
+}
 
 const showArtistGallery = computed(
   () => (props.cluster?.items?.length || 0) === 1,
@@ -51,6 +65,18 @@ const galleryArtistIds = computed(() => {
   const first = props.cluster?.items?.[0]?.artist;
   return first == null ? [] : [String(first)];
 });
+
+watch(
+  () => [showArtistGallery.value, galleryArtistIds.value],
+  ([show, ids]) => {
+    if (!show || !ids.length) {
+      galleryPastHero.value = true;
+      return;
+    }
+    galleryPastHero.value = !hasFeaturedQuoteUuid(ids);
+  },
+  { immediate: true },
+);
 
 const dotTimelineData = computed(() => {
   if (!showDotTimeline.value || !props.cluster) return [];
@@ -125,11 +151,29 @@ const dotTimelineArtworks = computed(() => {
     class="cluster-view-fullpage"
     :class="{ 'cluster-view-fullpage--gallery': showArtistGallery }"
   >
-    <button class="close-btn" @click="emit('close')">×</button>
-    <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
+    <header
+      class="cluster-view-header"
+      :class="{
+        'cluster-view-header--on-hero':
+          showArtistGallery &&
+          galleryArtistIds.length > 0 &&
+          !galleryPastHero,
+      }"
+    >
+      <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
+      <button
+        type="button"
+        class="close-btn"
+        aria-label="Close"
+        @click="emit('close')"
+      >
+        ×
+      </button>
+    </header>
     <ArtistGallery
       v-if="showArtistGallery && galleryArtistIds.length"
       :artist-ids="galleryArtistIds"
+      @past-hero-change="galleryPastHero = $event"
     />
     <div
       v-else-if="showArtistGallery"

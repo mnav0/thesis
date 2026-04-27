@@ -23,23 +23,48 @@
    gallery component so the timeline bar / dots column stay pinned. */
 .cluster-view-fullpage--gallery {
   overflow: hidden;
-  padding: 1.25rem 0 0;
+  padding: 0;
+  background: #fff;
 }
-.cluster-view-fullpage--gallery .cluster-view-heading {
-  margin: 0.4rem 2.4rem 1rem 1.5rem;
+
+.cluster-view-header {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 1rem;
+  box-sizing: border-box;
+  background: #fff;
+  color: #111;
+  transition: background-color 0.6s ease, color 0.6s ease;
+  z-index: 10;
 }
+
+.cluster-view-header--on-hero {
+  background: #111;
+  color: #fff;
+}
+
+.cluster-view-fullpage--gallery .cluster-view-header {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .close-btn {
-  position: absolute;
-  right: 1.25rem;
-  top: 1rem;
+  flex-shrink: 0;
   font-size: 2.2em;
+  line-height: 1;
   background: none;
   border: none;
   cursor: pointer;
-  color: #222;
+  color: inherit;
   font-family: "Instrument Serif", serif;
-  z-index: 10;
+  padding: 0;
+  margin: 0;
 }
+
 /* Matches the gallery hero quote scale so the modal title and hero copy
    read at the same size. */
 .cluster-view-heading {
@@ -48,8 +73,21 @@
   line-height: 1.06;
   letter-spacing: 0.01em;
   font-weight: 400;
-  margin: 0.4rem 2.4rem 1rem 0.2rem;
+  margin: 0;
   text-align: left;
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+}
+
+.cluster-view-fullpage:not(.cluster-view-fullpage--gallery) .cluster-view-header {
+  padding-left: 0.2rem;
+  padding-right: 0;
+  margin-bottom: 0.75rem;
+}
+
+.cluster-view-fullpage:not(.cluster-view-fullpage--gallery) .close-btn {
+  margin-right: -0.15rem;
 }
 .cluster-view-artworks {
   display: flex;
@@ -110,7 +148,12 @@
     padding: 1rem;
   }
 
-  .cluster-view-heading {
-    margin-right: 2.2rem;
+  .cluster-view-fullpage--gallery {
+    padding: 0;
+  }
+
+  .cluster-view-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
