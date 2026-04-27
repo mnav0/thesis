@@ -204,14 +204,18 @@
   position: absolute;
   width: var(--dot-size);
   height: var(--dot-size);
-  border-radius: 50%;
-  background: #111;
   z-index: 6;
   cursor: pointer;
-  transition:
-    box-shadow 0.2s,
-    opacity 0.2s,
-    background-color 0.2s;
+  transition: opacity 0.2s;
+}
+
+.cs-point :deep(.artist-dot) {
+  transition: filter 0.2s;
+}
+
+.cs-point :deep(.artist-dot) path {
+  fill: #111;
+  transition: fill 0.2s;
 }
 
 .cs-point:hover {
@@ -222,18 +226,21 @@
   z-index: 12;
 }
 
-.cs-point--active-cluster {
-  box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.24);
+.cs-point--active-cluster :deep(.artist-dot) {
+  filter: drop-shadow(0 0 0.5px rgba(17, 17, 17, 0.5))
+    drop-shadow(0 0 0.5px rgba(17, 17, 17, 0.5));
 }
 
 .cs-point--hovered {
   z-index: 1100;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-.cs-point--dimmed {
-  opacity: 1;
-  background: #dddddd;
+.cs-point--hovered :deep(.artist-dot) {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+.cs-point--dimmed :deep(.artist-dot) path {
+  fill: #dddddd;
 }
 
 .cs-point-tag {

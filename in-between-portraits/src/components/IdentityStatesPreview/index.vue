@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { themePreviewTitles } from "../../data/index.js";
 import { DOT_SIZE_PX } from "../../constants.js";
 import { generateDotPositions } from "../../utils/cluster-offsets.js";
+import ArtistDot from "../ArtistDot/index.vue";
 
 const props = defineProps({
   dotCount: { type: Number, default: 15 },
@@ -54,7 +55,7 @@ const pos5  = computed(() => generateDotPositions(props.dotCount, 5, 501));
         :key="`d1-${i}`"
         class="identity-dot"
         :style="{ left: p.left, top: p.top, width: dotSize, height: dotSize }"
-      ></span>
+      ><ArtistDot :artist-id="i" /></span>
     </div>
 
     <div class="identity-state" data-state="descriptor2">
@@ -72,7 +73,7 @@ const pos5  = computed(() => generateDotPositions(props.dotCount, 5, 501));
         :key="`d31-${i}`"
         class="identity-dot"
         :style="{ left: p.left, top: p.top, width: dotSize, height: dotSize }"
-      ></span>
+      ><ArtistDot :artist-id="i" /></span>
     </div>
 
     <div class="identity-state" data-state="descriptor3_2">
@@ -81,7 +82,7 @@ const pos5  = computed(() => generateDotPositions(props.dotCount, 5, 501));
         :key="`d32-${i}`"
         class="identity-dot"
         :style="{ left: p.left, top: p.top, width: dotSize, height: dotSize }"
-      ></span>
+      ><ArtistDot :artist-id="i" /></span>
     </div>
 
     <div class="identity-state" data-state="descriptor3_3">
@@ -90,7 +91,7 @@ const pos5  = computed(() => generateDotPositions(props.dotCount, 5, 501));
         :key="`d33-${i}`"
         class="identity-dot"
         :style="{ left: p.left, top: p.top, width: dotSize, height: dotSize }"
-      ></span>
+      ><ArtistDot :artist-id="i" /></span>
     </div>
   </div>
 </template>

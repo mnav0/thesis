@@ -1,5 +1,10 @@
 <script setup>
 import { publicImgSrc } from "../../utils/public-img-src.js";
+import ArtistDot from "../ArtistDot/index.vue";
+
+defineProps({
+  personaArtistId: { type: [String, Number], default: 18 },
+});
 
 const actors = [
   {
@@ -12,7 +17,7 @@ const actors = [
   {
     key: "persona",
     label: "Persona",
-    icon: publicImgSrc("persona.svg"),
+    icon: null,
     top: "80%",
     left: "20%",
   },
@@ -42,12 +47,16 @@ const actors = [
       :data-actor="actor.key"
       :style="{ top: actor.top, left: actor.left }"
     >
+      <div v-if="actor.key === 'persona'" class="actors-preview__icon">
+        <ArtistDot :artist-id="personaArtistId" />
+      </div>
       <img
+        v-else
         :src="actor.icon"
         :alt="`${actor.label} icon`"
         class="actors-preview__icon"
       />
-      <span class="uppercase">{{ actor.label }}</span>
+      <span class="label-text">{{ actor.label }}</span>
     </div>
   </div>
 </template>

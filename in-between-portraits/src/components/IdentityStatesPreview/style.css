@@ -33,13 +33,17 @@
   opacity: 1;
 }
 
-/* ── Dots (size and position set via inline style from JS) ── */
+/* ── Dot wrappers (size and position set via inline style from JS) ── */
 
 .identity-dot {
   position: absolute;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
   transform: translate(-50%, -50%);
+}
+
+.identity-dot :deep(.artist-dot) path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1;
 }
 
 /* ── Labels (descriptor2 state) ── */

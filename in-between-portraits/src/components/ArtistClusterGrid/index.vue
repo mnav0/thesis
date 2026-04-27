@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import { DOT_SIZE_PX, ARTWORK_SIZE } from "../../constants.js";
 import { createTooltip } from "../../utils/d3/tooltip.js";
+import ArtistDot from "../ArtistDot/index.vue";
 import {
   artistPointsRows,
   artistWordRows,
@@ -461,6 +462,7 @@ watch(
             data-cluster-point
             class="artist-cluster-point artist-cluster-point--text"
             :class="{
+              'artist-cluster-point--artist': point.renderType === 'text_artist_dot',
               'artist-cluster-point--institution': point.renderType === 'text_institution_dot',
               'artist-cluster-point--artist-link': point.renderType === 'text_artist_dot' && point.url,
               'artist-cluster-point--artwork-square': point.renderType === 'artwork_institution_square',
@@ -473,7 +475,12 @@ watch(
             }"
             :data-payload="JSON.stringify(point)"
             @click="handlePointClick(point)"
-          />
+          >
+            <ArtistDot
+              v-if="point.renderType === 'text_artist_dot'"
+              :artist-id="props.artistId"
+            />
+          </button>
 
           <img
             v-else-if="

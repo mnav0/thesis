@@ -13,7 +13,7 @@ import ClusterView from "./components/ClusterView/index.vue";
 import PageSection from "./components/PageSection/index.vue";
 import IdentityStatesPreview from "./components/IdentityStatesPreview/index.vue";
 import ActorsPreview from "./components/ActorsPreview/index.vue";
-import ArtworkCollage from "./components/ArtworkCollage/index.vue";
+import ArtistDot from "./components/ArtistDot/index.vue";
 import ExhibitionsSankey from "./components/ExhibitionsSankey/index.vue";
 import ExhibitionsTimeline from "./components/ExhibitionsTimeline/index.vue";
 import { publicImgSrc } from "./utils/public-img-src.js";
@@ -22,9 +22,13 @@ import {
   initAppScrollAnimations,
 } from "./utils/scroll-app-animations.js";
 
+// Artist whose silhouette stands in for the generic "persona" actor in the
+// actors preview, the floating scroll element, and the persona section image.
+// Update this id (matches src/assets/artist-dots/<id>.svg) to swap the icon.
+const REPRESENTATIVE_ARTIST_ID = 18;
+
 const expandedCluster = ref(null);
 const expandedClusterGroupBy = ref(null);
-const personaSectionIllustrationSrc = publicImgSrc("persona.svg");
 const introCollageSrc = publicImgSrc("artworks-all.png");
 const shellReady = ref(false);
 
@@ -101,7 +105,6 @@ onBeforeUnmount(() => {
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
-        <!-- <ArtworkCollage /> -->
         <PageSection class="intro-section" tone="light" layout="stacked" stacked-full-width>
           <div class="grid min-h-[100svh] grid-cols-12 gap-x-2 md:gap-x-4">
             <div class="col-span-12 overflow-visible lg:col-span-6 sm:col-span-1">
@@ -137,7 +140,7 @@ onBeforeUnmount(() => {
           texture-preset="rightSoft"
           heading="Making art provides a way to <i>process</i>, <i>define</i>, and <i>express</i> complex identities."
         >
-          <ActorsPreview />
+          <ActorsPreview :persona-artist-id="REPRESENTATIVE_ARTIST_ID" />
         </PageSection>
 
         <!-- Persona -->
@@ -150,13 +153,13 @@ onBeforeUnmount(() => {
             </h2>
             <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
             <div class="col-span-12 flex justify-center md:col-span-5 md:justify-end">
-              <img
+              <div
                 ref="section3PersonaRef"
-                :src="personaSectionIllustrationSrc"
-                alt=""
-                class="w-full max-w-[28rem]"
+                class="aspect-square w-full max-w-[28rem] self-center opacity-0"
                 role="presentation"
-              />
+              >
+                <ArtistDot :artist-id="REPRESENTATIVE_ARTIST_ID" />
+              </div>
             </div>
             <p class="col-span-12 md:row-start-3 md:self-end">
               *A representation of artist identity constructed from texts that
@@ -201,7 +204,7 @@ onBeforeUnmount(() => {
   </div>
 
   <div ref="floatingPersonaRef" class="floating-persona">
-    <img :src="personaSectionIllustrationSrc" alt="" class="floating-persona__img" />
+    <ArtistDot :artist-id="REPRESENTATIVE_ARTIST_ID" />
   </div>
 
   <div ref="exhibitionsLabelRef" class="exhibitions-bridge-label">

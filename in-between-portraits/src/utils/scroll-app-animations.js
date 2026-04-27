@@ -4,6 +4,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import {
   EXHIBITIONS_NODE_RX_PX,
 } from "../constants/exhibitions-viz.js";
+import { artistDotInlineSvg } from "./artist-dot.js";
 
 const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
@@ -614,6 +615,11 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
 
       const proxyDotEl = document.createElement("div");
       proxyDotEl.className = "sankey-cluster-travel-dot";
+      proxyDotEl.innerHTML = artistDotInlineSvg(artistId, {
+        fill: "#000",
+        stroke: "#fff",
+        strokeWidth: 1,
+      });
       overlayEl.appendChild(proxyDotEl);
 
       out.push({

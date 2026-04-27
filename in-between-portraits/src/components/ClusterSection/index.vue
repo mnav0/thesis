@@ -9,6 +9,7 @@ import {
 } from "vue";
 import { artistsById, exhibitionEntryCount } from "../../data/index.js";
 import { DOT_SIZE_PX } from "../../constants.js";
+import ArtistDot from "../ArtistDot/index.vue";
 
 const props = defineProps({
   exhibitions: {
@@ -1228,9 +1229,10 @@ function displayLabelLine(i, group) {
           "
           @click.stop="handlePointClick(item)"
         >
+          <ArtistDot :artist-id="item.artistId" />
           <div
             v-if="activePointKeys.has(pointKey(group, item, idx))"
-            class="cs-point-tag"
+            class="cs-point-tag label-text"
           >
             {{ initialsFromName(item.artistName) }}
           </div>
@@ -1261,9 +1263,10 @@ function displayLabelLine(i, group) {
           "
           @click.stop="handlePointClick(artist)"
         >
+          <ArtistDot :artist-id="artist.artistId" />
           <div
             v-if="activePointKeys.has(`shared-${artist.artistId}`)"
-            class="cs-point-tag"
+            class="cs-point-tag label-text"
           >
             {{ initialsFromName(artist.artistName) }}
           </div>

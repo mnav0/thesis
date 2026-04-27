@@ -16,6 +16,7 @@ import {
   EXHIBITIONS_VIZ_MARGIN,
 } from "../../constants/exhibitions-viz.js";
 import { DOT_SIZE_PX, FONT_SANS } from "../../constants.js";
+import { getArtistDotData } from "../../utils/artist-dot.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
 
@@ -426,19 +427,34 @@ function renderChart() {
     .attr("rx", EXHIBITIONS_NODE_RX_PX)
     .style("cursor", "pointer");
 
+  function artistDotTransform(d) {
+    const dot = getArtistDotData(d.nodeId.slice(3));
+    if (!dot) return null;
+    const [, , vbW, vbH] = dot.viewBox.split(/\s+/).map(Number);
+    const scale = DOT_SIZE_PX / Math.max(vbW, vbH);
+    const cx = (d.x0 + d.x1) / 2 - 3;
+    const cy = (d.y0 + d.y1) / 2;
+    const tx = cx - (vbW * scale) / 2;
+    const ty = cy - (vbH * scale) / 2;
+    return `translate(${tx}, ${ty}) scale(${scale})`;
+  }
+
   const artistNodes = nodeGroup
     .filter((d) => d.type === "artist")
-    .append("circle")
+    .append("g")
     .attr("class", "sankey-node-mark")
     .attr("data-node-id", (d) => d.nodeId)
     .attr("data-artist-id", (d) => d.nodeId.slice(3))
-    .attr("cx", (d) => (d.x0 + d.x1) / 2 - 3)
-    .attr("cy", (d) => (d.y0 + d.y1) / 2)
-    .attr("r", DOT_SIZE_PX / 2)
+    .attr("transform", (d) => artistDotTransform(d) || "")
     .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
     .style("cursor", "pointer");
+
+  artistNodes
+    .append("path")
+    .attr("d", (d) => getArtistDotData(d.nodeId.slice(3))?.d || "")
+    .attr("vector-effect", "non-scaling-stroke");
 
   // Increase hover affordance for tiny artist dots.
   nodeGroup
@@ -485,7 +501,7 @@ function renderChart() {
         d.nodeId === nodeId || activeNodeIds.has(d.nodeId) ? nodeFillHover(d) : nodeFill(d),
       );
     svg
-      .selectAll("circle.sankey-node-mark")
+      .selectAll("g.sankey-node-mark")
       .attr("stroke-opacity", (d) => (activeNodeIds.has(d.nodeId) ? 1 : 0.25))
     svg
       .selectAll(".sankey-node-label")

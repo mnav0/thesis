@@ -157,12 +157,6 @@ select {
   opacity: 0;
 }
 
-.floating-persona__img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
 /* Invisible anchors inside scroll content mark start/end positions */
 .exhibitions-bridge-anchor {
   height: 1px;
@@ -204,6 +198,12 @@ select {
   white-space: nowrap;
 }
 
+.label-text {
+  font-size: 1rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
 .exhibitions-bridge-label__token--and,
 .exhibitions-bridge-label__token--artists {
   opacity: 0;
@@ -222,13 +222,16 @@ select {
   position: absolute;
   width: var(--dot-size);
   height: var(--dot-size);
-  border-radius: 999px;
-  background: #000;
-  border: 1px solid #fff;
   transform: translate(0, 0);
   margin-left: calc(var(--dot-size) / -2);
   margin-top: calc(var(--dot-size) / -2);
   opacity: 0;
+}
+
+.sankey-cluster-travel-dot > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .timeline-sankey-travel-overlay {
