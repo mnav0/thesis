@@ -7,7 +7,7 @@ import {
   nextTick,
   watch,
 } from "vue";
-import { artistsById, exhibitionEntryCount } from "../../data/index.js";
+import { artistsById, exhibitionEntryCount, exhibitionsById } from "../../data/index.js";
 import { DOT_SIZE_PX } from "../../constants.js";
 import ArtistDot from "../ArtistDot/index.vue";
 
@@ -1059,9 +1059,21 @@ function handleCenterClick(group) {
     .filter(Boolean);
   const clusterTitle = labels.length ? labels.join(", ") : group.name;
 
+  // For exhibition clusters, group.items only holds exclusive artists (those
+  // not shared between exhibitions). To surface all artists in the gallery we
+  // fall back to the full list from artistsByExhibitionId, which includes both
+  // exclusive and shared artists.
+  const sourceItems =
+    viewMode.value === "exhibitions"
+      ? (artistsByExhibitionId.value.get(group.clusterId) ?? []).map((a) => ({
+          artistId: a.artistId,
+          artistName: artistDisplayName(a.artistId),
+        }))
+      : group.items;
+
   const seen = new Set();
   const uniqueArtists = [];
-  for (const item of group.items) {
+  for (const item of sourceItems) {
     if (seen.has(item.artistId)) continue;
     seen.add(item.artistId);
     uniqueArtists.push({
@@ -1069,14 +1081,25 @@ function handleCenterClick(group) {
       artistName: item.artistName,
     });
   }
+
+  const isExhibitionMode = viewMode.value === "exhibitions";
+  const clusterPos = currentClusterPositions.value[String(group.clusterId)];
+  const keywords = isExhibitionMode
+    ? (group.centerLabels ?? [])
+    : (clusterPos?.keywords ?? []);
+  const exhibitionHero = isExhibitionMode
+    ? (exhibitionsById.get(group.clusterId) ?? null)
+    : null;
   emit("select-cluster", {
     name: clusterTitle,
     items: uniqueArtists.map((a) => ({
       artist: a.artist == null ? a.artist : String(a.artist),
       artistName: a.artistName,
     })),
-    n_clusters:
-      viewMode.value === "exhibitions" ? exhibitionEntryCount : selectedN.value,
+    n_clusters: isExhibitionMode ? exhibitionEntryCount : selectedN.value,
+    keywords,
+    clusterFeaturedQuote: clusterPos?.featured_quote ?? null,
+    exhibitionHero,
   });
 }
 

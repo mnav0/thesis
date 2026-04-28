@@ -80,6 +80,24 @@
   color: inherit;
 }
 
+.cluster-view-keywords {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.6rem;
+  align-items: center;
+}
+
+.cluster-view-keyword {
+  font-family: "Kosugi", sans-serif;
+  font-size: 1rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: inherit;
+  letter-spacing: 0.04em;
+}
+
 .cluster-view-fullpage:not(.cluster-view-fullpage--gallery) .cluster-view-header {
   padding-left: 0.2rem;
   padding-right: 0;

@@ -1,16 +1,9 @@
 <script setup>
 import { computed, ref, watch } from "vue";
-import DotTimeline from "../DotTimeline/index.vue";
 import ArtistGallery from "../ArtistGallery/index.vue";
 import {
-  artistsById,
-  institutionsById,
-  artworks as allArtworks,
-  artistThemeRows,
-  institutionThemeRows,
   featuredQuotesByArtistId,
 } from "../../data/index.js";
-import { COLOR_MAP } from "../../constants.js";
 
 const props = defineProps({
   cluster: Object,
@@ -19,12 +12,17 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
-/** When false, single-artist gallery hero is still in view — modal header matches hero (#111). */
+/** When false, gallery hero is still in view — modal header matches hero (#111). */
 const galleryPastHero = ref(true);
 
-/** Same artist-id lookup as ArtistGallery’s featured-quote wiring (CSV map only). */
-function hasFeaturedQuoteUuid(ids) {
+/** Check whether this cluster/artist will render a hero section. */
+function hasFeaturedQuote(ids) {
   if (!ids?.length) return false;
+  // Exhibition clusters always show the exhibition-name hero.
+  if (props.cluster?.exhibitionHero) return true;
+  if (ids.length > 1) {
+    return Boolean(props.cluster?.clusterFeaturedQuote);
+  }
   const aid = String(ids[0]);
   return Boolean(
     featuredQuotesByArtistId.get(aid) ||
@@ -32,38 +30,21 @@ function hasFeaturedQuoteUuid(ids) {
   );
 }
 
-const showArtistGallery = computed(
-  () => (props.cluster?.items?.length || 0) === 1,
-);
-const showDotTimeline = computed(
-  () =>
-    props.groupBy === "theme" ||
-    (props.groupBy === "embedding" && !showArtistGallery.value),
-);
+/** Show ArtistGallery for any embedding cluster. */
+const showArtistGallery = computed(() => props.groupBy === "embedding");
 
-/** Theme CSV uses string artist ids; cluster items may be number — normalize for Set.has */
-function timelineIdSet(cluster) {
-  if (!cluster?.items?.length) return new Set();
-  return new Set(
-    cluster.items
-      .map((art) =>
-        art.artist == null || art.artist === "" ? null : String(art.artist),
-      )
-      .filter(Boolean),
-  );
-}
-
-const timelineArtistIds = computed(() => timelineIdSet(props.cluster));
-
-/**
- * Artist ids fed to <ArtistGallery>. Currently only the single-artist branch
- * is wired up, but the prop is an array so the gallery can later aggregate
- * a cluster's artists without changing its shape.
- */
+/** All unique artist IDs from the cluster items. */
 const galleryArtistIds = computed(() => {
   if (!showArtistGallery.value) return [];
-  const first = props.cluster?.items?.[0]?.artist;
-  return first == null ? [] : [String(first)];
+  const seen = new Set();
+  const ids = [];
+  for (const item of props.cluster?.items ?? []) {
+    const id = item.artist == null ? null : String(item.artist);
+    if (id == null || seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  return ids;
 });
 
 watch(
@@ -73,77 +54,10 @@ watch(
       galleryPastHero.value = true;
       return;
     }
-    galleryPastHero.value = !hasFeaturedQuoteUuid(ids);
+    galleryPastHero.value = !hasFeaturedQuote(ids);
   },
   { immediate: true },
 );
-
-const dotTimelineData = computed(() => {
-  if (!showDotTimeline.value || !props.cluster) return [];
-
-  let filterArtist;
-  let filterTheme;
-  if (props.groupBy === "embedding") {
-    filterArtist = timelineArtistIds.value;
-  } else {
-    filterTheme = props.cluster.name;
-  }
-
-  const artistData = artistThemeRows
-    .filter((row) =>
-      filterTheme
-        ? row.theme_title === filterTheme
-        : filterArtist.has(String(row.artist)),
-    )
-    .map((row) => ({
-      artist: row.artist,
-      artistName: artistsById.value[row.artist]?.name || row.artist,
-      date: row.date,
-      theme_source_sentence: row.theme_source_sentence,
-      is_artwork: row.theme_source && row.theme_source.startsWith("W"),
-      sourceType: "artist",
-      sourceName: artistsById.value[row.artist]?.name || row.artist,
-    }));
-
-  const institutionData = institutionThemeRows
-    .filter((row) =>
-      filterTheme
-        ? row.theme_title === filterTheme
-        : filterArtist.has(String(row.artist)),
-    )
-    .map((row) => ({
-      artist: row.artist,
-      artistName: artistsById.value[row.artist]?.name || row.artist,
-      date: row.date,
-      theme_source_sentence: row.theme_source_sentence,
-      sourceType: "institution",
-      sourceName:
-        institutionsById.value[row.institution]?.name || row.institution,
-    }));
-
-  return [...artistData, ...institutionData].sort(
-    (a, b) => +a.date - +b.date,
-  );
-});
-
-const dotTimelineArtworks = computed(() => {
-  if (!showDotTimeline.value || !props.cluster) return [];
-  return allArtworks.value
-    .filter(
-      (art) =>
-        timelineArtistIds.value.has(String(art.artist)) &&
-        art.date_created &&
-        art.artistName &&
-        art.image_url,
-    )
-    .map((art) => ({
-      artist: art.artist,
-      artistName: art.artistName,
-      date: art.date_created,
-      title: art.title,
-      image_url: art.image_url,
-    }));
-});
 </script>
 
 <template>
@@ -160,7 +74,16 @@ const dotTimelineArtworks = computed(() => {
           !galleryPastHero,
       }"
     >
-      <h2 class="cluster-view-heading">{{ cluster.name }}</h2>
+      <div class="cluster-view-keywords">
+        <template v-if="cluster.keywords?.length">
+          <span
+            v-for="kw in cluster.keywords"
+            :key="kw"
+            class="cluster-view-keyword"
+          >{{ kw }}</span>
+        </template>
+        <h2 v-else class="cluster-view-heading">{{ cluster.name }}</h2>
+      </div>
       <button
         type="button"
         class="close-btn"
@@ -173,25 +96,14 @@ const dotTimelineArtworks = computed(() => {
     <ArtistGallery
       v-if="showArtistGallery && galleryArtistIds.length"
       :artist-ids="galleryArtistIds"
+      :cluster-featured-quote="cluster.clusterFeaturedQuote"
+      :exhibition-hero="cluster.exhibitionHero"
       @past-hero-change="galleryPastHero = $event"
     />
     <div
       v-else-if="showArtistGallery"
       class="cluster-view-empty"
     >No artist data found for this view.</div>
-    <div v-else-if="showDotTimeline">
-      <div v-if="dotTimelineData.length === 0 && dotTimelineArtworks.length === 0" class="cluster-view-empty">
-        No theme or artwork data found for this artist.
-      </div>
-      <DotTimeline
-        v-else
-        :data="dotTimelineData"
-        :artworks="dotTimelineArtworks"
-        :width="1100"
-        :height="550"
-        :colorMap="COLOR_MAP"
-      />
-    </div>
     <div v-else class="cluster-view-artworks">
       <div
         v-for="art in cluster.items"

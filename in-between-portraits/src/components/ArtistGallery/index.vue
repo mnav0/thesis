@@ -24,6 +24,14 @@ const props = defineProps({
   // pass `[id]`. Multi-artist (cluster) callers can pass several ids; the
   // component combines all enriched points into one chronological timeline.
   artistIds: { type: Array, required: true },
+  // When opening a multi-artist cluster, the cluster's featured_quote object
+  // from artist_cluster_positions.json: { source_idx, point, text }.
+  // Takes precedence over the single-artist CSV lookup.
+  clusterFeaturedQuote: { type: Object, default: null },
+  // When opening an exhibition cluster, show the exhibition name as the hero
+  // (no quotes) with location + year as attribution.
+  // Shape: { name, location, year }
+  exhibitionHero: { type: Object, default: null },
 });
 
 const emit = defineEmits(["pastHeroChange"]);
@@ -99,7 +107,7 @@ const enrichedPoints = computed(() => {
 
       const base = {
         pointKey: `g-${rawId}-${sourceIdx}-${idx}`,
-        id: String(point.id || ""),
+        id: String(point.id ?? ""),
         artistId: String(rawId),
         sourceActor,
         isArtwork,
@@ -147,7 +155,30 @@ const enrichedPoints = computed(() => {
   return out;
 });
 
-const featuredQuote = computed(() => {
+/**
+ * Unified hero data for the gallery hero section. Returns one of:
+ *   { kind: "exhibition", name, location, year }
+ *   { kind: "quote", text, artistName, year }
+ *   null  — no hero rendered
+ */
+const heroData = computed(() => {
+  // Exhibition cluster: show the exhibition name (no quotes) + location/year.
+  if (props.exhibitionHero) {
+    const { name, location, year } = props.exhibitionHero;
+    if (!name) return null;
+    return { kind: "exhibition", name, location: location || null, year: year || null };
+  }
+  // Multi-artist embedding cluster: use the cluster's featured_quote.
+  if (props.clusterFeaturedQuote) {
+    const cq = props.clusterFeaturedQuote;
+    if (!cq.text) return null;
+    const wordRow = artistWordsById.get(String(cq.source_idx || ""));
+    const artistName = wordRow?.artist ? resolveArtistName(wordRow.artist) : "";
+    // Year comes from the word row's date, not from the cluster JSON (which has no date field).
+    const year = wordRow?.date ? parseYear(String(wordRow.date)) : null;
+    return { kind: "quote", text: cq.text, artistName, year };
+  }
+  // Single-artist: look up via the featured_quotes CSV.
   if (props.artistIds.length !== 1) return null;
   const aid = String(props.artistIds[0]);
   const uuid =
@@ -157,7 +188,9 @@ const featuredQuote = computed(() => {
   const found = enrichedPoints.value.find((p) => p.id === uuid);
   if (!found) return null;
   return {
+    kind: "quote",
     text: found.text,
+    artistName: resolveArtistName(aid),
     year: parseYear(found.date) || found.year || null,
   };
 });
@@ -256,7 +289,7 @@ function syncPastHeroToParent() {
   const el = scrollRef.value;
   if (!el) return;
   let past;
-  if (!featuredQuote.value) {
+  if (!heroData.value) {
     past = true;
   } else if (heroPx.value <= 0) {
     // Before layout, hero height is 0 so `scrollTop >= heroPx` would wrongly read "past".
@@ -334,7 +367,7 @@ onBeforeUnmount(() => {
 // Hero is conditionally rendered (depends on async-loaded data); re-observe
 // and re-measure whenever it appears so the scroll math stays accurate.
 watch(
-  () => featuredQuote.value,
+  () => heroData.value,
   async () => {
     await nextTick();
     measureHero();
@@ -362,14 +395,6 @@ function findLatestWithFallback(pts, cutoff, predicate) {
   return pts.find(predicate) || null;
 }
 
-const featuredArtwork = computed(() =>
-  findLatestWithFallback(
-    chronoPoints.value,
-    activeIdxRounded.value,
-    isArtistArtwork,
-  ),
-);
-
 const featuredText = computed(() =>
   findLatestWithFallback(
     chronoPoints.value,
@@ -377,6 +402,22 @@ const featuredText = computed(() =>
     hasText,
   ),
 );
+
+const featuredArtwork = computed(() => {
+  const pts = chronoPoints.value;
+  const textPoint = featuredText.value;
+  // When multiple artists are present, constrain the artwork to the same
+  // artist as the active text point so they are always paired together.
+  if (textPoint && props.artistIds.length > 1) {
+    const aid = textPoint.artistId;
+    return findLatestWithFallback(
+      pts,
+      activeIdxRounded.value,
+      (p) => isArtistArtwork(p) && p.artistId === aid,
+    );
+  }
+  return findLatestWithFallback(pts, activeIdxRounded.value, isArtistArtwork);
+});
 
 const featuredKeys = computed(() => {
   const set = new Set();
@@ -550,13 +591,25 @@ const canvasItems = computed(() =>
 <template>
   <div class="artist-gallery-root">
     <div ref="scrollRef" class="artist-gallery-scroll">
-      <section v-if="featuredQuote" ref="heroRef" class="gallery-hero">
-        <blockquote class="gallery-hero__quote">
-          {{ featuredQuote.text }}
-        </blockquote>
-        <div v-if="featuredQuote.year" class="gallery-hero__year">
-          {{ featuredQuote.year }}
-        </div>
+      <section v-if="heroData" ref="heroRef" class="gallery-hero">
+        <!-- Exhibition hero: name as heading, no quote marks, location (year) attribution -->
+        <template v-if="heroData.kind === 'exhibition'">
+          <h2 class="gallery-hero__exhibition-name">{{ heroData.name }}</h2>
+          <div class="gallery-hero__attribution">
+            <template v-if="heroData.location">{{ heroData.location }}</template>
+            <template v-if="heroData.year"> ({{ heroData.year }})</template>
+          </div>
+        </template>
+        <!-- Quote hero: blockquote with artist name + year attribution -->
+        <template v-else>
+          <blockquote class="gallery-hero__quote">
+            {{ heroData.text }}
+          </blockquote>
+          <div class="gallery-hero__attribution">
+            <template v-if="heroData.artistName">{{ heroData.artistName }}</template>
+            <template v-if="heroData.year"><template v-if="heroData.artistName">, </template>{{ heroData.year }}</template>
+          </div>
+        </template>
       </section>
 
       <div v-if="chronoPoints.length" class="gallery-body" :style="galleryBodyStyle">

@@ -11,7 +11,8 @@
           "masterprint series",
           "masterprint",
           "series oriental"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.7654,
@@ -22,7 +23,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.8516,
@@ -33,7 +35,12 @@
           "identity",
           "t",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "3": {
         "x": 0.9305,
@@ -44,7 +51,12 @@
           "work",
           "self portraiture",
           "painting"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "4": {
         "x": 0.98,
@@ -55,7 +67,12 @@
           "american",
           "artists",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.5715,
@@ -66,7 +83,12 @@
           "lamp",
           "cargo",
           "nude"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -77,7 +99,12 @@
           "t",
           "just",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.6299,
@@ -88,7 +115,8 @@
           "morphologies",
           "morphologies comparative",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.8103,
@@ -99,7 +127,12 @@
           "like",
           "culture",
           "work"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT121",
+          "point": 327,
+          "text": "It is about self-exploration and discovering and probing the unconscious and intuition. I look at the broken connections, and the erased and forgotten past as the direct result of slavery, indentured servitude, and colonialism."
+        }
       },
       "9": {
         "x": 0.58,
@@ -110,7 +143,8 @@
           "flowers untitled",
           "portfolio flowers",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -121,7 +155,12 @@
           "philippines",
           "t",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -132,7 +171,8 @@
           "figurative painting",
           "figurative tradition",
           "figure"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 2896,
@@ -151,7 +191,8 @@
           "oriental masterprints",
           "series oriental",
           "masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.4066,
@@ -162,7 +203,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.8625,
@@ -173,7 +215,12 @@
           "identity",
           "t",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "3": {
         "x": 0.887,
@@ -184,7 +231,12 @@
           "painting",
           "self portraiture",
           "work"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "4": {
         "x": 0.98,
@@ -195,7 +247,12 @@
           "asian american",
           "identity",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.5844,
@@ -206,7 +263,12 @@
           "cargo",
           "lamp",
           "photos"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -217,7 +279,12 @@
           "t",
           "just",
           "like"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.5933,
@@ -228,7 +295,8 @@
           "comparative",
           "morphologies comparative",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.764,
@@ -239,7 +307,12 @@
           "hong kong",
           "hong",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT104",
+          "point": 292,
+          "text": "It started out as this research project on animistic and shamanic traditions in different countries and places that were colonised, where you can kind of trace the effects and the built-up trauma."
+        }
       },
       "9": {
         "x": 0.5254,
@@ -250,7 +323,8 @@
           "flowers untitled",
           "portfolio flowers",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -261,7 +335,12 @@
           "philippines",
           "t",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -272,7 +351,8 @@
           "fiction",
           "fictional",
           "field"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.9391,
@@ -283,7 +363,12 @@
           "identity",
           "like",
           "bodies"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       }
     },
     "canvas_min_w": 3140,
@@ -302,7 +387,8 @@
           "series oriental",
           "masterprints",
           "oriental masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.702,
@@ -313,7 +399,8 @@
           "migrants",
           "photos",
           "applicant"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.88,
@@ -324,7 +411,12 @@
           "identity",
           "t",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "3": {
         "x": 0.8928,
@@ -335,7 +427,12 @@
           "self portraiture",
           "painting",
           "work"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "4": {
         "x": 0.98,
@@ -346,7 +443,12 @@
           "asian american",
           "identity",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.5225,
@@ -357,7 +459,12 @@
           "cargo cults",
           "cargo",
           "table"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -368,7 +475,12 @@
           "t",
           "just",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.532,
@@ -379,7 +491,8 @@
           "morphologies",
           "morphologies comparative",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.7976,
@@ -390,7 +503,12 @@
           "hong",
           "hong kong",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "9": {
         "x": 0.3963,
@@ -401,7 +519,8 @@
           "flowers untitled",
           "portfolio flowers",
           "portfolio"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -412,7 +531,12 @@
           "philippines",
           "t",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -423,7 +547,8 @@
           "female",
           "fiction",
           "fictional"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.9352,
@@ -434,7 +559,12 @@
           "people",
           "bodies",
           "like"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.579,
@@ -445,7 +575,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 3325,
@@ -464,7 +595,12 @@
           "cargo",
           "cargo cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.3126,
@@ -475,7 +611,8 @@
           "oriental masterprint",
           "series oriental",
           "masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.896,
@@ -486,7 +623,12 @@
           "identity",
           "t",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "3": {
         "x": 0.8911,
@@ -497,7 +639,12 @@
           "painting",
           "self portraiture",
           "work"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "4": {
         "x": 0.98,
@@ -508,7 +655,12 @@
           "asian american",
           "mixed",
           "identity"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.574,
@@ -519,7 +671,12 @@
           "akari",
           "site",
           "nude"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -530,7 +687,12 @@
           "t",
           "just",
           "like"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.6414,
@@ -541,7 +703,8 @@
           "comparative",
           "morphologies comparative",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.8026,
@@ -552,7 +715,12 @@
           "kong",
           "hong kong",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT104",
+          "point": 292,
+          "text": "It started out as this research project on animistic and shamanic traditions in different countries and places that were colonised, where you can kind of trace the effects and the built-up trauma."
+        }
       },
       "9": {
         "x": 0.4055,
@@ -563,7 +731,8 @@
           "flowers untitled",
           "portfolio flowers",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -574,7 +743,12 @@
           "philippines",
           "t",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -585,7 +759,8 @@
           "feel",
           "feeling",
           "feels"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.9407,
@@ -596,7 +771,12 @@
           "identity",
           "like",
           "bodies"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.5102,
@@ -607,7 +787,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "14": {
         "x": 0.4724,
@@ -618,7 +799,8 @@
           "lucky",
           "tiger lucky",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 3552,
@@ -637,7 +819,12 @@
           "cargo",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.2781,
@@ -648,7 +835,8 @@
           "oriental masterprint",
           "oriental masterprints",
           "masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.8539,
@@ -659,7 +847,12 @@
           "identity",
           "mixed",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT77",
+          "point": 141,
+          "text": "I keep circling back to thinking about identity in terms of language. There is something shared between people of very different historically oppressed groups that has to do with being incommunicable or considered \u201cnonpersons.\u201d"
+        }
       },
       "3": {
         "x": 0.8456,
@@ -670,7 +863,12 @@
           "painting",
           "self portraiture",
           "work"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "4": {
         "x": 0.98,
@@ -681,7 +879,12 @@
           "race",
           "artists",
           "asian american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.5521,
@@ -692,7 +895,12 @@
           "akari",
           "site",
           "nude"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -703,7 +911,12 @@
           "american",
           "just",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.6058,
@@ -714,7 +927,8 @@
           "comparative",
           "morphologies comparative",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.7443,
@@ -725,7 +939,12 @@
           "kong",
           "hong kong",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT104",
+          "point": 292,
+          "text": "It started out as this research project on animistic and shamanic traditions in different countries and places that were colonised, where you can kind of trace the effects and the built-up trauma."
+        }
       },
       "9": {
         "x": 0.3479,
@@ -736,7 +955,8 @@
           "flowers untitled",
           "flowers",
           "portfolio flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -747,7 +967,12 @@
           "philippines",
           "american",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -758,7 +983,8 @@
           "filled",
           "filled men",
           "film"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.886,
@@ -769,7 +995,12 @@
           "people",
           "like",
           "ghost"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.482,
@@ -780,7 +1011,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "14": {
         "x": 0.4415,
@@ -791,7 +1023,8 @@
           "tiger",
           "ii",
           "nude"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.98,
@@ -802,7 +1035,12 @@
           "race",
           "mixed",
           "community"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       }
     },
     "canvas_min_w": 3814,
@@ -821,7 +1059,12 @@
           "cargo",
           "cargo cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.2757,
@@ -832,7 +1075,8 @@
           "masterprints",
           "masterprint series",
           "masterprint"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.8082,
@@ -843,7 +1087,12 @@
           "identity",
           "mixed",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 160,
+          "text": "I decided for myself long ago. Mixed-race identities are complicated . . . for people who carry or cling to certain ideas, assumptions, or theories about racial and cultural purity."
+        }
       },
       "3": {
         "x": 0.8309,
@@ -854,7 +1103,12 @@
           "painting",
           "self portraiture",
           "work"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "4": {
         "x": 0.98,
@@ -865,7 +1119,12 @@
           "asian american",
           "race",
           "artists"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.5514,
@@ -876,7 +1135,12 @@
           "akari",
           "site",
           "nude"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -887,7 +1151,12 @@
           "t",
           "mixed",
           "just"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.5889,
@@ -898,7 +1167,8 @@
           "morphologies",
           "morphologies comparative",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.7349,
@@ -909,7 +1179,12 @@
           "culture",
           "images",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       },
       "9": {
         "x": 0.3436,
@@ -920,7 +1195,8 @@
           "flowers untitled",
           "flowers",
           "portfolio flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -931,7 +1207,12 @@
           "philippines",
           "t",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -942,7 +1223,8 @@
           "field",
           "figurative",
           "figurative painting"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.859,
@@ -953,7 +1235,12 @@
           "people",
           "time",
           "space"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.4729,
@@ -964,7 +1251,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "14": {
         "x": 0.4335,
@@ -975,7 +1263,8 @@
           "lucky",
           "ii",
           "nude"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.9683,
@@ -986,7 +1275,12 @@
           "t",
           "community",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT25",
+          "point": 53,
+          "text": "For many of us, when it came to discussing ethnic identity, we were never offered a seat at the table. A lot of my career as an artist has come from being in the right place at the right time, or simply being the first person to do something, or both."
+        }
       },
       "16": {
         "x": 0.98,
@@ -997,7 +1291,12 @@
           "anonymous",
           "video",
           "hong"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 308,
+          "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+        }
       }
     },
     "canvas_min_w": 4168,
@@ -1016,7 +1315,12 @@
           "cargo",
           "cargo cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.4513,
@@ -1027,7 +1331,8 @@
           "series oriental",
           "masterprints",
           "masterprint"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9261,
@@ -1038,7 +1343,12 @@
           "identity",
           "racial",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "3": {
         "x": 0.7033,
@@ -1049,7 +1359,12 @@
           "self portraiture",
           "painting",
           "comparative morphologies"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "4": {
         "x": 0.98,
@@ -1060,7 +1375,12 @@
           "race",
           "artists",
           "asian american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.4188,
@@ -1071,7 +1391,12 @@
           "akari",
           "site",
           "nude"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -1082,7 +1407,12 @@
           "american",
           "just",
           "like"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.239,
@@ -1093,7 +1423,8 @@
           "portfolio",
           "flowers untitled",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.7334,
@@ -1104,7 +1435,12 @@
           "people",
           "culture",
           "maps"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       },
       "9": {
         "x": 0.0763,
@@ -1115,7 +1451,8 @@
           "version",
           "wash",
           "day"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -1126,7 +1463,12 @@
           "philippines",
           "american",
           "filipino american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -1137,7 +1479,8 @@
           "feminist",
           "fiction",
           "fictional"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.7838,
@@ -1148,7 +1491,12 @@
           "ghost",
           "time",
           "idea"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.2626,
@@ -1159,7 +1507,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "14": {
         "x": 0.4111,
@@ -1170,7 +1519,8 @@
           "tiger",
           "tiger lucky",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.98,
@@ -1181,7 +1531,12 @@
           "people",
           "mixed",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 373,
+          "text": "The kernel for our book and the related traveling exhibition happened organically over several years of research and teaching and involvement with community multiracial organizations such as MAVIN in Seattle and iPride and Hapa Issues Forum in San Francisco and then later working together with my colleague Camilla Fojas to found the Critical Mixed RaceStudies biennial conference at DePaul University in Chicago."
+        }
       },
       "16": {
         "x": 0.8993,
@@ -1192,7 +1547,12 @@
           "hong",
           "chinese",
           "paintings"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "17": {
         "x": 0.8446,
@@ -1203,7 +1563,12 @@
           "empathic",
           "humans",
           "universe"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT147",
+          "point": 458,
+          "text": "I use this science-fiction inspired project to undermine stable conceptions of identity and examine how hybrid identities emerge and transform through different kinds of biological and cultural contact."
+        }
       }
     },
     "canvas_min_w": 4385,
@@ -1222,7 +1587,12 @@
           "cargo",
           "cargo cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.4104,
@@ -1233,7 +1603,8 @@
           "oriental masterprint",
           "masterprints",
           "masterprint series"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.98,
@@ -1244,7 +1615,12 @@
           "people",
           "language",
           "project"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT25",
+          "point": 55,
+          "text": "Which is why The Hapa Project is more than a project about race or ethnicity. It\u2019s a project about identity."
+        }
       },
       "3": {
         "x": 0.6405,
@@ -1255,7 +1631,12 @@
           "self portraiture",
           "painting",
           "portraits"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "4": {
         "x": 0.9443,
@@ -1266,7 +1647,12 @@
           "american",
           "artists",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.3829,
@@ -1277,7 +1663,12 @@
           "akari",
           "nude",
           "site"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -1288,7 +1679,12 @@
           "american",
           "chinese",
           "japanese"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.2071,
@@ -1299,7 +1695,8 @@
           "portfolio",
           "flowers untitled",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.7766,
@@ -1310,7 +1707,12 @@
           "culture",
           "people",
           "images"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       },
       "9": {
         "x": 0.0362,
@@ -1321,7 +1723,8 @@
           "version",
           "wash",
           "day"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -1332,7 +1735,12 @@
           "philippines",
           "american",
           "filipino american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -1343,7 +1751,8 @@
           "feeling",
           "feels",
           "felt"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.8197,
@@ -1354,7 +1763,12 @@
           "ghost",
           "time",
           "idea"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.2245,
@@ -1365,7 +1779,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "14": {
         "x": 0.3662,
@@ -1376,7 +1791,8 @@
           "tiger",
           "tiger lucky",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.98,
@@ -1387,7 +1803,12 @@
           "mixed",
           "race",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "16": {
         "x": 0.9227,
@@ -1398,7 +1819,12 @@
           "hong kong",
           "chinese",
           "refugees"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "17": {
         "x": 0.7363,
@@ -1409,7 +1835,12 @@
           "bodies",
           "body",
           "gens"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT147",
+          "point": 458,
+          "text": "I use this science-fiction inspired project to undermine stable conceptions of identity and examine how hybrid identities emerge and transform through different kinds of biological and cultural contact."
+        }
       },
       "18": {
         "x": 0.883,
@@ -1420,7 +1851,12 @@
           "critical",
           "color",
           "social"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT85",
+          "point": 200,
+          "text": "I guess so. There are realities of human skin color that become apparent immediately upon executing a project like this. I realized that there are so many people who are considered white who are blacker than people who are considered black, and so on."
+        }
       }
     },
     "canvas_min_w": 4590,
@@ -1439,7 +1875,12 @@
           "cargo",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.4571,
@@ -1450,7 +1891,8 @@
           "oriental masterprint",
           "masterprints",
           "masterprint series"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9581,
@@ -1461,7 +1903,12 @@
           "people",
           "language",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT25",
+          "point": 55,
+          "text": "Which is why The Hapa Project is more than a project about race or ethnicity. It\u2019s a project about identity."
+        }
       },
       "3": {
         "x": 0.6637,
@@ -1472,7 +1919,12 @@
           "self portraiture",
           "painting",
           "portraits"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "4": {
         "x": 0.98,
@@ -1483,7 +1935,12 @@
           "american",
           "artists",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "5": {
         "x": 0.4449,
@@ -1494,7 +1951,12 @@
           "akari",
           "nude",
           "floor lamp"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.98,
@@ -1505,7 +1967,12 @@
           "american",
           "chinese",
           "japanese"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "7": {
         "x": 0.2394,
@@ -1516,7 +1983,8 @@
           "portfolio",
           "flowers untitled",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "8": {
         "x": 0.8044,
@@ -1527,7 +1995,12 @@
           "culture",
           "people",
           "images"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       },
       "9": {
         "x": 0.0464,
@@ -1538,7 +2011,8 @@
           "version",
           "wash",
           "day"
-        ]
+        ],
+        "featured_quote": null
       },
       "10": {
         "x": 0.98,
@@ -1549,7 +2023,12 @@
           "philippines",
           "american",
           "filipino american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "11": {
         "x": 0.02,
@@ -1560,7 +2039,8 @@
           "feels",
           "felt",
           "felt like"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.8218,
@@ -1571,7 +2051,12 @@
           "time",
           "ghost",
           "idea"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "13": {
         "x": 0.1618,
@@ -1582,7 +2067,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "14": {
         "x": 0.2993,
@@ -1593,7 +2079,8 @@
           "lucky",
           "tiger lucky",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.98,
@@ -1604,7 +2091,12 @@
           "mixed",
           "race",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "16": {
         "x": 0.9213,
@@ -1615,7 +2107,12 @@
           "kong",
           "chinese",
           "refugees"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "17": {
         "x": 0.7306,
@@ -1626,7 +2123,12 @@
           "body",
           "bodies",
           "gens"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT147",
+          "point": 458,
+          "text": "I use this science-fiction inspired project to undermine stable conceptions of identity and examine how hybrid identities emerge and transform through different kinds of biological and cultural contact."
+        }
       },
       "18": {
         "x": 0.8359,
@@ -1637,7 +2139,12 @@
           "critical",
           "color",
           "social"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT85",
+          "point": 200,
+          "text": "I guess so. There are realities of human skin color that become apparent immediately upon executing a project like this. I realized that there are so many people who are considered white who are blacker than people who are considered black, and so on."
+        }
       },
       "19": {
         "x": 0.2033,
@@ -1648,7 +2155,8 @@
           "far",
           "felt like",
           "female"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 4827,
@@ -1667,7 +2175,12 @@
           "cargo",
           "cargo cults",
           "cults"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT130",
+          "point": 356,
+          "text": "My \u201cUchinanchu\u201d textile series engages Okinawan diasporic communal identities."
+        }
       },
       "1": {
         "x": 0.3947,
@@ -1678,7 +2191,8 @@
           "oriental masterprint",
           "oriental masterprints",
           "masterprint"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.98,
@@ -1689,7 +2203,12 @@
           "self",
           "figurative",
           "paintings"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.7744,
@@ -1700,7 +2219,12 @@
           "migrants",
           "applicant",
           "applicant photos"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 181,
+          "text": "As more and more non-Western immigrants settle in the United States\u2014and as their descendants mix with the people already present here\u2014another family of questions comes into focus. Especially in those parts of the country\u2014especially in the cities\u2014with majority-minority populations."
+        }
       },
       "4": {
         "x": 0.8923,
@@ -1711,7 +2235,12 @@
           "ghost",
           "people",
           "world"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.5246,
@@ -1722,7 +2251,12 @@
           "cargo cults",
           "nude",
           "cults"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.5037,
@@ -1733,7 +2267,8 @@
           "desert",
           "flower",
           "portfolio"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.7755,
@@ -1744,7 +2279,12 @@
           "philippines",
           "people",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.6717,
@@ -1755,7 +2295,12 @@
           "information",
           "bodies",
           "body"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.7391,
@@ -1766,7 +2311,12 @@
           "history",
           "chinese",
           "funny names"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.1632,
@@ -1777,7 +2327,8 @@
           "lucky",
           "owl",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -1788,7 +2339,8 @@
           "filipinx",
           "filled",
           "filled men"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -1799,7 +2351,12 @@
           "representation",
           "artists color",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT121",
+          "point": 338,
+          "text": "I later became part of the multiculturalism movement in New York City that fought to democratize the visual arts and to provide even a fraction of the opportunities enjoyed by white artists to artists of color."
+        }
       },
       "13": {
         "x": 0.9655,
@@ -1810,7 +2367,12 @@
           "asian american",
           "race",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.4144,
@@ -1821,7 +2383,8 @@
           "lamp",
           "table",
           "plane"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.3007,
@@ -1832,7 +2395,8 @@
           "far",
           "prison",
           "filled men"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.98,
@@ -1843,7 +2407,12 @@
           "identity",
           "mixed",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.841,
@@ -1854,7 +2423,12 @@
           "t",
           "chinese",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 32,
+          "text": "Going back to my adolescence, my story is that I have a relatively unique cultural heritage\u2014I am African-American on my mother\u2019s side and South Asian Indian on my father\u2019s side. In the United States the conversation about race is almost always black and white."
+        }
       },
       "18": {
         "x": 0.6239,
@@ -1865,7 +2439,8 @@
           "morphologies",
           "morphologies comparative",
           "fluid"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.98,
@@ -1876,7 +2451,12 @@
           "self portraiture",
           "identity",
           "way"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT152",
+          "point": 481,
+          "text": "For this reason I gravitate towards portraiture as practice and process. Rather than depicting moments of cultural \u201cdiaspora,\u201d I lean towards the idea of fragmentation within the self as being more of an evolving, fluid, and never-ending process."
+        }
       },
       "20": {
         "x": 0.9155,
@@ -1887,7 +2467,12 @@
           "people",
           "colonial",
           "like"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       }
     },
     "canvas_min_w": 5195,
@@ -1906,7 +2491,8 @@
           "cargo",
           "cargo cults",
           "cults"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.2408,
@@ -1917,7 +2503,8 @@
           "plane tree",
           "table",
           "plane trees"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.98,
@@ -1928,7 +2515,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.809,
@@ -1939,7 +2531,12 @@
           "migrants",
           "photos migrants",
           "photos"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 181,
+          "text": "As more and more non-Western immigrants settle in the United States\u2014and as their descendants mix with the people already present here\u2014another family of questions comes into focus. Especially in those parts of the country\u2014especially in the cities\u2014with majority-minority populations."
+        }
       },
       "4": {
         "x": 0.8649,
@@ -1950,7 +2547,12 @@
           "ghost",
           "people",
           "world"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.5034,
@@ -1961,7 +2563,12 @@
           "cults",
           "post",
           "rasquache"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.4442,
@@ -1972,7 +2579,8 @@
           "desert",
           "flower",
           "portfolio"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.7857,
@@ -1983,7 +2591,12 @@
           "philippines",
           "people",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.6741,
@@ -1994,7 +2607,12 @@
           "information",
           "bodies",
           "body"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.7352,
@@ -2005,7 +2623,12 @@
           "history",
           "chinese",
           "images"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.1365,
@@ -2016,7 +2639,8 @@
           "lucky",
           "tiger lucky",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -2027,7 +2651,8 @@
           "fiction",
           "fictional",
           "field"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -2038,7 +2663,12 @@
           "race",
           "representation",
           "works"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT121",
+          "point": 337,
+          "text": "We have plans to start this project this summer. My greatest challenge as an artist has been overcoming racism and exclusion in the visual arts. This was a very real obstacle to artists of color in the 1970\u2019s and 80\u2019s and one I experienced firsthand on occasions too numerous to mention."
+        }
       },
       "13": {
         "x": 0.9702,
@@ -2049,7 +2679,12 @@
           "asian american",
           "mixed race",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.3573,
@@ -2060,7 +2695,8 @@
           "lamp",
           "akari",
           "nude"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.2549,
@@ -2071,7 +2707,8 @@
           "finally",
           "film",
           "filled"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.98,
@@ -2082,7 +2719,12 @@
           "identity",
           "mixed",
           "t"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.8454,
@@ -2093,7 +2735,12 @@
           "t",
           "chinese",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 32,
+          "text": "Going back to my adolescence, my story is that I have a relatively unique cultural heritage\u2014I am African-American on my mother\u2019s side and South Asian Indian on my father\u2019s side. In the United States the conversation about race is almost always black and white."
+        }
       },
       "18": {
         "x": 0.6071,
@@ -2104,7 +2751,8 @@
           "comparative",
           "morphologies comparative",
           "flower"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.98,
@@ -2115,7 +2763,12 @@
           "self portraiture",
           "identity",
           "way"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT152",
+          "point": 481,
+          "text": "For this reason I gravitate towards portraiture as practice and process. Rather than depicting moments of cultural \u201cdiaspora,\u201d I lean towards the idea of fragmentation within the self as being more of an evolving, fluid, and never-ending process."
+        }
       },
       "20": {
         "x": 0.9209,
@@ -2126,7 +2779,12 @@
           "people",
           "colonial",
           "like"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       },
       "21": {
         "x": 0.3563,
@@ -2137,7 +2795,8 @@
           "masterprint series",
           "oriental masterprints",
           "oriental masterprint"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 5406,
@@ -2156,7 +2815,8 @@
           "cargo cults",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.2497,
@@ -2167,7 +2827,8 @@
           "plane trees",
           "trees",
           "tree"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.98,
@@ -2178,7 +2839,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.7589,
@@ -2189,7 +2855,12 @@
           "migrants",
           "photos",
           "photos migrants"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 181,
+          "text": "As more and more non-Western immigrants settle in the United States\u2014and as their descendants mix with the people already present here\u2014another family of questions comes into focus. Especially in those parts of the country\u2014especially in the cities\u2014with majority-minority populations."
+        }
       },
       "4": {
         "x": 0.8107,
@@ -2200,7 +2871,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.33,
@@ -2211,7 +2887,12 @@
           "nude",
           "aleyda",
           "cost"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.297,
@@ -2222,7 +2903,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.98,
@@ -2233,7 +2915,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7341,
@@ -2244,7 +2931,12 @@
           "ghosts",
           "information",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.7083,
@@ -2255,7 +2947,12 @@
           "chinese",
           "images",
           "funny names"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.1835,
@@ -2266,7 +2963,8 @@
           "tiger",
           "tiger lucky",
           "filled"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -2277,7 +2975,8 @@
           "feminist",
           "fiction",
           "fictional"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -2288,7 +2987,12 @@
           "people color",
           "white",
           "black"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.8241,
@@ -2299,7 +3003,12 @@
           "race",
           "race studies",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 373,
+          "text": "The kernel for our book and the related traveling exhibition happened organically over several years of research and teaching and involvement with community multiracial organizations such as MAVIN in Seattle and iPride and Hapa Issues Forum in San Francisco and then later working together with my colleague Camilla Fojas to found the Critical Mixed RaceStudies biennial conference at DePaul University in Chicago."
+        }
       },
       "14": {
         "x": 0.2858,
@@ -2310,7 +3019,8 @@
           "flowers untitled",
           "flowers",
           "portfolio flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.1538,
@@ -2321,7 +3031,8 @@
           "near",
           "filipinx",
           "filipinos"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.9,
@@ -2332,7 +3043,12 @@
           "identity",
           "racial",
           "color"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.8552,
@@ -2343,7 +3059,12 @@
           "american",
           "language",
           "chinese"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "18": {
         "x": 0.5903,
@@ -2354,7 +3075,8 @@
           "morphologies",
           "morphologies comparative",
           "filled"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.9286,
@@ -2365,7 +3087,12 @@
           "self portraiture",
           "identity",
           "way"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT152",
+          "point": 481,
+          "text": "For this reason I gravitate towards portraiture as practice and process. Rather than depicting moments of cultural \u201cdiaspora,\u201d I lean towards the idea of fragmentation within the self as being more of an evolving, fluid, and never-ending process."
+        }
       },
       "20": {
         "x": 0.9455,
@@ -2376,7 +3103,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.366,
@@ -2387,7 +3119,8 @@
           "masterprint series",
           "masterprints",
           "oriental masterprint"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.98,
@@ -2398,7 +3131,12 @@
           "asian american",
           "american",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       }
     },
     "canvas_min_w": 5494,
@@ -2417,7 +3155,8 @@
           "cargo",
           "cargo cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.3647,
@@ -2428,7 +3167,8 @@
           "portrait",
           "portfolio",
           "lamp"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.98,
@@ -2439,7 +3179,12 @@
           "self",
           "figurative",
           "paintings"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.7502,
@@ -2450,7 +3195,12 @@
           "photos migrants",
           "applicant",
           "migrants"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 181,
+          "text": "As more and more non-Western immigrants settle in the United States\u2014and as their descendants mix with the people already present here\u2014another family of questions comes into focus. Especially in those parts of the country\u2014especially in the cities\u2014with majority-minority populations."
+        }
       },
       "4": {
         "x": 0.9205,
@@ -2461,7 +3211,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.4681,
@@ -2472,7 +3227,12 @@
           "statement",
           "rasquache",
           "right"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.284,
@@ -2483,7 +3243,8 @@
           "portfolio",
           "flowers untitled",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.9001,
@@ -2494,7 +3255,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7002,
@@ -2505,7 +3271,12 @@
           "information",
           "ghosts",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.688,
@@ -2516,7 +3287,12 @@
           "chinese",
           "images",
           "funny names"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.1352,
@@ -2527,7 +3303,8 @@
           "tiger",
           "owl",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -2538,7 +3315,8 @@
           "figure",
           "figures",
           "filipino"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -2549,7 +3327,12 @@
           "people color",
           "black",
           "white"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.8149,
@@ -2560,7 +3343,12 @@
           "critical mixed",
           "mixed",
           "race studies"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 373,
+          "text": "The kernel for our book and the related traveling exhibition happened organically over several years of research and teaching and involvement with community multiracial organizations such as MAVIN in Seattle and iPride and Hapa Issues Forum in San Francisco and then later working together with my colleague Camilla Fojas to found the Critical Mixed RaceStudies biennial conference at DePaul University in Chicago."
+        }
       },
       "14": {
         "x": 0.3611,
@@ -2571,7 +3359,8 @@
           "lamp",
           "akari",
           "nude"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.2286,
@@ -2582,7 +3371,8 @@
           "near",
           "prison",
           "figures"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.98,
@@ -2593,7 +3383,12 @@
           "identity",
           "racial",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.869,
@@ -2604,7 +3399,12 @@
           "american",
           "language",
           "chinese"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "18": {
         "x": 0.5814,
@@ -2615,7 +3415,8 @@
           "comparative",
           "morphologies comparative",
           "flower"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.98,
@@ -2626,7 +3427,12 @@
           "self portraiture",
           "identity",
           "way"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT152",
+          "point": 481,
+          "text": "For this reason I gravitate towards portraiture as practice and process. Rather than depicting moments of cultural \u201cdiaspora,\u201d I lean towards the idea of fragmentation within the self as being more of an evolving, fluid, and never-ending process."
+        }
       },
       "20": {
         "x": 0.8192,
@@ -2637,7 +3443,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT91",
+          "point": 209,
+          "text": "In a similar way, colonial subjects are alienated not just from their labor but from their sense of who they are, as something more than a spectacle for other people. Yes, to me the spectacle is not simply visual, it\u2019s psychological: it conditions what you can imagine as a possibility."
+        }
       },
       "21": {
         "x": 0.3565,
@@ -2648,7 +3459,8 @@
           "oriental masterprint",
           "oriental masterprints",
           "masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.9443,
@@ -2659,7 +3471,12 @@
           "asian american",
           "american",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "23": {
         "x": 0.2594,
@@ -2670,7 +3487,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 5919,
@@ -2689,7 +3507,8 @@
           "cargo cults",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.3534,
@@ -2700,7 +3519,8 @@
           "plane trees",
           "chair",
           "trees"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.98,
@@ -2711,7 +3531,12 @@
           "self",
           "figurative",
           "paintings"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.928,
@@ -2722,7 +3547,12 @@
           "culture",
           "western",
           "americans"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 190,
+          "text": "Regardless of what languages are coming out of our mouths, and what European names appear on our government documents, non-Western cultural perspectives and non-Western family histories remain as part of the mix in the descendants of all the immigrants coming from Asia, Africa, and Latin America, and they can\u2019t help but rearrange and reshape this fucked-up place."
+        }
       },
       "4": {
         "x": 0.8933,
@@ -2733,7 +3563,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.4144,
@@ -2744,7 +3579,12 @@
           "cults",
           "cargo cults",
           "cargo"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.2422,
@@ -2755,7 +3595,8 @@
           "flowers untitled",
           "flowers",
           "portfolio flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.98,
@@ -2766,7 +3607,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7132,
@@ -2777,7 +3623,12 @@
           "information",
           "ghosts",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.6984,
@@ -2788,7 +3639,12 @@
           "history",
           "images",
           "funny names"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.145,
@@ -2799,7 +3655,8 @@
           "lucky",
           "owl",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -2810,7 +3667,8 @@
           "filled men",
           "film",
           "films"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -2821,7 +3679,12 @@
           "people color",
           "white",
           "black"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.8221,
@@ -2832,7 +3695,12 @@
           "critical mixed",
           "mixed",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 373,
+          "text": "The kernel for our book and the related traveling exhibition happened organically over several years of research and teaching and involvement with community multiracial organizations such as MAVIN in Seattle and iPride and Hapa Issues Forum in San Francisco and then later working together with my colleague Camilla Fojas to found the Critical Mixed RaceStudies biennial conference at DePaul University in Chicago."
+        }
       },
       "14": {
         "x": 0.318,
@@ -2843,7 +3711,8 @@
           "nude",
           "paris abstraction",
           "paris"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.1388,
@@ -2854,7 +3723,8 @@
           "far",
           "film",
           "finally"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.9365,
@@ -2865,7 +3735,12 @@
           "mixed",
           "social",
           "white"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.827,
@@ -2876,7 +3751,12 @@
           "chinese",
           "language",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT110",
+          "point": 307,
+          "text": "Whenever you come from a monocultural country like Taiwan to America, you suddenly realize you are a minority. Of course, now Asians have much more power, but back then you were often boxed into stereotypes."
+        }
       },
       "18": {
         "x": 0.5738,
@@ -2887,7 +3767,8 @@
           "morphologies",
           "morphologies comparative",
           "focused"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.98,
@@ -2898,7 +3779,12 @@
           "self portraiture",
           "identity",
           "way"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT152",
+          "point": 481,
+          "text": "For this reason I gravitate towards portraiture as practice and process. Rather than depicting moments of cultural \u201cdiaspora,\u201d I lean towards the idea of fragmentation within the self as being more of an evolving, fluid, and never-ending process."
+        }
       },
       "20": {
         "x": 0.8221,
@@ -2909,7 +3795,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.3647,
@@ -2920,7 +3811,8 @@
           "masterprint series",
           "masterprints",
           "oriental masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.9304,
@@ -2931,7 +3823,12 @@
           "asian american",
           "american",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 397,
+          "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+        }
       },
       "23": {
         "x": 0.2349,
@@ -2942,7 +3839,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "24": {
         "x": 0.5198,
@@ -2953,7 +3851,8 @@
           "migrants",
           "applicant photos",
           "photos"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 6118,
@@ -2972,7 +3871,8 @@
           "cargo cults",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.326,
@@ -2983,7 +3883,8 @@
           "plane trees",
           "chair",
           "trees"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9476,
@@ -2994,7 +3895,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.8655,
@@ -3005,7 +3911,12 @@
           "culture",
           "western",
           "immigrants"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 190,
+          "text": "Regardless of what languages are coming out of our mouths, and what European names appear on our government documents, non-Western cultural perspectives and non-Western family histories remain as part of the mix in the descendants of all the immigrants coming from Asia, Africa, and Latin America, and they can\u2019t help but rearrange and reshape this fucked-up place."
+        }
       },
       "4": {
         "x": 0.8233,
@@ -3016,7 +3927,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.3782,
@@ -3027,7 +3943,12 @@
           "cargo cults",
           "cults",
           "cargo"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.2588,
@@ -3038,7 +3959,8 @@
           "flowers untitled",
           "portfolio flowers",
           "portfolio"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.9141,
@@ -3049,7 +3971,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.6768,
@@ -3060,7 +3987,12 @@
           "information",
           "identity",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.7288,
@@ -3071,7 +4003,12 @@
           "painting",
           "images",
           "history"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.145,
@@ -3082,7 +4019,8 @@
           "lucky",
           "owl",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -3093,7 +4031,8 @@
           "filled",
           "filled men",
           "film"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -3104,7 +4043,12 @@
           "people color",
           "white",
           "black"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.98,
@@ -3115,7 +4059,12 @@
           "mixed",
           "race",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.2773,
@@ -3126,7 +4075,8 @@
           "nude",
           "lamp akari",
           "paris"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.1096,
@@ -3137,7 +4087,8 @@
           "far",
           "film",
           "films"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.9746,
@@ -3148,7 +4099,12 @@
           "social",
           "mixed",
           "racial"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.8515,
@@ -3159,7 +4115,12 @@
           "chinese",
           "language",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 32,
+          "text": "Going back to my adolescence, my story is that I have a relatively unique cultural heritage\u2014I am African-American on my mother\u2019s side and South Asian Indian on my father\u2019s side. In the United States the conversation about race is almost always black and white."
+        }
       },
       "18": {
         "x": 0.5664,
@@ -3170,7 +4131,8 @@
           "morphologies",
           "morphologies comparative",
           "focus"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.9697,
@@ -3181,7 +4143,12 @@
           "self portraiture",
           "identity",
           "portraits"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "20": {
         "x": 0.8522,
@@ -3192,7 +4159,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.366,
@@ -3203,7 +4175,8 @@
           "series oriental",
           "oriental masterprint",
           "oriental masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.98,
@@ -3214,7 +4187,12 @@
           "american",
           "asian american",
           "artists"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 397,
+          "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+        }
       },
       "23": {
         "x": 0.2172,
@@ -3225,7 +4203,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "24": {
         "x": 0.5025,
@@ -3236,7 +4215,8 @@
           "applicant",
           "migrants",
           "photos migrants"
-        ]
+        ],
+        "featured_quote": null
       },
       "25": {
         "x": 0.7921,
@@ -3247,7 +4227,12 @@
           "mixed",
           "race studies",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 409,
+          "text": "We sent out a call for papers in 2009 and by the time the inaugural conference\u00a0\u201cEmerging Paradigms in Critical Mixed Race Studies\u201d\u00a0took shape in November 2010 we had over 200 paper submissions and 430 people attended."
+        }
       }
     },
     "canvas_min_w": 6032,
@@ -3266,7 +4251,8 @@
           "cargo cults",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.243,
@@ -3277,7 +4263,8 @@
           "portrait",
           "lamp",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9588,
@@ -3288,7 +4275,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.8807,
@@ -3299,7 +4291,12 @@
           "culture",
           "western",
           "immigrants"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 190,
+          "text": "Regardless of what languages are coming out of our mouths, and what European names appear on our government documents, non-Western cultural perspectives and non-Western family histories remain as part of the mix in the descendants of all the immigrants coming from Asia, Africa, and Latin America, and they can\u2019t help but rearrange and reshape this fucked-up place."
+        }
       },
       "4": {
         "x": 0.8187,
@@ -3310,7 +4307,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.3955,
@@ -3321,7 +4323,12 @@
           "rasquache",
           "post",
           "statement"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.2957,
@@ -3332,7 +4339,8 @@
           "portfolio flowers",
           "flowers untitled",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.8689,
@@ -3343,7 +4351,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7004,
@@ -3354,7 +4367,12 @@
           "information",
           "identity",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.7434,
@@ -3365,7 +4383,12 @@
           "painting",
           "images",
           "history"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.0549,
@@ -3376,7 +4399,8 @@
           "tiger",
           "tiger lucky",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -3387,7 +4411,8 @@
           "felt",
           "felt like",
           "female"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.9453,
@@ -3398,7 +4423,12 @@
           "people color",
           "davis",
           "white"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.98,
@@ -3409,7 +4439,12 @@
           "mixed",
           "race",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.2868,
@@ -3420,7 +4455,8 @@
           "lamp",
           "akari",
           "nude"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.0895,
@@ -3431,7 +4467,8 @@
           "filipino american",
           "filipino",
           "figures"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.98,
@@ -3442,7 +4479,12 @@
           "social",
           "mixed",
           "racial"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.8717,
@@ -3453,7 +4495,12 @@
           "chinese",
           "language",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 32,
+          "text": "Going back to my adolescence, my story is that I have a relatively unique cultural heritage\u2014I am African-American on my mother\u2019s side and South Asian Indian on my father\u2019s side. In the United States the conversation about race is almost always black and white."
+        }
       },
       "18": {
         "x": 0.566,
@@ -3464,7 +4511,8 @@
           "comparative morphologies",
           "morphologies comparative",
           "filipino american"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.98,
@@ -3475,7 +4523,12 @@
           "self portraiture",
           "identity",
           "portraits"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "20": {
         "x": 0.8285,
@@ -3486,7 +4539,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.3843,
@@ -3497,7 +4555,8 @@
           "masterprint",
           "oriental masterprint",
           "oriental masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.98,
@@ -3508,7 +4567,12 @@
           "american",
           "asian american",
           "artists"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 397,
+          "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+        }
       },
       "23": {
         "x": 0.1456,
@@ -3519,7 +4583,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "24": {
         "x": 0.4985,
@@ -3530,7 +4595,8 @@
           "migrants",
           "photos",
           "photos migrants"
-        ]
+        ],
+        "featured_quote": null
       },
       "25": {
         "x": 0.7533,
@@ -3541,7 +4607,12 @@
           "mixed",
           "race studies",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 409,
+          "text": "We sent out a call for papers in 2009 and by the time the inaugural conference\u00a0\u201cEmerging Paradigms in Critical Mixed Race Studies\u201d\u00a0took shape in November 2010 we had over 200 paper submissions and 430 people attended."
+        }
       },
       "26": {
         "x": 0.1673,
@@ -3552,7 +4623,8 @@
           "cost",
           "living",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 6326,
@@ -3571,7 +4643,8 @@
           "cargo cults",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.2152,
@@ -3582,7 +4655,8 @@
           "portrait",
           "lamp",
           "prints"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9385,
@@ -3593,7 +4667,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.9264,
@@ -3604,7 +4683,12 @@
           "culture",
           "western",
           "americans"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 190,
+          "text": "Regardless of what languages are coming out of our mouths, and what European names appear on our government documents, non-Western cultural perspectives and non-Western family histories remain as part of the mix in the descendants of all the immigrants coming from Asia, Africa, and Latin America, and they can\u2019t help but rearrange and reshape this fucked-up place."
+        }
       },
       "4": {
         "x": 0.8428,
@@ -3615,7 +4699,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.3676,
@@ -3626,7 +4715,12 @@
           "post",
           "cults",
           "cargo"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.2103,
@@ -3637,7 +4731,8 @@
           "flowers untitled",
           "portfolio flowers",
           "flowers"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.9297,
@@ -3648,7 +4743,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7242,
@@ -3659,7 +4759,12 @@
           "information",
           "identity",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.7225,
@@ -3670,7 +4775,12 @@
           "painting",
           "images",
           "history"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.0753,
@@ -3681,7 +4791,8 @@
           "lucky",
           "tiger lucky",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -3692,7 +4803,8 @@
           "feel",
           "feeling",
           "feels"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -3703,7 +4815,12 @@
           "people color",
           "white",
           "black"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.98,
@@ -3714,7 +4831,12 @@
           "mixed",
           "race",
           "mixed race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.2504,
@@ -3725,7 +4847,8 @@
           "nude",
           "akari floor",
           "paris abstraction"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.1066,
@@ -3736,7 +4859,8 @@
           "far",
           "feels",
           "felt"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.968,
@@ -3747,7 +4871,12 @@
           "social",
           "mixed",
           "racial"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.8292,
@@ -3758,7 +4887,12 @@
           "chinese",
           "language",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 32,
+          "text": "Going back to my adolescence, my story is that I have a relatively unique cultural heritage\u2014I am African-American on my mother\u2019s side and South Asian Indian on my father\u2019s side. In the United States the conversation about race is almost always black and white."
+        }
       },
       "18": {
         "x": 0.5322,
@@ -3769,7 +4903,8 @@
           "comparative morphologies",
           "morphologies comparative",
           "figure"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.9668,
@@ -3780,7 +4915,12 @@
           "self portraiture",
           "identity",
           "portraits"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "20": {
         "x": 0.8222,
@@ -3791,7 +4931,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.3212,
@@ -3802,7 +4947,8 @@
           "masterprint",
           "masterprint series",
           "oriental masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.98,
@@ -3813,7 +4959,12 @@
           "american",
           "asian american",
           "artists"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 397,
+          "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+        }
       },
       "23": {
         "x": 0.2349,
@@ -3824,7 +4975,8 @@
           "desert",
           "desert flower",
           "chrysanthemums"
-        ]
+        ],
+        "featured_quote": null
       },
       "24": {
         "x": 0.5084,
@@ -3835,7 +4987,8 @@
           "photos migrants",
           "photos",
           "applicant photos"
-        ]
+        ],
+        "featured_quote": null
       },
       "25": {
         "x": 0.8352,
@@ -3846,7 +4999,12 @@
           "mixed",
           "race studies",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 409,
+          "text": "We sent out a call for papers in 2009 and by the time the inaugural conference\u00a0\u201cEmerging Paradigms in Critical Mixed Race Studies\u201d\u00a0took shape in November 2010 we had over 200 paper submissions and 430 people attended."
+        }
       },
       "26": {
         "x": 0.1323,
@@ -3857,7 +5015,8 @@
           "cost living",
           "owl",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "27": {
         "x": 0.1153,
@@ -3868,7 +5027,8 @@
           "trees",
           "plane tree",
           "tree"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 6478,
@@ -3887,7 +5047,8 @@
           "cargo cults",
           "cargo",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.16,
@@ -3898,7 +5059,8 @@
           "portrait",
           "lamp",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9019,
@@ -3909,7 +5071,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 21,
+          "text": "My new self-portraits are not about myself. These works are about figurative painting and the artist as picture-maker. I repurpose ideas and approaches to painting across time and geography, including Egyptian form, Giotto frescoes, Hindu figuration, and early American painting."
+        }
       },
       "3": {
         "x": 0.9441,
@@ -3920,7 +5087,12 @@
           "culture",
           "western",
           "immigrants"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 190,
+          "text": "Regardless of what languages are coming out of our mouths, and what European names appear on our government documents, non-Western cultural perspectives and non-Western family histories remain as part of the mix in the descendants of all the immigrants coming from Asia, Africa, and Latin America, and they can\u2019t help but rearrange and reshape this fucked-up place."
+        }
       },
       "4": {
         "x": 0.8316,
@@ -3931,7 +5103,12 @@
           "ghost",
           "world",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.3615,
@@ -3942,7 +5119,12 @@
           "paris abstraction",
           "en",
           "c"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.1701,
@@ -3953,7 +5135,8 @@
           "flowers",
           "flowers untitled",
           "untitled"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.9375,
@@ -3964,7 +5147,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7155,
@@ -3975,7 +5163,12 @@
           "information",
           "ghosts",
           "memories"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT102",
+          "point": 287,
+          "text": "The human species is defined by how it names, connects and remembers itself. I was considering this in relation to my grandmother's dementia \u2014 how that meant that she was starting to physically lose these networks of meaning."
+        }
       },
       "9": {
         "x": 0.736,
@@ -3986,7 +5179,12 @@
           "painting",
           "images",
           "history"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.0799,
@@ -3997,7 +5195,8 @@
           "lucky",
           "tiger lucky",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -4008,7 +5207,8 @@
           "fiction",
           "fictional",
           "field"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.9777,
@@ -4019,7 +5219,12 @@
           "people color",
           "white",
           "black"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 36,
+          "text": "In my works, I position a woman of color at the center of a discourse on representation. I established this objective from my study of art history."
+        }
       },
       "13": {
         "x": 0.98,
@@ -4030,7 +5235,12 @@
           "mixed",
           "race",
           "american"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.1082,
@@ -4041,7 +5251,8 @@
           "form",
           "hanging",
           "nature"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.0943,
@@ -4052,7 +5263,8 @@
           "far",
           "field",
           "figurative"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.98,
@@ -4063,7 +5275,12 @@
           "social",
           "mixed",
           "racial"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.8764,
@@ -4074,7 +5291,12 @@
           "chinese",
           "language",
           "mixed"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 32,
+          "text": "Going back to my adolescence, my story is that I have a relatively unique cultural heritage\u2014I am African-American on my mother\u2019s side and South Asian Indian on my father\u2019s side. In the United States the conversation about race is almost always black and white."
+        }
       },
       "18": {
         "x": 0.5065,
@@ -4085,7 +5307,8 @@
           "comparative morphologies",
           "morphologies comparative",
           "filled men"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.9537,
@@ -4096,7 +5319,12 @@
           "self portraiture",
           "identity",
           "portraits"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "20": {
         "x": 0.8649,
@@ -4107,7 +5335,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.2736,
@@ -4118,7 +5351,8 @@
           "masterprint",
           "oriental masterprints",
           "oriental masterprint"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.98,
@@ -4129,7 +5363,12 @@
           "american",
           "asian american",
           "artists"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 397,
+          "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+        }
       },
       "23": {
         "x": 0.1575,
@@ -4140,7 +5379,8 @@
           "desert",
           "chrysanthemums",
           "desert flower"
-        ]
+        ],
+        "featured_quote": null
       },
       "24": {
         "x": 0.5015,
@@ -4151,7 +5391,8 @@
           "migrants",
           "applicant",
           "applicant photos"
-        ]
+        ],
+        "featured_quote": null
       },
       "25": {
         "x": 0.823,
@@ -4162,7 +5403,12 @@
           "mixed",
           "race studies",
           "race"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 409,
+          "text": "We sent out a call for papers in 2009 and by the time the inaugural conference\u00a0\u201cEmerging Paradigms in Critical Mixed Race Studies\u201d\u00a0took shape in November 2010 we had over 200 paper submissions and 430 people attended."
+        }
       },
       "26": {
         "x": 0.1494,
@@ -4173,7 +5419,8 @@
           "living",
           "figurative",
           "figurative painting"
-        ]
+        ],
+        "featured_quote": null
       },
       "27": {
         "x": 0.0826,
@@ -4184,7 +5431,8 @@
           "plane tree",
           "trees",
           "plane trees"
-        ]
+        ],
+        "featured_quote": null
       },
       "28": {
         "x": 0.2361,
@@ -4195,7 +5443,8 @@
           "owl",
           "nude",
           "akari floor"
-        ]
+        ],
+        "featured_quote": null
       }
     },
     "canvas_min_w": 6692,
@@ -4214,7 +5463,8 @@
           "cargo cults",
           "cults",
           "umakichi umakichi"
-        ]
+        ],
+        "featured_quote": null
       },
       "1": {
         "x": 0.1819,
@@ -4225,7 +5475,8 @@
           "portrait",
           "lamp",
           "ii"
-        ]
+        ],
+        "featured_quote": null
       },
       "2": {
         "x": 0.9267,
@@ -4236,7 +5487,12 @@
           "self",
           "figurative",
           "tradition"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT14",
+          "point": 23,
+          "text": "My aim is to make paintings that do multiple things at once: point to history while maintaining contemporary relevance; present naturalistic form while emphasizing underlying, abstract, structure; and explore what is to be a person of color in America while at the same time moving the genre of self-portraiture away from identity and toward a discourse on past and present picture-making."
+        }
       },
       "3": {
         "x": 0.9065,
@@ -4247,7 +5503,12 @@
           "western",
           "culture",
           "americans"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT82",
+          "point": 190,
+          "text": "Regardless of what languages are coming out of our mouths, and what European names appear on our government documents, non-Western cultural perspectives and non-Western family histories remain as part of the mix in the descendants of all the immigrants coming from Asia, Africa, and Latin America, and they can\u2019t help but rearrange and reshape this fucked-up place."
+        }
       },
       "4": {
         "x": 0.8122,
@@ -4258,7 +5519,12 @@
           "ghost",
           "chantri",
           "people"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT145",
+          "point": 453,
+          "text": "My work considers the idea that symbolic and ideological systems can be activated and re-imagined through collaboration, imaginative play and masquerade. To affect this re-imagining objects, bodies, and landscapes are constructed to immerse us in the logic of another place."
+        }
       },
       "5": {
         "x": 0.3521,
@@ -4269,7 +5535,12 @@
           "sculpture",
           "shape",
           "en"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT94",
+          "point": 219,
+          "text": "R-a-s-q-u-a-c-h-e.\nLike rasquache in the most grandest sense would be. . . . In an African-American culture, jazz would be ultimate rasquache."
+        }
       },
       "6": {
         "x": 0.1869,
@@ -4280,7 +5551,8 @@
           "flowers",
           "flowers untitled",
           "untitled"
-        ]
+        ],
+        "featured_quote": null
       },
       "7": {
         "x": 0.98,
@@ -4291,7 +5563,12 @@
           "philippines",
           "t",
           "cultural"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT144",
+          "point": 449,
+          "text": "In attempting to excavate why we as a country are still turning this over and over, I wanted to look back at some of the earliest images of Filipinos taken in America, and see how they also fed into similar positionings of Native Americans and Black Americans \u2014 that we were all lumped into varying degrees of not meeting standards, of not belonging."
+        }
       },
       "8": {
         "x": 0.7824,
@@ -4302,7 +5579,12 @@
           "t",
           "life",
           "psychological"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT46",
+          "point": 104,
+          "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can\u2019t see it, and you always think you\u2019re an independent person or being."
+        }
       },
       "9": {
         "x": 0.7577,
@@ -4313,7 +5595,12 @@
           "paintings",
           "funny names",
           "painting"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT178",
+          "point": 536,
+          "text": "I did paintings based on old photographs of Chinese railroad workers, a Chinese family, and immigrants to the U.S. I borrowed photographs from the Wong family in San Francisco. These old black-and-white historic photographs provide information, they are witness to a particular moment in society."
+        }
       },
       "10": {
         "x": 0.0889,
@@ -4324,7 +5611,8 @@
           "tiger",
           "tiger lucky",
           "wildness"
-        ]
+        ],
+        "featured_quote": null
       },
       "11": {
         "x": 0.02,
@@ -4335,7 +5623,8 @@
           "film",
           "films",
           "finally"
-        ]
+        ],
+        "featured_quote": null
       },
       "12": {
         "x": 0.98,
@@ -4346,7 +5635,12 @@
           "people color",
           "works",
           "artists"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT121",
+          "point": 337,
+          "text": "We have plans to start this project this summer. My greatest challenge as an artist has been overcoming racism and exclusion in the visual arts. This was a very real obstacle to artists of color in the 1970\u2019s and 80\u2019s and one I experienced firsthand on occasions too numerous to mention."
+        }
       },
       "13": {
         "x": 0.98,
@@ -4357,7 +5651,12 @@
           "american",
           "race",
           "history"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 370,
+          "text": "I\u2019m a visual artist, a painter, and much of my work has been about Asian American and mixed race identity and history. As a result, I\u2019m tapped into a network of artists, scholars, and activists working on similar topics."
+        }
       },
       "14": {
         "x": 0.128,
@@ -4368,7 +5667,8 @@
           "form",
           "hanging",
           "nature"
-        ]
+        ],
+        "featured_quote": null
       },
       "15": {
         "x": 0.0886,
@@ -4379,7 +5679,8 @@
           "near",
           "focused",
           "focus"
-        ]
+        ],
+        "featured_quote": null
       },
       "16": {
         "x": 0.8139,
@@ -4390,7 +5691,12 @@
           "identity",
           "t",
           "white"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT18",
+          "point": 33,
+          "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+        }
       },
       "17": {
         "x": 0.9227,
@@ -4401,7 +5707,12 @@
           "chinese",
           "american",
           "language"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT26",
+          "point": 65,
+          "text": "I grew up as the \u2026 white kid. I didn\u2019t speak the language, didn\u2019t like the food, didn\u2019t get the culture. I was the only Asian kid."
+        }
       },
       "18": {
         "x": 0.5169,
@@ -4412,7 +5723,8 @@
           "comparative",
           "morphologies comparative",
           "fojas"
-        ]
+        ],
+        "featured_quote": null
       },
       "19": {
         "x": 0.8946,
@@ -4423,7 +5735,12 @@
           "self portraiture",
           "portraits",
           "identity"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT119",
+          "point": 324,
+          "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+        }
       },
       "20": {
         "x": 0.8505,
@@ -4434,7 +5751,12 @@
           "people",
           "power",
           "political"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT138",
+          "point": 421,
+          "text": "By examining institutional, governmental, and museum archives and collections, I focus on how power manifests in visible and invisible ways\u2014from American colonial regimes to overseas authoritarian legacies, in an attempt to \u201ctalk back\u201d to the official narrative."
+        }
       },
       "21": {
         "x": 0.2882,
@@ -4445,7 +5767,8 @@
           "masterprint",
           "series oriental",
           "oriental masterprints"
-        ]
+        ],
+        "featured_quote": null
       },
       "22": {
         "x": 0.98,
@@ -4456,7 +5779,12 @@
           "american",
           "asian american",
           "hapa"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT134",
+          "point": 397,
+          "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+        }
       },
       "23": {
         "x": 0.1493,
@@ -4467,7 +5795,8 @@
           "desert",
           "chrysanthemums",
           "desert flower"
-        ]
+        ],
+        "featured_quote": null
       },
       "24": {
         "x": 0.4804,
@@ -4478,7 +5807,8 @@
           "migrants",
           "applicant",
           "applicant photos"
-        ]
+        ],
+        "featured_quote": null
       },
       "25": {
         "x": 0.9589,
@@ -4489,7 +5819,12 @@
           "race studies",
           "race",
           "studies"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT133",
+          "point": 373,
+          "text": "The kernel for our book and the related traveling exhibition happened organically over several years of research and teaching and involvement with community multiracial organizations such as MAVIN in Seattle and iPride and Hapa Issues Forum in San Francisco and then later working together with my colleague Camilla Fojas to found the Critical Mixed RaceStudies biennial conference at DePaul University in Chicago."
+        }
       },
       "26": {
         "x": 0.1319,
@@ -4500,7 +5835,8 @@
           "folks",
           "fojas",
           "focused"
-        ]
+        ],
+        "featured_quote": null
       },
       "27": {
         "x": 0.0985,
@@ -4511,7 +5847,8 @@
           "plane tree",
           "plane trees",
           "trees"
-        ]
+        ],
+        "featured_quote": null
       },
       "28": {
         "x": 0.2299,
@@ -4522,7 +5859,8 @@
           "owl",
           "nude",
           "floor lamp"
-        ]
+        ],
+        "featured_quote": null
       },
       "29": {
         "x": 0.696,
@@ -4533,7 +5871,12 @@
           "gens",
           "bodies",
           "empathic"
-        ]
+        ],
+        "featured_quote": {
+          "source_idx": "AT147",
+          "point": 458,
+          "text": "I use this science-fiction inspired project to undermine stable conceptions of identity and examine how hybrid identities emerge and transform through different kinds of biological and cultural contact."
+        }
       }
     },
     "canvas_min_w": 6887,

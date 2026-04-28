@@ -49,18 +49,23 @@
   content: "\201D";
   margin-left: 0.05em;
 }
-.gallery-hero__year {
+.gallery-hero__exhibition-name {
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(2rem, 3.4vw, 3.6rem);
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+}
+
+.gallery-hero__attribution {
   align-self: flex-end;
   margin-top: 2rem;
   font-family: "Kosugi", sans-serif;
   font-size: 1rem;
   line-height: 1.25;
   color: #fff;
-}
-@media (max-width: 768px) {
-  .gallery-hero__year {
-    font-size: 1.25rem;
-  }
 }
 
 /* ---- gallery body: scroll spacer that drives chronology ---- */
@@ -223,10 +228,8 @@
 }
 
 /**
- * Mirrors the styling of the shared point tooltip
- * (see utils/d3/tooltip.js + DotTimeline tooltip HTML): same padding,
- * sans-serif type, line-height, max/min width, separator rule, and
- * right-aligned attribution at 0.98em.
+ * Featured text card: same padding, sans-serif type, line-height,
+ * max/min width, separator rule, and right-aligned attribution at 0.98em.
  */
 .gallery-featured-text {
   margin: 0;
