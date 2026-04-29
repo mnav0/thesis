@@ -28,8 +28,12 @@ const REPRESENTATIVE_ARTIST_ID = 18;
 
 const expandedCluster = ref(null);
 const expandedClusterGroupBy = ref(null);
-const introCollageSrc = publicImgSrc("artworks-all.png");
+const introPreviewVideoSrc = publicImgSrc("gallery-preview.mov");
 const shellReady = ref(false);
+const introPreviewVideoRef = ref(null);
+const introFadeToWhiteActive = ref(false);
+const INTRO_END_FADE_SECONDS = 2.4;
+const INTRO_WHITE_HOLD_MS = 180;
 
 const section2HeadingHtml = [
   "Identity is",
@@ -53,6 +57,7 @@ const section3PersonaRef = ref(null);
 const floatingPersonaRef = ref(null);
 
 let smoother = null;
+let introWhiteHoldTimeoutId = null;
 
 function openClusterFromEmbedding(cluster) {
   expandedCluster.value = cluster;
@@ -66,6 +71,38 @@ function closeClusterView() {
 
 function getSectionEl(compRef) {
   return compRef.value?.sectionEl ?? compRef.value?.$el;
+}
+
+function pauseIntroPreviewVideo() {
+  introPreviewVideoRef.value?.pause();
+}
+
+function playIntroPreviewVideo() {
+  introPreviewVideoRef.value?.play().catch(() => {
+    // Ignore autoplay resume failures caused by browser policies.
+  });
+}
+
+function updateIntroWhiteFade() {
+  const video = introPreviewVideoRef.value;
+  if (!video || !Number.isFinite(video.duration)) return;
+  introFadeToWhiteActive.value = video.duration - video.currentTime <= INTRO_END_FADE_SECONDS;
+}
+
+function onIntroPreviewEnded() {
+  const video = introPreviewVideoRef.value;
+  if (!video) return;
+
+  introFadeToWhiteActive.value = true;
+  video.currentTime = 0;
+  playIntroPreviewVideo();
+  if (introWhiteHoldTimeoutId !== null) {
+    window.clearTimeout(introWhiteHoldTimeoutId);
+  }
+  introWhiteHoldTimeoutId = window.setTimeout(() => {
+    introFadeToWhiteActive.value = false;
+    introWhiteHoldTimeoutId = null;
+  }, INTRO_WHITE_HOLD_MS);
 }
 
 onMounted(() => {
@@ -96,6 +133,10 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  if (introWhiteHoldTimeoutId !== null) {
+    window.clearTimeout(introWhiteHoldTimeoutId);
+    introWhiteHoldTimeoutId = null;
+  }
   destroyAppScrollAnimations(smoother);
 });
 </script>
@@ -105,11 +146,30 @@ onBeforeUnmount(() => {
     <div id="smooth-content">
       <main class="app-shell w-full" :class="{ 'app-shell--ready': shellReady }">
         <PageSection class="intro-section" tone="light" layout="stacked" stacked-full-width>
-          <div class="grid min-h-[100svh] grid-cols-12 gap-x-2 md:gap-x-4">
-            <div class="col-span-12 overflow-visible lg:col-span-6 sm:col-span-1">
-              <img :src="introCollageSrc" alt="" class="intro-section__collage" role="presentation" />
+          <div class="intro-section__grid grid min-h-[100svh] grid-cols-12 gap-x-2 md:gap-x-4">
+            <div
+              class="intro-section__media-layer"
+              @mouseenter="pauseIntroPreviewVideo"
+              @mouseleave="playIntroPreviewVideo"
+            >
+              <video
+                ref="introPreviewVideoRef"
+                class="intro-section__collage"
+                :class="{ 'intro-section__collage--fading': introFadeToWhiteActive }"
+                muted
+                autoplay
+                playsinline
+                preload="auto"
+                aria-hidden="true"
+                @timeupdate="updateIntroWhiteFade"
+                @ended="onIntroPreviewEnded"
+              >
+                <source :src="introPreviewVideoSrc" type="video/mp4" />
+              </video>
             </div>
-            <div class="col-span-12 flex items-end justify-end py-8 lg:col-span-5 lg:col-start-8 mb-8 sm:col-span-12 sm:col-start-2">
+            <div
+              class="intro-section__title-wrap col-span-12 mb-8 flex items-end justify-end py-8 lg:col-span-5 lg:col-start-8 sm:col-span-12 sm:col-start-2"
+            >
               <div class="intro-section__title-card">
                 <h1 class="mb-8"><i>In Between</i> Portraits</h1>
                 <p class="mb-8">

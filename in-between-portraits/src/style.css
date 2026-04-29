@@ -105,12 +105,47 @@ select {
   display: none;
 }
 
+.intro-section .page-section-background {
+  display: none;
+}
+
+.intro-section.page-section {
+  border-color: transparent;
+}
+
 .intro-section__collage {
   display: block;
-  max-width: none;
-  height: 100svh;
+  border: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: left top;
+  object-position: center;
+  opacity: 1;
+  transition: opacity 2.4s linear;
+}
+
+.intro-section__grid {
+  position: relative;
+}
+
+.intro-section__media-layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw - 1rem);
+  z-index: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.intro-section__collage--fading {
+  opacity: 0;
+}
+
+.intro-section__title-wrap {
+  position: relative;
+  z-index: 1;
 }
 
 .intro-section__title-card {
