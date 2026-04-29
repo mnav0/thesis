@@ -6,7 +6,6 @@ import {
   artistPositionsMap,
   institutionPositionsMap,
   exhibitionClustersMap,
-  artistCount,
 } from "./data/index.js";
 import ClusterSection from "./components/ClusterSection/index.vue";
 import ClusterView from "./components/ClusterView/index.vue";
@@ -35,9 +34,9 @@ const shellReady = ref(false);
 const section2HeadingHtml = [
   "Identity is",
   '<span class="identity-heading__descriptors">',
-  '<i class="identity-heading__descriptor identity-heading__descriptor--active" data-descriptor="descriptor1">collective</i>',
+  '<i class="identity-heading__descriptor" data-descriptor="descriptor1">collective</i>',
   '<i class="identity-heading__descriptor" data-descriptor="descriptor2">multifaceted</i>',
-  '<i class="identity-heading__descriptor" data-descriptor="descriptor3">ever-developing</i>',
+  '<i class="identity-heading__descriptor" data-descriptor="descriptor3">ever-changing</i>',
   "</span>",
 ].join("");
 
@@ -129,7 +128,7 @@ onBeforeUnmount(() => {
           layout="split"
           :heading-html="section2HeadingHtml"
         >
-          <IdentityStatesPreview :dot-count="artistCount" />
+          <IdentityStatesPreview />
         </PageSection>
 
         <!-- Actors -->
@@ -173,16 +172,16 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
-          heading="for artists selected from exhibitions about identity?"
+          heading="for artists selected from modern exhibitions about identity?"
           subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
-          <ExhibitionsTimeline class="mt-8" />
+          <ExhibitionsTimeline class="mt-12" />
           <div ref="exhibitionsAnchorStartRef" class="exhibitions-bridge-anchor" aria-hidden="true"></div>
         </PageSection>
 
         <!-- Sankey section -->
         <PageSection ref="sankeyRef" tone="dark" layout="stacked">
-          <div ref="exhibitionsAnchorEndRef" class="exhibitions-bridge-anchor mb-6" aria-hidden="true"></div>
+          <div ref="exhibitionsAnchorEndRef" class="exhibitions-bridge-anchor mb-4" aria-hidden="true"></div>
           <ExhibitionsSankey />
         </PageSection>
 

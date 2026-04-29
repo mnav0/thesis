@@ -9,24 +9,21 @@ import {
 } from "../../utils/exhibition-tooltip.js";
 import { exhibitionStartYear, parseArtistIds } from "../../utils/exhibition-data.js";
 import {
+  EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
-  EXHIBITIONS_LINK_STROKE_PX,
-  EXHIBITIONS_NODE_RX_PX,
-  EXHIBITIONS_NODE_SIZE_PX,
-  EXHIBITIONS_VIZ_MARGIN,
 } from "../../constants/exhibitions-viz.js";
 import { DOT_SIZE_PX, FONT_SANS } from "../../constants.js";
 import { getArtistDotData } from "../../utils/artist-dot.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
 
-const NODE_WIDTH = EXHIBITIONS_NODE_SIZE_PX;
+const NODE_WIDTH = EXHIBITIONS_VIZ_CONFIG.layout.nodeSizePx;
 const NODE_PADDING = 32;
 const LABEL_FONT_PX = 16;
 const LABEL_OFFSET_PX = 8;
 const LABEL_LINE_HEIGHT_EM = 1.1;
 const LABEL_SINGLE_LINE_DY_EM = 0.35;
-const LINK_STROKE = EXHIBITIONS_LINK_STROKE_PX;
+const LINK_STROKE = EXHIBITIONS_VIZ_CONFIG.stroke.linkPx;
 const BASE_REQUIRED_HEIGHT = 600;
 
 const containerRef = ref(null);
@@ -314,7 +311,7 @@ function renderChart() {
 
   const width = root.clientWidth || 900;
   const baseHeight = root.clientHeight || BASE_REQUIRED_HEIGHT;
-  const margin = EXHIBITIONS_VIZ_MARGIN;
+  const margin = EXHIBITIONS_VIZ_CONFIG.layout.margin;
   const exhibitionCount = nodes.filter((d) => d.type === "exhibition").length;
   const artistCount = nodes.filter((d) => d.type === "artist").length;
   const densestColumnCount = Math.max(exhibitionCount, artistCount, 1);
@@ -424,7 +421,7 @@ function renderChart() {
     .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
-    .attr("rx", EXHIBITIONS_NODE_RX_PX)
+    .attr("rx", EXHIBITIONS_VIZ_CONFIG.layout.nodeRadiusPx)
     .style("cursor", "pointer");
 
   function artistDotTransform(d) {

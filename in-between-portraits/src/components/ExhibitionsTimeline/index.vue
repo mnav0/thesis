@@ -3,21 +3,15 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import * as d3 from "d3";
 import { createTooltip } from "../../utils/d3/tooltip.js";
 import { exhibitionTooltipShowOptions } from "../../utils/exhibition-tooltip.js";
-import { EXHIBITION_ERA, getExhibitionEraById } from "../../utils/exhibition-era.js";
 import { exhibitionStartYear, parseArtistIds } from "../../utils/exhibition-data.js";
 import {
+  EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
-  EXHIBITIONS_LINK_STROKE_PX,
-  EXHIBITIONS_NODE_RX_PX,
-  EXHIBITIONS_NODE_SIZE_PX,
-  EXHIBITIONS_VIZ_MARGIN,
 } from "../../constants/exhibitions-viz.js";
 import { FONT_SANS } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 
 const LABEL_FONT_PX = 16;
-const LANE_LABEL_FONT_PX = 16;
-const LANE_LINE_GAP_PX = 60;
 const TOP_BOTTOM_PADDING_PX = 24;
 
 const exhibitions = computed(() => {
@@ -35,7 +29,6 @@ const exhibitions = computed(() => {
         yearNum,
         artistIds,
         artistCount: artistIds.length,
-        era: getExhibitionEraById(r.id),
       };
     })
     .filter((e) => Number.isFinite(e.yearNum));
@@ -46,12 +39,12 @@ const markerHeightByExhibitionId = computed(() =>
 );
 
 function layoutTimelineNodes(list) {
+  const step = EXHIBITIONS_VIZ_CONFIG.layout.nodeSizePx + 2;
   const byYear = d3.group(list, (d) => d.yearNum);
   const out = [];
   for (const [, group] of byYear) {
     const n = group.length;
     group.forEach((e, i) => {
-      const step = EXHIBITIONS_NODE_SIZE_PX + 2;
       const xOffset = n === 1 ? 0 : (i - (n - 1) / 2) * step;
       out.push({ ...e, xOffset });
     });
@@ -59,9 +52,7 @@ function layoutTimelineNodes(list) {
   return out;
 }
 
-function markerYForEra(cy, markerHeight, era) {
-  if (era === EXHIBITION_ERA.CONTEMPORARY) return cy - markerHeight;
-  if (era === EXHIBITION_ERA.MODERN) return cy;
+function markerYCentered(cy, markerHeight) {
   return cy - markerHeight / 2;
 }
 
@@ -79,19 +70,14 @@ function renderChart() {
   const items = exhibitions.value;
   if (!items.length) return;
 
-  const margin = EXHIBITIONS_VIZ_MARGIN;
+  const margin = EXHIBITIONS_VIZ_CONFIG.layout.margin;
   const width = root.clientWidth || 900;
-  const size = EXHIBITIONS_NODE_SIZE_PX;
+  const size = EXHIBITIONS_VIZ_CONFIG.layout.nodeSizePx;
   const maxMarkerHeight = d3.max(items, (d) => markerHeightByExhibitionId.value[d.id] ?? size) ?? size;
-  const minHeightForLaneGuides = LANE_LINE_GAP_PX * 2 + 72;
-  const height = Math.max(
-    minHeightForLaneGuides,
-    maxMarkerHeight * 2 + TOP_BOTTOM_PADDING_PX * 2,
-  );
+  const height = Math.max(maxMarkerHeight + TOP_BOTTOM_PADDING_PX * 2, 72);
   const innerLeft = margin.left;
   const innerRight = width - margin.right;
   const cy = height / 2;
-  const laneOffset = Math.max(LANE_LINE_GAP_PX, size + 4);
 
   const yearNums = items.map((d) => d.yearNum);
   const lo = d3.min(yearNums);
@@ -124,32 +110,10 @@ function renderChart() {
     .append("line")
     .attr("x1", lineX1)
     .attr("x2", lineX2)
-    .attr("y1", cy - laneOffset)
-    .attr("y2", cy - laneOffset)
-    .attr("stroke", "#fff")
-    .attr("stroke-opacity", 0.7)
-    .attr("stroke-width", EXHIBITIONS_LINK_STROKE_PX)
-    .attr("stroke-dasharray", "2.5 3");
-
-  svg
-    .append("line")
-    .attr("x1", lineX1)
-    .attr("x2", lineX2)
-    .attr("y1", cy + laneOffset)
-    .attr("y2", cy + laneOffset)
-    .attr("stroke", "#fff")
-    .attr("stroke-opacity", 0.7)
-    .attr("stroke-width", EXHIBITIONS_LINK_STROKE_PX)
-    .attr("stroke-dasharray", "2.5 3");
-
-  svg
-    .append("line")
-    .attr("x1", lineX1)
-    .attr("x2", lineX2)
     .attr("y1", cy)
     .attr("y2", cy)
     .attr("stroke", "#fff")
-    .attr("stroke-width", EXHIBITIONS_LINK_STROKE_PX);
+    .attr("stroke-width", EXHIBITIONS_VIZ_CONFIG.stroke.linkPx);
 
   svg
     .append("text")
@@ -164,30 +128,6 @@ function renderChart() {
 
   svg
     .append("text")
-    .attr("x", innerLeft - 10)
-    .attr("y", cy - laneOffset)
-    .attr("text-anchor", "end")
-    .attr("dominant-baseline", "middle")
-    .attr("fill", "#fff")
-    .attr("fill-opacity", 0.75)
-    .style("font-family", FONT_SANS)
-    .style("font-size", `${LANE_LABEL_FONT_PX}px`)
-    .text("CONTEMPORARY");
-
-  svg
-    .append("text")
-    .attr("x", innerLeft - 10)
-    .attr("y", cy + laneOffset)
-    .attr("text-anchor", "end")
-    .attr("dominant-baseline", "middle")
-    .attr("fill", "#fff")
-    .attr("fill-opacity", 0.75)
-    .style("font-family", FONT_SANS)
-    .style("font-size", `${LANE_LABEL_FONT_PX}px`)
-    .text("MODERN");
-
-  svg
-    .append("text")
     .attr("x", innerRight + 10)
     .attr("y", cy)
     .attr("text-anchor", "start")
@@ -197,7 +137,7 @@ function renderChart() {
     .style("font-size", `${LABEL_FONT_PX}px`)
     .text(String(hi));
 
-  const rx = EXHIBITIONS_NODE_RX_PX;
+  const rx = EXHIBITIONS_VIZ_CONFIG.layout.nodeRadiusPx;
 
   const markers = svg
     .selectAll("rect.exhibition-marker")
@@ -206,9 +146,8 @@ function renderChart() {
     .append("rect")
     .attr("class", "exhibition-marker")
     .attr("data-exhibition-id", (d) => d.id)
-    .attr("data-era", (d) => d.era)
     .attr("x", (d) => xScale(d.yearNum) + d.xOffset - size / 2)
-    .attr("y", (d) => markerYForEra(cy, markerHeightByExhibitionId.value[d.id] ?? size, d.era))
+    .attr("y", (d) => markerYCentered(cy, markerHeightByExhibitionId.value[d.id] ?? size))
     .attr("width", size)
     .attr("height", (d) => markerHeightByExhibitionId.value[d.id] ?? size)
     .attr("rx", rx)
@@ -230,9 +169,8 @@ function renderChart() {
     .append("rect")
     .attr("class", "exhibition-marker-hit")
     .attr("data-exhibition-id", (d) => d.id)
-    .attr("data-era", (d) => d.era)
     .attr("x", (d) => xScale(d.yearNum) + d.xOffset - size / 2 - hitOffset)
-    .attr("y", (d) => markerYForEra(cy, markerHeightByExhibitionId.value[d.id] ?? size, d.era))
+    .attr("y", (d) => markerYCentered(cy, markerHeightByExhibitionId.value[d.id] ?? size))
     .attr("width", hitWidth)
     .attr("height", (d) => markerHeightByExhibitionId.value[d.id] ?? size)
     .attr("fill", "transparent")

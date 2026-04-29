@@ -2,16 +2,55 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import {
-  EXHIBITIONS_NODE_RX_PX,
+  EXHIBITIONS_VIZ_CONFIG,
 } from "../constants/exhibitions-viz.js";
 import { artistDotInlineSvg } from "./artist-dot.js";
 
 const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
-const EXHIBITIONS_LABEL_END_Y_OFFSET_PX = -4;
-const EXHIBITIONS_LABEL_START_X_OFFSET_PX = 6;
-const EXHIBITIONS_LABEL_END_X_NUDGE_PX = 2;
-const ARTISTS_LABEL_END_X_NUDGE_PX = -2;
+const EXHIBITIONS_SCROLL_CONFIG = {
+  timelineToSankey: {
+    startNearBottomPx: 48,
+  },
+  bridgeLabel: {
+    endYOffsetPx: -4,
+    startXOffsetPx: 6,
+    exhibitionsEndXNudgePx: 2,
+    artistsEndXNudgePx: -2,
+  },
+};
+const IDENTITY_PREVIEW_CONFIG = {
+  featuredKeywords: {
+    state2Primary: "ancestry",
+    state2Secondary: "political",
+    state3Sequence: ["mixed", "representation", "personal"],
+  },
+  emphasis: {
+    highlightScale: 2,
+    nonFeaturedOpacity: 0.3,
+  },
+  timeline: {
+    holdEnd: {
+      state0: 0.16,
+      state1Collective: 0.34,
+      state2: 0.72,
+      state3TextLead: 0.75,
+      state3First: 0.82,
+      state3Second: 0.945,
+    },
+    transitionStart: {
+      state2: 0.44,
+    },
+    transitionEnd: {
+      state2TextLead: 0.48,
+      state2Primary: 0.56,
+      state2Secondary: 0.66,
+      state3SecondBlend: 0.88,
+      state3ThirdBlend: 0.9,
+    },
+    pinScrollDistance: "+=280%",
+  },
+};
 
 function measurePersonaPositions(actorsEl, section3El, personaIcon, section3PersonaImg) {
   if (!actorsEl || !section3El || !personaIcon || !section3PersonaImg) return null;
@@ -39,6 +78,7 @@ function measurePersonaPositions(actorsEl, section3El, personaIcon, section3Pers
 
 function setIdentityState(sectionEl, stateId) {
   const descriptorMap = {
+    descriptor0: null,
     descriptor1: "descriptor1",
     descriptor2: "descriptor2",
     descriptor3_1: "descriptor3",
@@ -52,41 +92,195 @@ function setIdentityState(sectionEl, stateId) {
       node.dataset.descriptor === activeDescriptor,
     );
   });
-  sectionEl.querySelectorAll("[data-state]").forEach((node) => {
-    node.classList.toggle("identity-state--active", node.dataset.state === stateId);
+}
+
+function normalizeThemeKey(input) {
+  return String(input ?? "").trim().toLowerCase();
+}
+
+function smoothstep01(v) {
+  const p = clamp01(v);
+  return p * p * (3 - 2 * p);
+}
+
+function applyIdentityLabelFocus(sectionEl, weightsByTheme, focusStrength = 1) {
+  const labels = sectionEl.querySelectorAll(".identity-label[data-theme-key]");
+  const strength = clamp01(focusStrength);
+  labels.forEach((node) => {
+    const themeKey = normalizeThemeKey(node.dataset.themeKey);
+    const themeWeight = clamp01(weightsByTheme[themeKey] ?? 0);
+    const featuredness = themeWeight * strength;
+    const scale = 1 + (IDENTITY_PREVIEW_CONFIG.emphasis.highlightScale - 1) * featuredness;
+    const opacity = 1
+      - (1 - IDENTITY_PREVIEW_CONFIG.emphasis.nonFeaturedOpacity) * strength * (1 - featuredness);
+    gsap.set(node, {
+      "--identity-label-scale": String(scale),
+      "--identity-label-opacity": String(opacity),
+    });
   });
 }
 
-function setupIdentitySectionTimeline(section2El) {
-  setIdentityState(section2El, "descriptor1");
-  const frames = section2El.querySelectorAll(".identity-states-preview__frame");
+function applyIdentityPreviewByProgress(sectionEl, progress) {
+  const { holdEnd, transitionStart, transitionEnd } = IDENTITY_PREVIEW_CONFIG.timeline;
+  const p = clamp01(progress);
+  const state3Keywords = IDENTITY_PREVIEW_CONFIG.featuredKeywords.state3Sequence
+    .map((theme) => normalizeThemeKey(theme));
+  const [firstKeyword, secondKeyword, thirdKeyword] = state3Keywords;
+  const primaryState2Keyword = normalizeThemeKey(
+    IDENTITY_PREVIEW_CONFIG.featuredKeywords.state2Primary,
+  );
+  const secondaryState2Keyword = normalizeThemeKey(
+    IDENTITY_PREVIEW_CONFIG.featuredKeywords.state2Secondary,
+  );
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section2El,
-      start: "top top",
-      end: "+=260%",
-      pin: true,
-      scrub: 1,
+  if (p < holdEnd.state0) {
+    setIdentityState(sectionEl, "descriptor0");
+    applyIdentityLabelFocus(sectionEl, {}, 0);
+    return;
+  }
+
+  if (p < holdEnd.state1Collective) {
+    setIdentityState(sectionEl, "descriptor1");
+    applyIdentityLabelFocus(sectionEl, {}, 0);
+    return;
+  }
+
+  if (p < transitionStart.state2) {
+    setIdentityState(sectionEl, "descriptor1");
+    applyIdentityLabelFocus(sectionEl, {}, 0);
+    return;
+  }
+
+  if (p < holdEnd.state2) {
+    setIdentityState(sectionEl, "descriptor2");
+
+    if (p < transitionEnd.state2TextLead) {
+      applyIdentityLabelFocus(sectionEl, {}, 0);
+      return;
+    }
+
+    if (p < transitionEnd.state2Primary) {
+      const localP = smoothstep01(
+        (p - transitionEnd.state2TextLead) /
+        (transitionEnd.state2Primary - transitionEnd.state2TextLead),
+      );
+      applyIdentityLabelFocus(
+        sectionEl,
+        { [primaryState2Keyword]: 1 },
+        localP,
+      );
+      return;
+    }
+
+    if (p < transitionEnd.state2Secondary) {
+      const localP = smoothstep01(
+        (p - transitionEnd.state2Primary) /
+        (transitionEnd.state2Secondary - transitionEnd.state2Primary),
+      );
+      applyIdentityLabelFocus(
+        sectionEl,
+        {
+          [primaryState2Keyword]: 1,
+          [secondaryState2Keyword]: localP,
+        },
+        1,
+      );
+      return;
+    }
+
+    applyIdentityLabelFocus(
+      sectionEl,
+      {
+        [primaryState2Keyword]: 1,
+        [secondaryState2Keyword]: 1,
+      },
+      1,
+    );
+    return;
+  }
+
+  if (p < holdEnd.state3TextLead) {
+    setIdentityState(sectionEl, "descriptor3_1");
+    applyIdentityLabelFocus(
+      sectionEl,
+      {
+        [primaryState2Keyword]: 1,
+        [secondaryState2Keyword]: 1,
+      },
+      1,
+    );
+    return;
+  }
+
+  if (p < holdEnd.state3First) {
+    setIdentityState(sectionEl, "descriptor3_1");
+    applyIdentityLabelFocus(sectionEl, { [firstKeyword]: 1 }, 1);
+    return;
+  }
+
+  if (p < transitionEnd.state3SecondBlend) {
+    const blendP = smoothstep01(
+      (p - holdEnd.state3First) /
+      (transitionEnd.state3SecondBlend - holdEnd.state3First),
+    );
+    setIdentityState(sectionEl, "descriptor3_2");
+    applyIdentityLabelFocus(
+      sectionEl,
+      {
+        [firstKeyword]: 1 - blendP,
+        [secondKeyword]: blendP,
+      },
+      1,
+    );
+    return;
+  }
+
+  if (p < holdEnd.state3Second) {
+    setIdentityState(sectionEl, "descriptor3_2");
+    applyIdentityLabelFocus(sectionEl, { [secondKeyword]: 1 }, 1);
+    return;
+  }
+
+  if (p < transitionEnd.state3ThirdBlend) {
+    const blendP = smoothstep01(
+      (p - holdEnd.state3Second) /
+      (transitionEnd.state3ThirdBlend - holdEnd.state3Second),
+    );
+    setIdentityState(sectionEl, "descriptor3_3");
+    applyIdentityLabelFocus(
+      sectionEl,
+      {
+        [secondKeyword]: 1 - blendP,
+        [thirdKeyword]: blendP,
+      },
+      1,
+    );
+    return;
+  }
+
+  setIdentityState(sectionEl, "descriptor3_3");
+  applyIdentityLabelFocus(sectionEl, { [thirdKeyword]: 1 }, 1);
+}
+
+function setupIdentitySectionTimeline(section2El) {
+  applyIdentityPreviewByProgress(section2El, 0);
+
+  ScrollTrigger.create({
+    trigger: section2El,
+    start: "top top",
+    end: IDENTITY_PREVIEW_CONFIG.timeline.pinScrollDistance,
+    pin: true,
+    scrub: 1,
+    onUpdate: (self) => {
+      applyIdentityPreviewByProgress(section2El, self.progress);
+    },
+    onRefresh: (self) => {
+      applyIdentityPreviewByProgress(section2El, self.progress);
+    },
+    onLeaveBack: () => {
+      applyIdentityPreviewByProgress(section2El, 0);
     },
   });
-
-  tl.call(() => {
-    setIdentityState(section2El, "descriptor1");
-    gsap.to(frames, { opacity: 1, duration: 0.2 });
-  }, null, 0)
-    .to({}, { duration: 0.55 })
-    .call(() => {
-      setIdentityState(section2El, "descriptor2");
-      gsap.to(frames, { opacity: 0, duration: 0.3 });
-    })
-    .to({}, { duration: 0.65 })
-    .call(() => setIdentityState(section2El, "descriptor3_1"))
-    .to({}, { duration: 0.45 })
-    .call(() => setIdentityState(section2El, "descriptor3_2"))
-    .to({}, { duration: 0.45 })
-    .call(() => setIdentityState(section2El, "descriptor3_3"))
-    .to({}, { duration: 0.4 });
 }
 
 function setupActorsToPersonaGrow({
@@ -235,7 +429,7 @@ function setupExhibitionsLabel({
     const andWidth = andEl.getBoundingClientRect().width;
     const artistsWidth = artistsEl.getBoundingClientRect().width;
     const trackWidth = trackRect.width;
-    const startAnchoredExhibitionsX = EXHIBITIONS_LABEL_START_X_OFFSET_PX;
+    const startAnchoredExhibitionsX = EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.startXOffsetPx;
     const sankeyTargets = getSankeyColumnTargets();
     if (!sankeyTargets) {
       const fallbackAndX = trackWidth / 2 - andWidth / 2;
@@ -251,11 +445,16 @@ function setupExhibitionsLabel({
       gsap.utils.clamp(0, Math.max(0, trackWidth - tokenWidth), x);
 
     const exhibitionsEndX = clampToTrack(
-      sankeyTargets.exhibitionRight - trackRect.left - exhibitionWidth + EXHIBITIONS_LABEL_END_X_NUDGE_PX,
+      sankeyTargets.exhibitionRight
+      - trackRect.left
+      - exhibitionWidth
+      + EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.exhibitionsEndXNudgePx,
       exhibitionWidth,
     );
     const artistsTargetX = clampToTrack(
-      sankeyTargets.artistLeft - trackRect.left + ARTISTS_LABEL_END_X_NUDGE_PX,
+      sankeyTargets.artistLeft
+      - trackRect.left
+      + EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.artistsEndXNudgePx,
       artistsWidth,
     );
     const andTargetX = clampToTrack(
@@ -273,7 +472,8 @@ function setupExhibitionsLabel({
 
   function applyProgress(p) {
     const startCenterY = yFromTimelineBaseline();
-    const endCenterY = endAnchorEl.getBoundingClientRect().top + EXHIBITIONS_LABEL_END_Y_OFFSET_PX;
+    const endCenterY = endAnchorEl.getBoundingClientRect().top
+      + EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.endYOffsetPx;
     const {
       exhibitionsStartX,
       exhibitionsEndX,
@@ -316,8 +516,8 @@ function setupExhibitionsLabel({
   ScrollTrigger.create({
     trigger: startAnchorEl,
     start: "top bottom",
-    endTrigger: timelineSectionEl,
-    end: "bottom bottom",
+    endTrigger: sankeySectionEl,
+    end: `top bottom-=${EXHIBITIONS_SCROLL_CONFIG.timelineToSankey.startNearBottomPx}`,
     onUpdate: (self) => setStartAnchorState(gsap.utils.clamp(0, 1, self.progress / 0.25)),
     onEnter: () => setStartAnchorState(0),
     onEnterBack: () => setStartAnchorState(1),
@@ -325,8 +525,8 @@ function setupExhibitionsLabel({
   });
 
   ScrollTrigger.create({
-    trigger: timelineSectionEl,
-    start: "bottom bottom",
+    trigger: sankeySectionEl,
+    start: `top bottom-=${EXHIBITIONS_SCROLL_CONFIG.timelineToSankey.startNearBottomPx}`,
     endTrigger: sankeySectionEl,
     end: "bottom top",
     onUpdate: (self) => applyProgress(self.progress),
@@ -426,7 +626,7 @@ function setupTimelineToSankeyExhibitionTravel({ timelineSectionEl, sankeySectio
       proxyRectEl.className = "timeline-sankey-travel-rect";
       proxyRectEl.style.width = `${sourceRect.width}px`;
       proxyRectEl.style.height = `${sourceRect.height}px`;
-      proxyRectEl.style.borderRadius = `${EXHIBITIONS_NODE_RX_PX}px`;
+      proxyRectEl.style.borderRadius = `${EXHIBITIONS_VIZ_CONFIG.layout.nodeRadiusPx}px`;
       overlayEl.appendChild(proxyRectEl);
 
       const delay = Math.min(index * GROUP_STAGGER_STEP, GROUP_STAGGER_MAX);
@@ -509,8 +709,8 @@ function setupTimelineToSankeyExhibitionTravel({ timelineSectionEl, sankeySectio
   }
 
   ScrollTrigger.create({
-    trigger: timelineSectionEl,
-    start: "bottom bottom",
+    trigger: sankeySectionEl,
+    start: `top bottom-=${EXHIBITIONS_SCROLL_CONFIG.timelineToSankey.startNearBottomPx}`,
     endTrigger: sankeySectionEl,
     end: "top top",
     scrub: 1,

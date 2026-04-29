@@ -1,60 +1,32 @@
 .identity-states-preview {
   position: relative;
   width: 100%;
-  max-width: 28rem;
-  aspect-ratio: 1 / 1;
+  min-height: min(62svh, 42rem);
+  max-height: min(68svh, 46rem);
   margin-left: auto;
-}
-
-.identity-states-preview__frame {
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  pointer-events: none;
-}
-
-.identity-states-preview__frame--outer {
-  inset: 4% 4%;
-}
-
-.identity-states-preview__frame--inner {
-  inset: 8% 8%;
 }
 
 /* ── State layers ── */
 
 .identity-state {
   position: absolute;
-  inset: 12% 12%;
-  opacity: 0;
-  transition: opacity 300ms ease;
+  inset: 0;
 }
 
-.identity-state--active {
-  opacity: 1;
-}
-
-/* ── Dot wrappers (size and position set via inline style from JS) ── */
-
-.identity-dot {
-  position: absolute;
-  transform: translate(-50%, -50%);
-}
-
-.identity-dot :deep(.artist-dot) path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.6);
-  stroke-width: 1;
-}
-
-/* ── Labels (descriptor2 state) ── */
+/* ── Labels ── */
 
 .identity-label {
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--identity-label-scale, 1));
+  transform-origin: center;
   color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(0.5rem, 0.9vw, 0.72rem);
-  line-height: 1.1;
+  line-height: 1.25;
   letter-spacing: 0.08em;
   white-space: nowrap;
   text-align: center;
+  opacity: var(--identity-label-opacity, 1);
+  transition:
+    transform 160ms ease-out,
+    opacity 160ms ease-out;
+  will-change: transform, opacity;
 }
