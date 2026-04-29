@@ -10,13 +10,23 @@ const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
 const EXHIBITIONS_SCROLL_CONFIG = {
   timelineToSankey: {
-    startNearBottomPx: 48,
+    startNearBottomPx: 200,
   },
   bridgeLabel: {
-    endYOffsetPx: -4,
+    endYOffsetPx: -8,
     startXOffsetPx: 6,
     exhibitionsEndXNudgePx: 2,
     artistsEndXNudgePx: -2,
+  },
+};
+const SECTION_HANDOFF_SCROLL_CONFIG = {
+  identity: {
+    pinScrollDistance: "+=440%",
+    finalStateHoldProgressWindow: 0.22,
+  },
+  personaToExhibitions: {
+    preCoverHoldViewport: 0.34,
+    coverRevealStartProgress: 0.56,
   },
 };
 const IDENTITY_PREVIEW_CONFIG = {
@@ -36,7 +46,7 @@ const IDENTITY_PREVIEW_CONFIG = {
       state2: 0.72,
       state3TextLead: 0.75,
       state3First: 0.82,
-      state3Second: 0.945,
+      state3Second: 0.92,
     },
     transitionStart: {
       state2: 0.44,
@@ -46,9 +56,9 @@ const IDENTITY_PREVIEW_CONFIG = {
       state2Primary: 0.56,
       state2Secondary: 0.66,
       state3SecondBlend: 0.88,
-      state3ThirdBlend: 0.9,
+      state3ThirdBlend: 0.97,
     },
-    pinScrollDistance: "+=280%",
+    pinScrollDistance: SECTION_HANDOFF_SCROLL_CONFIG.identity.pinScrollDistance,
   },
 };
 
@@ -265,6 +275,14 @@ function applyIdentityPreviewByProgress(sectionEl, progress) {
 function setupIdentitySectionTimeline(section2El) {
   applyIdentityPreviewByProgress(section2El, 0);
 
+  function getIdentityMappedProgress(progress) {
+    const holdWindow = clamp01(
+      SECTION_HANDOFF_SCROLL_CONFIG.identity.finalStateHoldProgressWindow,
+    );
+    const activeProgressSpan = Math.max(0.01, 1 - holdWindow);
+    return clamp01(progress / activeProgressSpan);
+  }
+
   ScrollTrigger.create({
     trigger: section2El,
     start: "top top",
@@ -272,15 +290,73 @@ function setupIdentitySectionTimeline(section2El) {
     pin: true,
     scrub: 1,
     onUpdate: (self) => {
-      applyIdentityPreviewByProgress(section2El, self.progress);
+      applyIdentityPreviewByProgress(section2El, getIdentityMappedProgress(self.progress));
     },
     onRefresh: (self) => {
-      applyIdentityPreviewByProgress(section2El, self.progress);
+      applyIdentityPreviewByProgress(section2El, getIdentityMappedProgress(self.progress));
     },
     onLeaveBack: () => {
       applyIdentityPreviewByProgress(section2El, 0);
     },
   });
+}
+
+function getPersonaCoverEndDistancePx(s3El, sectionAfterS3El) {
+  if (!s3El || !sectionAfterS3El) return 0;
+  const s3Rect = s3El.getBoundingClientRect();
+  const nextRect = sectionAfterS3El.getBoundingClientRect();
+  // Base distance for natural handoff, then we add explicit hold.
+  return Math.max(0, Math.round(nextRect.top - s3Rect.top));
+}
+
+function getPersonaPinEndPosition(s3El, sectionAfterS3El) {
+  const baseDistancePx = getPersonaCoverEndDistancePx(s3El, sectionAfterS3El);
+  const holdPx = Math.max(
+    0,
+    Math.round(window.innerHeight * SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.preCoverHoldViewport),
+  );
+  // End when a deeper point inside the next section reaches viewport top.
+  return `top+=${baseDistancePx + holdPx} top`;
+}
+
+function getPersonaPreCoverHoldPx() {
+  return Math.max(
+    0,
+    Math.round(window.innerHeight * SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.preCoverHoldViewport),
+  );
+}
+
+function createPersonaCoverTimeline({
+  s3El,
+  sectionAfterS3El,
+  onEnter,
+  onLeaveBack,
+}) {
+  const holdPx = getPersonaPreCoverHoldPx();
+  const revealStartProgress = clamp01(
+    SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.coverRevealStartProgress,
+  );
+  const revealDuration = Math.max(0.01, 1 - revealStartProgress);
+  gsap.set(sectionAfterS3El, { position: "relative", zIndex: 2, y: holdPx });
+
+  return gsap.timeline({
+    scrollTrigger: {
+      trigger: s3El,
+      start: "top top",
+      end: () => getPersonaPinEndPosition(s3El, sectionAfterS3El),
+      pin: true,
+      pinSpacing: false,
+      scrub: 1,
+      invalidateOnRefresh: true,
+      onEnter,
+      onLeave: () => {
+        gsap.set(sectionAfterS3El, { y: 0 });
+      },
+      onLeaveBack,
+    },
+  })
+    .to(sectionAfterS3El, { y: holdPx, duration: revealStartProgress, ease: "none" }, 0)
+    .to(sectionAfterS3El, { y: 0, duration: revealDuration, ease: "none" }, revealStartProgress);
 }
 
 function setupActorsToPersonaGrow({
@@ -342,20 +418,15 @@ function setupActorsToPersonaGrow({
       0.3,
     );
 
-  gsap.set(sectionAfterS3El, { position: "relative", zIndex: 2 });
-
-  ScrollTrigger.create({
-    trigger: s3El,
-    start: "top top",
-    endTrigger: sectionAfterS3El,
-    end: "top top",
-    pin: true,
-    pinSpacing: false,
+  createPersonaCoverTimeline({
+    s3El,
+    sectionAfterS3El,
     onEnter: () => {
       gsap.set(floatingEl, { opacity: 0 });
       gsap.set(s3PersonaImg, { opacity: 1 });
     },
     onLeaveBack: () => {
+      gsap.set(sectionAfterS3El, { y: 0 });
       gsap.set(floatingEl, { opacity: 1 });
       gsap.set(s3PersonaImg, { opacity: 0 });
     },
@@ -363,14 +434,13 @@ function setupActorsToPersonaGrow({
 }
 
 function setupSection3PinCoverFallback(s3El, sectionAfterS3El) {
-  gsap.set(sectionAfterS3El, { position: "relative", zIndex: 2 });
-  ScrollTrigger.create({
-    trigger: s3El,
-    start: "top top",
-    endTrigger: sectionAfterS3El,
-    end: "top top",
-    pin: true,
-    pinSpacing: false,
+  createPersonaCoverTimeline({
+    s3El,
+    sectionAfterS3El,
+    onEnter: undefined,
+    onLeaveBack: () => {
+      gsap.set(sectionAfterS3El, { y: 0 });
+    },
   });
 }
 
