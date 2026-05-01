@@ -28,7 +28,7 @@ const REPRESENTATIVE_ARTIST_ID = 18;
 
 const expandedCluster = ref(null);
 const expandedClusterGroupBy = ref(null);
-const introPreviewVideoSrc = publicImgSrc("gallery-preview.mov");
+const introPreviewVideoSrc = "https://github.com/mnav0/thesis/releases/download/assets/gallery-preview.mov";
 const shellReady = ref(false);
 const introPreviewVideoRef = ref(null);
 const introFadeToWhiteActive = ref(false);

@@ -58,6 +58,7 @@
       "id": 7,
       "name": "Biennale Arte 2015: All the World's Futures",
       "labels": [
+        "countries",
         "international",
         "world"
       ]
@@ -84,6 +85,8 @@
       "id": 10,
       "name": "America is Hard to See",
       "labels": [
+        "hard",
+        "american",
         "america"
       ]
     },
@@ -152,7 +155,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 1.0472
+      "_jitter_angle": 1.1424
     },
     {
       "artistId": 3,
@@ -180,7 +183,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 2.618
+      "_jitter_angle": 2.856
     },
     {
       "artistId": 20,
@@ -199,7 +202,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 3.6652
+      "_jitter_angle": 3.9984
     },
     {
       "artistId": 6,
@@ -227,7 +230,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 5.236
+      "_jitter_angle": 5.712
     },
     {
       "artistId": 10,
@@ -238,7 +241,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 5.7596
+      "_jitter_angle": 6.2832
     },
     {
       "artistId": 12,
@@ -248,7 +251,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 6.2832
+      "_jitter_angle": 6.8544
     },
     {
       "artistId": 13,
@@ -258,7 +261,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 6.8068
+      "_jitter_angle": 7.4256
     },
     {
       "artistId": 14,
@@ -278,7 +281,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 7.854
+      "_jitter_angle": 8.568
     },
     {
       "artistId": 19,
@@ -289,7 +292,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 8.3776
+      "_jitter_angle": 9.1392
     },
     {
       "artistId": 7,
@@ -312,12 +315,11 @@
     {
       "artistId": 26,
       "exhibitionIds": [
-        7,
-        13
+        7
       ],
-      "isShared": true,
-      "_radius_frac": 0.85,
-      "_jitter_angle": 9.9484
+      "isShared": false,
+      "_radius_frac": 0.35,
+      "_angle": 3.1416
     },
     {
       "artistId": 11,
@@ -327,7 +329,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 10.472
+      "_jitter_angle": 11.424
     },
     {
       "artistId": 9,
@@ -382,6 +384,15 @@
       "isShared": false,
       "_radius_frac": 0.35,
       "_angle": 3.1416
+    },
+    {
+      "artistId": 28,
+      "exhibitionIds": [
+        13
+      ],
+      "isShared": false,
+      "_radius_frac": 0.35,
+      "_angle": 0.0
     },
     {
       "artistId": 27,
