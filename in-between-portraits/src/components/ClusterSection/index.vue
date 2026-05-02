@@ -16,10 +16,14 @@ const props = defineProps({
     type: Object,
     default: () => ({ exhibitions: [], artists: [] }),
   },
-  artistData: { type: Array, default: () => [] },
-  institutionData: { type: Array, default: () => [] },
-  artistPositions: { type: Array, default: () => [] },
-  institutionPositions: { type: Array, default: () => [] },
+  artistData: {
+    type: Object,
+    default: () => ({ numClusters: [] }),
+  },
+  institutionData: {
+    type: Object,
+    default: () => ({ numClusters: [] }),
+  },
   /** @type {'exhibitions' | 'artist' | 'institution'} */
   initialViewMode: {
     type: String,
@@ -30,6 +34,7 @@ const props = defineProps({
 
 const emit = defineEmits(["select-point", "select-cluster"]);
 
+// --- layout constants ---
 const POINT_SIZE = DOT_SIZE_PX;
 const CLUSTER_RADIUS = 118;
 const CANVAS_PADDING = 50;
@@ -37,9 +42,8 @@ const CLUSTER_BOX_MIN_WIDTH = 150;
 const CLUSTER_BOX_MIN_HEIGHT = 170;
 const CLUSTER_BOX_PADDING = 18;
 const CLUSTER_LABEL_GAP = 10;
-/** for non-exhibition layouts to avoid overflow */
+const CLUSTER_KEYWORDS_TO_SHOW = 2;
 const CLUSTER_SAFE_AREA_SCALE = 0.75;
-/** Norm-space inset for the exhibition grid (room for labels before spread). */
 const EXHIBITION_GRID_EDGE = 0.07;
 const EXHIBITION_CLUSTER_SPREAD = 1.4;
 const PACK_FALLBACK_W = 960;
@@ -52,23 +56,24 @@ const viewMode = ref(
 );
 const selectedNIndex = ref(0);
 
+// --- mode + summary selection ---
 const sectionRef = ref(null);
 const svgSize = ref({ width: 0, height: 0 });
 
 const activeSummary = computed(() =>
   viewMode.value === "institution" ? props.institutionData : props.artistData,
 );
-const activePositions = computed(() =>
-  viewMode.value === "institution"
-    ? props.institutionPositions
-    : props.artistPositions,
-);
+
+const numClustersList = computed(() => {
+  const src = activeSummary.value?.numClusters;
+  return Array.isArray(src) ? src : [];
+});
 
 const availableN = computed(() => {
   if (viewMode.value === "exhibitions") return [];
-  const data = activeSummary.value;
-  if (!data?.length) return [];
-  return [...new Set(data.map((d) => d.n))].sort((a, b) => a - b);
+  const list = numClustersList.value;
+  if (!list.length) return [];
+  return [...new Set(list.map((d) => d.n))].sort((a, b) => a - b);
 });
 
 const selectedN = computed(() => availableN.value[selectedNIndex.value] ?? 0);
@@ -126,16 +131,39 @@ function applyInitialNIfNeeded() {
   }
 }
 
-const currentJsonRows = computed(
-  () =>
-    activeSummary.value?.filter((d) => d.n === selectedN.value) ?? [],
-);
+const currentClusterEntry = computed(() => {
+  const n = selectedN.value;
+  return numClustersList.value.find((e) => e.n === n) ?? null;
+});
 
-const currentClusterPositions = computed(
-  () =>
-    activePositions.value?.find((p) => p.n === selectedN.value)
-      ?.cluster_positions ?? {},
-);
+const lastClusterN = ref(null);
+
+watch(selectedN, (n) => {
+  if (viewMode.value !== "exhibitions") lastClusterN.value = n;
+});
+
+watch(viewMode, () => {
+  nextTick(() => {
+    if (viewMode.value === "exhibitions") return;
+    const vals = availableN.value;
+    if (!vals.length) return;
+    const want = lastClusterN.value;
+    if (want != null && vals.includes(want)) {
+      selectedNIndex.value = vals.indexOf(want);
+      return;
+    }
+    if (want != null) {
+      const lower = [...vals].filter((v) => v <= want).pop();
+      const pick = lower ?? vals[0];
+      selectedNIndex.value = vals.indexOf(pick);
+      return;
+    }
+    selectedNIndex.value = Math.min(
+      selectedNIndex.value,
+      Math.max(0, vals.length - 1),
+    );
+  });
+});
 
 function canvasPaddingPx() {
   return CANVAS_PADDING;
@@ -145,10 +173,7 @@ function clamp01(v, lo, hi) {
   return Math.min(hi, Math.max(lo, v));
 }
 
-/**
- * Keep cluster centers in a visible normalized window based on real pixel geometry.
- * This prevents off-screen clusters for artist/institution layouts on narrower viewports.
- */
+// Keeps norm coords on-screen; artist/institution uses a tighter safe rect.
 function visibleNormBounds() {
   const pad = canvasPaddingPx();
   const w = Math.max(1, svgSize.value.width);
@@ -198,34 +223,6 @@ function clampRefNormXY(x, y) {
   };
 }
 
-function fitNormPointsWithinBounds(points) {
-  if (!points.length) return new Map();
-  const b = visibleNormBounds();
-  let minX = Infinity;
-  let maxX = -Infinity;
-  let minY = Infinity;
-  let maxY = -Infinity;
-  for (const p of points) {
-    if (p.x < minX) minX = p.x;
-    if (p.x > maxX) maxX = p.x;
-    if (p.y < minY) minY = p.y;
-    if (p.y > maxY) maxY = p.y;
-  }
-  const spanX = Math.max(maxX - minX, 1e-6);
-  const spanY = Math.max(maxY - minY, 1e-6);
-  const out = new Map();
-  for (const p of points) {
-    const tx = (p.x - minX) / spanX;
-    const ty = (p.y - minY) / spanY;
-    out.set(p.id, {
-      nx: b.minX + tx * (b.maxX - b.minX),
-      ny: b.minY + ty * (b.maxY - b.minY),
-    });
-  }
-  return out;
-}
-
-/** Even grid inside [edge, 1-edge]²; aspect drives row/column count like pack. */
 function exhibitionGridNormCell(k, index, aspectW, aspectH) {
   const edge = EXHIBITION_GRID_EDGE;
   const usable = Math.max(0.2, 1 - 2 * edge);
@@ -242,7 +239,6 @@ function exhibitionGridNormCell(k, index, aspectW, aspectH) {
   };
 }
 
-/** Radially separate exhibition cluster centers so they breathe on the canvas. */
 function spreadExhibitionNorm(nx, ny) {
   const s = EXHIBITION_CLUSTER_SPREAD;
   const x = 0.5 + (nx - 0.5) * s;
@@ -251,66 +247,158 @@ function spreadExhibitionNorm(nx, ny) {
   return { normX: c.nx, normY: c.ny };
 }
 
-const SHARED_JITTER_PX = 24; // spread shared artists apart at their midpoint
+const SHARED_JITTER_PX = 24;
+const POINT_JITTER_PX = 10;
+const POINT_COLLISION_MIN_DIST = POINT_SIZE * 0.95;
+// Cap so dense layouts don’t shove dots into weird pockets.
+const POINT_COLLISION_MAX_NUDGE = 18;
+
+// Shared midpoint: runner-up pulls the blend only within this mass gap of primary.
+const SHARED_BLEND_GAP = 0.15;
+// Line thickness / “primary” activation: same numeric idea, separate tuning knob.
+const PRIMARY_LINE_GAP = 0.15;
+
+function sharedLinkIds(artist) {
+  if (viewMode.value === "exhibitions") {
+    return (artist.exhibitionIds ?? []).map((id) => Number(id)).filter(Number.isFinite);
+  }
+  return (artist.clusterIds ?? []).map((id) => Number(id)).filter(Number.isFinite);
+}
+
+function sharedJitterAngle(artist) {
+  if (viewMode.value === "exhibitions") {
+    return artist._jitter_angle ?? 0;
+  }
+  return artist._jitter_angle ?? artist._angle ?? 0;
+}
+
+function distributionMass(clusterDistribution, clusterId) {
+  if (!clusterDistribution || typeof clusterDistribution !== "object") return 0;
+  const raw = clusterDistribution[String(clusterId)] ?? clusterDistribution[clusterId];
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function stableJitterAngle(seedA, seedB = 0) {
+  const x = Number(seedA) * 12.9898 + Number(seedB) * 78.233;
+  const n = Math.sin(x) * 43758.5453;
+  const frac = n - Math.floor(n);
+  return frac * Math.PI * 2;
+}
+
+function isPrimarySpoke(clusterDistribution, primaryIdRaw, targetClusterIdRaw) {
+  const clusterId = Number(targetClusterIdRaw);
+  const primaryId = Number(primaryIdRaw);
+  if (!Number.isFinite(clusterId) || !Number.isFinite(primaryId)) return false;
+  if (!clusterDistribution || typeof clusterDistribution !== "object") {
+    return clusterId === primaryId;
+  }
+  const wPrimary = distributionMass(clusterDistribution, primaryId);
+  const w = distributionMass(clusterDistribution, clusterId);
+  return w > 0 && w >= wPrimary - PRIMARY_LINE_GAP;
+}
+
+/** Same threshold as line `isOther` / active cluster boxes for summary dots. */
+function primaryLikePoint(details, clusterIdRaw) {
+  if (!details) return false;
+  return isPrimarySpoke(
+    details.clusterDistribution,
+    details.primaryCluster ?? details.clusterId,
+    clusterIdRaw,
+  );
+}
+
+function secondStrongestClusterId(clusterDistribution, primaryId) {
+  const p = Number(primaryId);
+  let bestId = null;
+  let bestW = -1;
+  for (const [key, wRaw] of Object.entries(clusterDistribution)) {
+    const id = Number(key);
+    const w = Number(wRaw);
+    if (!Number.isFinite(id) || !Number.isFinite(w) || w <= 0) continue;
+    if (id === p) continue;
+    if (w > bestW) {
+      bestW = w;
+      bestId = id;
+    }
+  }
+  return bestId == null ? null : { id: bestId, mass: bestW };
+}
 
 function getSharedArtistCanvasPos(artist) {
-  const positions = artist.exhibitionIds
-    .map((eid) => {
-      const g = placedLayoutGroups.value.find((g) => g.clusterId === eid);
-      return g ? getClusterCanvasPos(g) : null;
-    })
-    .filter(Boolean);
+  const ja = sharedJitterAngle(artist);
 
-  if (!positions.length) return null;
+  if (viewMode.value === "exhibitions") {
+    const positions = sharedLinkIds(artist)
+      .map((id) => {
+        const g = layoutGroupsList.value.find((gr) => gr.clusterId === id);
+        return g ? getClusterCanvasPos(g) : null;
+      })
+      .filter(Boolean);
+    if (!positions.length) return null;
+    const avgX = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+    const avgY = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+    return {
+      x: avgX + Math.cos(ja) * SHARED_JITTER_PX,
+      y: avgY + Math.sin(ja) * SHARED_JITTER_PX,
+    };
+  }
 
-  const avgX = positions.reduce((s, p) => s + p.x, 0) / positions.length;
-  const avgY = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+  const primaryId = Number(artist.primaryCluster);
+  const dist = artist.clusterDistribution;
+  if (!Number.isFinite(primaryId) || !dist) return null;
 
-  // Jitter so multiple shared artists at the same midpoint don't stack
-  return {
-    x: avgX + Math.cos(artist._jitter_angle) * SHARED_JITTER_PX,
-    y: avgY + Math.sin(artist._jitter_angle) * SHARED_JITTER_PX,
-  };
+  const gPrimary = layoutGroupsList.value.find((gr) => gr.clusterId === primaryId);
+  const pPrimary = gPrimary ? getClusterCanvasPos(gPrimary) : null;
+  if (!pPrimary) return null;
+
+  const wPrimary = distributionMass(dist, primaryId);
+  const runnerUp = secondStrongestClusterId(dist, primaryId);
+  let x = pPrimary.x;
+  let y = pPrimary.y;
+
+  if (
+    runnerUp &&
+    runnerUp.mass > 0 &&
+    runnerUp.mass >= wPrimary - SHARED_BLEND_GAP
+  ) {
+    const gSec = layoutGroupsList.value.find((gr) => gr.clusterId === runnerUp.id);
+    const pSec = gSec ? getClusterCanvasPos(gSec) : null;
+    if (pSec) {
+      const sum = wPrimary + runnerUp.mass;
+      const t = sum > 0 ? wPrimary / sum : 1;
+      const u = sum > 0 ? runnerUp.mass / sum : 0;
+      x = t * pPrimary.x + u * pSec.x;
+      y = t * pPrimary.y + u * pSec.y;
+    }
+  }
+
+  const angle = artist._angle ?? 0;
+  const ringR = (artist._radius_frac ?? 0.5) * CLUSTER_RADIUS;
+  x += Math.cos(angle) * ringR;
+  y += Math.sin(angle) * ringR;
+
+  x += Math.cos(ja) * SHARED_JITTER_PX;
+  y += Math.sin(ja) * SHARED_JITTER_PX;
+
+  return { x, y };
 }
 
 function getSharedArtistStyle(artist) {
+  const key = `shared-${artist.artistId}`;
   const pos = getSharedArtistCanvasPos(artist);
   if (!pos) return { display: "none" };
+  const nudge = pointNudgesByKey.value[key] ?? { dx: 0, dy: 0 };
   return {
-    left: `${pos.x - POINT_SIZE / 2}px`,
-    top: `${pos.y - POINT_SIZE / 2}px`,
+    left: `${pos.x + nudge.dx - POINT_SIZE / 2}px`,
+    top: `${pos.y + nudge.dy - POINT_SIZE / 2}px`,
   };
 }
 
-function centerLabelsForJsonCluster(clusterId, rowsInCluster, clusterPosition) {
-  const kwFromPosition = clusterPosition?.keywords;
-  if (Array.isArray(kwFromPosition) && kwFromPosition.length) {
-    return kwFromPosition.slice(0, 1).map(String);
-  }
-  // Backward-compatible fallback for older row-level payloads.
-  const row =
-    rowsInCluster.find((r) => r.primary_cluster === clusterId) ??
-    rowsInCluster[0];
-  const kw = row?.cluster_keywords?.[String(clusterId)];
-  if (Array.isArray(kw) && kw.length) return kw.slice(0, 1).map(String);
-  return [];
-}
-
-/** Resolve display labels from the canonical artists table by id. */
 function artistDisplayName(artistId) {
   const id = Number(artistId);
   if (Number.isNaN(id)) return `Artist ${artistId}`;
   return artistsById.value[id]?.name ?? `Artist ${id}`;
-}
-
-/** Match a display name to an artist id (institution rows list several names in one field). */
-function artistIdForDisplayName(name) {
-  const t = String(name).trim().toLowerCase();
-  if (!t) return null;
-  for (const [id, a] of Object.entries(artistsById.value)) {
-    if (a?.name && String(a.name).trim().toLowerCase() === t) return +id;
-  }
-  return null;
 }
 
 function clusterIdsFromDistribution(clusterDistribution) {
@@ -325,52 +413,51 @@ function clusterIdsFromDistribution(clusterDistribution) {
   return ids;
 }
 
-function baseItemFromJsonRow(row, c) {
+function summaryArtistToExclusiveItem(a) {
   return {
-    artistId: row.artist,
-    artistName: artistDisplayName(row.artist),
-    primaryCluster: c,
-    closestOtherCluster: row.closest_cluster_by_dist,
-    linkedClusterIds: clusterIdsFromDistribution(row.cluster_distribution),
-    _angle: row._angle ?? 0,
-    _radius_frac: row._radius_frac ?? 0.5,
+    artistId: a.artistId,
+    artistName: artistDisplayName(a.artistId),
+    primaryCluster: a.primaryGroup,
+    closestOtherCluster: null,
+    linkedClusterIds: clusterIdsFromDistribution(a.clusterDistribution),
+    clusterDistribution: a.clusterDistribution,
+    _angle: a._angle ?? 0,
+    _radius_frac: a._radius_frac ?? 0.5,
+    isShared: false,
   };
 }
 
-/**
- * Institution summaries may list multiple artists in `artist_name` (comma-separated);
- * we split to find ids, but labels always come from artists.csv.
- */
-function jsonRowToDisplayItems(row, isInstitutionMode) {
-  const c = row.primary_cluster;
-  if (!isInstitutionMode) {
-    return [baseItemFromJsonRow(row, c)];
-  }
-  const raw = row.artist_name;
-  if (raw == null || !String(raw).includes(",")) {
-    return [baseItemFromJsonRow(row, c)];
-  }
-  const names = String(raw)
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (names.length <= 1) {
-    return [baseItemFromJsonRow(row, c)];
-  }
-  return names.map((name) => {
-    const id = artistIdForDisplayName(name) ?? row.artist;
-    return {
-      artistId: id,
-      artistName: artistDisplayName(id),
-      primaryCluster: c,
-      closestOtherCluster: row.closest_cluster_by_dist,
-      linkedClusterIds: clusterIdsFromDistribution(row.cluster_distribution),
-      _angle: row._angle ?? 0,
-      _radius_frac: row._radius_frac ?? 0.5,
-    };
-  });
-}
+const clusterSharedArtistItems = computed(() => {
+  if (viewMode.value !== "artist" && viewMode.value !== "institution") return [];
+  const entry = currentClusterEntry.value;
+  const artists = entry?.artists ?? [];
+  return artists
+    .filter((a) => a.isShared)
+    .map((a) => ({
+      artistId: a.artistId,
+      artistName: artistDisplayName(a.artistId),
+      exhibitionIds: [],
+      clusterIds: clusterIdsFromDistribution(a.clusterDistribution),
+      primaryCluster: a.primaryGroup,
+      isShared: true,
+      _jitter_angle: a._jitter_angle ?? a._angle ?? 0,
+      _angle: a._angle,
+      _radius_frac: a._radius_frac ?? 0.85,
+      closestOtherCluster: null,
+      linkedClusterIds: clusterIdsFromDistribution(a.clusterDistribution),
+      clusterDistribution: a.clusterDistribution,
+    }));
+});
 
+const surfaceSharedArtistItems = computed(() => {
+  if (viewMode.value === "exhibitions") return sharedArtistItems.value;
+  if (viewMode.value === "artist" || viewMode.value === "institution") {
+    return clusterSharedArtistItems.value;
+  }
+  return [];
+});
+
+// --- layout: exhibition grid vs summary groups + exclusive ring items ---
 const layoutGroups = computed(() => {
   if (viewMode.value === "exhibitions") {
     const exRows = normalizedExhibitionData.value.exhibitions ?? [];
@@ -422,47 +509,41 @@ const layoutGroups = computed(() => {
     return out;
   }
 
-  const n = selectedN.value;
-  const data = currentJsonRows.value;
-  const pos = currentClusterPositions.value;
+  const entry = currentClusterEntry.value;
   const out = {};
-  const rawCenters = [];
+  if (!entry) return out;
 
-  for (let c = 0; c < n; c++) {
-    const p = pos[String(c)];
-    const rawX = p?.x ?? 0.5;
-    const rawY = p?.y ?? 0.5;
-    rawCenters.push({ id: c, x: rawX, y: rawY });
-    const rowsHere = data.filter((r) => r.primary_cluster === c);
-    const centerLabels = centerLabelsForJsonCluster(c, rowsHere, p);
+  const groups = [...(entry.groups ?? [])].sort(
+    (a, b) => Number(a.gridIndex) - Number(b.gridIndex),
+  );
+  const k = groups.length;
+  if (!k) return out;
 
-    out[c] = {
-      clusterId: c,
-      name: `Cluster ${c}`,
-      normX: rawX,
-      normY: rawY,
+  const aw = Math.max(svgSize.value.width - CANVAS_PADDING * 2 || PACK_FALLBACK_W, 400);
+  const ah = Math.max(svgSize.value.height - CANVAS_PADDING * 2 || PACK_FALLBACK_H, 400);
+
+  groups.forEach((g, cellIdx) => {
+    const clusterId = Number(g.id);
+    const { nx, ny } = exhibitionGridNormCell(k, cellIdx, aw, ah);
+    const { normX, normY } = spreadExhibitionNorm(nx, ny);
+    const kw = Array.isArray(g.keywords) ? g.keywords : [];
+    const centerLabels = kw.slice(0, CLUSTER_KEYWORDS_TO_SHOW).map(String);
+    out[clusterId] = {
+      clusterId,
+      name: `Cluster ${clusterId}`,
+      normX,
+      normY,
       centerLabels,
+      featuredQuote: g.featured_quote ?? null,
       items: [],
     };
-  }
+  });
 
-  const fitted = fitNormPointsWithinBounds(rawCenters);
-  for (const c of Object.keys(out)) {
-    const id = Number(c);
-    const p = fitted.get(id);
-    if (!p) continue;
-    out[id].normX = p.nx;
-    out[id].normY = p.ny;
-  }
-
-  const isInstitution = viewMode.value === "institution";
-  for (const row of data) {
-    const c = row.primary_cluster;
+  for (const a of entry.artists ?? []) {
+    if (a.isShared) continue;
+    const c = Number(a.primaryGroup);
     if (!out[c]) continue;
-    const pieces = jsonRowToDisplayItems(row, isInstitution);
-    for (const piece of pieces) {
-      out[c].items.push(piece);
-    }
+    out[c].items.push(summaryArtistToExclusiveItem(a));
   }
 
   return out;
@@ -472,12 +553,6 @@ const layoutGroupsList = computed(() =>
   Object.values(layoutGroups.value).sort(
     (a, b) => a.clusterId - b.clusterId,
   ),
-);
-
-const placedLayoutGroups = computed(() =>
-  viewMode.value === "exhibitions"
-    ? layoutGroupsList.value
-    : layoutGroupsList.value
 );
 
 function getClusterCanvasPos(group) {
@@ -492,7 +567,6 @@ function getClusterCanvasPos(group) {
   return normToCanvas(group.normX, group.normY);
 }
 
-/** Anchor point (cluster center in px); dot is translate(-50%,-50%) so its center sits here. */
 function getClusterAnchorStyle(group) {
   const { x, y } = getClusterCanvasPos(group);
   return {
@@ -501,13 +575,16 @@ function getClusterAnchorStyle(group) {
   };
 }
 
-function getArtistStyle(artist, group) {
+function getArtistStyle(artist, group, idx) {
   const { x: cx, y: cy } = getClusterCanvasPos(group);
   const r = (artist._radius_frac ?? 0.5) * CLUSTER_RADIUS;
   const angle = artist._angle ?? 0;
+  const jitterAngle = stableJitterAngle(artist.artistId, artist.primaryCluster);
+  const key = pointKey(group, artist, idx);
+  const nudge = pointNudgesByKey.value[key] ?? { dx: 0, dy: 0 };
   return {
-    left: `${cx + Math.cos(angle) * r - POINT_SIZE / 2}px`,
-    top: `${cy + Math.sin(angle) * r - POINT_SIZE / 2}px`,
+    left: `${cx + Math.cos(angle) * r + Math.cos(jitterAngle) * POINT_JITTER_PX + nudge.dx - POINT_SIZE / 2}px`,
+    top: `${cy + Math.sin(angle) * r + Math.sin(jitterAngle) * POINT_JITTER_PX + nudge.dy - POINT_SIZE / 2}px`,
   };
 }
 
@@ -515,20 +592,90 @@ function pointKey(group, item, index) {
   return `${group.clusterId}-${index}-${item.artistId}`;
 }
 
+function baseArtistCanvasPos(artist, group) {
+  const { x: cx, y: cy } = getClusterCanvasPos(group);
+  const r = (artist._radius_frac ?? 0.5) * CLUSTER_RADIUS;
+  const angle = artist._angle ?? 0;
+  const jitterAngle = stableJitterAngle(artist.artistId, artist.primaryCluster);
+  return {
+    x: cx + Math.cos(angle) * r + Math.cos(jitterAngle) * POINT_JITTER_PX,
+    y: cy + Math.sin(angle) * r + Math.sin(jitterAngle) * POINT_JITTER_PX,
+  };
+}
+
+// Collision pass: nudges are capped so stacks don’t explode outward.
+const pointNudgesByKey = computed(() => {
+  const points = [];
+  for (const group of layoutGroupsList.value) {
+    (group.items ?? []).forEach((item, idx) => {
+      const base = baseArtistCanvasPos(item, group);
+      points.push({
+        key: pointKey(group, item, idx),
+        x: base.x,
+        y: base.y,
+        seed: stableJitterAngle(item.artistId, group.clusterId + idx),
+      });
+    });
+  }
+  for (const artist of surfaceSharedArtistItems.value) {
+    const base = getSharedArtistCanvasPos(artist);
+    if (!base) continue;
+    points.push({
+      key: `shared-${artist.artistId}`,
+      x: base.x,
+      y: base.y,
+      seed: stableJitterAngle(artist.artistId, 999),
+    });
+  }
+
+  const out = {};
+  const placed = [];
+  for (const p of points) {
+    let x = p.x;
+    let y = p.y;
+    for (const q of placed) {
+      const dx = x - q.x;
+      const dy = y - q.y;
+      const d = Math.hypot(dx, dy);
+      if (d >= POINT_COLLISION_MIN_DIST) continue;
+      const overlap = POINT_COLLISION_MIN_DIST - d;
+      const ang = d < 1e-6 ? p.seed : Math.atan2(dy, dx);
+      x += Math.cos(ang) * overlap;
+      y += Math.sin(ang) * overlap;
+    }
+    let ndx = x - p.x;
+    let ndy = y - p.y;
+    const nmag = Math.hypot(ndx, ndy);
+    if (nmag > POINT_COLLISION_MAX_NUDGE && nmag > 0) {
+      const t = POINT_COLLISION_MAX_NUDGE / nmag;
+      ndx *= t;
+      ndy *= t;
+      x = p.x + ndx;
+      y = p.y + ndy;
+    }
+    out[p.key] = { dx: ndx, dy: ndy };
+    placed.push({ x, y });
+  }
+  return out;
+});
+
 const hoveredPoint = ref(null);
 const hoveredClusterId = ref(null);
 const clusterCenterPositions = ref({});
 const pointPositions = ref({});
 const renderEpoch = ref(0);
 
+// --- hover geometry: point metadata + SVG lines (from measured DOM positions) ---
 const pointDetailsByKey = computed(() => {
   const out = {};
-  for (const group of placedLayoutGroups.value) {
+  for (const group of layoutGroupsList.value) {
     group.items.forEach((item, idx) => {
       const pk = pointKey(group, item, idx);
       out[pk] = {
         clusterId: group.clusterId,
+        primaryCluster: item.primaryCluster,
         artistId: item.artistId,
+        clusterDistribution: item.clusterDistribution ?? null,
       };
     });
   }
@@ -539,9 +686,26 @@ const pointDetailsByKey = computed(() => {
         artistId: artist.artistId,
       };
     }
+  } else if (viewMode.value === "artist" || viewMode.value === "institution") {
+    for (const artist of clusterSharedArtistItems.value) {
+      out[`shared-${artist.artistId}`] = {
+        clusterIds: (artist.clusterIds ?? []).map((id) => Number(id)),
+        artistId: artist.artistId,
+        clusterId: artist.primaryCluster,
+        primaryCluster: artist.primaryCluster,
+        clusterDistribution: artist.clusterDistribution ?? null,
+      };
+    }
   }
   return out;
 });
+
+function artistIdFromPointKey(pointKey) {
+  if (!pointKey) return null;
+  const raw = pointDetailsByKey.value[pointKey]?.artistId;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+}
 
 const hoveredPointDetails = computed(() =>
   hoveredPoint.value ? pointDetailsByKey.value[hoveredPoint.value] : null,
@@ -549,31 +713,37 @@ const hoveredPointDetails = computed(() =>
 
 const activeClusterIds = computed(() => {
   const ids = new Set();
-  if (hoveredPointDetails.value) {
-    const details = hoveredPointDetails.value;
-    if (Array.isArray(details.clusterIds)) {
-      for (const id of details.clusterIds) {
+  const d = hoveredPointDetails.value;
+  if (d) {
+    if (Array.isArray(d.clusterIds)) {
+      const primaryId = Number(d.primaryCluster ?? d.clusterId);
+      const filterPrimary =
+        viewMode.value === "artist" || viewMode.value === "institution";
+      for (const id of d.clusterIds) {
         const n = Number(id);
-        ids.add(n);
-      }
-    } else if (details.clusterId != null) {
-      const n = Number(details.clusterId);
-      ids.add(n);
-      if (viewMode.value === "exhibitions") {
-        const artistId = Number(details.artistId);
-        const shared = sharedArtistItems.value.find(
-          (artist) => Number(artist.artistId) === artistId,
-        );
-        if (shared) {
-          for (const id of shared.exhibitionIds ?? []) ids.add(Number(id));
+        if (filterPrimary) {
+          if (isPrimarySpoke(d.clusterDistribution, primaryId, n)) ids.add(n);
+        } else {
+          ids.add(n);
         }
+      }
+    } else if (d.clusterId != null) {
+      ids.add(Number(d.clusterId));
+      const aid = Number(d.artistId);
+      if (viewMode.value === "exhibitions") {
+        const shared = sharedArtistItems.value.find(
+          (a) => Number(a.artistId) === aid,
+        );
+        for (const id of shared?.exhibitionIds ?? []) ids.add(Number(id));
+      } else if (viewMode.value === "artist" || viewMode.value === "institution") {
+        const shared = clusterSharedArtistItems.value.find(
+          (a) => Number(a.artistId) === aid,
+        );
+        for (const id of shared?.clusterIds ?? []) ids.add(Number(id));
       }
     }
   }
-  if (hoveredClusterId.value != null) {
-    const n = Number(hoveredClusterId.value);
-    ids.add(n);
-  }
+  if (hoveredClusterId.value != null) ids.add(Number(hoveredClusterId.value));
   return ids;
 });
 
@@ -583,11 +753,10 @@ const allLines = computed(() => {
   const lines = [];
   if (!Object.keys(centers).length || !Object.keys(pts).length) return lines;
 
-  /** Exhibition mode: same artistId may appear in multiple shows — link dot-to-dot on hover. */
   let peersByArtist = null;
   if (viewMode.value === "exhibitions") {
     peersByArtist = new Map();
-    for (const g of placedLayoutGroups.value) {
+    for (const g of layoutGroupsList.value) {
       g.items.forEach((item, idx) => {
         const pk = pointKey(g, item, idx);
         const k = item.artistId == null ? NaN : Number(item.artistId);
@@ -598,7 +767,7 @@ const allLines = computed(() => {
     }
   }
 
-  for (const group of placedLayoutGroups.value) {
+  for (const group of layoutGroupsList.value) {
     const cid = group.clusterId;
     const cx = centers[cid];
     if (!cx) continue;
@@ -618,6 +787,7 @@ const allLines = computed(() => {
         y1: pt.y,
         x2: cx.x,
         y2: cx.y,
+        isOther: !isPrimarySpoke(item.clusterDistribution, item.primaryCluster, cid),
       });
 
       const extraClusterIds = Array.isArray(item.linkedClusterIds)
@@ -640,7 +810,11 @@ const allLines = computed(() => {
           y1: pt.y,
           x2: oc.x,
           y2: oc.y,
-          isOther: true,
+          isOther: !isPrimarySpoke(
+            item.clusterDistribution,
+            item.primaryCluster,
+            otherId,
+          ),
         });
       }
 
@@ -683,14 +857,49 @@ const allLines = computed(() => {
           sourcePointKey: pk,
           sourceClusterId: eid,
           targetPointKey: pk,
-          x1: pt.x, y1: pt.y,
-          x2: cx.x, y2: cx.y,
+          x1: pt.x,
+          y1: pt.y,
+          x2: cx.x,
+          y2: cx.y,
           isOther: false,
         });
       }
     }
   }
-    
+
+  if (viewMode.value === "artist" || viewMode.value === "institution") {
+    const primaryOf = (a) => Number(a.primaryCluster);
+    for (const artist of clusterSharedArtistItems.value) {
+      const pk = `shared-${artist.artistId}`;
+      const pt = pts[pk];
+      if (!pt) continue;
+      const pId = primaryOf(artist);
+      for (const cidRaw of artist.clusterIds ?? []) {
+        const cid = Number(cidRaw);
+        if (!Number.isFinite(cid)) continue;
+        const cx = centers[cid];
+        if (!cx) continue;
+        lines.push({
+          key: `${pk}-to-${cid}`,
+          kind: "center-point",
+          sourcePointKey: pk,
+          sourceClusterId: pId,
+          targetClusterId: cid,
+          targetPointKey: pk,
+          x1: pt.x,
+          y1: pt.y,
+          x2: cx.x,
+          y2: cx.y,
+          isOther: !isPrimarySpoke(
+            artist.clusterDistribution,
+            artist.primaryCluster,
+            cid,
+          ),
+        });
+      }
+    }
+  }
+
   return lines;
 });
 
@@ -699,16 +908,10 @@ const directExhibitionLineKeys = computed(() => {
   if (viewMode.value !== "exhibitions") return directKeys;
   if (!hasActiveHoverContext.value) return directKeys;
 
-  const pointArtistId = (pointKey) => {
-    if (!pointKey) return null;
-    const raw = pointDetailsByKey.value[pointKey]?.artistId;
-    const n = Number(raw);
-    return Number.isFinite(n) ? n : null;
-  };
   const centerPointLines = allLines.value.filter((line) => line.kind === "center-point");
 
   if (hoveredPoint.value) {
-    const hoveredArtistId = pointArtistId(hoveredPoint.value);
+    const hoveredArtistId = artistIdFromPointKey(hoveredPoint.value);
     const artistPointKeys = new Set();
 
     if (hoveredArtistId != null) {
@@ -744,13 +947,6 @@ const secondaryExhibitionLineKeys = computed(() => {
   const directKeys = directExhibitionLineKeys.value;
   const centerPointLines = allLines.value.filter((line) => line.kind === "center-point");
 
-  const pointArtistId = (pointKey) => {
-    if (!pointKey) return null;
-    const raw = pointDetailsByKey.value[pointKey]?.artistId;
-    const n = Number(raw);
-    return Number.isFinite(n) ? n : null;
-  };
-
   if (hoveredPoint.value) {
     const associatedClusterIds = new Set();
     for (const line of centerPointLines) {
@@ -770,16 +966,16 @@ const secondaryExhibitionLineKeys = computed(() => {
     const artistIds = new Set();
     for (const line of centerPointLines) {
       if (!directKeys.has(line.key)) continue;
-      const sourceArtistId = pointArtistId(line.sourcePointKey);
-      const targetArtistId = pointArtistId(line.targetPointKey);
+      const sourceArtistId = artistIdFromPointKey(line.sourcePointKey);
+      const targetArtistId = artistIdFromPointKey(line.targetPointKey);
       if (sourceArtistId != null) artistIds.add(sourceArtistId);
       if (targetArtistId != null) artistIds.add(targetArtistId);
     }
 
     for (const line of centerPointLines) {
       if (directKeys.has(line.key)) continue;
-      const sourceArtistId = pointArtistId(line.sourcePointKey);
-      const targetArtistId = pointArtistId(line.targetPointKey);
+      const sourceArtistId = artistIdFromPointKey(line.sourcePointKey);
+      const targetArtistId = artistIdFromPointKey(line.targetPointKey);
       if (artistIds.has(sourceArtistId) || artistIds.has(targetArtistId)) {
         secondaryKeys.add(line.key);
       }
@@ -797,25 +993,21 @@ const directNonExhibitionLineKeys = computed(() => {
   const centerPointLines = allLines.value.filter((line) => line.kind === "center-point");
 
   if (hoveredPoint.value) {
-    const hoveredPrimaryClusterId = Number(
-      pointDetailsByKey.value[hoveredPoint.value]?.clusterId,
-    );
+    const d = pointDetailsByKey.value[hoveredPoint.value];
     for (const line of centerPointLines) {
       if (line.sourcePointKey !== hoveredPoint.value) continue;
       const targetClusterId = Number(line.targetClusterId);
-      if (
-        Number.isFinite(hoveredPrimaryClusterId) &&
-        targetClusterId === hoveredPrimaryClusterId
-      ) {
+      if (primaryLikePoint(d, targetClusterId)) {
         directKeys.add(line.key);
       }
     }
   } else if (hoveredClusterId.value != null) {
     const hoveredId = Number(hoveredClusterId.value);
     for (const line of centerPointLines) {
-      const sourceClusterId = Number(line.sourceClusterId);
       const targetClusterId = Number(line.targetClusterId);
-      if (sourceClusterId === hoveredId && targetClusterId === hoveredId) {
+      if (targetClusterId !== hoveredId) continue;
+      const details = pointDetailsByKey.value[line.sourcePointKey];
+      if (primaryLikePoint(details, hoveredId)) {
         directKeys.add(line.key);
       }
     }
@@ -962,6 +1154,7 @@ function getClusterBoxMetrics(group) {
   };
 }
 
+// --- DOM geometry for lines (centers + dot anchors) ---
 function recalcPositions() {
   if (!sectionRef.value) return;
   const sectionRect = sectionRef.value.getBoundingClientRect();
@@ -1003,7 +1196,6 @@ function resetCanvasTransitionState() {
 }
 
 watch([viewMode, selectedN], () => {
-  // Clear old geometry/hover state before the new layout mounts.
   resetCanvasTransitionState();
   nextTick(() => {
     recalcPositions();
@@ -1059,17 +1251,36 @@ function handleCenterClick(group) {
     .filter(Boolean);
   const clusterTitle = labels.length ? labels.join(", ") : group.name;
 
-  // For exhibition clusters, group.items only holds exclusive artists (those
-  // not shared between exhibitions). To surface all artists in the gallery we
-  // fall back to the full list from artistsByExhibitionId, which includes both
-  // exclusive and shared artists.
+  const cid = group.clusterId;
   const sourceItems =
     viewMode.value === "exhibitions"
-      ? (artistsByExhibitionId.value.get(group.clusterId) ?? []).map((a) => ({
+      ? (artistsByExhibitionId.value.get(cid) ?? []).map((a) => ({
           artistId: a.artistId,
           artistName: artistDisplayName(a.artistId),
         }))
-      : group.items;
+      : (() => {
+          const entry = currentClusterEntry.value;
+          const acc = [];
+          const seen = new Set();
+          for (const item of group.items ?? []) {
+            if (seen.has(item.artistId)) continue;
+            seen.add(item.artistId);
+            acc.push({
+              artistId: item.artistId,
+              artistName: item.artistName,
+            });
+          }
+          for (const a of entry?.artists ?? []) {
+            if (!(distributionMass(a.clusterDistribution, cid) > 0)) continue;
+            if (seen.has(a.artistId)) continue;
+            seen.add(a.artistId);
+            acc.push({
+              artistId: a.artistId,
+              artistName: artistDisplayName(a.artistId),
+            });
+          }
+          return acc;
+        })();
 
   const seen = new Set();
   const uniqueArtists = [];
@@ -1083,12 +1294,9 @@ function handleCenterClick(group) {
   }
 
   const isExhibitionMode = viewMode.value === "exhibitions";
-  const clusterPos = currentClusterPositions.value[String(group.clusterId)];
-  const keywords = isExhibitionMode
-    ? (group.centerLabels ?? [])
-    : (clusterPos?.keywords ?? []);
+  const keywords = group.centerLabels ?? [];
   const exhibitionHero = isExhibitionMode
-    ? (exhibitionsById.get(group.clusterId) ?? null)
+    ? (exhibitionsById.get(cid) ?? null)
     : null;
   emit("select-cluster", {
     name: clusterTitle,
@@ -1098,7 +1306,7 @@ function handleCenterClick(group) {
     })),
     n_clusters: isExhibitionMode ? exhibitionEntryCount : selectedN.value,
     keywords,
-    clusterFeaturedQuote: clusterPos?.featured_quote ?? null,
+    clusterFeaturedQuote: group.featuredQuote ?? null,
     exhibitionHero,
   });
 }
@@ -1107,6 +1315,15 @@ function displayLabelLine(i, group) {
   const raw = (group.centerLabels ?? [])[i];
   if (raw == null || raw === "") return "";
   return String(raw).toUpperCase();
+}
+
+function displayLabelLines(group) {
+  const lines = [];
+  for (let i = 0; i < CLUSTER_KEYWORDS_TO_SHOW; i += 1) {
+    const line = displayLabelLine(i, group);
+    if (line) lines.push(line);
+  }
+  return lines;
 }
 </script>
 
@@ -1191,7 +1408,7 @@ function displayLabelLine(i, group) {
       </svg>
 
       <div
-        v-for="group in placedLayoutGroups"
+        v-for="group in layoutGroupsList"
         :key="`${renderEpoch}-${group.clusterId}`"
         class="cs-cluster-group"
       >
@@ -1220,10 +1437,15 @@ function displayLabelLine(i, group) {
           class="cs-center-labels"
           :style="getClusterLabelStyle(group)"
         >
-          <span v-if="displayLabelLine(0, group)" class="cs-center-label-line">{{
-            displayLabelLine(0, group)
-          }}</span>
-          <span v-if="!displayLabelLine(0, group)" class="cs-center-label-line cs-center-label-line--empty">—</span>
+          <span
+            v-for="(line, idx) in displayLabelLines(group)"
+            :key="`${group.clusterId}-label-${idx}`"
+            class="cs-center-label-line"
+          >{{ line }}</span>
+          <span
+            v-if="!displayLabelLines(group).length"
+            class="cs-center-label-line cs-center-label-line--empty"
+          >—</span>
         </div>
 
         <div
@@ -1238,7 +1460,7 @@ function displayLabelLine(i, group) {
               hoveredPoint !== pointKey(group, item, idx) &&
               !activePointKeys.has(pointKey(group, item, idx)),
           }"
-          :style="getArtistStyle(item, group)"
+          :style="getArtistStyle(item, group, idx)"
           :data-point-id="pointKey(group, item, idx)"
           :data-artist-id="item.artistId == null ? null : String(item.artistId)"
           :aria-label="item.artistName"
@@ -1262,9 +1484,9 @@ function displayLabelLine(i, group) {
           <div class="cs-tooltip">{{ item.artistName }}</div>
         </div>
       </div>
-      <div v-if="viewMode === 'exhibitions'">
+      <template v-if="surfaceSharedArtistItems.length">
         <div
-          v-for="artist in sharedArtistItems"
+          v-for="artist in surfaceSharedArtistItems"
           :key="`${renderEpoch}-shared-${artist.artistId}`"
           class="cs-point cs-point--shared"
           :class="{
@@ -1295,7 +1517,7 @@ function displayLabelLine(i, group) {
           </div>
           <div class="cs-tooltip">{{ artist.artistName }}</div>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>

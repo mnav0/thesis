@@ -25,7 +25,7 @@ const props = defineProps({
   // component combines all enriched points into one chronological timeline.
   artistIds: { type: Array, required: true },
   // When opening a multi-artist cluster, the cluster's featured_quote object
-  // from artist_cluster_positions.json: { source_idx, point, text }.
+  // from cluster summary JSON (e.g. artist_cluster_summary): group featured_quote { source_idx, point, text }.
   // Takes precedence over the single-artist CSV lookup.
   clusterFeaturedQuote: { type: Object, default: null },
   // When opening an exhibition cluster, show the exhibition name as the hero

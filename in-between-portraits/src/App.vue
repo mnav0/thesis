@@ -3,8 +3,6 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import {
   artistClustersMap,
   institutionClustersMap,
-  artistPositionsMap,
-  institutionPositionsMap,
   exhibitionClustersMap,
 } from "./data/index.js";
 import ClusterSection from "./components/ClusterSection/index.vue";
@@ -251,8 +249,6 @@ onBeforeUnmount(() => {
             :exhibitions="exhibitionClustersMap"
             :artist-data="artistClustersMap"
             :institution-data="institutionClustersMap"
-            :artist-positions="artistPositionsMap"
-            :institution-positions="institutionPositionsMap"
             initial-view-mode="exhibitions"
             @select-point="openClusterFromEmbedding"
             @select-cluster="openClusterFromEmbedding"

@@ -11,10 +11,8 @@ import exhibitionsCSV from "./exhibitions.csv?raw";
 import featuredQuotesCSV from "./featured_quotes.csv?raw";
 import artistPointsJSON from "./artist_points_flat.json";
 
-import artistClusters from "./clusters/artist_clusters.json";
-import institutionClusters from "./clusters/institution_clusters.json";
-import artistClusterPositions from "./clusters/artist_cluster_positions.json";
-import institutionClusterPositions from "./clusters/institution_cluster_positions.json";
+import artistClusterSummary from "./clusters/artist_cluster_summary.json";
+import institutionClusterSummary from "./clusters/institution_cluster_summary.json";
 import exhibitionClusters from "./clusters/exhibition_clusters.json";
 
 // --- Derived constants ---
@@ -68,11 +66,9 @@ export const themePreviewTitles = computed(() =>
   themeRows.map((row) => row.word).filter(Boolean),
 );
 
-/** Precomputed cluster map data for ClusterSection (artist- vs institution-centric summaries + layouts). */
-export const artistClustersMap = artistClusters;
-export const institutionClustersMap = institutionClusters;
-export const artistPositionsMap = artistClusterPositions;
-export const institutionPositionsMap = institutionClusterPositions;
+/** Precomputed cluster summaries for ClusterSection (`numClusters` entries with `groups` + `artists`). */
+export const artistClustersMap = artistClusterSummary;
+export const institutionClustersMap = institutionClusterSummary;
 function buildExhibitionClustersMap() {
   const src =
     exhibitionClusters && !Array.isArray(exhibitionClusters)
