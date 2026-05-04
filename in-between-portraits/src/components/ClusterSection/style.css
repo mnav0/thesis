@@ -1,76 +1,8 @@
 .cluster-section-root {
+  box-sizing: border-box;
   width: 100%;
   background: #fff;
-}
-
-.cs-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 1.25rem 2rem;
-  margin-bottom: 1.25rem;
-}
-
-.cs-mode-toggle {
-  display: inline-flex;
-  border: 1px solid #111;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.cs-mode-btn {
-  margin: 0;
-  padding: 0.45rem 0.85rem;
-  border: none;
-  background: #fff;
-  font-family: inherit;
-  font-size: 0.875rem;
-  cursor: pointer;
-  border-right: 1px solid #111;
-}
-
-.cs-mode-btn:last-child {
-  border-right: none;
-}
-
-.cs-mode-btn--active {
-  background: #111;
-  color: #fff;
-}
-
-.cs-slider-block {
-  flex: 1;
-  min-width: 200px;
-  max-width: 22rem;
-}
-
-.cs-slider-block--disabled {
-  opacity: 0.65;
-}
-
-.cs-slider-label {
-  display: block;
-  font-size: 0.875rem;
-  margin-bottom: 0.35rem;
-  font-family: "Instrument Serif", serif;
-}
-
-.cs-slider {
-  display: block;
-  width: 100%;
-  margin: 0.25rem 0;
-}
-
-.cs-slider:disabled {
-  cursor: not-allowed;
-}
-
-.cs-slider-ticks {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.65rem;
-  color: #555;
-  margin-top: 0.15rem;
+  padding: 0.5rem;
 }
 
 .cluster-section-canvas {
@@ -156,6 +88,10 @@
   background: transparent;
 }
 
+/*
+ * Invisible measurement anchor for line endpoints; same visual as the original
+ * center ring when a hover highlights lines to this cluster (matches SVG line classes).
+ */
 .cs-center-dot {
   position: absolute;
   left: 0;
@@ -164,12 +100,24 @@
   height: 3px;
   box-sizing: border-box;
   transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  border: none;
   border-radius: 50%;
   background: transparent;
-  border: 1px solid #6a6a6a;
+  opacity: 0;
+  pointer-events: none;
   z-index: 2;
-  pointer-events: auto;
-  cursor: pointer;
+  transition:
+    opacity 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.cs-center-dot.cs-center-dot--visible {
+  border: 1px solid #6a6a6a;
+  background: transparent;
+  opacity: 1;
+  z-index: 15;
 }
 
 .cs-center-labels {
@@ -248,7 +196,7 @@
   transform: translateX(-50%);
   left: 50%;
   top: calc(100% + 2px);
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   line-height: 1;
   letter-spacing: 0.06em;
   padding: 1px 3px;

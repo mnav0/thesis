@@ -18,11 +18,7 @@ import {
   destroyAppScrollAnimations,
   initAppScrollAnimations,
 } from "./utils/scroll-app-animations.js";
-
-// Artist whose silhouette stands in for the generic "persona" actor in the
-// actors preview, the floating scroll element, and the persona section image.
-// Update this id (matches src/assets/artist-dots/<id>.svg) to swap the icon.
-const REPRESENTATIVE_ARTIST_ID = 18;
+import { REPRESENTATIVE_PERSONA_ARTIST_ID } from "./constants.js";
 
 const expandedCluster = ref(null);
 const expandedClusterGroupBy = ref(null);
@@ -197,7 +193,7 @@ onBeforeUnmount(() => {
           texture-preset="rightSoft"
           heading="Making art provides a way to <i>process</i>, <i>define</i>, and <i>express</i> complex identities."
         >
-          <ActorsPreview :persona-artist-id="REPRESENTATIVE_ARTIST_ID" />
+          <ActorsPreview :persona-artist-id="REPRESENTATIVE_PERSONA_ARTIST_ID" />
         </PageSection>
 
         <!-- Persona -->
@@ -215,7 +211,7 @@ onBeforeUnmount(() => {
                 class="aspect-square w-full max-w-[28rem] self-center opacity-0"
                 role="presentation"
               >
-                <ArtistDot :artist-id="REPRESENTATIVE_ARTIST_ID" />
+                <ArtistDot :artist-id="REPRESENTATIVE_PERSONA_ARTIST_ID" />
               </div>
             </div>
             <p class="col-span-12 md:row-start-3 md:self-end">
@@ -259,7 +255,7 @@ onBeforeUnmount(() => {
   </div>
 
   <div ref="floatingPersonaRef" class="floating-persona">
-    <ArtistDot :artist-id="REPRESENTATIVE_ARTIST_ID" />
+    <ArtistDot :artist-id="REPRESENTATIVE_PERSONA_ARTIST_ID" />
   </div>
 
   <div ref="exhibitionsLabelRef" class="exhibitions-bridge-label">

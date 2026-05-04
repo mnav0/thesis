@@ -10,6 +10,7 @@ import {
 import { artistsById, exhibitionEntryCount, exhibitionsById } from "../../data/index.js";
 import { DOT_SIZE_PX } from "../../constants.js";
 import ArtistDot from "../ArtistDot/index.vue";
+import ClusterSectionHeading from "../ClusterSectionHeading/index.vue";
 
 const props = defineProps({
   exhibitions: {
@@ -42,18 +43,23 @@ const CLUSTER_BOX_MIN_WIDTH = 150;
 const CLUSTER_BOX_MIN_HEIGHT = 170;
 const CLUSTER_BOX_PADDING = 18;
 const CLUSTER_LABEL_GAP = 10;
-const CLUSTER_KEYWORDS_TO_SHOW = 2;
+const CLUSTER_KEYWORDS_TO_SHOW = 1;
 const CLUSTER_SAFE_AREA_SCALE = 0.75;
 const EXHIBITION_GRID_EDGE = 0.07;
 const EXHIBITION_CLUSTER_SPREAD = 1.4;
 const PACK_FALLBACK_W = 960;
 const PACK_FALLBACK_H = 720;
 
+const CLUSTER_MODES = ["exhibitions", "artist", "institution"];
+
 const viewMode = ref(
-  ["exhibitions", "artist", "institution"].includes(props.initialViewMode)
-    ? props.initialViewMode
-    : "exhibitions",
+  CLUSTER_MODES.includes(props.initialViewMode) ? props.initialViewMode : "exhibitions",
 );
+
+function isArtistOrInstitutionMode() {
+  const m = viewMode.value;
+  return m === "artist" || m === "institution";
+}
 const selectedNIndex = ref(0);
 
 // --- mode + summary selection ---
@@ -73,12 +79,12 @@ const availableN = computed(() => {
   if (viewMode.value === "exhibitions") return [];
   const list = numClustersList.value;
   if (!list.length) return [];
-  return [...new Set(list.map((d) => d.n))].sort((a, b) => a - b);
+  return sortedDistinctNFromList(list);
 });
 
 const selectedN = computed(() => availableN.value[selectedNIndex.value] ?? 0);
 
-const sliderDisabled = computed(() => viewMode.value === "exhibitions");
+const showShuffle = computed(() => isArtistOrInstitutionMode());
 
 const normalizedExhibitionData = computed(() => {
   const src = props.exhibitions;
@@ -136,37 +142,65 @@ const currentClusterEntry = computed(() => {
   return numClustersList.value.find((e) => e.n === n) ?? null;
 });
 
-const lastClusterN = ref(null);
+function sortedDistinctNFromList(list) {
+  if (!Array.isArray(list) || !list.length) return [];
+  return [...new Set(list.map((d) => Number(d.n)).filter(Number.isFinite))].sort(
+    (a, b) => a - b,
+  );
+}
 
-watch(selectedN, (n) => {
-  if (viewMode.value !== "exhibitions") lastClusterN.value = n;
-});
+function summaryPropsForMode(mode) {
+  if (mode === "institution") return props.institutionData;
+  if (mode === "artist") return props.artistData;
+  return null;
+}
 
-watch(viewMode, () => {
-  nextTick(() => {
-    if (viewMode.value === "exhibitions") return;
-    const vals = availableN.value;
-    if (!vals.length) return;
-    const want = lastClusterN.value;
-    if (want != null && vals.includes(want)) {
-      selectedNIndex.value = vals.indexOf(want);
-      return;
+function applySelectedIndexForTargetN(mode, targetN) {
+  if (mode === "exhibitions") return;
+  const summary = summaryPropsForMode(mode);
+  const list = Array.isArray(summary?.numClusters) ? summary.numClusters : [];
+  const vals = sortedDistinctNFromList(list);
+  if (!vals.length) return;
+  if (targetN != null && vals.includes(targetN)) {
+    selectedNIndex.value = vals.indexOf(targetN);
+    return;
+  }
+  if (targetN != null) {
+    const lower = [...vals].filter((v) => v <= targetN).pop();
+    const pick = lower ?? vals[0];
+    selectedNIndex.value = vals.indexOf(pick);
+    return;
+  }
+  selectedNIndex.value = Math.min(
+    selectedNIndex.value,
+    Math.max(0, vals.length - 1),
+  );
+}
+
+function setViewMode(mode) {
+  if (!CLUSTER_MODES.includes(mode)) return;
+  if (mode === viewMode.value) return;
+
+  const prevMode = viewMode.value;
+  let targetN = null;
+  if (mode !== "exhibitions") {
+    if (prevMode === "exhibitions") {
+      targetN = exhibitionEntryCount;
+    } else {
+      targetN = selectedN.value;
     }
-    if (want != null) {
-      const lower = [...vals].filter((v) => v <= want).pop();
-      const pick = lower ?? vals[0];
-      selectedNIndex.value = vals.indexOf(pick);
-      return;
-    }
-    selectedNIndex.value = Math.min(
-      selectedNIndex.value,
-      Math.max(0, vals.length - 1),
-    );
-  });
-});
+  }
 
-function canvasPaddingPx() {
-  return CANVAS_PADDING;
+  viewMode.value = mode;
+
+  if (mode === "exhibitions") return;
+  applySelectedIndexForTargetN(mode, targetN);
+}
+
+function shuffleN() {
+  const vals = availableN.value;
+  if (!vals.length || viewMode.value === "exhibitions") return;
+  selectedNIndex.value = (selectedNIndex.value + 1) % vals.length;
 }
 
 function clamp01(v, lo, hi) {
@@ -175,7 +209,7 @@ function clamp01(v, lo, hi) {
 
 // Keeps norm coords on-screen; artist/institution uses a tighter safe rect.
 function visibleNormBounds() {
-  const pad = canvasPaddingPx();
+  const pad = CANVAS_PADDING;
   const w = Math.max(1, svgSize.value.width);
   const h = Math.max(1, svgSize.value.height);
   const innerW = Math.max(1, w - pad * 2);
@@ -207,7 +241,7 @@ function visibleNormBounds() {
 }
 
 function normToCanvas(x, y) {
-  const pad = canvasPaddingPx();
+  const pad = CANVAS_PADDING;
   const { width, height } = svgSize.value;
   return {
     x: pad + x * (width - pad * 2),
@@ -428,7 +462,7 @@ function summaryArtistToExclusiveItem(a) {
 }
 
 const clusterSharedArtistItems = computed(() => {
-  if (viewMode.value !== "artist" && viewMode.value !== "institution") return [];
+  if (!isArtistOrInstitutionMode()) return [];
   const entry = currentClusterEntry.value;
   const artists = entry?.artists ?? [];
   return artists
@@ -449,13 +483,13 @@ const clusterSharedArtistItems = computed(() => {
     }));
 });
 
-const surfaceSharedArtistItems = computed(() => {
-  if (viewMode.value === "exhibitions") return sharedArtistItems.value;
-  if (viewMode.value === "artist" || viewMode.value === "institution") {
-    return clusterSharedArtistItems.value;
-  }
-  return [];
-});
+const surfaceSharedArtistItems = computed(() =>
+  viewMode.value === "exhibitions"
+    ? sharedArtistItems.value
+    : isArtistOrInstitutionMode()
+      ? clusterSharedArtistItems.value
+      : [],
+);
 
 // --- layout: exhibition grid vs summary groups + exclusive ring items ---
 const layoutGroups = computed(() => {
@@ -556,7 +590,7 @@ const layoutGroupsList = computed(() =>
 );
 
 function getClusterCanvasPos(group) {
-  const pad = canvasPaddingPx();
+  const pad = CANVAS_PADDING;
   if (
     !group ||
     typeof group.normX !== "number" ||
@@ -686,7 +720,7 @@ const pointDetailsByKey = computed(() => {
         artistId: artist.artistId,
       };
     }
-  } else if (viewMode.value === "artist" || viewMode.value === "institution") {
+  } else if (isArtistOrInstitutionMode()) {
     for (const artist of clusterSharedArtistItems.value) {
       out[`shared-${artist.artistId}`] = {
         clusterIds: (artist.clusterIds ?? []).map((id) => Number(id)),
@@ -717,8 +751,7 @@ const activeClusterIds = computed(() => {
   if (d) {
     if (Array.isArray(d.clusterIds)) {
       const primaryId = Number(d.primaryCluster ?? d.clusterId);
-      const filterPrimary =
-        viewMode.value === "artist" || viewMode.value === "institution";
+      const filterPrimary = isArtistOrInstitutionMode();
       for (const id of d.clusterIds) {
         const n = Number(id);
         if (filterPrimary) {
@@ -735,7 +768,7 @@ const activeClusterIds = computed(() => {
           (a) => Number(a.artistId) === aid,
         );
         for (const id of shared?.exhibitionIds ?? []) ids.add(Number(id));
-      } else if (viewMode.value === "artist" || viewMode.value === "institution") {
+      } else if (isArtistOrInstitutionMode()) {
         const shared = clusterSharedArtistItems.value.find(
           (a) => Number(a.artistId) === aid,
         );
@@ -746,6 +779,10 @@ const activeClusterIds = computed(() => {
   if (hoveredClusterId.value != null) ids.add(Number(hoveredClusterId.value));
   return ids;
 });
+
+const hasActiveHoverContext = computed(
+  () => activeClusterIds.value.size > 0 || hoveredPoint.value != null,
+);
 
 const allLines = computed(() => {
   const centers = clusterCenterPositions.value;
@@ -867,7 +904,7 @@ const allLines = computed(() => {
     }
   }
 
-  if (viewMode.value === "artist" || viewMode.value === "institution") {
+  if (isArtistOrInstitutionMode()) {
     const primaryOf = (a) => Number(a.primaryCluster);
     for (const artist of clusterSharedArtistItems.value) {
       const pk = `shared-${artist.artistId}`;
@@ -1046,24 +1083,10 @@ const secondaryNonExhibitionLineKeys = computed(() => {
 });
 
 const activeLineKeys = computed(() => {
-  if (viewMode.value === "exhibitions" && hasActiveHoverContext.value) {
-    return directExhibitionLineKeys.value;
-  }
-  if (viewMode.value !== "exhibitions" && hasActiveHoverContext.value) {
-    return directNonExhibitionLineKeys.value;
-  }
-  if (!activeClusterIds.value.size) return new Set();
-  return new Set(
-    allLines.value
-      .filter((line) => {
-        const sourceActive = activeClusterIds.value.has(Number(line.sourceClusterId));
-        const targetActive =
-          line.targetClusterId != null &&
-          activeClusterIds.value.has(Number(line.targetClusterId));
-        return sourceActive || targetActive;
-      })
-      .map((line) => line.key),
-  );
+  if (!hasActiveHoverContext.value) return new Set();
+  return viewMode.value === "exhibitions"
+    ? directExhibitionLineKeys.value
+    : directNonExhibitionLineKeys.value;
 });
 
 const activePointKeys = computed(() => {
@@ -1082,9 +1105,48 @@ const activePointKeys = computed(() => {
   return keys;
 });
 
-const hasActiveHoverContext = computed(
-  () => activeClusterIds.value.size > 0 || hoveredPoint.value != null,
-);
+/**
+ * Cluster centers that should show the anchor dot: same lines as the SVG
+ * (`cluster-line--active` or `cluster-line--secondary`).
+ */
+const clusterIdsWithVisibleHoverLines = computed(() => {
+  const ids = new Set();
+  if (!hasActiveHoverContext.value) return [];
+
+  const isEx = viewMode.value === "exhibitions";
+  let anyHighlightedLine = false;
+
+  for (const line of allLines.value) {
+    const isActive = activeLineKeys.value.has(line.key);
+    const isSecondary = isEx
+      ? secondaryExhibitionLineKeys.value.has(line.key)
+      : secondaryNonExhibitionLineKeys.value.has(line.key);
+    if (!isActive && !isSecondary) continue;
+
+    anyHighlightedLine = true;
+    const s = Number(line.sourceClusterId);
+    const t = Number(line.targetClusterId);
+    if (Number.isFinite(s)) ids.add(s);
+    if (Number.isFinite(t)) ids.add(t);
+
+    if (line.kind === "point-point" && line.targetPointKey) {
+      const d = pointDetailsByKey.value[line.targetPointKey];
+      if (d?.clusterId != null) ids.add(Number(d.clusterId));
+      if (Array.isArray(d?.clusterIds)) {
+        for (const c of d.clusterIds) {
+          const n = Number(c);
+          if (Number.isFinite(n)) ids.add(n);
+        }
+      }
+    }
+  }
+
+  if (anyHighlightedLine && ids.size === 0) {
+    for (const id of activeClusterIds.value) ids.add(Number(id));
+  }
+
+  return Array.from(ids);
+});
 
 function isClusterActive(clusterId) {
   return activeClusterIds.value.has(Number(clusterId));
@@ -1311,17 +1373,13 @@ function handleCenterClick(group) {
   });
 }
 
-function displayLabelLine(i, group) {
-  const raw = (group.centerLabels ?? [])[i];
-  if (raw == null || raw === "") return "";
-  return String(raw).toUpperCase();
-}
-
 function displayLabelLines(group) {
   const lines = [];
+  const labels = group.centerLabels ?? [];
   for (let i = 0; i < CLUSTER_KEYWORDS_TO_SHOW; i += 1) {
-    const line = displayLabelLine(i, group);
-    if (line) lines.push(line);
+    const raw = labels[i];
+    if (raw == null || raw === "") continue;
+    lines.push(String(raw).toUpperCase());
   }
   return lines;
 }
@@ -1329,50 +1387,12 @@ function displayLabelLines(group) {
 
 <template>
   <div class="cluster-section-root">
-    <div class="cs-controls">
-      <div class="cs-mode-toggle">
-        <button
-          type="button"
-          :class="['cs-mode-btn', { 'cs-mode-btn--active': viewMode === 'exhibitions' }]"
-          @click="viewMode = 'exhibitions'"
-        >
-          Exhibitions
-        </button>
-        <button
-          type="button"
-          :class="['cs-mode-btn', { 'cs-mode-btn--active': viewMode === 'artist' }]"
-          @click="viewMode = 'artist'"
-        >
-          Artists
-        </button>
-        <button
-          type="button"
-          :class="['cs-mode-btn', { 'cs-mode-btn--active': viewMode === 'institution' }]"
-          @click="viewMode = 'institution'"
-        >
-          Institutions
-        </button>
-      </div>
-
-      <div
-        class="cs-slider-block"
-        :class="{ 'cs-slider-block--disabled': sliderDisabled }"
-      >
-        <span class="cs-slider-label">n = {{ sliderDisabled ? '—' : selectedN }}</span>
-        <input
-          type="range"
-          class="cs-slider"
-          :disabled="sliderDisabled"
-          :min="0"
-          :max="Math.max(0, availableN.length - 1)"
-          :step="1"
-          v-model.number="selectedNIndex"
-        />
-        <div v-if="!sliderDisabled" class="cs-slider-ticks">
-          <span v-for="n in availableN" :key="n" class="cs-tick">{{ n }}</span>
-        </div>
-      </div>
-    </div>
+    <ClusterSectionHeading
+      :view-mode="viewMode"
+      :show-shuffle="showShuffle"
+      @change-view-mode="setViewMode"
+      @shuffle="shuffleN"
+    />
 
     <div
       ref="sectionRef"
@@ -1426,9 +1446,13 @@ function displayLabelLines(group) {
           />
           <div
             class="cs-center-dot"
+            :class="{
+              'cs-center-dot--visible': clusterIdsWithVisibleHoverLines.includes(
+                Number(group.clusterId),
+              ),
+            }"
             :data-cluster-center="group.clusterId"
             aria-hidden="true"
-            @click.stop="handleCenterClick(group)"
           />
         </div>
 

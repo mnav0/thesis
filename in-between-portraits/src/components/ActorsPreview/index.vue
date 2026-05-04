@@ -1,9 +1,13 @@
 <script setup>
+import { REPRESENTATIVE_PERSONA_ARTIST_ID } from "../../constants.js";
 import { publicImgSrc } from "../../utils/public-img-src.js";
 import ArtistDot from "../ArtistDot/index.vue";
 
 defineProps({
-  personaArtistId: { type: [String, Number], default: 18 },
+  personaArtistId: {
+    type: [String, Number],
+    default: REPRESENTATIVE_PERSONA_ARTIST_ID,
+  },
 });
 
 const actors = [
