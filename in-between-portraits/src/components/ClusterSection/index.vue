@@ -102,7 +102,10 @@ const availableN = computed(() => {
 
 const selectedN = computed(() => availableN.value[selectedNIndex.value] ?? 0);
 
-const showShuffle = computed(() => isArtistOrInstitutionMode());
+const showNAdjustControls = computed(() => isArtistOrInstitutionMode());
+const displayedGroupCount = computed(() =>
+  viewMode.value === "exhibitions" ? exhibitionEntryCount : selectedN.value,
+);
 
 const artMode = ref(false);
 const artModeEpoch = ref(0);
@@ -238,10 +241,16 @@ function setViewMode(mode) {
   applySelectedIndexForTargetN(mode, targetN);
 }
 
-function shuffleN() {
+function decrementN() {
   const vals = availableN.value;
   if (!vals.length || viewMode.value === "exhibitions") return;
-  selectedNIndex.value = (selectedNIndex.value + 1) % vals.length;
+  selectedNIndex.value = Math.max(0, selectedNIndex.value - 1);
+}
+
+function incrementN() {
+  const vals = availableN.value;
+  if (!vals.length || viewMode.value === "exhibitions") return;
+  selectedNIndex.value = Math.min(vals.length - 1, selectedNIndex.value + 1);
 }
 
 function clamp01(v, lo, hi) {
@@ -1326,10 +1335,12 @@ function displayLabelLines(group) {
   <div class="cluster-section-root">
     <ClusterSectionHeading
       :view-mode="viewMode"
-      :show-shuffle="showShuffle"
+      :show-n-adjust-controls="showNAdjustControls"
       :art-mode="artMode"
+      :group-count="displayedGroupCount"
       @change-view-mode="setViewMode"
-      @shuffle="shuffleN"
+      @decrement-n="decrementN"
+      @increment-n="incrementN"
     />
 
     <div

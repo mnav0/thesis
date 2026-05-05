@@ -9,7 +9,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  showShuffle: {
+  showNAdjustControls: {
     type: Boolean,
     default: false,
   },
@@ -17,9 +17,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  groupCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
-const emit = defineEmits(["change-view-mode", "shuffle"]);
+const emit = defineEmits(["change-view-mode", "decrement-n", "increment-n"]);
 
 const modes = [
   { key: "exhibitions", label: "Exhibition", icon: "exhibition" },
@@ -79,14 +83,27 @@ function iconMaskStyle(iconUrl) {
             <span class="cluster-heading__toggle-label">{{ mode.label }}</span>
           </button>
         </div>
-        <div v-if="showShuffle" class="cluster-heading__shuffle-cluster">
+        <div class="cluster-heading__group-count-controls">
           <button
+            v-if="showNAdjustControls"
             type="button"
-            class="cluster-heading__shuffle-btn label-text"
-            aria-label="Shuffle groups"
-            @click="emit('shuffle')"
+            class="cluster-heading__group-count-step-btn label-text"
+            aria-label="Decrease groups"
+            @click="emit('decrement-n')"
           >
-            Shuffle groups
+            -
+          </button>
+          <div class="cluster-heading__group-count-value label-text" aria-live="polite">
+            {{ groupCount }} groups
+          </div>
+          <button
+            v-if="showNAdjustControls"
+            type="button"
+            class="cluster-heading__group-count-step-btn label-text"
+            aria-label="Increase groups"
+            @click="emit('increment-n')"
+          >
+            +
           </button>
         </div>
       </div>
