@@ -1,0 +1,30 @@
+.cs-point-mark--art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Fixed width, intrinsic height — no cropping to a square. */
+.cs-point-mark__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.cs-point-mark__img--loaded {
+  opacity: 1;
+}
+
+/* Explicit square: parent height is auto, so % height does not work; aspect-ratio does. */
+.cs-point-fallback-rect {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border: none;
+  background: #111;
+  border-radius: 1px;
+}

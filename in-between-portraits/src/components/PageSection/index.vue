@@ -39,17 +39,16 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  /** Extra space between heading block and body when layout is not built-in split */
   stackedBodyGap: {
     type: String,
     default: "default",
     validator: (v) => ["default", "relaxed"].includes(v),
   },
-  /**
-   * When layout is stacked, use full 12-column width instead of the default 9-column cap.
-   * Intended for occasional sections (e.g. cluster grid) that need edge-to-edge content.
-   */
   stackedFullWidth: {
+    type: Boolean,
+    default: false,
+  },
+  stackedFillHeight: {
     type: Boolean,
     default: false,
   },
@@ -73,10 +72,14 @@ const textures = computed(
     SECTION_TEXTURE_PRESETS[DEFAULT_TEXTURE_PRESET],
 );
 
-const sectionClasses = computed(() => [
-  "page-section relative overflow-hidden",
-  isLight.value ? "page-section--light" : "page-section--dark",
-]);
+const sectionClasses = computed(() => {
+  const classes = [
+    "page-section relative overflow-hidden",
+    isLight.value ? "page-section--light" : "page-section--dark",
+  ];
+  if (props.stackedFillHeight) classes.push("page-section--viz-fill");
+  return classes;
+});
 
 const textureSrc = publicImgSrc("texture.svg");
 
@@ -87,16 +90,36 @@ const backgroundStyles = computed(() => ({
   backgroundSize: "cover",
 }));
 
-const stackedBodyClass = computed(() =>
-  props.stackedBodyGap === "relaxed"
-    ? "page-section-body page-section-body--stacked page-section-body--relaxed"
-    : "page-section-body page-section-body--stacked",
-);
+const stackedBodyClass = computed(() => {
+  const base =
+    props.stackedBodyGap === "relaxed"
+      ? "page-section-body page-section-body--stacked page-section-body--relaxed"
+      : "page-section-body page-section-body--stacked";
+  return props.stackedFillHeight ? `${base} page-section-body--stacked-fill` : base;
+});
 
-const stackedInnerColClass = computed(() =>
-  props.stackedFullWidth
-    ? "col-span-12 flex h-full flex-col"
-    : "col-span-12 flex h-full flex-col md:col-span-9 md:col-start-1",
+const stackedInnerColClass = computed(() => {
+  const base = props.stackedFullWidth
+    ? "col-span-12 flex h-full min-h-0 flex-col"
+    : "col-span-12 flex h-full min-h-0 flex-col md:col-span-9 md:col-start-1";
+  return props.stackedFillHeight ? `${base} overflow-visible` : base;
+});
+
+const stackedOuterGridClass = computed(() => {
+  const base = "grid grid-cols-12 gap-x-2 md:gap-x-4";
+  return props.stackedFillHeight
+    ? `${base} min-h-0 flex-1 grid-rows-[minmax(0,1fr)] overflow-visible`
+    : base;
+});
+
+const pageSectionContentOverflowClass = computed(() => {
+  if (props.scrollContent) return "overflow-y-auto";
+  if (props.stackedFillHeight) return "overflow-visible";
+  return "overflow-hidden";
+});
+
+const pageSectionContentHorizontalPadClass = computed(
+  () => `px-4${props.stackedFillHeight && props.stackedFullWidth ? "" : " md:px-8"}`,
 );
 
 const sectionEl = ref(null);
@@ -124,8 +147,8 @@ defineExpose({ sectionEl });
     </transition>
 
     <div
-      class="page-section-content relative z-10 mx-auto w-full max-w-[1600px] px-4 py-20 md:px-8 md:py-28"
-      :class="scrollContent ? 'overflow-y-auto' : 'overflow-hidden'"
+      class="page-section-content relative z-10 mx-auto w-full max-w-[1600px] pt-20 pb-8 md:pt-28 md:pb-8"
+      :class="[pageSectionContentOverflowClass, pageSectionContentHorizontalPadClass]"
     >
       <div
         v-if="usesBuiltInSplitHeading"
@@ -147,7 +170,7 @@ defineExpose({ sectionEl });
         </div>
       </div>
       <template v-else>
-        <div v-if="layout === 'stacked'" class="grid grid-cols-12 gap-x-2 md:gap-x-4">
+        <div v-if="layout === 'stacked'" :class="stackedOuterGridClass">
           <div :class="stackedInnerColClass">
             <slot name="heading">
               <div v-if="hasHeadingContent" class="page-section-heading-block">

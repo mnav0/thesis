@@ -240,7 +240,13 @@ onBeforeUnmount(() => {
         </PageSection>
 
         <!-- Text-embedding cluster visualization -->
-        <PageSection ref="clustersRef" tone="light" layout="stacked" stacked-full-width>
+        <PageSection
+          ref="clustersRef"
+          tone="light"
+          layout="stacked"
+          stacked-full-width
+          stacked-fill-height
+        >
           <ClusterSection
             :exhibitions="exhibitionClustersMap"
             :artist-data="artistClustersMap"

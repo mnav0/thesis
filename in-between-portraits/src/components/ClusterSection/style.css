@@ -1,20 +1,47 @@
 .cluster-section-root {
   box-sizing: border-box;
+  position: relative;
   width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   background: #fff;
-  padding: 0.5rem;
+  padding: 0 0 0.5rem;
+}
+
+.cluster-section__art-mode-btn {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 20;
+  margin: 0;
+  border: 0.25px solid #111;
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  background-image: url("/texture.svg");
+  background-repeat: repeat;
+  background-size: auto;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  text-transform: none;
+}
+
+.cluster-section__art-mode-btn--active {
+  background-image: none;
+  background-color: #111;
+  color: #fff;
 }
 
 .cluster-section-canvas {
   position: relative;
   width: 100%;
-  height: 600px;
-  min-height: 650px;
-  overflow-x: hidden;
-  overflow-y: visible;
+  flex: 1 1 auto;
+  min-height: max(650px, calc(100svh - 22rem));
+  overflow: visible;
 }
 
-/* Single root per cluster so nested v-for keeps parent `group` in scope (Vue fragment quirk). */
 .cs-cluster-group {
   position: relative;
   width: 0;
@@ -88,10 +115,6 @@
   background: transparent;
 }
 
-/*
- * Invisible measurement anchor for line endpoints; same visual as the original
- * center ring when a hover highlights lines to this cluster (matches SVG line classes).
- */
 .cs-center-dot {
   position: absolute;
   left: 0;
@@ -122,14 +145,12 @@
 
 .cs-center-labels {
   position: absolute;
-  z-index: 1000;
+  z-index: 8000;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  min-width: min(20rem, 55vw);
-  max-width: min(22rem, 58vw);
   text-align: center;
   pointer-events: none;
 }
@@ -157,6 +178,24 @@
   transition: opacity 0.2s;
 }
 
+.cs-point--art {
+  width: var(--dot-size);
+  height: auto;
+  overflow: visible;
+}
+
+.cs-point--art.cs-point--dimmed {
+  z-index: 3;
+}
+
+.cs-point--art.cs-point--active-cluster:not(.cs-point--dimmed):not(.cs-point--hovered) {
+  z-index: 40;
+}
+
+.cs-point--art.cs-point--hovered {
+  z-index: 600;
+}
+
 .cs-point :deep(.artist-dot) {
   transition: filter 0.2s;
 }
@@ -167,7 +206,7 @@
 }
 
 .cs-point:hover {
-  z-index: 1100;
+  z-index: 70;
 }
 
 .cs-point--shared {
@@ -175,12 +214,12 @@
 }
 
 .cs-point--active-cluster :deep(.artist-dot) {
-  filter: drop-shadow(0 0 0.5px rgba(17, 17, 17, 0.5))
+  filter: drop-shadow(0 0 0.5px rgba(17, 17, 17, 0.5)),
     drop-shadow(0 0 0.5px rgba(17, 17, 17, 0.5));
 }
 
 .cs-point--hovered {
-  z-index: 1100;
+  z-index: 70;
 }
 
 .cs-point--hovered :deep(.artist-dot) {
@@ -189,6 +228,15 @@
 
 .cs-point--dimmed :deep(.artist-dot) path {
   fill: #dddddd;
+}
+
+.cs-point--dimmed :deep(.cs-point-mark__img--loaded) {
+  opacity: 0.12;
+  filter: saturate(0.4);
+}
+
+.cs-point--dimmed :deep(.cs-point-mark__img:not(.cs-point-mark__img--loaded)) {
+  opacity: 0.06;
 }
 
 .cs-point-tag {
@@ -224,7 +272,7 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s;
-  z-index: 10;
+  z-index: 25;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 

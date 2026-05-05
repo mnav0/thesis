@@ -5,6 +5,7 @@ import {
   EXHIBITIONS_VIZ_CONFIG,
 } from "../constants/exhibitions-viz.js";
 import { artistDotInlineSvg } from "./artist-dot.js";
+import { isClusterArtModeActive } from "./cluster-art-mode-flag.js";
 
 const SMOOTH_WRAPPER_ID = "#smooth-wrapper";
 const SMOOTH_CONTENT_ID = "#smooth-content";
@@ -906,6 +907,13 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
   }
 
   function applyProgress(progress) {
+    if (isClusterArtModeActive()) {
+      clearOverlayDots();
+      pairs = [];
+      resetOriginalDots();
+      return;
+    }
+
     const p = clamp01(progress);
     if (!pairs.length) {
       resetOriginalDots();
@@ -934,6 +942,11 @@ function setupSankeyToClusterDotTravel({ sankeySectionEl, clusterSectionEl }) {
   function rebuild(progress = 0) {
     clearOverlayDots();
     resetOriginalDots();
+    if (isClusterArtModeActive()) {
+      pairs = [];
+      applyProgress(progress);
+      return;
+    }
     pairs = collectPairs();
     applyProgress(progress);
   }

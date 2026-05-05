@@ -12,6 +12,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  artMode: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["change-view-mode", "shuffle"]);
@@ -69,29 +73,44 @@ function iconMaskStyle(iconUrl) {
           <button
             type="button"
             class="cluster-heading__shuffle-btn label-text"
-            aria-label="Shuffle to next cluster count"
+            aria-label="Shuffle groups"
             @click="emit('shuffle')"
           >
-            Shuffle
+            Shuffle groups
           </button>
         </div>
       </div>
       <p class="cluster-heading__subtitle">
         Artists are grouped around central themes extracted from these source texts.
+        <br />
+        Select points and groups to view more details.
       </p>
     </div>
 
     <div class="cluster-heading__key">
       <div class="cluster-heading__key-row">
         <span class="cluster-heading__key-marker cluster-heading__key-marker--artist">
-          <span class="cluster-heading__key-persona-dot">
-            <ArtistDot :artist-id="REPRESENTATIVE_PERSONA_ARTIST_ID" />
-          </span>
-          <span class="cluster-heading__key-initials">WT</span>
+          <template v-if="artMode">
+            <img
+              class="cluster-heading__key-artwork"
+              :src="publicImgSrc('artwork.svg')"
+              alt=""
+              width="28"
+              height="24"
+            />
+          </template>
+          <template v-else>
+            <span class="cluster-heading__key-persona-dot">
+              <ArtistDot :artist-id="REPRESENTATIVE_PERSONA_ARTIST_ID" />
+            </span>
+            <span class="cluster-heading__key-initials">WT</span>
+          </template>
         </span>
         <span class="cluster-heading__key-text">
           <span class="cluster-heading__key-equals">=</span>
-          <span class="cluster-heading__key-copy">artist + initials</span>
+          <span class="cluster-heading__key-copy">{{
+            artMode ? "artist + work" : "artist + initials"
+          }}</span>
         </span>
       </div>
       <div class="cluster-heading__key-row">
@@ -111,7 +130,7 @@ function iconMaskStyle(iconUrl) {
         </span>
         <span class="cluster-heading__key-text">
           <span class="cluster-heading__key-equals">=</span>
-          <span class="cluster-heading__key-copy">group anchor + theme keywords</span>
+          <span class="cluster-heading__key-copy">group anchor + keywords</span>
         </span>
       </div>
       <div class="cluster-heading__key-row">

@@ -1,4 +1,5 @@
 .cluster-heading {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -15,7 +16,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.75rem;
 }
 
 .cluster-heading__group-label {
@@ -43,7 +44,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   padding: 0.75rem 1rem;
   border: 1px solid #111;
   background: #fff;
@@ -93,7 +94,6 @@
 .cluster-heading__shuffle-cluster {
   display: inline-flex;
   align-items: center;
-  margin-left: 1rem;
   gap: 0.75rem;
   flex-shrink: 0;
 }
@@ -125,7 +125,7 @@
   border: 0.25px solid #111;
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(12.5rem, 12.5rem));
+  grid-template-columns: 8rem 12.5rem;
   justify-content: space-between;
   column-gap: 2rem;
   row-gap: 0.85rem;
@@ -136,7 +136,7 @@
   align-items: flex-start;
   gap: 0.5rem;
   min-height: 1.7rem;
-  width: 12rem;
+  min-width: 10rem;
 }
 
 .cluster-heading__key-text {
@@ -168,7 +168,7 @@
   align-items: center;
   justify-content: center;
   width: 2.25rem;
-  padding-top: 0.14rem;
+  padding-top: 0.2rem;
   flex: 0 0 auto;
 }
 
@@ -183,6 +183,14 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.26rem;
+}
+
+.cluster-heading__key-artwork {
+  width: 1.5rem;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 .cluster-heading__key-persona-dot {
@@ -235,12 +243,12 @@
 }
 
 .cluster-heading__key-box {
-  width: 1.35rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.65rem;
   border: 0.25px solid #111;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .cluster-heading {
     flex-direction: column;
     align-items: stretch;
