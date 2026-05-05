@@ -48,6 +48,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  /**
+   * headings stay in the former md:col-span-9 band while body is full width
+   */
+  stackedNarrowHeading: {
+    type: Boolean,
+    default: false,
+  },
   stackedFillHeight: {
     type: Boolean,
     default: false,
@@ -112,6 +119,10 @@ const stackedOuterGridClass = computed(() => {
     : base;
 });
 
+const stackedSplitHeadingBody = computed(
+  () => props.layout === "stacked" && props.stackedFullWidth && props.stackedNarrowHeading,
+);
+
 const pageSectionContentOverflowClass = computed(() => {
   if (props.scrollContent) return "overflow-y-auto";
   if (props.stackedFillHeight) return "overflow-visible";
@@ -171,7 +182,30 @@ defineExpose({ sectionEl });
       </div>
       <template v-else>
         <div v-if="layout === 'stacked'" :class="stackedOuterGridClass">
-          <div :class="stackedInnerColClass">
+          <template v-if="stackedSplitHeadingBody">
+            <div class="col-span-12 md:col-span-9 md:col-start-1">
+              <slot name="heading">
+                <div v-if="hasHeadingContent" class="page-section-heading-block">
+                  <h2
+                    v-if="resolvedHeadingHtml"
+                    class="page-section-heading"
+                    v-html="resolvedHeadingHtml"
+                  ></h2>
+                  <h3
+                    v-if="resolvedSubheadingHtml"
+                    class="page-section-subheading"
+                    v-html="resolvedSubheadingHtml"
+                  ></h3>
+                </div>
+              </slot>
+            </div>
+            <div class="col-span-12 flex h-full min-h-0 min-w-0 flex-col">
+              <div :class="stackedBodyClass">
+                <slot />
+              </div>
+            </div>
+          </template>
+          <div v-else :class="stackedInnerColClass">
             <slot name="heading">
               <div v-if="hasHeadingContent" class="page-section-heading-block">
                 <h2

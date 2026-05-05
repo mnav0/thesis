@@ -518,11 +518,13 @@ function setupExhibitionsLabel({
     const artistLabelRects = labelNodes
       .filter((node) => node.getAttribute("text-anchor") === "start")
       .map((node) => node.getBoundingClientRect());
+      console.log(artistLabelRects);
 
     if (!exhibitionLabelRects.length || !artistLabelRects.length) return null;
 
     const exhibitionRight = Math.max(...exhibitionLabelRects.map((rect) => rect.right));
     const artistLeft = Math.min(...artistLabelRects.map((rect) => rect.left));
+    console.log(artistLeft);
     return { exhibitionRight, artistLeft };
   }
 
@@ -616,7 +618,22 @@ function setupExhibitionsLabel({
     gsap.set(artistsEl, { opacity: 0 });
   }
 
-  ScrollTrigger.create({
+  function syncExhibitionsLabelToScrollPosition() {
+    if (stSankey?.isActive) {
+      applyProgress(stSankey.progress);
+    } else if (stStart?.isActive) {
+      setStartAnchorState(gsap.utils.clamp(0, 1, stStart.progress / 0.25));
+    } else {
+      applyProgress(0);
+    }
+  }
+
+  let stStart = null;
+  let stSankey = null;
+
+  stStart = ScrollTrigger.create({
+    id: "exhibitions-bridge-start",
+    invalidateOnRefresh: true,
     trigger: startAnchorEl,
     start: "top bottom",
     endTrigger: sankeySectionEl,
@@ -627,7 +644,9 @@ function setupExhibitionsLabel({
     onLeaveBack: () => gsap.set(labelEl, { opacity: 0 }),
   });
 
-  ScrollTrigger.create({
+  stSankey = ScrollTrigger.create({
+    id: "exhibitions-bridge-sankey",
+    invalidateOnRefresh: true,
     trigger: sankeySectionEl,
     start: `top bottom-=${EXHIBITIONS_SCROLL_CONFIG.timelineToSankey.startNearBottomPx}`,
     endTrigger: sankeySectionEl,
@@ -639,7 +658,10 @@ function setupExhibitionsLabel({
     onEnterBack: () => applyProgress(1),
   });
 
-  applyProgress(0);
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh();
+    syncExhibitionsLabelToScrollPosition();
+  });
 }
 
 function clamp01(v) {
@@ -1098,6 +1120,10 @@ export function initAppScrollAnimations({
   setupSankeyToClusterDotTravel({
     sankeySectionEl,
     clusterSectionEl,
+  });
+
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh();
   });
 
   return smoother;

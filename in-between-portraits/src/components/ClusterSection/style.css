@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   background: #fff;
-  padding: 0 0 0.5rem;
+  padding: 1rem;
 }
 
 .cluster-section__art-mode-btn {

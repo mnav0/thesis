@@ -1,12 +1,15 @@
+/** Horizontal inset (px) for timeline baseline + Sankey plot; left and right stay equal so both views align. */
+export const EXHIBITIONS_INNER_MARGIN_X_PX = 236;
+
 /** Shared geometry + styling config for exhibition timeline/sankey visuals. */
 export const EXHIBITIONS_VIZ_CONFIG = {
   layout: {
-    /** Same inset as Sankey `extent` / inner plot band. */
+    /** Same inset as Sankey `extent` / inner plot band (symmetric; matches section padding visually). */
     margin: {
       top: 12,
-      right: 220,
+      right: EXHIBITIONS_INNER_MARGIN_X_PX,
       bottom: 12,
-      left: 236,
+      left: EXHIBITIONS_INNER_MARGIN_X_PX,
     },
     /**
      * Sankey node column thickness (`nodeWidth`) and timeline markers (square w × h).

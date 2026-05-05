@@ -1,7 +1,7 @@
 export const FONT_SANS = '"Kosugi", sans-serif';
 
-/** Diameter in px for artist dots/points used across intro, clusters, sankey, and travel overlay. */
-export const DOT_SIZE_PX = 14;
+/** Diameter in px for artist dots/points used across clusters, sankey, and travel overlay. */
+export const DOT_SIZE_PX = 18;
 
 /** Cluster art mode: thumbnail / hit box diameter relative to `DOT_SIZE_PX`. */
 export const CLUSTER_ART_MODE_DOT_SCALE = 4;

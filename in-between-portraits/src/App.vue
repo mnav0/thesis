@@ -19,6 +19,7 @@ import {
   initAppScrollAnimations,
 } from "./utils/scroll-app-animations.js";
 import { REPRESENTATIVE_PERSONA_ARTIST_ID } from "./constants.js";
+import { EXHIBITIONS_INNER_MARGIN_X_PX } from "./constants/exhibitions-viz.js";
 
 const expandedCluster = ref(null);
 const expandedClusterGroupBy = ref(null);
@@ -226,6 +227,8 @@ onBeforeUnmount(() => {
           ref="timelineRef"
           tone="dark"
           layout="stacked"
+          stacked-full-width
+          stacked-narrow-heading
           heading="for artists selected from modern exhibitions about identity?"
           subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
@@ -234,7 +237,7 @@ onBeforeUnmount(() => {
         </PageSection>
 
         <!-- Sankey section -->
-        <PageSection ref="sankeyRef" tone="dark" layout="stacked">
+        <PageSection ref="sankeyRef" tone="dark" layout="stacked" stacked-full-width>
           <div ref="exhibitionsAnchorEndRef" class="exhibitions-bridge-anchor mb-4" aria-hidden="true"></div>
           <ExhibitionsSankey />
         </PageSection>
@@ -268,7 +271,10 @@ onBeforeUnmount(() => {
     <div class="mx-auto w-full max-w-[1600px] px-4 md:px-8">
       <div class="grid grid-cols-12 gap-x-2 md:gap-x-4">
         <div class="col-span-12 md:col-span-9 md:col-start-1">
-          <div class="exhibitions-bridge-label__track">
+          <div
+            class="exhibitions-bridge-label__track"
+            :style="{ '--exhibitions-inner-margin-x': `${EXHIBITIONS_INNER_MARGIN_X_PX}px` }"
+          >
             <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--exhibitions">
               Exhibitions
             </span>
