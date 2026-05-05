@@ -330,6 +330,8 @@ function getPersonaPreCoverHoldPx() {
 function createPersonaCoverTimeline({
   s3El,
   sectionAfterS3El,
+  s3PersonaImg = null,
+  floatingEl = null,
   onEnter,
   onLeaveBack,
 }) {
@@ -339,6 +341,12 @@ function createPersonaCoverTimeline({
   );
   const revealDuration = Math.max(0.01, 1 - revealStartProgress);
   gsap.set(sectionAfterS3El, { position: "relative", zIndex: 2, y: holdPx });
+
+  function syncFloatingForScrollPosition(scrollTriggerSelf) {
+    if (!floatingEl) return;
+    const scroll = scrollTriggerSelf.scroll();
+    if (scroll >= scrollTriggerSelf.start) gsap.set(floatingEl, { opacity: 0 });
+  }
 
   return gsap.timeline({
     scrollTrigger: {
@@ -354,6 +362,18 @@ function createPersonaCoverTimeline({
         gsap.set(sectionAfterS3El, { y: 0 });
       },
       onLeaveBack,
+      // clear so stale floating opacity cannot survive a rerender-driven refresh
+      onRefresh: (self) => {
+        const scroll = self.scroll();
+        if (scroll >= self.start) {
+          if (s3PersonaImg) gsap.set(s3PersonaImg, { opacity: 1 });
+          if (scroll >= self.end) gsap.set(sectionAfterS3El, { y: 0 });
+        } else if (s3PersonaImg) {
+          gsap.set(s3PersonaImg, { opacity: 0 });
+        }
+        queueMicrotask(() => syncFloatingForScrollPosition(self));
+        gsap.delayedCall(0, () => syncFloatingForScrollPosition(self));
+      },
     },
   })
     .to(sectionAfterS3El, { y: holdPx, duration: revealStartProgress, ease: "none" }, 0)
@@ -368,6 +388,8 @@ function setupActorsToPersonaGrow({
   s3PersonaImg,
   personaPos,
 }) {
+  let personaCoverST = null;
+
   const personaIcon = actorsEl.querySelector(
     '[data-actor="persona"] .actors-preview__icon',
   );
@@ -395,6 +417,12 @@ function setupActorsToPersonaGrow({
       end: "+=150%",
       pin: true,
       scrub: 1,
+      onUpdate(self) {
+        // account for fast crosses of s3-top
+        if (personaCoverST && self.scroll() >= personaCoverST.start) {
+          gsap.set(floatingEl, { opacity: 0 });
+        }
+      },
     },
   });
 
@@ -419,19 +447,23 @@ function setupActorsToPersonaGrow({
       0.3,
     );
 
-  createPersonaCoverTimeline({
+  const personaCoverTl = createPersonaCoverTimeline({
     s3El,
     sectionAfterS3El,
+    s3PersonaImg,
+    floatingEl,
     onEnter: () => {
       gsap.set(floatingEl, { opacity: 0 });
       gsap.set(s3PersonaImg, { opacity: 1 });
     },
     onLeaveBack: () => {
       gsap.set(sectionAfterS3El, { y: 0 });
-      gsap.set(floatingEl, { opacity: 1 });
       gsap.set(s3PersonaImg, { opacity: 0 });
+      gsap.set(floatingEl, { opacity: 1 });
     },
   });
+
+  personaCoverST = personaCoverTl.scrollTrigger;
 }
 
 function setupSection3PinCoverFallback(s3El, sectionAfterS3El) {
