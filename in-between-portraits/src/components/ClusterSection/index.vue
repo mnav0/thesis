@@ -1439,10 +1439,7 @@ function displayLabelLines(group) {
             :mode-epoch="artModeEpoch"
           />
           <ArtistDot v-else :artist-id="item.artistId" />
-          <div
-            v-if="!artMode && activePointKeys.has(pointKey(group, item, idx))"
-            class="cs-point-tag label-text"
-          >
+          <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(item.artistName) }}
           </div>
           <div class="cs-tooltip">{{ item.artistName }}</div>
@@ -1479,10 +1476,7 @@ function displayLabelLines(group) {
             :mode-epoch="artModeEpoch"
           />
           <ArtistDot v-else :artist-id="artist.artistId" />
-          <div
-            v-if="!artMode && activePointKeys.has(`shared-${artist.artistId}`)"
-            class="cs-point-tag label-text"
-          >
+          <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(artist.artistName) }}
           </div>
           <div class="cs-tooltip">{{ artist.artistName }}</div>
