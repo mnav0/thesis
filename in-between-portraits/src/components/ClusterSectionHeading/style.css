@@ -114,9 +114,23 @@
 
 .cluster-heading__subtitle {
   margin: 0.85rem 0 0;
+}
+
+.cluster-heading__subtitle p {
   font-size: 1rem;
   line-height: 1.25;
   letter-spacing: normal;
+}
+
+.cluster-heading__subtitle-info-button {
+  margin-top: -0.5rem;
+  margin-left: -0.25rem;
+}
+
+.cluster-heading__subtitle-info-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
 .cluster-heading__key {

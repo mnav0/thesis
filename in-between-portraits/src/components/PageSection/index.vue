@@ -171,8 +171,10 @@ defineExpose({ sectionEl });
             <h3
               v-if="resolvedSubheadingHtml"
               class="page-section-subheading"
-              v-html="resolvedSubheadingHtml"
-            ></h3>
+            >
+              <span v-html="resolvedSubheadingHtml"></span>
+              <slot name="subheading-addon" />
+            </h3>
           </div>
         </div>
         <div class="hidden md:block md:col-span-2" aria-hidden="true"></div>
@@ -194,8 +196,10 @@ defineExpose({ sectionEl });
                   <h3
                     v-if="resolvedSubheadingHtml"
                     class="page-section-subheading"
-                    v-html="resolvedSubheadingHtml"
-                  ></h3>
+                  >
+                    <span v-html="resolvedSubheadingHtml"></span>
+                    <slot name="subheading-addon" />
+                  </h3>
                 </div>
               </slot>
             </div>
@@ -216,8 +220,10 @@ defineExpose({ sectionEl });
                 <h3
                   v-if="resolvedSubheadingHtml"
                   class="page-section-subheading"
-                  v-html="resolvedSubheadingHtml"
-                ></h3>
+                >
+                  <span v-html="resolvedSubheadingHtml"></span>
+                  <slot name="subheading-addon" />
+                </h3>
               </div>
             </slot>
             <div :class="stackedBodyClass">
@@ -232,8 +238,10 @@ defineExpose({ sectionEl });
               <h3
                 v-if="resolvedSubheadingHtml"
                 class="page-section-subheading"
-                v-html="resolvedSubheadingHtml"
-              ></h3>
+              >
+                <span v-html="resolvedSubheadingHtml"></span>
+                <slot name="subheading-addon" />
+              </h3>
             </div>
           </slot>
           <div :class="stackedBodyClass">

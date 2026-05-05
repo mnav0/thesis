@@ -240,6 +240,10 @@ select {
   text-transform: uppercase;
 }
 
+.app-exhibitions-info-button {
+  margin-left: 0.5rem;
+}
+
 .exhibitions-bridge-label__token--and,
 .exhibitions-bridge-label__token--artists {
   opacity: 0;

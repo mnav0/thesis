@@ -95,6 +95,7 @@
 
 .page-section-subheading {
   margin: 1.5rem 0 0;
+  display: flex;
 }
 
 .page-section-body--stacked {

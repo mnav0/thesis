@@ -1,0 +1,137 @@
+.info-overlay-button {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.info-overlay-button__trigger {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  text-transform: none;
+  line-height: 1;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.info-overlay-button__trigger--light {
+  color: #111;
+}
+
+.info-overlay-button__trigger--dark {
+  color: #fff;
+}
+
+.info-overlay-button__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.info-overlay-button__overlay--light {
+  background: rgba(255, 255, 255, 0.58);
+  color: #111;
+}
+
+.info-overlay-button__overlay--dark {
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+}
+
+.info-overlay-button__modal {
+  width: min(100%, 40rem);
+  max-height: min(85vh, 48rem);
+  overflow-y: auto;
+  border: 1px solid currentColor;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  background: currentColor;
+}
+
+.info-overlay-button__overlay--light .info-overlay-button__modal {
+  background: #fff;
+  color: #111;
+}
+
+.info-overlay-button__overlay--dark .info-overlay-button__modal {
+  background: #000;
+  color: #fff;
+}
+
+.info-overlay-button__close {
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 2.2em;
+  line-height: 1;
+  font-family: "Instrument Serif", serif;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.info-overlay-button__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-overlay-button__heading {
+  margin-top: 0.25rem 0 1rem 0;
+  font-family: "Kosugi", sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.info-overlay-button__list {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style-position: outside;
+}
+
+.info-overlay-button__list--bullet {
+  list-style-type: disc;
+}
+
+.info-overlay-button__list--numbered {
+  list-style-type: decimal;
+}
+
+.info-overlay-button__item {
+  font-family: "Kosugi", sans-serif;
+  font-size: 1rem;
+  line-height: 1.35;
+  margin-left: 0.25rem;
+}
+
+.info-overlay-button__item + .info-overlay-button__item {
+  margin-top: 0.5rem;
+}
+
+.info-overlay-button__separator {
+  height: 2rem;
+}
+
+@media (max-width: 768px) {
+  .info-overlay-button__modal {
+    width: min(100%, 100vw);
+    max-height: min(88vh, 100svh);
+    padding: 1rem;
+  }
+}

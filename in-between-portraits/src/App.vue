@@ -13,6 +13,7 @@ import ActorsPreview from "./components/ActorsPreview/index.vue";
 import ArtistDot from "./components/ArtistDot/index.vue";
 import ExhibitionsSankey from "./components/ExhibitionsSankey/index.vue";
 import ExhibitionsTimeline from "./components/ExhibitionsTimeline/index.vue";
+import InfoModal from "./components/InfoModal/index.vue";
 import { publicImgSrc } from "./utils/public-img-src.js";
 import {
   destroyAppScrollAnimations,
@@ -29,6 +30,16 @@ const introPreviewVideoRef = ref(null);
 const introFadeToWhiteActive = ref(false);
 const INTRO_END_FADE_SECONDS = 2.4;
 const INTRO_WHITE_HOLD_MS = 180;
+const datasetInfoPoints = [
+  "Metropolitan Museum of Art,	New York, NY",
+  "National Gallery of Art, Washington, D. C.",
+  "Museum of Modern Art, New York, NY",
+  "Art Institute of Chicago, Chicago, IL",
+  "J. Paul Getty Center, Los Angeles, CA",
+  "Smithsonian American Art Museum, Washington, D. C.",
+  "Whitney Museum of American Art, New York, NY",
+  "Cleveland Museum of Art, Cleveland, OH",
+];
 
 const section2HeadingHtml = [
   "Identity is",
@@ -232,6 +243,15 @@ onBeforeUnmount(() => {
           heading="for artists selected from modern exhibitions about identity?"
           subheading="*with a case study of mixed-race, Asian American identifying artists."
         >
+          <template #subheading-addon>
+            <InfoModal
+              headingHtml="Selected artists catalogued within digital archives<br>of the top visited art museums in the U.S. (2025)"
+              :bullet-points="datasetInfoPoints"
+              list-type="numbered"
+              aria-label="Open dataset information modal"
+              class="app-exhibitions-info-button"
+            />
+          </template>
           <ExhibitionsTimeline class="mt-12" />
           <div ref="exhibitionsAnchorStartRef" class="exhibitions-bridge-anchor" aria-hidden="true"></div>
         </PageSection>
