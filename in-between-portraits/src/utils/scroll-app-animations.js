@@ -29,6 +29,7 @@ const SECTION_HANDOFF_SCROLL_CONFIG = {
   personaToExhibitions: {
     preCoverHoldViewport: 0.34,
     coverRevealStartProgress: 0.56,
+    minPinScrollVh: 0.5,
   },
 };
 const IDENTITY_PREVIEW_CONFIG = {
@@ -303,29 +304,28 @@ function setupIdentitySectionTimeline(section2El) {
   });
 }
 
-function getPersonaCoverEndDistancePx(s3El, sectionAfterS3El) {
+function personaHandoffHoldPx() {
+  const f = SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.preCoverHoldViewport;
+  return Math.max(0, Math.round(window.innerHeight * f));
+}
+
+function getPersonaCoverFlowGapPx(s3El, sectionAfterS3El) {
   if (!s3El || !sectionAfterS3El) return 0;
-  const s3Rect = s3El.getBoundingClientRect();
-  const nextRect = sectionAfterS3El.getBoundingClientRect();
-  // Base distance for natural handoff, then we add explicit hold.
-  return Math.max(0, Math.round(nextRect.top - s3Rect.top));
+  if (s3El.parentElement === sectionAfterS3El.parentElement) {
+    const gap = sectionAfterS3El.offsetTop - s3El.offsetTop;
+    if (gap > 1) return Math.round(gap);
+  }
+  const dy =
+    sectionAfterS3El.getBoundingClientRect().top - s3El.getBoundingClientRect().top;
+  return Math.max(0, Math.round(dy));
 }
 
-function getPersonaPinEndPosition(s3El, sectionAfterS3El) {
-  const baseDistancePx = getPersonaCoverEndDistancePx(s3El, sectionAfterS3El);
-  const holdPx = Math.max(
-    0,
-    Math.round(window.innerHeight * SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.preCoverHoldViewport),
-  );
-  // End when a deeper point inside the next section reaches viewport top.
-  return `top+=${baseDistancePx + holdPx} top`;
-}
-
-function getPersonaPreCoverHoldPx() {
-  return Math.max(
-    0,
-    Math.round(window.innerHeight * SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.preCoverHoldViewport),
-  );
+function getPersonaPinScrollDistancePx(s3El, sectionAfterS3El) {
+  const { minPinScrollVh } = SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions;
+  const base = getPersonaCoverFlowGapPx(s3El, sectionAfterS3El);
+  const hold = personaHandoffHoldPx();
+  const minPx = Math.round(window.innerHeight * minPinScrollVh);
+  return Math.max(minPx, 1, base + hold);
 }
 
 function createPersonaCoverTimeline({
@@ -336,7 +336,7 @@ function createPersonaCoverTimeline({
   onEnter,
   onLeaveBack,
 }) {
-  const holdPx = getPersonaPreCoverHoldPx();
+  const holdPx = personaHandoffHoldPx();
   const revealStartProgress = clamp01(
     SECTION_HANDOFF_SCROLL_CONFIG.personaToExhibitions.coverRevealStartProgress,
   );
@@ -353,24 +353,31 @@ function createPersonaCoverTimeline({
     scrollTrigger: {
       trigger: s3El,
       start: "top top",
-      end: () => getPersonaPinEndPosition(s3El, sectionAfterS3El),
+      end: () => `+=${getPersonaPinScrollDistancePx(s3El, sectionAfterS3El)}`,
       pin: true,
       pinSpacing: false,
-      scrub: 1,
+      pinReparent: true,
+      scrub: true,
       invalidateOnRefresh: true,
       onEnter,
       onLeave: () => {
         gsap.set(sectionAfterS3El, { y: 0 });
+        if (s3PersonaImg) gsap.set(s3PersonaImg, { opacity: 0 });
+      },
+      onEnterBack: () => {
+        if (s3PersonaImg) gsap.set(s3PersonaImg, { opacity: 1 });
+        if (floatingEl) gsap.set(floatingEl, { opacity: 0 });
       },
       onLeaveBack,
-      // clear so stale floating opacity cannot survive a rerender-driven refresh
       onRefresh: (self) => {
-        const scroll = self.scroll();
-        if (scroll >= self.start) {
-          if (s3PersonaImg) gsap.set(s3PersonaImg, { opacity: 1 });
-          if (scroll >= self.end) gsap.set(sectionAfterS3El, { y: 0 });
+        const p = self.progress;
+        if (p <= 0) {
+          if (s3PersonaImg) gsap.set(s3PersonaImg, { opacity: 0 });
+        } else if (p >= 1) {
+          gsap.set(sectionAfterS3El, { y: 0 });
+          if (s3PersonaImg) gsap.set(s3PersonaImg, { opacity: 0 });
         } else if (s3PersonaImg) {
-          gsap.set(s3PersonaImg, { opacity: 0 });
+          gsap.set(s3PersonaImg, { opacity: 1 });
         }
         queueMicrotask(() => syncFloatingForScrollPosition(self));
         gsap.delayedCall(0, () => syncFloatingForScrollPosition(self));
@@ -419,7 +426,6 @@ function setupActorsToPersonaGrow({
       pin: true,
       scrub: 1,
       onUpdate(self) {
-        // account for fast crosses of s3-top
         if (personaCoverST && self.scroll() >= personaCoverST.start) {
           gsap.set(floatingEl, { opacity: 0 });
         }
@@ -478,7 +484,6 @@ function setupSection3PinCoverFallback(s3El, sectionAfterS3El) {
   });
 }
 
-/** Map Sankey SVG user-space X to viewport X using the root svg CTM (handles scaling / letterboxing). */
 function sankeySvgUserXToViewportX(svgEl, userX, userY) {
   if (!svgEl || !Number.isFinite(userX)) return null;
   const h = parseFloat(svgEl.getAttribute("height"));
@@ -558,11 +563,6 @@ function setupExhibitionsLabel({
       };
     }
 
-    /**
-     * Tokens are positioned inside `.exhibitions-bridge-label__track`, but Sankey labels often sit
-     * to the right of that box (track is 9 cols while the chart is full width). An upper clamp to
-     * trackWidth would pin every target to the same edge and ignore nudges / layout fixes.
-     */
     const nonNegativeX = (x) => Math.max(0, x);
     const clampStartX = (x) =>
       gsap.utils.clamp(0, Math.max(0, trackWidth - exhibitionWidth), x);
@@ -697,7 +697,6 @@ function rectInRootSpace(rect, rootRect) {
 function setupTimelineToSankeyExhibitionTravel({ timelineSectionEl, sankeySectionEl }) {
   if (!timelineSectionEl || !sankeySectionEl) return;
 
-  // Keep this transition quick/subtle so the Sankey is fully settled at section top.
   const GROUP_STAGGER_STEP = 0.008;
   const GROUP_STAGGER_MAX = 0.045;
   const TRAVEL_PROGRESS_SPAN = 0.5;
@@ -783,7 +782,6 @@ function setupTimelineToSankeyExhibitionTravel({ timelineSectionEl, sankeySectio
       return;
     }
 
-    // Solid handoff: avoid opacity blending between source/proxy/target.
     const sourceOpacity = p <= SOURCE_HIDE_PROGRESS ? "1" : "0";
     sourceNodes.forEach((node) => { node.style.opacity = sourceOpacity; });
     targetNodes.forEach((node) => {

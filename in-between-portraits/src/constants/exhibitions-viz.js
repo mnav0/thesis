@@ -1,14 +1,9 @@
 /** Horizontal inset (px) for timeline baseline + Sankey plot; left and right stay equal so both views align. */
 export const EXHIBITIONS_INNER_MARGIN_X_PX = 236;
 
-/**
- * Gap between the Sankey node column and name labels (user units); must match `drawNodeLabel` in ExhibitionsSankey.
- */
+/** Must match ExhibitionsSankey `drawNodeLabel` offset. */
 export const EXHIBITIONS_SANKEY_LABEL_OFFSET_PX = 8;
 
-/**
- * Layout-derived label anchor X values (SVG user space) on the root sankey `<svg>` for the fixed bridge label.
- */
 export const EXHIBITIONS_SANKEY_BRIDGE_ATTR = {
   exhibitionLabelAnchorX: "data-exhibition-label-anchor-x",
   artistLabelAnchorX: "data-artist-label-anchor-x",
