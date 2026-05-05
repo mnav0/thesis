@@ -270,7 +270,7 @@ onBeforeUnmount(() => {
   <div ref="exhibitionsLabelRef" class="exhibitions-bridge-label">
     <div class="mx-auto w-full max-w-[1600px] px-4 md:px-8">
       <div class="grid grid-cols-12 gap-x-2 md:gap-x-4">
-        <div class="col-span-12 md:col-span-9 md:col-start-1">
+        <div class="col-span-12">
           <div
             class="exhibitions-bridge-label__track"
             :style="{ '--exhibitions-inner-margin-x': `${EXHIBITIONS_INNER_MARGIN_X_PX}px` }"

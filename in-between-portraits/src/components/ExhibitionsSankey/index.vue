@@ -9,6 +9,8 @@ import {
 } from "../../utils/exhibition-tooltip.js";
 import { exhibitionStartYear, parseArtistIds } from "../../utils/exhibition-data.js";
 import {
+  EXHIBITIONS_SANKEY_BRIDGE_ATTR,
+  EXHIBITIONS_SANKEY_LABEL_OFFSET_PX,
   EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
 } from "../../constants/exhibitions-viz.js";
@@ -20,7 +22,7 @@ import artistsCSV from "../../data/artists.csv?raw";
 const NODE_WIDTH = EXHIBITIONS_VIZ_CONFIG.layout.nodeSizePx;
 const NODE_PADDING = 32;
 const LABEL_FONT_PX = 16;
-const LABEL_OFFSET_PX = 8;
+const LABEL_OFFSET_PX = EXHIBITIONS_SANKEY_LABEL_OFFSET_PX;
 const LABEL_LINE_HEIGHT_EM = 1.1;
 const LABEL_SINGLE_LINE_DY_EM = 0.35;
 const LINK_STROKE = EXHIBITIONS_VIZ_CONFIG.stroke.linkPx;
@@ -334,13 +336,24 @@ function renderChart() {
     links: links.map((d) => ({ ...d })),
   });
 
+  const sampleExhibition = graph.nodes.find((d) => d.type === "exhibition");
+  const sampleArtist = graph.nodes.find((d) => d.type === "artist");
+  const exhibitionLabelAnchorX = sampleExhibition
+    ? sampleExhibition.x0 - LABEL_OFFSET_PX
+    : margin.left + NODE_WIDTH - LABEL_OFFSET_PX;
+  const artistLabelAnchorX = sampleArtist
+    ? sampleArtist.x1 + LABEL_OFFSET_PX
+    : width - margin.right + LABEL_OFFSET_PX;
+
   const svg = d3
     .select(root)
     .append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", `0 0 ${width} ${height}`)
-    .attr("preserveAspectRatio", "xMidYMid meet");
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .attr(EXHIBITIONS_SANKEY_BRIDGE_ATTR.exhibitionLabelAnchorX, String(exhibitionLabelAnchorX))
+    .attr(EXHIBITIONS_SANKEY_BRIDGE_ATTR.artistLabelAnchorX, String(artistLabelAnchorX));
 
   const { show, hide, destroy } = createTooltip(root);
   destroyTooltip = destroy;

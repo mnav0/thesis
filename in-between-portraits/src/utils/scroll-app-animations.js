@@ -2,6 +2,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import {
+  EXHIBITIONS_SANKEY_BRIDGE_ATTR,
   EXHIBITIONS_VIZ_CONFIG,
 } from "../constants/exhibitions-viz.js";
 import { artistDotInlineSvg } from "./artist-dot.js";
@@ -477,6 +478,19 @@ function setupSection3PinCoverFallback(s3El, sectionAfterS3El) {
   });
 }
 
+/** Map Sankey SVG user-space X to viewport X using the root svg CTM (handles scaling / letterboxing). */
+function sankeySvgUserXToViewportX(svgEl, userX, userY) {
+  if (!svgEl || !Number.isFinite(userX)) return null;
+  const h = parseFloat(svgEl.getAttribute("height"));
+  const y = Number.isFinite(userY) ? userY : (Number.isFinite(h) ? h / 2 : 0);
+  const pt = svgEl.createSVGPoint();
+  pt.x = userX;
+  pt.y = y;
+  const ctm = svgEl.getScreenCTM();
+  if (!ctm) return null;
+  return pt.matrixTransform(ctm).x;
+}
+
 function setupExhibitionsLabel({
   labelEl,
   startAnchorEl,
@@ -511,20 +525,16 @@ function setupExhibitionsLabel({
   }
 
   function getSankeyColumnTargets() {
-    const labelNodes = [...sankeySectionEl.querySelectorAll(".sankey-node-label")];
-    const exhibitionLabelRects = labelNodes
-      .filter((node) => node.getAttribute("text-anchor") === "end")
-      .map((node) => node.getBoundingClientRect());
-    const artistLabelRects = labelNodes
-      .filter((node) => node.getAttribute("text-anchor") === "start")
-      .map((node) => node.getBoundingClientRect());
-      console.log(artistLabelRects);
-
-    if (!exhibitionLabelRects.length || !artistLabelRects.length) return null;
-
-    const exhibitionRight = Math.max(...exhibitionLabelRects.map((rect) => rect.right));
-    const artistLeft = Math.min(...artistLabelRects.map((rect) => rect.left));
-    console.log(artistLeft);
+    const svg = sankeySectionEl.querySelector(".exhibitions-sankey svg");
+    if (!svg) return null;
+    const exX = parseFloat(svg.getAttribute(EXHIBITIONS_SANKEY_BRIDGE_ATTR.exhibitionLabelAnchorX));
+    const arX = parseFloat(svg.getAttribute(EXHIBITIONS_SANKEY_BRIDGE_ATTR.artistLabelAnchorX));
+    const h = parseFloat(svg.getAttribute("height"));
+    const midY = Number.isFinite(h) ? h / 2 : 0;
+    if (!Number.isFinite(exX) || !Number.isFinite(arX)) return null;
+    const exhibitionRight = sankeySvgUserXToViewportX(svg, exX, midY);
+    const artistLeft = sankeySvgUserXToViewportX(svg, arX, midY);
+    if (exhibitionRight == null || artistLeft == null) return null;
     return { exhibitionRight, artistLeft };
   }
 
@@ -535,6 +545,8 @@ function setupExhibitionsLabel({
     const artistsWidth = artistsEl.getBoundingClientRect().width;
     const trackWidth = trackRect.width;
     const startAnchoredExhibitionsX = EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.startXOffsetPx;
+    const nudgeEx = EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.exhibitionsEndXNudgePx;
+    const nudgeArt = EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.artistsEndXNudgePx;
     const sankeyTargets = getSankeyColumnTargets();
     if (!sankeyTargets) {
       const fallbackAndX = trackWidth / 2 - andWidth / 2;
@@ -542,33 +554,31 @@ function setupExhibitionsLabel({
         exhibitionsStartX: startAnchoredExhibitionsX,
         exhibitionsEndX: startAnchoredExhibitionsX,
         andTargetX: fallbackAndX,
-        artistsTargetX: fallbackAndX + andWidth + 12,
+        artistsTargetX: fallbackAndX + andWidth + 12 + nudgeArt,
       };
     }
 
-    const clampToTrack = (x, tokenWidth) =>
-      gsap.utils.clamp(0, Math.max(0, trackWidth - tokenWidth), x);
+    /**
+     * Tokens are positioned inside `.exhibitions-bridge-label__track`, but Sankey labels often sit
+     * to the right of that box (track is 9 cols while the chart is full width). An upper clamp to
+     * trackWidth would pin every target to the same edge and ignore nudges / layout fixes.
+     */
+    const nonNegativeX = (x) => Math.max(0, x);
+    const clampStartX = (x) =>
+      gsap.utils.clamp(0, Math.max(0, trackWidth - exhibitionWidth), x);
 
-    const exhibitionsEndX = clampToTrack(
-      sankeyTargets.exhibitionRight
-      - trackRect.left
-      - exhibitionWidth
-      + EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.exhibitionsEndXNudgePx,
-      exhibitionWidth,
+    const exhibitionsEndX = nonNegativeX(
+      sankeyTargets.exhibitionRight - trackRect.left - exhibitionWidth + nudgeEx,
     );
-    const artistsTargetX = clampToTrack(
-      sankeyTargets.artistLeft
-      - trackRect.left
-      + EXHIBITIONS_SCROLL_CONFIG.bridgeLabel.artistsEndXNudgePx,
-      artistsWidth,
+    const artistsTargetX = nonNegativeX(
+      sankeyTargets.artistLeft - trackRect.left + nudgeArt,
     );
-    const andTargetX = clampToTrack(
+    const andTargetX = nonNegativeX(
       (sankeyTargets.exhibitionRight + sankeyTargets.artistLeft) / 2 - trackRect.left - andWidth / 2,
-      andWidth,
     );
 
     return {
-      exhibitionsStartX: clampToTrack(startAnchoredExhibitionsX, exhibitionWidth),
+      exhibitionsStartX: clampStartX(startAnchoredExhibitionsX),
       exhibitionsEndX,
       andTargetX,
       artistsTargetX,
