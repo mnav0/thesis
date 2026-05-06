@@ -7,6 +7,7 @@ import {
   ref,
   watch,
 } from "vue";
+import { createTooltip } from "../../utils/d3/tooltip.js";
 import {
   artistPointsRows,
   artistWordRows,
@@ -35,6 +36,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["pastHeroChange"]);
+const FEATURED_TEXT_MAX_YEAR_GAP = 5;
 
 // ---------- enrichment ----------
 
@@ -86,6 +88,14 @@ function hasText(point) {
   return Boolean(point && point.text && String(point.text).trim());
 }
 
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 const enrichedPoints = computed(() => {
   const artworkById = new Map(
     artworks.value.map((art) => [String(art.id), art]),
@@ -109,6 +119,8 @@ const enrichedPoints = computed(() => {
         pointKey: `g-${rawId}-${sourceIdx}-${idx}`,
         id: String(point.id ?? ""),
         artistId: String(rawId),
+        sourceIdx,
+        sourcePointOrder: idx,
         sourceActor,
         isArtwork,
         text: point.text || "",
@@ -203,7 +215,6 @@ const chronoPoints = computed(() => {
     .slice();
   arr.sort((a, b) => {
     if (a.year !== b.year) return a.year - b.year;
-    // artwork ties precede text ties (so artwork shows first when years match)
     if (a.isArtwork !== b.isArtwork) return a.isArtwork ? -1 : 1;
     if (a.sourceActor !== b.sourceActor) {
       return a.sourceActor === "artist" ? -1 : 1;
@@ -242,16 +253,60 @@ function pickRange(rand, min, max) {
   return min + rand() * (max - min);
 }
 
+const FEATURED_ART_BLOCK = {
+  minX: 30,
+  maxX: 74,
+  minY: 18,
+  maxY: 62,
+};
+
+const FEATURED_TEXT_BLOCK = {
+  minX: 20,
+  maxX: 86,
+  minY: 58,
+  maxY: 90,
+};
+
+function expandRect(rect, padX = 0, padY = 0) {
+  return {
+    minX: Math.max(0, rect.minX - padX),
+    maxX: Math.min(100, rect.maxX + padX),
+    minY: Math.max(0, rect.minY - padY),
+    maxY: Math.min(100, rect.maxY + padY),
+  };
+}
+
+function isInBlockedStageAreas(xPct, yPct, blockedRects) {
+  return blockedRects.some(
+    (rect) =>
+      xPct >= rect.minX &&
+      xPct <= rect.maxX &&
+      yPct >= rect.minY &&
+      yPct <= rect.maxY,
+  );
+}
+
+function pickScatterPosOutsideBlockedArea(rand, blockedRects) {
+  for (let i = 0; i < 18; i++) {
+    const xPct = pickRange(rand, 4, 96);
+    const yPct = pickRange(rand, 8, 92);
+    if (!isInBlockedStageAreas(xPct, yPct, blockedRects)) return { xPct, yPct };
+  }
+  const leftSide = rand() < 0.5;
+  const xPct = leftSide ? pickRange(rand, 4, 20) : pickRange(rand, 84, 96);
+  const yPct = pickRange(rand, 8, 92);
+  return { xPct, yPct };
+}
+
 const canvasPositions = computed(() => {
   const map = new Map();
+  const blocked = [FEATURED_ART_BLOCK, FEATURED_TEXT_BLOCK];
   chronoPoints.value.forEach((p) => {
     const rand = seededRandom(hash32(p.pointKey));
-    // ~78% on the left band, the rest on a smaller right-of-center band so
-    // the canvas mostly hugs the left side and leaves room for the dots.
-    const onLeft = rand() < 0.78;
+    const { xPct, yPct } = pickScatterPosOutsideBlockedArea(rand, blocked);
     map.set(p.pointKey, {
-      x: onLeft ? pickRange(rand, 2, 22) : pickRange(rand, 58, 70),
-      y: pickRange(rand, 8, 80),
+      x: xPct,
+      y: yPct,
       rotate: pickRange(rand, -2, 2),
     });
   });
@@ -260,11 +315,18 @@ const canvasPositions = computed(() => {
 
 const dotPositions = computed(() => {
   const map = new Map();
+  const blocked = [
+    expandRect(FEATURED_ART_BLOCK, 4, 4),
+    expandRect(FEATURED_TEXT_BLOCK, 7, 6),
+  ];
   chronoPoints.value.forEach((p) => {
     const rand = seededRandom(hash32(`dot-${p.pointKey}`));
-    const xPct = pickRange(rand, 6, 88);
-    const jitterY = pickRange(rand, -22, 22);
-    map.set(p.pointKey, { xPct, jitterY });
+    const { xPct, yPct } = pickScatterPosOutsideBlockedArea(rand, blocked);
+    map.set(p.pointKey, {
+      xPct,
+      yPct,
+      rotate: pickRange(rand, -6, 6),
+    });
   });
   return map;
 });
@@ -337,11 +399,13 @@ function onScroll() {
 }
 
 let resizeObs = null;
+let artworkTooltipApi = null;
 
 onMounted(() => {
   if (!scrollRef.value) return;
   viewportH.value = scrollRef.value.clientHeight;
   measureHero();
+  artworkTooltipApi = createTooltip(scrollRef.value);
   scrollRef.value.addEventListener("scroll", onScroll, { passive: true });
   resizeObs = new ResizeObserver(() => {
     if (scrollRef.value) viewportH.value = scrollRef.value.clientHeight;
@@ -356,6 +420,10 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (scrollRef.value) {
     scrollRef.value.removeEventListener("scroll", onScroll);
+  }
+  if (artworkTooltipApi) {
+    artworkTooltipApi.destroy();
+    artworkTooltipApi = null;
   }
   if (resizeObs) {
     resizeObs.disconnect();
@@ -379,6 +447,10 @@ watch(
 // ---------- featured slot resolution ----------
 
 const activeIdxRounded = computed(() => Math.round(activeIdx.value));
+const activePoint = computed(() => {
+  const pts = chronoPoints.value;
+  return pts[activeIdxRounded.value] || null;
+});
 
 /**
  * Walk backward from `cutoff` for the most recent point matching `predicate`.
@@ -395,28 +467,44 @@ function findLatestWithFallback(pts, cutoff, predicate) {
   return pts.find(predicate) || null;
 }
 
-const featuredText = computed(() =>
-  findLatestWithFallback(
-    chronoPoints.value,
-    activeIdxRounded.value,
-    hasText,
-  ),
-);
+const featuredTextCandidate = computed(() => {
+  const pts = chronoPoints.value;
+  const cutoff = activeIdxRounded.value;
+  const predicate = (p) => hasText(p) && !p.isArtwork;
+  return findLatestWithFallback(pts, cutoff, predicate);
+});
 
 const featuredArtwork = computed(() => {
   const pts = chronoPoints.value;
-  const textPoint = featuredText.value;
-  // When multiple artists are present, constrain the artwork to the same
-  // artist as the active text point so they are always paired together.
+  const cutoff = activeIdxRounded.value;
+  const textPoint = featuredTextCandidate.value;
   if (textPoint && props.artistIds.length > 1) {
     const aid = textPoint.artistId;
     return findLatestWithFallback(
       pts,
-      activeIdxRounded.value,
+      cutoff,
       (p) => isArtistArtwork(p) && p.artistId === aid,
     );
   }
-  return findLatestWithFallback(pts, activeIdxRounded.value, isArtistArtwork);
+  return findLatestWithFallback(pts, cutoff, isArtistArtwork);
+});
+
+function shouldShowFeaturedTextForArtwork(textPoint, artworkPoint) {
+  if (!textPoint) return false;
+  if (!artworkPoint) return true;
+  if (!Number.isFinite(textPoint.year) || !Number.isFinite(artworkPoint.year)) {
+    return true;
+  }
+  return Math.abs(textPoint.year - artworkPoint.year) <= FEATURED_TEXT_MAX_YEAR_GAP;
+}
+
+const featuredText = computed(() => {
+  const textPoint = featuredTextCandidate.value;
+  if (!textPoint) return null;
+  if (activePoint.value?.pointKey === textPoint.pointKey) return textPoint;
+  return shouldShowFeaturedTextForArtwork(textPoint, featuredArtwork.value)
+    ? textPoint
+    : null;
 });
 
 const featuredKeys = computed(() => {
@@ -424,11 +512,6 @@ const featuredKeys = computed(() => {
   if (featuredArtwork.value) set.add(featuredArtwork.value.pointKey);
   if (featuredText.value) set.add(featuredText.value.pointKey);
   return set;
-});
-
-const activePoint = computed(() => {
-  const pts = chronoPoints.value;
-  return pts[activeIdxRounded.value] || null;
 });
 
 /**
@@ -444,6 +527,86 @@ const activeYear = computed(() => {
   if (pt && Number.isFinite(pt.year)) return pt.year;
   return null;
 });
+
+const artworkHoverPointsBySourceIdx = computed(() => {
+  const map = new Map();
+  for (const point of enrichedPoints.value) {
+    if (!point.isArtwork) continue;
+    const key = String(point.sourceIdx || "");
+    if (!key) continue;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(point);
+  }
+  return map;
+});
+
+const tooltipRandomSeed = ref(0);
+watch(
+  () => featuredTextCandidate.value?.pointKey || null,
+  () => {
+    tooltipRandomSeed.value += 1;
+  },
+);
+
+function candidateDistanceScore(point, { featuredOrder, featuredYear, artworkYear }) {
+  if (Number.isFinite(featuredOrder) && Number.isFinite(point.sourcePointOrder)) {
+    return Math.abs(point.sourcePointOrder - featuredOrder);
+  }
+  if (Number.isFinite(featuredYear) && Number.isFinite(point.year)) {
+    return Math.abs(point.year - featuredYear);
+  }
+  if (Number.isFinite(point.year)) {
+    return Math.abs(point.year - artworkYear);
+  }
+  return Number.POSITIVE_INFINITY;
+}
+
+function pickClosestByScore(candidates, context) {
+  if (!candidates.length) return null;
+  return candidates
+    .slice()
+    .sort((a, b) => candidateDistanceScore(a, context) - candidateDistanceScore(b, context))[0];
+}
+
+function pickByFeaturedSource(candidates, sourceActor, context, artworkSourceIdx) {
+  if (!candidates.length) return null;
+  const preferred = candidates.filter((p) => p.sourceActor === sourceActor);
+  if (sourceActor === "institution" && preferred.length) {
+    const rand = seededRandom(
+      hash32(`inst-${tooltipRandomSeed.value}-${artworkSourceIdx}`),
+    );
+    const idx = Math.floor(rand() * preferred.length);
+    return preferred[idx] || preferred[0];
+  }
+  if (preferred.length) return pickClosestByScore(preferred, context);
+  return pickClosestByScore(candidates, context);
+}
+
+function hoverTooltipForArtwork(point) {
+  if (!point) return null;
+  const key = String(point.sourceIdx || "");
+  if (!key) return null;
+  const candidates = artworkHoverPointsBySourceIdx.value.get(key) ?? [];
+  if (!candidates.length) return null;
+  const sourceActor = featuredTextCandidate.value?.sourceActor || "artist";
+  const selected = pickByFeaturedSource(
+    candidates,
+    sourceActor,
+    {
+      featuredOrder: featuredTextCandidate.value?.sourcePointOrder,
+      featuredYear: featuredTextCandidate.value?.year,
+      artworkYear: point.year,
+    },
+    key,
+  );
+  if (!selected || !hasText(selected)) return null;
+  return {
+    text: selected.text,
+    sourceName: selected.sourceName,
+    displayDate: selected.displayDate,
+    sourceActor: selected.sourceActor,
+  };
+}
 
 const timelineProgress = computed(() => {
   const { min, max } = yearBounds.value;
@@ -465,18 +628,13 @@ function canvasOpacity(idx) {
 function dotOpacity(idx) {
   if (idx === activeIdxRounded.value) return 1;
   const dist = Math.abs(idx - activeIdx.value);
-  // smooth fall-off so far-from-center dots fade out at the column edges
   return Math.max(0.12, 0.7 - dist * 0.06);
 }
 
-const VERTICAL_SPACING_PX = 58;
-
 function dotTransform(point) {
   const pos = dotPositions.value.get(point.pointKey);
-  const offsetY =
-    (point.idx - activeIdx.value) * VERTICAL_SPACING_PX +
-    (pos ? pos.jitterY : 0);
-  return `translate3d(0, ${offsetY}px, 0)`;
+  const rotate = pos ? pos.rotate : 0;
+  return `translate(-50%, -50%) rotate(${rotate}deg)`;
 }
 
 // ---------- image fallback tracking ----------
@@ -495,6 +653,29 @@ function handleImageError(pointKey) {
   const next = new Set(failedImageKeys.value);
   next.add(pointKey);
   failedImageKeys.value = next;
+}
+
+function tooltipOptionsFromPoint(point) {
+  if (!point || !hasText(point)) return null;
+  const isInstitution = point.sourceActor === "institution";
+  return {
+    bg: isInstitution ? "#fff" : "#111",
+    fg: isInstitution ? "#111" : "#fff",
+    border: isInstitution ? "#111" : "#fff",
+    smallText: true,
+    html: `<div style="line-height:1.25"><div>${escapeHtml(point.text)} (${escapeHtml(point.displayDate || "n.d.")})</div></div>`,
+  };
+}
+
+function showFeaturedArtworkTooltip(event) {
+  if (!artworkTooltipApi) return;
+  const opts = tooltipOptionsFromPoint(featuredArtworkTooltip.value);
+  if (!opts) return;
+  artworkTooltipApi.show(event, opts);
+}
+
+function hideFeaturedArtworkTooltip() {
+  artworkTooltipApi?.hide();
 }
 
 // ---------- navigation: smooth scroll to a point ----------
@@ -586,6 +767,19 @@ const canvasItems = computed(() =>
     pos: canvasPositions.value.get(p.pointKey),
   })),
 );
+
+const visibleDotPoints = computed(() =>
+  chronoPoints.value.filter((point) => !point.isArtwork),
+);
+
+const featuredArtworkTooltip = computed(() => hoverTooltipForArtwork(featuredArtwork.value));
+
+watch(
+  () => featuredArtwork.value?.pointKey || null,
+  () => {
+    artworkTooltipApi?.hide();
+  },
+);
 </script>
 
 <template>
@@ -629,7 +823,6 @@ const canvasItems = computed(() =>
                   pointerEvents: canvasOpacity(point.idx) < 0.05 ? 'none' : 'auto',
                 }"
                 :tabindex="canvasOpacity(point.idx) < 0.05 ? -1 : 0"
-                :title="point.displayDate"
                 @click="scrollToPoint(point)"
               >
                 <img
@@ -645,7 +838,7 @@ const canvasItems = computed(() =>
           <!-- dots layer: encoded by source actor only -->
           <div class="gallery-dots-layer" aria-hidden="true">
             <button
-              v-for="point in chronoPoints"
+              v-for="point in visibleDotPoints"
               :key="point.pointKey"
               class="gallery-dot"
               :class="[
@@ -657,6 +850,7 @@ const canvasItems = computed(() =>
               ]"
               :style="{
                 left: dotPositions.get(point.pointKey).xPct + '%',
+                top: dotPositions.get(point.pointKey).yPct + '%',
                 transform: dotTransform(point),
                 '--dot-opacity': dotOpacity(point.idx),
               }"
@@ -677,6 +871,9 @@ const canvasItems = computed(() =>
                 v-if="featuredArtwork"
                 :key="featuredArtwork.pointKey"
                 class="gallery-featured-art"
+                @mouseenter="showFeaturedArtworkTooltip"
+                @mousemove="showFeaturedArtworkTooltip"
+                @mouseleave="hideFeaturedArtworkTooltip"
               >
                 <img
                   v-if="shouldShowImage(featuredArtwork)"

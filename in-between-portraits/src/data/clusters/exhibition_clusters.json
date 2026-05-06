@@ -4,18 +4,14 @@
       "id": 0,
       "name": "Part Asian, 100% Hapa",
       "labels": [
-        "hapa",
-        "ancestry",
-        "asian"
+        "hapa"
       ]
     },
     {
       "id": 1,
       "name": "War Baby / Love Child: Mixed Race Asian American Art",
       "labels": [
-        "mixed",
-        "asian",
-        "american"
+        "mixed"
       ]
     },
     {
@@ -23,17 +19,17 @@
       "name": "Ruth Asawa: Citizen of the Universe",
       "labels": [
         "citizen",
-        "universe",
-        "life"
+        "life",
+        "universe"
       ]
     },
     {
       "id": 4,
       "name": "Dis/orient: Contemporary Art of the Asian Diaspora",
       "labels": [
+        "diaspora",
         "orient",
-        "dis",
-        "diaspora"
+        "dis"
       ]
     },
     {
@@ -41,7 +37,6 @@
       "name": "Legacies: Asian American Art Movements in New York City",
       "labels": [
         "legacies",
-        "asian",
         "american"
       ]
     },
@@ -49,16 +44,13 @@
       "id": 6,
       "name": "Oscar yi Hou: East of sun, west of moon",
       "labels": [
-        "east",
-        "asian",
-        "chinese"
+        "east"
       ]
     },
     {
       "id": 7,
       "name": "Biennale Arte 2015: All the World's Futures",
       "labels": [
-        "countries",
         "international",
         "world"
       ]
@@ -67,9 +59,7 @@
       "id": 8,
       "name": "Global Fascisms",
       "labels": [
-        "ideologies",
-        "global",
-        "authoritarian"
+        "global"
       ]
     },
     {
@@ -77,25 +67,25 @@
       "name": "Across the Pacific: Contemporary Korean and Korean American Art",
       "labels": [
         "korean",
-        "english",
-        "pacific"
+        "pacific",
+        "english"
       ]
     },
     {
       "id": 10,
       "name": "America is Hard to See",
       "labels": [
-        "hard",
         "american",
-        "america"
+        "america",
+        "hard"
       ]
     },
     {
       "id": 11,
       "name": "Portraiture Now: Asian American Portraits of Encounter",
       "labels": [
-        "portraiture",
         "asian",
+        "portraiture",
         "smithsonian"
       ]
     },
@@ -103,26 +93,23 @@
       "id": 12,
       "name": "Ascendancy: The Self in Contemporary Art",
       "labels": [
-        "ascendancy",
-        "agency",
-        "personal"
+        "personal",
+        "agency"
       ]
     },
     {
       "id": 13,
       "name": "One Way or Another: Asian American Art Now",
       "labels": [
-        "american",
         "asian",
-        "chinese"
+        "chinese",
+        "american"
       ]
     },
     {
       "id": 14,
       "name": "The Decade Show: Frameworks of Identity in the 1980s",
       "labels": [
-        "decade",
-        "studio",
         "frameworks"
       ]
     }

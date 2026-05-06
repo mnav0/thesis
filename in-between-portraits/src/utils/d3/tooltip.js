@@ -5,7 +5,7 @@ import { FONT_SANS } from "../../constants.js";
  * Creates a D3-managed tooltip div inside `container` and returns
  * { tooltip, show, hide } helpers.
  *
- *   show(event, { bg, fg, border, html })
+ *   show(event, { bg, fg, border, html, smallText })
  *     – positions the tooltip near the cursor (relative to container)
  *       and sets its content / colours.
  *
@@ -33,7 +33,7 @@ export function createTooltip(container) {
     .style("white-space", "pre-line")
     .style("line-height", "1.35");
 
-  function show(event, { bg, fg, border, html }) {
+  function show(event, { bg, fg, border, html, smallText = false }) {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
     const offset = 10;
@@ -43,6 +43,8 @@ export function createTooltip(container) {
       .style("background", bg)
       .style("color", fg)
       .style("border-color", border)
+      .style("font-size", smallText ? "0.75rem" : "1em")
+      .style("line-height", smallText ? "1.15" : "1.35")
       .html(html);
 
     const tooltipNode = tooltip.node();
