@@ -50,9 +50,9 @@
           "id": 3,
           "gridIndex": 3,
           "keywords": [
+            "nationalities",
             "family",
-            "culture",
-            "nationalities"
+            "culture"
           ],
           "featured_quote": {
             "source_idx": "IT110",
@@ -64,8 +64,8 @@
           "id": 7,
           "gridIndex": 4,
           "keywords": [
-            "person",
             "background",
+            "person",
             "abstract"
           ],
           "featured_quote": {
@@ -78,9 +78,9 @@
           "id": 5,
           "gridIndex": 5,
           "keywords": [
+            "asian",
             "heritage",
-            "islander",
-            "asian"
+            "islander"
           ],
           "featured_quote": {
             "source_idx": "IT48",
@@ -682,8 +682,8 @@
           "id": 3,
           "gridIndex": 1,
           "keywords": [
-            "family",
             "culture",
+            "family",
             "nationalities"
           ],
           "featured_quote": {
@@ -724,9 +724,9 @@
           "id": 6,
           "gridIndex": 4,
           "keywords": [
+            "activism",
             "marginalized",
-            "cultural",
-            "activism"
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "IT63",
@@ -738,8 +738,8 @@
           "id": 2,
           "gridIndex": 5,
           "keywords": [
-            "contemporary",
             "descent",
+            "contemporary",
             "invitation"
           ],
           "featured_quote": {
@@ -766,8 +766,8 @@
           "id": 7,
           "gridIndex": 7,
           "keywords": [
-            "person",
             "background",
+            "person",
             "abstract"
           ],
           "featured_quote": {
@@ -780,9 +780,9 @@
           "id": 0,
           "gridIndex": 8,
           "keywords": [
+            "ambiguity",
             "diaristic",
-            "different",
-            "ambiguity"
+            "different"
           ],
           "featured_quote": {
             "source_idx": "IT40",
@@ -1430,8 +1430,8 @@
           "id": 3,
           "gridIndex": 2,
           "keywords": [
-            "portrait",
             "japanese",
+            "portrait",
             "like"
           ],
           "featured_quote": {
@@ -1458,9 +1458,9 @@
           "id": 8,
           "gridIndex": 4,
           "keywords": [
+            "social",
             "represented",
-            "chinese",
-            "social"
+            "chinese"
           ],
           "featured_quote": {
             "source_idx": "IT63",
@@ -1472,8 +1472,8 @@
           "id": 6,
           "gridIndex": 5,
           "keywords": [
-            "participation",
             "cultural",
+            "participation",
             "american"
           ],
           "featured_quote": {
@@ -1486,8 +1486,8 @@
           "id": 1,
           "gridIndex": 6,
           "keywords": [
-            "mixed",
             "ancestry",
+            "mixed",
             "japanese"
           ],
           "featured_quote": {
@@ -1501,8 +1501,8 @@
           "gridIndex": 7,
           "keywords": [
             "contemporary",
-            "painter",
-            "american"
+            "american",
+            "painter"
           ],
           "featured_quote": {
             "source_idx": "IT92",
@@ -1514,8 +1514,8 @@
           "id": 7,
           "gridIndex": 8,
           "keywords": [
-            "person",
             "background",
+            "person",
             "abstract"
           ],
           "featured_quote": {
@@ -1528,9 +1528,9 @@
           "id": 0,
           "gridIndex": 9,
           "keywords": [
+            "ambiguity",
             "diaristic",
-            "different",
-            "ambiguity"
+            "different"
           ],
           "featured_quote": {
             "source_idx": "IT40",
@@ -2180,8 +2180,8 @@
           "id": 5,
           "gridIndex": 0,
           "keywords": [
-            "person",
             "american",
+            "person",
             "francisco"
           ],
           "featured_quote": {
@@ -2222,8 +2222,8 @@
           "id": 4,
           "gridIndex": 3,
           "keywords": [
-            "self",
             "traditional",
+            "self",
             "complexities"
           ],
           "featured_quote": {
@@ -2236,8 +2236,8 @@
           "id": 12,
           "gridIndex": 4,
           "keywords": [
-            "paint",
             "ordinary",
+            "paint",
             "painting"
           ],
           "featured_quote": {
@@ -3118,9 +3118,9 @@
           "id": 1,
           "gridIndex": 0,
           "keywords": [
+            "arts",
             "director",
-            "harvard",
-            "arts"
+            "harvard"
           ],
           "featured_quote": {
             "source_idx": "IT101",
@@ -3216,8 +3216,8 @@
           "id": 12,
           "gridIndex": 7,
           "keywords": [
-            "paint",
             "ordinary",
+            "paint",
             "transformed"
           ],
           "featured_quote": {
@@ -3240,9 +3240,9 @@
           "id": 16,
           "gridIndex": 9,
           "keywords": [
+            "ambiguous",
             "diaristic",
-            "different",
-            "ambiguous"
+            "different"
           ],
           "featured_quote": {
             "source_idx": "IT40",
@@ -3254,8 +3254,8 @@
           "id": 5,
           "gridIndex": 10,
           "keywords": [
-            "person",
             "american",
+            "person",
             "francisco"
           ],
           "featured_quote": {
@@ -4130,9 +4130,9 @@
           "id": 1,
           "gridIndex": 0,
           "keywords": [
+            "arts",
             "director",
-            "harvard",
-            "arts"
+            "harvard"
           ],
           "featured_quote": {
             "source_idx": "IT101",
@@ -4200,9 +4200,9 @@
           "id": 12,
           "gridIndex": 5,
           "keywords": [
-            "paint",
             "ordinary",
-            "transformed"
+            "transformed",
+            "paint"
           ],
           "featured_quote": {
             "source_idx": "IT32",
@@ -4224,9 +4224,9 @@
           "id": 16,
           "gridIndex": 7,
           "keywords": [
+            "ambiguous",
             "diaristic",
-            "different",
-            "ambiguous"
+            "different"
           ],
           "featured_quote": {
             "source_idx": "IT40",
@@ -4252,9 +4252,9 @@
           "id": 3,
           "gridIndex": 9,
           "keywords": [
-            "marble",
             "japanese",
-            "american"
+            "american",
+            "marble"
           ],
           "featured_quote": {
             "source_idx": "IT110",
@@ -4294,8 +4294,8 @@
           "id": 5,
           "gridIndex": 12,
           "keywords": [
-            "person",
             "american",
+            "person",
             "francisco"
           ],
           "featured_quote": {
@@ -5228,8 +5228,8 @@
           "id": 8,
           "gridIndex": 3,
           "keywords": [
-            "family",
             "culture",
+            "family",
             "immigration"
           ],
           "featured_quote": {
@@ -5256,9 +5256,9 @@
           "id": 4,
           "gridIndex": 5,
           "keywords": [
+            "racial",
             "self",
-            "american",
-            "racial"
+            "american"
           ],
           "featured_quote": {
             "source_idx": "IT29",
@@ -5270,9 +5270,9 @@
           "id": 18,
           "gridIndex": 6,
           "keywords": [
+            "abstract",
             "including",
-            "pollock",
-            "abstract"
+            "pollock"
           ],
           "featured_quote": {
             "source_idx": "IT72",
@@ -5284,9 +5284,9 @@
           "id": 2,
           "gridIndex": 7,
           "keywords": [
+            "conceptual",
             "contemporary",
-            "painter",
-            "conceptual"
+            "painter"
           ],
           "featured_quote": {
             "source_idx": "IT08",
@@ -5312,8 +5312,8 @@
           "id": 10,
           "gridIndex": 9,
           "keywords": [
-            "individuals",
             "displacement",
+            "individuals",
             "chinese"
           ],
           "featured_quote": {
@@ -5326,8 +5326,8 @@
           "id": 3,
           "gridIndex": 10,
           "keywords": [
-            "marble",
             "japanese",
+            "marble",
             "american"
           ],
           "featured_quote": {
@@ -5340,9 +5340,9 @@
           "id": 1,
           "gridIndex": 11,
           "keywords": [
+            "license",
             "japanese",
-            "director",
-            "license"
+            "director"
           ],
           "featured_quote": {
             "source_idx": "IT11",
@@ -5354,9 +5354,9 @@
           "id": 13,
           "gridIndex": 12,
           "keywords": [
+            "member",
             "parsons",
-            "yale",
-            "member"
+            "yale"
           ],
           "featured_quote": {
             "source_idx": "IT69",
@@ -5368,8 +5368,8 @@
           "id": 20,
           "gridIndex": 13,
           "keywords": [
-            "dying",
             "independent",
+            "dying",
             "gregory"
           ],
           "featured_quote": {
@@ -5382,9 +5382,9 @@
           "id": 0,
           "gridIndex": 14,
           "keywords": [
+            "ambiguity",
             "diaristic",
-            "different",
-            "ambiguity"
+            "different"
           ],
           "featured_quote": {
             "source_idx": "IT40",

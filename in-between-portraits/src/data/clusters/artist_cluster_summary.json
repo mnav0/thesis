@@ -8,7 +8,6 @@
           "id": 1,
           "gridIndex": 0,
           "keywords": [
-            "oriental",
             "migrants",
             "flowers"
           ],
@@ -42,9 +41,9 @@
           "id": 0,
           "gridIndex": 3,
           "keywords": [
+            "asian",
             "chinese",
-            "anonymous",
-            "asian"
+            "anonymous"
           ],
           "featured_quote": {
             "source_idx": "AT110",
@@ -56,7 +55,6 @@
           "id": 8,
           "gridIndex": 4,
           "keywords": [
-            "people",
             "community",
             "feel"
           ],
@@ -84,9 +82,9 @@
           "id": 4,
           "gridIndex": 6,
           "keywords": [
+            "mixed",
             "ethnic",
-            "people",
-            "mixed"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT18",
@@ -788,9 +786,9 @@
           "id": 9,
           "gridIndex": 7,
           "keywords": [
+            "oriental",
             "abstraction",
-            "untitled",
-            "oriental"
+            "untitled"
           ],
           "featured_quote": null
         },
@@ -798,9 +796,9 @@
           "id": 1,
           "gridIndex": 8,
           "keywords": [
+            "tiger",
             "iv",
-            "flowers",
-            "tiger"
+            "flowers"
           ],
           "featured_quote": null
         },
@@ -1426,8 +1424,8 @@
           "id": 3,
           "gridIndex": 0,
           "keywords": [
-            "flowers",
             "cults",
+            "flowers",
             "lamp"
           ],
           "featured_quote": null
@@ -1474,8 +1472,8 @@
           "id": 8,
           "gridIndex": 4,
           "keywords": [
-            "individual",
             "personal",
+            "individual",
             "community"
           ],
           "featured_quote": {
@@ -1488,9 +1486,9 @@
           "id": 4,
           "gridIndex": 5,
           "keywords": [
+            "cultural",
             "people",
-            "mixed",
-            "cultural"
+            "mixed"
           ],
           "featured_quote": {
             "source_idx": "AT18",
@@ -1530,8 +1528,8 @@
           "id": 2,
           "gridIndex": 8,
           "keywords": [
-            "self",
             "representation",
+            "self",
             "portrait"
           ],
           "featured_quote": {
@@ -2192,8 +2190,8 @@
           "id": 3,
           "gridIndex": 1,
           "keywords": [
-            "painting",
             "migrants",
+            "painting",
             "cults"
           ],
           "featured_quote": null
@@ -2202,8 +2200,8 @@
           "id": 11,
           "gridIndex": 2,
           "keywords": [
-            "oriental",
             "comparative",
+            "oriental",
             "famous"
           ],
           "featured_quote": null
@@ -2212,9 +2210,9 @@
           "id": 7,
           "gridIndex": 3,
           "keywords": [
+            "speak",
             "got",
-            "subjects",
-            "speak"
+            "subjects"
           ],
           "featured_quote": {
             "source_idx": "AT121",
@@ -2268,9 +2266,9 @@
           "id": 4,
           "gridIndex": 7,
           "keywords": [
-            "people",
+            "cultural",
             "mixed",
-            "cultural"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT18",
@@ -3050,8 +3048,8 @@
           "id": 5,
           "gridIndex": 5,
           "keywords": [
-            "inhabit",
             "people",
+            "inhabit",
             "having"
           ],
           "featured_quote": {
@@ -3106,9 +3104,9 @@
           "id": 8,
           "gridIndex": 9,
           "keywords": [
+            "personal",
             "individual",
-            "people",
-            "personal"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT25",
@@ -3120,9 +3118,9 @@
           "id": 4,
           "gridIndex": 10,
           "keywords": [
-            "people",
+            "cultural",
             "mixed",
-            "cultural"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT18",
@@ -3890,9 +3888,9 @@
           "id": 5,
           "gridIndex": 4,
           "keywords": [
+            "culture",
             "inhabit",
-            "people",
-            "culture"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT154",
@@ -3904,9 +3902,9 @@
           "id": 0,
           "gridIndex": 5,
           "keywords": [
+            "anonymous",
             "people",
-            "chinese",
-            "anonymous"
+            "chinese"
           ],
           "featured_quote": {
             "source_idx": "AT110",
@@ -3946,9 +3944,9 @@
           "id": 8,
           "gridIndex": 8,
           "keywords": [
+            "personal",
             "individual",
-            "people",
-            "personal"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT25",
@@ -4002,9 +4000,9 @@
           "id": 12,
           "gridIndex": 12,
           "keywords": [
+            "hybrid",
             "empathic",
-            "human",
-            "hybrid"
+            "human"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -4804,8 +4802,8 @@
           "id": 1,
           "gridIndex": 0,
           "keywords": [
-            "hudson",
             "tiger",
+            "hudson",
             "floor"
           ],
           "featured_quote": null
@@ -4814,9 +4812,9 @@
           "id": 5,
           "gridIndex": 1,
           "keywords": [
-            "painting",
             "abstraction",
-            "untitled"
+            "untitled",
+            "painting"
           ],
           "featured_quote": null
         },
@@ -4835,8 +4833,8 @@
           "gridIndex": 3,
           "keywords": [
             "familiar",
-            "family",
-            "oriental"
+            "oriental",
+            "family"
           ],
           "featured_quote": null
         },
@@ -4844,8 +4842,8 @@
           "id": 12,
           "gridIndex": 4,
           "keywords": [
-            "self",
             "heritage",
+            "self",
             "portrait"
           ],
           "featured_quote": {
@@ -4858,9 +4856,9 @@
           "id": 13,
           "gridIndex": 5,
           "keywords": [
+            "culture",
             "inhabit",
-            "people",
-            "culture"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT154",
@@ -4872,8 +4870,8 @@
           "id": 0,
           "gridIndex": 6,
           "keywords": [
-            "immigrant",
             "experiences",
+            "immigrant",
             "chinese"
           ],
           "featured_quote": {
@@ -4900,9 +4898,9 @@
           "id": 16,
           "gridIndex": 8,
           "keywords": [
+            "transnational",
             "fellow",
-            "feel",
-            "transnational"
+            "feel"
           ],
           "featured_quote": {
             "source_idx": "AT25",
@@ -4914,9 +4912,9 @@
           "id": 6,
           "gridIndex": 9,
           "keywords": [
+            "cultural",
             "empathic",
-            "experience",
-            "cultural"
+            "experience"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -4942,8 +4940,8 @@
           "id": 20,
           "gridIndex": 11,
           "keywords": [
+            "thinking",
             "bring",
-            "think",
             "like"
           ],
           "featured_quote": {
@@ -4984,9 +4982,9 @@
           "id": 4,
           "gridIndex": 14,
           "keywords": [
+            "community",
             "family",
-            "people",
-            "community"
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT99",
