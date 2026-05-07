@@ -4,6 +4,8 @@
       "id": 0,
       "name": "Part Asian, 100% Hapa",
       "labels": [
+        "ancestry",
+        "asian",
         "hapa"
       ]
     },
@@ -11,7 +13,9 @@
       "id": 1,
       "name": "War Baby / Love Child: Mixed Race Asian American Art",
       "labels": [
-        "mixed"
+        "mixed",
+        "asian",
+        "american"
       ]
     },
     {
@@ -28,22 +32,25 @@
       "name": "Dis/orient: Contemporary Art of the Asian Diaspora",
       "labels": [
         "diaspora",
-        "orient",
-        "dis"
+        "dis",
+        "orient"
       ]
     },
     {
       "id": 5,
       "name": "Legacies: Asian American Art Movements in New York City",
       "labels": [
-        "legacies",
-        "american"
+        "asian",
+        "american",
+        "legacies"
       ]
     },
     {
       "id": 6,
       "name": "Oscar yi Hou: East of sun, west of moon",
       "labels": [
+        "chinese",
+        "asian",
         "east"
       ]
     },
@@ -52,14 +59,17 @@
       "name": "Biennale Arte 2015: All the World's Futures",
       "labels": [
         "international",
-        "world"
+        "world",
+        "countries"
       ]
     },
     {
       "id": 8,
       "name": "Global Fascisms",
       "labels": [
-        "global"
+        "ideologies",
+        "global",
+        "authoritarian"
       ]
     },
     {
@@ -84,8 +94,8 @@
       "id": 11,
       "name": "Portraiture Now: Asian American Portraits of Encounter",
       "labels": [
-        "asian",
         "portraiture",
+        "asian",
         "smithsonian"
       ]
     },
@@ -94,6 +104,7 @@
       "name": "Ascendancy: The Self in Contemporary Art",
       "labels": [
         "personal",
+        "ascendancy",
         "agency"
       ]
     },
@@ -101,8 +112,8 @@
       "id": 13,
       "name": "One Way or Another: Asian American Art Now",
       "labels": [
-        "asian",
         "chinese",
+        "asian",
         "american"
       ]
     },
@@ -110,7 +121,9 @@
       "id": 14,
       "name": "The Decade Show: Frameworks of Identity in the 1980s",
       "labels": [
-        "frameworks"
+        "frameworks",
+        "studio",
+        "decade"
       ]
     }
   ],

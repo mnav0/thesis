@@ -13,7 +13,9 @@ import { artistsById, artworks, exhibitionEntryCount, exhibitionsById } from "..
 import {
   CLUSTER_ART_MODE_DOT_SIZE_PX,
   DOT_SIZE_PX,
+  REPRESENTATIVE_PERSONA_ARTIST_ID,
 } from "../../constants.js";
+import { publicImgSrc } from "../../utils/public-img-src.js";
 import ArtistDot from "../ArtistDot/index.vue";
 import ClusterArtistArtMark from "../ClusterArtistArtMark/index.vue";
 import ClusterSectionHeading from "../ClusterSectionHeading/index.vue";
@@ -64,8 +66,8 @@ const CLUSTER_BOX_MIN_HEIGHT = 170;
 const CLUSTER_BOX_PADDING = 18;
 const CLUSTER_LABEL_GAP = 10;
 const CLUSTER_KEYWORDS_TO_SHOW = 1;
-const CLUSTER_SAFE_AREA_SCALE = 0.65;
-const CLUSTER_GRID_SPREAD = 1.45;
+const CLUSTER_SAFE_AREA_SCALE = 0.6;
+const CLUSTER_SAFE_AREA_SHIFT_UP_PX = 48;
 const PACK_FALLBACK_W = 960;
 const PACK_FALLBACK_H = 720;
 
@@ -106,6 +108,18 @@ const showNAdjustControls = computed(() => isArtistOrInstitutionMode());
 const displayedGroupCount = computed(() =>
   viewMode.value === "exhibitions" ? exhibitionEntryCount : selectedN.value,
 );
+
+const canDecrementGroupN = computed(
+  () => showNAdjustControls.value && selectedNIndex.value > 0,
+);
+const canIncrementGroupN = computed(() => {
+  const vals = availableN.value;
+  return (
+    showNAdjustControls.value &&
+    vals.length > 0 &&
+    selectedNIndex.value < vals.length - 1
+  );
+});
 
 const artMode = ref(false);
 const artModeEpoch = ref(0);
@@ -280,8 +294,11 @@ function visibleNormBounds() {
   const sy = clamp01(CLUSTER_SAFE_AREA_SCALE, 0.35, 1);
   const targetMinY = (1 - sy) / 2;
   const minX = minXBase;
-  const minY = Math.max(minYTop, targetMinY);
-  const maxY = 1 - Math.max(minYBottom, targetMinY);
+  const minYBase = Math.max(minYTop, targetMinY);
+  const maxYBase = 1 - Math.max(minYBottom, targetMinY);
+  const shiftNorm = CLUSTER_SAFE_AREA_SHIFT_UP_PX / innerH;
+  const minY = Math.max(0, minYBase - shiftNorm);
+  const maxY = Math.max(minY + 1e-6, maxYBase - shiftNorm);
   return {
     minX,
     maxX: 1 - minX,
@@ -298,27 +315,6 @@ function normToCanvas(x, y) {
   };
 }
 
-function clampRefNormXY(x, y) {
-  const b = visibleNormBounds();
-  return {
-    nx: clamp01(Number(x) || 0.5, b.minX, b.maxX),
-    ny: clamp01(Number(y) || 0.5, b.minY, b.maxY),
-  };
-}
-
-function clusterGridNormCell(k, index) {
-  const cols = Math.max(1, Math.ceil(Math.sqrt(k)));
-  const rows = Math.ceil(k / cols);
-  const col = index % cols;
-  const row = Math.floor(index / cols);
-  return {
-    nx: (col + 0.5) / cols,
-    ny: (row + 0.5) / rows,
-    rows,
-    cols,
-  };
-}
-
 function gridCellIndexBySortedClusterId(clusterId, clusterIds) {
   const id = Number(clusterId);
   if (!Number.isFinite(id)) return 0;
@@ -329,12 +325,46 @@ function gridCellIndexBySortedClusterId(clusterId, clusterIds) {
   return idx >= 0 ? idx : 0;
 }
 
-function clusterGridSpreadNorm(nx, ny) {
-  const s = CLUSTER_GRID_SPREAD;
-  const x = 0.5 + (nx - 0.5) * s;
-  const y = 0.5 + (ny - 0.5) * s;
-  const c = clampRefNormXY(x, y);
-  return { normX: c.nx, normY: c.ny };
+/**
+ * Evenly distributes k cluster centers across the visible safe rectangle.
+ * Partial last rows use the same horizontal pitch as full rows and are centered.
+ */
+function clusterLayoutNormXY(k, cellIndex) {
+  const cols = Math.max(1, Math.ceil(Math.sqrt(k)));
+  const rows = Math.ceil(k / cols);
+  const row = Math.floor(cellIndex / cols);
+  const colInRow = cellIndex % cols;
+  const nInRow = row === rows - 1 ? k - row * cols : cols;
+
+  const b = visibleNormBounds();
+  const spanX = b.maxX - b.minX;
+  const spanY = b.maxY - b.minY;
+
+  let nxCell;
+  if (cols === 1) {
+    nxCell = 0.5;
+  } else {
+    const step = 1 / (cols - 1);
+    if (nInRow <= 1) {
+      nxCell = 0.5;
+    } else {
+      const blockWidth = (nInRow - 1) * step;
+      const start = (1 - blockWidth) / 2;
+      nxCell = start + colInRow * step;
+    }
+  }
+
+  let nyCell;
+  if (rows === 1) {
+    nyCell = 0.5;
+  } else {
+    nyCell = (row / (rows - 1)) * 1;
+  }
+
+  return {
+    normX: b.minX + nxCell * spanX,
+    normY: b.minY + nyCell * spanY,
+  };
 }
 
 const SHARED_BLEND_GAP = 0.15;
@@ -560,8 +590,7 @@ const layoutGroups = computed(() => {
     exRows.forEach((ex) => {
       const clusterId = Number(ex.id);
       const cellIdx = gridCellIndexBySortedClusterId(clusterId, clusterIds);
-      const { nx, ny } = clusterGridNormCell(k, cellIdx);
-      const { normX, normY } = clusterGridSpreadNorm(nx, ny);
+      const { normX, normY } = clusterLayoutNormXY(k, cellIdx);
 
       const rawExclusive = (artistsByExhibitionId.value.get(clusterId) ?? [])
         .filter((a) => !a.isShared)
@@ -611,8 +640,7 @@ const layoutGroups = computed(() => {
   groups.forEach((g) => {
     const clusterId = Number(g.id);
     const cellIdx = gridCellIndexBySortedClusterId(clusterId, clusterIds);
-    const { nx, ny } = clusterGridNormCell(k, cellIdx);
-    const { normX, normY } = clusterGridSpreadNorm(nx, ny);
+    const { normX, normY } = clusterLayoutNormXY(k, cellIdx);
     const kw = Array.isArray(g.keywords) ? g.keywords : [];
     const centerLabels = kw.slice(0, CLUSTER_KEYWORDS_TO_SHOW).map(String);
     out[clusterId] = {
@@ -1336,12 +1364,24 @@ function displayLabelLines(group) {
     <ClusterSectionHeading
       :view-mode="viewMode"
       :show-n-adjust-controls="showNAdjustControls"
-      :art-mode="artMode"
+      :can-decrement-group-n="canDecrementGroupN"
+      :can-increment-group-n="canIncrementGroupN"
       :group-count="displayedGroupCount"
       @change-view-mode="setViewMode"
       @decrement-n="decrementN"
       @increment-n="incrementN"
     />
+
+    <button
+      type="button"
+      class="cluster-section__art-mode-btn label-text"
+      :class="{ 'cluster-section__art-mode-btn--active': artMode }"
+      :aria-pressed="artMode"
+      aria-label="Toggle art mode"
+      @click="toggleArtMode"
+    >
+      Art mode
+    </button>
 
     <div
       ref="sectionRef"
@@ -1495,16 +1535,69 @@ function displayLabelLines(group) {
       </template>
     </div>
 
-    <button
-      type="button"
-      class="cluster-section__art-mode-btn label-text"
-      :class="{ 'cluster-section__art-mode-btn--active': artMode }"
-      :aria-pressed="artMode"
-      aria-label="Toggle art mode"
-      @click="toggleArtMode"
-    >
-      Art mode
-    </button>
+    <div class="cluster-section-footer" aria-label="Visualization key">
+      <div class="cluster-section-key">
+        <div class="cluster-section-key__row">
+          <span class="cluster-section-key__marker cluster-section-key__marker--artist">
+            <template v-if="artMode">
+              <img
+                class="cluster-section-key__artwork"
+                :src="publicImgSrc('artwork.svg')"
+                alt=""
+                width="28"
+                height="24"
+              />
+            </template>
+            <template v-else>
+              <span class="cluster-section-key__persona-dot">
+                <ArtistDot :artist-id="REPRESENTATIVE_PERSONA_ARTIST_ID" />
+              </span>
+              <span class="cluster-section-key__initials">WT</span>
+            </template>
+          </span>
+          <span class="cluster-section-key__text">
+            <span class="cluster-section-key__equals">=</span>
+            <span class="cluster-section-key__copy">{{
+              artMode ? "artist + work" : "artist + initials"
+            }}</span>
+          </span>
+        </div>
+        <div class="cluster-section-key__row">
+          <span class="cluster-section-key__marker cluster-section-key__marker--line-pair">
+            <span class="cluster-section-key__line cluster-section-key__line--primary" />
+            <span class="cluster-section-key__line cluster-section-key__line--secondary" />
+          </span>
+          <span class="cluster-section-key__text">
+            <span class="cluster-section-key__equals">=</span>
+            <span class="cluster-section-key__copy">strength of connection</span>
+          </span>
+        </div>
+        <div class="cluster-section-key__row">
+          <span class="cluster-section-key__marker cluster-section-key__marker--anchor">
+            <span class="cluster-section-key__box" />
+            <span class="cluster-section-key__anchor-label">LABEL</span>
+          </span>
+          <span class="cluster-section-key__text">
+            <span class="cluster-section-key__equals">=</span>
+            <span class="cluster-section-key__copy">group anchor + keywords</span>
+          </span>
+        </div>
+        <div class="cluster-section-key__row">
+          <span class="cluster-section-key__marker cluster-section-key__marker--line-pair">
+            <span
+              class="cluster-section-key__line cluster-section-key__line--similarity-strong"
+            />
+            <span
+              class="cluster-section-key__line cluster-section-key__line--similarity-weak"
+            />
+          </span>
+          <span class="cluster-section-key__text">
+            <span class="cluster-section-key__equals">=</span>
+            <span class="cluster-section-key__copy">similarity to group anchor</span>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

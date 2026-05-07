@@ -1,6 +1,15 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from "vue";
 
+function plainTextFromHeadingHtml(html) {
+  if (!html) return "";
+  return html
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]+>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const props = defineProps({
   headingHtml: {
     type: String,
@@ -23,6 +32,14 @@ const props = defineProps({
     default: "bullet",
     validator: (value) => ["bullet", "numbered"].includes(value),
   },
+  smallText: {
+    type: Boolean,
+    default: false,
+  },
+  triggerTitle: {
+    type: String,
+    default: undefined,
+  },
 });
 
 const isOpen = ref(false);
@@ -31,6 +48,20 @@ const isDarkContext = ref(false);
 const resolvedHeadingHtml = computed(() =>
   props.headingHtml ? props.headingHtml.replace(/\n/g, "<br>") : props.heading,
 );
+
+const triggerNativeTitle = computed(() => {
+  if (props.triggerTitle !== undefined) {
+    return props.triggerTitle;
+  }
+  if (props.heading) {
+    return props.heading;
+  }
+  const fromHtml = plainTextFromHeadingHtml(props.headingHtml);
+  if (fromHtml) {
+    return fromHtml;
+  }
+  return props.ariaLabel;
+});
 const titleId = useId();
 let originalBodyOverflow = "";
 
@@ -96,12 +127,17 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <span class="info-overlay-button" ref="triggerRef">
+  <span
+    class="info-overlay-button"
+    :class="{ 'info-overlay-button--small': smallText }"
+    ref="triggerRef"
+  >
     <button
       type="button"
       class="info-overlay-button__trigger label-text"
       :class="`info-overlay-button__trigger--${inferredTheme}`"
       :aria-label="ariaLabel"
+      :title="triggerNativeTitle"
       :aria-expanded="isOpen ? 'true' : 'false'"
       :aria-controls="titleId"
       @click="openModal"

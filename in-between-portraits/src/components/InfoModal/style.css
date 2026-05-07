@@ -28,6 +28,12 @@
   color: #fff;
 }
 
+.info-overlay-button--small .info-overlay-button__trigger {
+  width: 1.05rem;
+  height: 1.05rem;
+  font-size: 0.7125rem;
+}
+
 .info-overlay-button__overlay {
   position: fixed;
   inset: 0;
