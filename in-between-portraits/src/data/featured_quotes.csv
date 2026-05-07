@@ -1,7 +1,7 @@
 artist_id,source_idx,point
-0,AT56,2
+0,AT53,0
 1,AT01,4
-2,AT10,7
+2,AT11,6
 3,AT23,12
 4,AT25,27
 5,AT36,34
@@ -10,7 +10,7 @@ artist_id,source_idx,point
 8,AT68,53
 9,AT71,62
 10,AT81,68
-11,AT82,74
+11,AT82,71
 12,AT86,82
 13,AT90,86
 14,AT99,92

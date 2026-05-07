@@ -101,45 +101,25 @@ export function buildExhibitionSecondaryLineKeys(ctx) {
   const {
     centerPointLines,
     hoveredPoint,
-    hoveredClusterId,
-    pointDetailsByKey,
     directKeys,
     nonDimmedPointKeys,
   } = ctx;
   const secondaryKeys = new Set();
 
   if (hoveredPoint) {
-    const associatedClusterIds = new Set();
+    const directExhibitionIds = new Set();
     for (const line of centerPointLines) {
       if (!directKeys.has(line.key)) continue;
-      const cid = Number(line.sourceClusterId);
-      if (Number.isFinite(cid)) associatedClusterIds.add(cid);
-      const tcid = Number(line.targetClusterId);
-      if (Number.isFinite(tcid)) associatedClusterIds.add(tcid);
+      const sid = Number(line.sourceClusterId);
+      if (Number.isFinite(sid)) directExhibitionIds.add(sid);
     }
 
     for (const line of centerPointLines) {
       if (directKeys.has(line.key)) continue;
-      const cid = Number(line.sourceClusterId);
-      if (!associatedClusterIds.has(cid)) continue;
-      if (!exhibitionLineMatchesNonDimmed(line, nonDimmedPointKeys)) continue;
-      secondaryKeys.add(line.key);
-    }
-  } else if (hoveredClusterId != null) {
-    const artistIds = new Set();
-    for (const line of centerPointLines) {
-      if (!directKeys.has(line.key)) continue;
-      const sourceArtistId = artistIdFromPointKey(pointDetailsByKey, line.sourcePointKey);
-      const targetArtistId = artistIdFromPointKey(pointDetailsByKey, line.targetPointKey);
-      if (sourceArtistId != null) artistIds.add(sourceArtistId);
-      if (targetArtistId != null) artistIds.add(targetArtistId);
-    }
-
-    for (const line of centerPointLines) {
-      if (directKeys.has(line.key)) continue;
-      const sourceArtistId = artistIdFromPointKey(pointDetailsByKey, line.sourcePointKey);
-      const targetArtistId = artistIdFromPointKey(pointDetailsByKey, line.targetPointKey);
-      if (!artistIds.has(sourceArtistId) && !artistIds.has(targetArtistId)) continue;
+      // Non-direct lines from hovered artist are intentionally suppressed.
+      if (line.sourcePointKey === hoveredPoint) continue;
+      const sid = Number(line.sourceClusterId);
+      if (!directExhibitionIds.has(sid)) continue;
       if (!exhibitionLineMatchesNonDimmed(line, nonDimmedPointKeys)) continue;
       secondaryKeys.add(line.key);
     }
@@ -178,18 +158,11 @@ export function buildNonExhibitionDirectLineKeys(ctx) {
 }
 
 export function buildNonExhibitionSecondaryLineKeys(ctx) {
-  const {
-    centerPointLines,
-    hoveredPoint,
-    hoveredClusterId,
-    pointDetailsByKey,
-    directKeys,
-    primaryLikePoint,
-  } = ctx;
+  const { centerPointLines, hoveredPoint, pointDetailsByKey, directKeys, primaryLikePoint } = ctx;
   const secondaryKeys = new Set();
 
   if (hoveredPoint) {
-    // All clusters the hovered point has a primary-like spoke to
+    // Clusters that the hovered artist is directly/primarily connected to.
     const primarySpokeTargets = new Set();
     for (const line of centerPointLines) {
       if (!directKeys.has(line.key)) continue;
@@ -200,37 +173,14 @@ export function buildNonExhibitionSecondaryLineKeys(ctx) {
 
     for (const line of centerPointLines) {
       if (directKeys.has(line.key)) continue;
-      if (line.sourcePointKey === hoveredPoint) {
-        // Non-primary spokes from the hovered point to other cluster centers
-        secondaryKeys.add(line.key);
-        continue;
-      }
-      // Other artists' primary-like spokes to any of the hovered point's primary clusters
+      // non-activated centers don't show hovered lines
+      if (line.sourcePointKey === hoveredPoint) continue;
+
+      // show other artists in activated clusters
       const t = Number(line.targetClusterId);
       if (!primarySpokeTargets.has(t)) continue;
       const details = pointDetailsByKey[line.sourcePointKey];
       if (details && primaryLikePoint(details, t)) secondaryKeys.add(line.key);
-    }
-  } else if (hoveredClusterId != null) {
-    const hoveredId = Number(hoveredClusterId);
-
-    // Points with a direct (primary-like) spoke to the hovered cluster
-    const directSourcePointKeys = new Set();
-    for (const line of centerPointLines) {
-      if (directKeys.has(line.key) && line.sourcePointKey) {
-        directSourcePointKeys.add(line.sourcePointKey);
-      }
-    }
-
-    // Their other primary-like spokes to different cluster centers
-    for (const line of centerPointLines) {
-      if (directKeys.has(line.key)) continue;
-      if (!directSourcePointKeys.has(line.sourcePointKey)) continue;
-      if (Number(line.targetClusterId) === hoveredId) continue;
-      const details = pointDetailsByKey[line.sourcePointKey];
-      if (details && primaryLikePoint(details, Number(line.targetClusterId))) {
-        secondaryKeys.add(line.key);
-      }
     }
   }
 
@@ -269,7 +219,10 @@ export function buildLineHoverHighlight(opts) {
     const direct = buildExhibitionDirectLineKeys(exCtx);
     return {
       direct,
-      secondary: buildExhibitionSecondaryLineKeys({ ...exCtx, directKeys: direct }),
+      secondary: buildExhibitionSecondaryLineKeys({
+        ...exCtx,
+        directKeys: direct,
+      }),
     };
   }
 
