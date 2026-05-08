@@ -35,7 +35,7 @@ const SECTION_HANDOFF_SCROLL_CONFIG = {
 const IDENTITY_PREVIEW_CONFIG = {
   featuredKeywords: {
     state2Primary: "ancestry",
-    state2Secondary: "political",
+    state2Secondary: "conceptual",
     state3Sequence: ["mixed", "representation", "personal"],
   },
   emphasis: {

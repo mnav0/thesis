@@ -309,6 +309,12 @@ onBeforeUnmount(() => {
     </div>
   </div>
 
+  <div
+    v-if="expandedCluster"
+    class="cluster-view-backdrop"
+    aria-hidden="true"
+    @click="closeClusterView"
+  />
   <ClusterView
     v-if="expandedCluster"
     :cluster="expandedCluster"
