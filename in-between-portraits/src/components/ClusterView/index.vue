@@ -98,6 +98,7 @@ watch(
       :artist-ids="galleryArtistIds"
       :cluster-featured-quote="cluster.clusterFeaturedQuote"
       :exhibition-hero="cluster.exhibitionHero"
+      :point-filter="cluster.pointFilter ?? null"
       @past-hero-change="galleryPastHero = $event"
     />
     <div

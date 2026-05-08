@@ -33,6 +33,11 @@ const props = defineProps({
   // (no quotes) with location + year as attribution.
   // Shape: { name, location, year }
   exhibitionHero: { type: Object, default: null },
+  // Filter to show only cluster-relevant points.
+  // { type: "cluster", viewMode: "artist"|"institution", clusterId: Number, n: Number }
+  // { type: "exhibition", year: Number|null }
+  // null → no filter (single-artist dot click, show everything)
+  pointFilter: { type: Object, default: null },
 });
 
 const emit = defineEmits(["pastHeroChange"]);
@@ -124,6 +129,7 @@ const enrichedPoints = computed(() => {
         sourceActor,
         isArtwork,
         text: point.text || "",
+        clusterByN: point.cluster_by_n ?? null,
       };
 
       if (isArtwork) {
@@ -207,10 +213,32 @@ const heroData = computed(() => {
   };
 });
 
+// ---------- point filtering ----------
+
+const displayPoints = computed(() => {
+  const filter = props.pointFilter;
+  if (!filter) return enrichedPoints.value;
+
+  if (filter.type === "cluster") {
+    const source = filter.viewMode === "institution" ? "institution" : "artist";
+    return enrichedPoints.value.filter(
+      (p) => p.clusterByN?.[source]?.[filter.n] === filter.clusterId,
+    );
+  }
+
+  if (filter.type === "exhibition" && filter.year != null) {
+    return enrichedPoints.value.filter(
+      (p) => Number.isFinite(p.year) && p.year < filter.year,
+    );
+  }
+
+  return enrichedPoints.value;
+});
+
 // ---------- chronological timeline ----------
 
 const chronoPoints = computed(() => {
-  const arr = enrichedPoints.value
+  const arr = displayPoints.value
     .filter((p) => Number.isFinite(p.year))
     .slice();
   arr.sort((a, b) => {
@@ -340,6 +368,7 @@ const heroRef = ref(null);
 const activeIdx = ref(0); // fractional
 const viewportH = ref(0);
 const heroPx = ref(0);
+const pinnedArtworkKey = ref(null); // set when user explicitly clicks a canvas artwork
 
 function measureHero() {
   heroPx.value = heroRef.value ? heroRef.value.offsetHeight : 0;
@@ -444,6 +473,15 @@ watch(
   },
 );
 
+// Clear the pinned artwork when the user scrolls more than 1.5 segments away from it.
+watch(activeIdx, (newIdx) => {
+  if (!pinnedArtworkKey.value) return;
+  const pinned = chronoPoints.value.find((p) => p.pointKey === pinnedArtworkKey.value);
+  if (!pinned || Math.abs(pinned.idx - newIdx) > 1.5) {
+    pinnedArtworkKey.value = null;
+  }
+});
+
 // ---------- featured slot resolution ----------
 
 const activeIdxRounded = computed(() => Math.round(activeIdx.value));
@@ -467,26 +505,27 @@ function findLatestWithFallback(pts, cutoff, predicate) {
   return pts.find(predicate) || null;
 }
 
+// Artwork is resolved first; in multi-artist mode the text slot then
+// follows the artwork's artist so both slots always stay in sync.
+const featuredArtwork = computed(() => {
+  const pts = chronoPoints.value;
+  const cutoff = activeIdxRounded.value;
+  if (pinnedArtworkKey.value) {
+    const pinned = pts.find((p) => p.pointKey === pinnedArtworkKey.value);
+    if (pinned) return pinned;
+  }
+  return findLatestWithFallback(pts, cutoff, isArtistArtwork);
+});
+
 const featuredTextCandidate = computed(() => {
   const pts = chronoPoints.value;
   const cutoff = activeIdxRounded.value;
   const predicate = (p) => hasText(p) && !p.isArtwork;
-  return findLatestWithFallback(pts, cutoff, predicate);
-});
-
-const featuredArtwork = computed(() => {
-  const pts = chronoPoints.value;
-  const cutoff = activeIdxRounded.value;
-  const textPoint = featuredTextCandidate.value;
-  if (textPoint && props.artistIds.length > 1) {
-    const aid = textPoint.artistId;
-    return findLatestWithFallback(
-      pts,
-      cutoff,
-      (p) => isArtistArtwork(p) && p.artistId === aid,
-    );
+  if (props.artistIds.length > 1 && featuredArtwork.value) {
+    const aid = featuredArtwork.value.artistId;
+    return findLatestWithFallback(pts, cutoff, (p) => predicate(p) && p.artistId === aid);
   }
-  return findLatestWithFallback(pts, cutoff, isArtistArtwork);
+  return findLatestWithFallback(pts, cutoff, predicate);
 });
 
 function shouldShowFeaturedTextForArtwork(textPoint, artworkPoint) {
@@ -530,7 +569,7 @@ const activeYear = computed(() => {
 
 const artworkHoverPointsBySourceIdx = computed(() => {
   const map = new Map();
-  for (const point of enrichedPoints.value) {
+  for (const point of displayPoints.value) {
     if (!point.isArtwork) continue;
     const key = String(point.sourceIdx || "");
     if (!key) continue;
@@ -694,6 +733,11 @@ function scrollToPoint(point) {
   scrollToIdx(point.idx, { behavior: "smooth" });
 }
 
+function clickCanvasArtwork(point) {
+  pinnedArtworkKey.value = point.pointKey;
+  scrollToPoint(point);
+}
+
 // ---------- timeline scrubbing ----------
 
 const trackRef = ref(null);
@@ -757,7 +801,7 @@ function onTrackPointerUp(e) {
 // ---------- derived render data ----------
 
 const galleryBodyStyle = computed(() => ({
-  height: `${chronoPoints.value.length * SEGMENT_VH}vh`,
+  height: `calc(${chronoPoints.value.length * SEGMENT_VH}vh + 100vh)`,
 }));
 
 const canvasItems = computed(() =>
@@ -822,7 +866,7 @@ watch(
                   pointerEvents: canvasOpacity(point.idx) < 0.05 ? 'none' : 'auto',
                 }"
                 :tabindex="canvasOpacity(point.idx) < 0.05 ? -1 : 0"
-                @click="scrollToPoint(point)"
+                @click="clickCanvasArtwork(point)"
               >
                 <img
                   :src="point.image_url"
