@@ -1480,7 +1480,7 @@ function displayLabelLines(group) {
           <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(item.artistName) }}
           </div>
-          <div class="cs-tooltip">{{ item.artistName }}</div>
+          <div v-if="!artMode" class="cs-point-name">{{ item.artistName }}</div>
         </div>
       </div>
       <template v-if="surfaceSharedArtistItems.length">
@@ -1517,7 +1517,7 @@ function displayLabelLines(group) {
           <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(artist.artistName) }}
           </div>
-          <div class="cs-tooltip">{{ artist.artistName }}</div>
+          <div v-if="!artMode" class="cs-point-name">{{ artist.artistName }}</div>
         </div>
       </template>
     </div>

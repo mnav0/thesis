@@ -200,7 +200,8 @@
 .cs-point :deep(.artist-dot) {
   transition:
     filter 0.2s,
-    opacity 0.2s;
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .cs-point :deep(.artist-dot path) {
@@ -227,6 +228,7 @@
 
 .cs-point--hovered :deep(.artist-dot) {
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+  transform: scale(1.1);
 }
 
 .cs-point--dimmed :deep(.artist-dot) {
@@ -252,7 +254,6 @@
   line-height: 1;
   letter-spacing: 0.06em;
   padding: 1px 3px;
-  background: rgba(255, 255, 255, 0.6);
   color: #111;
   text-transform: uppercase;
   pointer-events: none;
@@ -264,19 +265,19 @@
   opacity: 0.4;
 }
 
-.cs-tooltip {
+.cs-point-name {
   position: absolute;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 2px);
   left: 50%;
   transform: translateX(-50%);
-  max-width: 14rem;
+  max-width: 12rem;
   white-space: normal;
   text-align: center;
   line-height: 1.25;
   background: rgba(255, 255, 255, 0.97);
   border: 1px solid #111;
-  padding: 6px 10px;
-  font-size: var(--text-ui);
+  padding: 3px 5px;
+  font-size: var(--text-key);
   font-family: var(--font-body);
   pointer-events: none;
   opacity: 0;
@@ -285,7 +286,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.cs-point:hover .cs-tooltip {
+.cs-point--hovered .cs-point-name,
+.cs-point--active-cluster .cs-point-name {
   opacity: 1;
 }
 
