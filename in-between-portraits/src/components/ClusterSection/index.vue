@@ -935,6 +935,7 @@ const allLines = computed(() => {
         sourcePointKey: pk,
         sourceClusterId: cid,
         targetClusterId: cid,
+        anchorClusterId: cid,
         x1: pt.x,
         y1: pt.y,
         x2: cx.x,
@@ -958,6 +959,7 @@ const allLines = computed(() => {
           sourcePointKey: pk,
           sourceClusterId: cid,
           targetClusterId: otherId,
+          anchorClusterId: otherId,
           x1: pt.x,
           y1: pt.y,
           x2: oc.x,
@@ -1009,6 +1011,7 @@ const allLines = computed(() => {
           sourcePointKey: pk,
           sourceClusterId: eid,
           targetPointKey: pk,
+          anchorClusterId: eid,
           x1: pt.x,
           y1: pt.y,
           x2: cx.x,
@@ -1037,6 +1040,7 @@ const allLines = computed(() => {
           sourceClusterId: pId,
           targetClusterId: cid,
           targetPointKey: pk,
+          anchorClusterId: cid,
           x1: pt.x,
           y1: pt.y,
           x2: cx.x,
@@ -1089,33 +1093,12 @@ const clusterIdsWithVisibleHoverLines = computed(() => {
   if (!hasActiveHoverContext.value) return [];
 
   const { direct, secondary } = lineHoverHighlight.value;
-  let anyHighlightedLine = false;
 
   for (const line of allLines.value) {
-    const isActive = direct.has(line.key);
-    const isSecondary = secondary.has(line.key);
-    if (!isActive && !isSecondary) continue;
-
-    anyHighlightedLine = true;
-    const s = Number(line.sourceClusterId);
-    const t = Number(line.targetClusterId);
-    if (Number.isFinite(s)) ids.add(s);
-    if (Number.isFinite(t)) ids.add(t);
-
-    if (line.kind === "point-point" && line.targetPointKey) {
-      const d = pointDetailsByKey.value[line.targetPointKey];
-      if (d?.clusterId != null) ids.add(Number(d.clusterId));
-      if (Array.isArray(d?.clusterIds)) {
-        for (const c of d.clusterIds) {
-          const n = Number(c);
-          if (Number.isFinite(n)) ids.add(n);
-        }
-      }
-    }
-  }
-
-  if (anyHighlightedLine && ids.size === 0) {
-    for (const id of activeClusterIds.value) ids.add(Number(id));
+    if (!direct.has(line.key) && !secondary.has(line.key)) continue;
+    if (line.kind !== "center-point") continue;
+    const anchor = Number(line.anchorClusterId);
+    if (Number.isFinite(anchor)) ids.add(anchor);
   }
 
   return Array.from(ids);
