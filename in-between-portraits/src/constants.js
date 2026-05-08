@@ -24,3 +24,12 @@ export const CLUSTER_ART_MODE_DOT_SIZE_PX = DOT_SIZE_PX * CLUSTER_ART_MODE_DOT_S
  * persona section, cluster key legend, etc. Matches `src/assets/artist-dots/<id>.svg`.
  */
 export const REPRESENTATIVE_PERSONA_ARTIST_ID = 18;
+
+/** How many keywords to show per cluster group in the cluster view and artist keyword summary. */
+export const CLUSTER_KEYWORDS_TO_SHOW = 1;
+
+/** Minimum cluster distribution weight to show any association in the keyword summary. */
+export const CLUSTER_MIN_ASSOCIATION_WEIGHT = 0.02;
+
+/** An association is “primary-like” if its weight is within this gap of the primary cluster's weight. */
+export const CLUSTER_PRIMARY_LINE_GAP = 0.1;

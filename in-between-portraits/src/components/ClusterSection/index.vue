@@ -12,6 +12,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { artistsById, artworks, exhibitionEntryCount, exhibitionsById } from "../../data/index.js";
 import {
   CLUSTER_ART_MODE_DOT_SIZE_PX,
+  CLUSTER_KEYWORDS_TO_SHOW,
+  CLUSTER_MIN_ASSOCIATION_WEIGHT,
+  CLUSTER_PRIMARY_LINE_GAP,
   DOT_SIZE_PX,
   REPRESENTATIVE_PERSONA_ARTIST_ID,
 } from "../../constants.js";
@@ -65,7 +68,6 @@ const CLUSTER_BOX_MIN_WIDTH = 150;
 const CLUSTER_BOX_MIN_HEIGHT = 170;
 const CLUSTER_BOX_PADDING = 18;
 const CLUSTER_LABEL_GAP = 10;
-const CLUSTER_KEYWORDS_TO_SHOW = 1;
 const CLUSTER_SAFE_AREA_SCALE = 0.6;
 const CLUSTER_SAFE_AREA_SHIFT_UP_PX = 48;
 const PACK_FALLBACK_W = 960;
@@ -368,8 +370,6 @@ function clusterLayoutNormXY(k, cellIndex) {
 }
 
 const SHARED_BLEND_GAP = 0.15;
-const PRIMARY_LINE_GAP = 0.1;
-const MIN_ASSOCIATION_WEIGHT = 0.02;
 
 function sharedLinkIds(artist) {
   if (viewMode.value === "exhibitions") {
@@ -408,7 +408,7 @@ function isPrimarySpoke(clusterDistribution, primaryIdRaw, targetClusterIdRaw) {
   }
   const wPrimary = distributionMass(clusterDistribution, primaryId);
   const w = distributionMass(clusterDistribution, clusterId);
-  return w > MIN_ASSOCIATION_WEIGHT && w >= wPrimary - PRIMARY_LINE_GAP;
+  return w > CLUSTER_MIN_ASSOCIATION_WEIGHT && w >= wPrimary - CLUSTER_PRIMARY_LINE_GAP;
 }
 
 function primaryLikePoint(details, clusterIdRaw) {
@@ -530,7 +530,7 @@ function clusterIdsFromDistribution(clusterDistribution) {
     const numericId = Number(clusterId);
     const numericWeight = Number(weight);
     if (!Number.isFinite(numericId) || !Number.isFinite(numericWeight)) continue;
-    if (numericWeight > MIN_ASSOCIATION_WEIGHT) ids.push(numericId);
+    if (numericWeight > CLUSTER_MIN_ASSOCIATION_WEIGHT) ids.push(numericId);
   }
   return ids;
 }
@@ -1265,6 +1265,7 @@ function handlePointClick(item) {
     items: [{ artist: id == null ? id : String(id) }],
     n_clusters:
       viewMode.value === "exhibitions" ? exhibitionEntryCount : selectedN.value,
+    view_mode: viewMode.value,
   });
 }
 

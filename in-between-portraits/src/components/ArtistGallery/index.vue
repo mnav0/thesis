@@ -15,7 +15,16 @@ import {
   artistsById,
   institutionsById,
   featuredQuotesByArtistId,
+  artistClustersMap,
+  institutionClustersMap,
+  exhibitionClustersMap,
 } from "../../data/index.js";
+import {
+  CLUSTER_KEYWORDS_TO_SHOW,
+  CLUSTER_MIN_ASSOCIATION_WEIGHT,
+  CLUSTER_PRIMARY_LINE_GAP,
+} from "../../constants.js";
+import { publicImgSrc } from "../../utils/public-img-src.js";
 import { parseYear } from "../../utils/parse-year.js";
 import ArtistDot from "../ArtistDot/index.vue";
 
@@ -37,6 +46,9 @@ const props = defineProps({
   // { type: "exhibition", year: Number|null }
   // null → no filter (single-artist dot click, show everything)
   pointFilter: { type: Object, default: null },
+  // View mode active when this modal was opened ('artist' | 'institution' | 'exhibitions').
+  // Determines which actor row appears first in the keyword summary.
+  sourceMode: { type: String, default: null },
 });
 
 const emit = defineEmits(["pastHeroChange"]);
@@ -359,6 +371,72 @@ const dotPositions = computed(() => {
     });
   });
   return map;
+});
+
+// ---------- per-source keyword summary ----------
+
+function getClusterKeywords(clusterMap, artistId) {
+  const list = clusterMap?.numClusters;
+  if (!list?.length) return [];
+  const seen = new Set();
+  const keywords = [];
+  for (const entry of list) {
+    const artistEntry = entry.artists?.find((a) => Number(a.artistId) === artistId);
+    if (!artistEntry) continue;
+    const dist = artistEntry.clusterDistribution ?? {};
+    const primaryId = Number(artistEntry.primaryGroup);
+    const primaryWeight = Number(dist[String(primaryId)] ?? dist[primaryId] ?? 0);
+    const primaryAssociations = Object.entries(dist)
+      .map(([id, w]) => ({ clusterId: Number(id), weight: Number(w) }))
+      .filter((a) => a.weight > CLUSTER_MIN_ASSOCIATION_WEIGHT && a.weight >= primaryWeight - CLUSTER_PRIMARY_LINE_GAP)
+      .sort((a, b) => b.weight - a.weight);
+    for (const { clusterId } of primaryAssociations) {
+      const group = entry.groups?.find((g) => Number(g.id) === clusterId);
+      for (const kw of (group?.keywords ?? []).slice(0, CLUSTER_KEYWORDS_TO_SHOW)) {
+        if (!seen.has(kw)) {
+          seen.add(kw);
+          keywords.push(kw);
+        }
+      }
+    }
+  }
+  return keywords;
+}
+
+function getExhibitionKeywords(exMap, artistId) {
+  const artistEntry = exMap?.artists?.find((a) => Number(a.artistId) === artistId);
+  if (!artistEntry?.exhibitionIds?.length) return [];
+  const labels = [];
+  for (const eid of artistEntry.exhibitionIds) {
+    const ex = exMap.exhibitions?.find((e) => e.id === Number(eid));
+    if (ex?.labels?.length) labels.push(...ex.labels);
+  }
+  return [...new Set(labels)];
+}
+
+function actorIconStyle(actor) {
+  const src = actor === "artist" ? publicImgSrc("artist.svg") : publicImgSrc("institution.svg");
+  return { maskImage: `url("${src}")`, WebkitMaskImage: `url("${src}")` };
+}
+
+const keywordRows = computed(() => {
+  if (props.artistIds.length !== 1) return [];
+  const artistId = Number(props.artistIds[0]);
+
+  const sourceModeToActor = { artist: "artist", institution: "institution", exhibitions: "exhibition" };
+  const clickedActor = sourceModeToActor[props.sourceMode] ?? "artist";
+  const defaultOrder = ["artist", "institution", "exhibition"];
+  const actorOrder = [clickedActor, ...defaultOrder.filter((a) => a !== clickedActor)];
+
+  const byActor = {
+    artist: getClusterKeywords(artistClustersMap, artistId),
+    institution: getClusterKeywords(institutionClustersMap, artistId),
+    exhibition: getExhibitionKeywords(exhibitionClustersMap, artistId),
+  };
+
+  return actorOrder
+    .filter((actor) => byActor[actor].length)
+    .map((actor) => ({ actor, keywords: byActor[actor] }));
 });
 
 // ---------- scroll-driven active index ----------
@@ -718,7 +796,12 @@ const visibleDotPoints = computed(() =>
 <template>
   <div class="artist-gallery-root">
     <div ref="scrollRef" class="artist-gallery-scroll">
-      <section v-if="heroData" ref="heroRef" class="gallery-hero">
+      <section
+        v-if="heroData"
+        ref="heroRef"
+        class="gallery-hero"
+        :class="{ 'gallery-hero--keyword-border': keywordRows[0]?.actor === 'artist' }"
+      >
         <!-- Exhibition hero: name as heading, no quote marks, location (year) attribution -->
         <template v-if="heroData.kind === 'exhibition'">
           <h2 class="gallery-hero__exhibition-name">{{ heroData.name }}</h2>
@@ -737,6 +820,21 @@ const visibleDotPoints = computed(() =>
             <template v-if="heroData.year"><template v-if="heroData.artistName">, </template>{{ heroData.year }}</template>
           </div>
         </template>
+      </section>
+
+      <section v-if="keywordRows.length" class="gallery-keyword-summary" aria-label="Source keywords">
+        <div
+          v-for="row in keywordRows"
+          :key="row.actor"
+          class="gallery-keyword-row"
+          :class="`gallery-keyword-row--${row.actor}`"
+        >
+          <span class="gallery-keyword-row__icon" aria-hidden="true">
+            <span v-if="row.actor === 'exhibition'" class="gallery-keyword-row__exhibition-node" />
+            <span v-else class="gallery-keyword-row__mode-icon" :style="actorIconStyle(row.actor)" />
+          </span>
+          <span class="gallery-keyword-row__keyword label-text">{{ row.keywords.join(', ') }}</span>
+        </div>
       </section>
 
       <div v-if="chronoPoints.length" class="gallery-body" :style="galleryBodyStyle">
