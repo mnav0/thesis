@@ -156,6 +156,24 @@
   pointer-events: none;
 }
 
+.cs-center-labels::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  bottom: -12px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 38%,
+    rgba(255, 255, 255, 0.9) 62%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
 .cs-center-label-line {
   font-size: clamp(var(--text-ui), 2.8vw, var(--text-body));
   line-height: 1.2;
@@ -224,6 +242,10 @@
 
 .cs-point--hovered {
   z-index: 70;
+}
+
+.cs-point--active-cluster:not(.cs-point--hovered) {
+  z-index: 30;
 }
 
 .cs-point--hovered :deep(.artist-dot) {
