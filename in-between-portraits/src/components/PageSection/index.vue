@@ -48,9 +48,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  /**
-   * headings stay in the former md:col-span-9 band while body is full width
-   */
   stackedNarrowHeading: {
     type: Boolean,
     default: false,
@@ -185,7 +182,7 @@ defineExpose({ sectionEl });
       <template v-else>
         <div v-if="layout === 'stacked'" :class="stackedOuterGridClass">
           <template v-if="stackedSplitHeadingBody">
-            <div class="col-span-12 md:col-span-9 md:col-start-1">
+            <div class="col-span-12 md:col-span-10 md:col-start-1">
               <slot name="heading">
                 <div v-if="hasHeadingContent" class="page-section-heading-block">
                   <h2

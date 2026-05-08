@@ -14,14 +14,13 @@ import {
   EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
 } from "../../constants/exhibitions-viz.js";
-import { DOT_SIZE_PX, FONT_SANS } from "../../constants.js";
+import { DOT_SIZE_PX, FONT_BODY, FONT_SIZE_UI_PX } from "../../constants.js";
 import { getArtistDotData } from "../../utils/artist-dot.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
 
 const NODE_WIDTH = EXHIBITIONS_VIZ_CONFIG.layout.nodeSizePx;
 const NODE_PADDING = 32;
-const LABEL_FONT_PX = 16;
 const LABEL_OFFSET_PX = EXHIBITIONS_SANKEY_LABEL_OFFSET_PX;
 const LABEL_LINE_HEIGHT_EM = 1.1;
 const LABEL_SINGLE_LINE_DY_EM = 0.35;
@@ -221,8 +220,8 @@ function drawNodeLabel(g, d) {
     .attr("y", y)
     .attr("text-anchor", anchor)
     .attr("fill", "#fff")
-    .style("font-family", FONT_SANS)
-    .style("font-size", `${LABEL_FONT_PX}px`);
+    .style("font-family", FONT_BODY)
+    .style("font-size", `${FONT_SIZE_UI_PX}px`);
 
   if (d.type !== "exhibition") {
     text.attr("dy", `${LABEL_SINGLE_LINE_DY_EM}em`).text(d.name);

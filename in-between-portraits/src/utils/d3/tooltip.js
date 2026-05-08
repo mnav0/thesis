@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { FONT_SANS } from "../../constants.js";
+import { FONT_BODY } from "../../constants.js";
 
 /**
  * Creates a D3-managed tooltip div inside `container` and returns
@@ -22,7 +22,7 @@ export function createTooltip(container) {
     .style("background", "#fff")
     .style("border", "1px solid #222")
     .style("padding", "8px 12px")
-    .style("font-family", FONT_SANS)
+    .style("font-family", FONT_BODY)
     .style("font-size", "1em")
     .style("pointer-events", "none")
     .style("display", "none")
@@ -33,7 +33,7 @@ export function createTooltip(container) {
     .style("white-space", "pre-line")
     .style("line-height", "1.35");
 
-  function show(event, { bg, fg, border, html, smallText = false }) {
+  function show(event, { bg, fg, border, html }) {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
     const offset = 10;
@@ -43,8 +43,6 @@ export function createTooltip(container) {
       .style("background", bg)
       .style("color", fg)
       .style("border-color", border)
-      .style("font-size", smallText ? "0.75rem" : "1em")
-      .style("line-height", smallText ? "1.15" : "1.35")
       .html(html);
 
     const tooltipNode = tooltip.node();

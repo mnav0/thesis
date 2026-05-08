@@ -17,11 +17,12 @@
 
 .cluster-heading__group-line {
   display: block;
-  font-size: 1rem;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
   line-height: 0.9;
   letter-spacing: normal;
   padding-bottom: 0.5rem;
-
+  text-transform: uppercase;
 }
 
 .cluster-heading__toggle {
@@ -37,12 +38,13 @@
   border: 1px solid #111;
   background: #fff;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--text-ui);
   line-height: 1;
 }
 
 .cluster-heading__toggle-label {
-  font-size: 1rem;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
   line-height: 1;
 }
 
@@ -96,7 +98,7 @@
   background-repeat: repeat;
   background-size: auto;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--text-ui);
   line-height: 1;
   text-transform: none;
 }
@@ -106,7 +108,7 @@
   padding: 0 0.15rem;
   min-width: 5rem;
   text-align: center;
-  font-size: 1rem;
+  font-size: var(--text-ui);
   line-height: 1;
   text-transform: none;
 }
@@ -116,7 +118,7 @@
 }
 
 .cluster-heading__subtitle p {
-  font-size: 0.75rem;
+  font-size: var(--text-key);
   line-height: 1.15;
   letter-spacing: normal;
 }

@@ -5,12 +5,20 @@
 :root {
   /* Mirrors DOT_SIZE_PX in constants.js */
   --dot-size: 18px;
+
+  --font-serif: "Instrument Serif", serif;
+  --font-label: "Kosugi", sans-serif;  /* uppercase labels, keys, tags */
+  --font-body: "Kosugi", sans-serif;   /* body text, tooltips, captions */
+
+  --text-body: 1.25rem;   /* body paragraphs, info modal content */
+  --text-ui: 1rem;       /* labels, attribution, point tags, timeline, text cards */
+  --text-key: 0.75rem;   /* cluster keys only */
 }
 
 body {
   min-height: 100vh;
   min-width: 100vw;
-  font-family: "Kosugi", sans-serif;
+  font-family: var(--font-body);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -18,7 +26,7 @@ body {
 
 h1 {
   margin-bottom: 0;
-  font-family: "Instrument Serif", serif;
+  font-family: var(--font-serif);
   font-size: 6rem;
   letter-spacing: 0.01em;
   line-height: 0.9;
@@ -33,7 +41,7 @@ h2 {
   color: #333;
   font-size: 6rem;
   line-height: 1.05;
-  font-family: "Instrument Serif", serif;
+  font-family: var(--font-serif);
 
   @media (max-width: 768px) {
     font-size: 4rem;
@@ -45,30 +53,30 @@ h2 {
 }
 
 h3 {
-  font-family: "Kosugi", sans-serif;
-  font-size: 1.5rem;
+  font-family: var(--font-label);
+  font-size: var(--text-body);
   line-height: 1.25;
   text-transform: uppercase;
 
   @media (max-width: 768px) {
-    font-size: 1.25rem;
+    font-size: var(--text-ui);
   }
 }
 
 p,
 li,
 span {
-  font-family: "Kosugi", sans-serif;
-  font-size: 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
   line-height: 1.25;
 
   @media (max-width: 768px) {
-    font-size: 1.25rem;
+    font-size: var(--text-ui);
   }
 }
 
 select {
-  font-family: "Kosugi", sans-serif;
+  font-family: var(--font-body);
   margin-left: 0.5em;
   padding: 0.2em 0.5em;
 }
@@ -225,8 +233,8 @@ select {
   position: absolute;
   left: 0;
   top: 50%;
-  font-family: "Kosugi", sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
   line-height: 1.25;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -235,7 +243,8 @@ select {
 }
 
 .label-text {
-  font-size: 1rem;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
   line-height: 1.25;
   text-transform: uppercase;
 }
@@ -296,3 +305,4 @@ select {
   opacity: 0;
   pointer-events: none;
 }
+

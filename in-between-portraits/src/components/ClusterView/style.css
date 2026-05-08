@@ -90,8 +90,8 @@
 }
 
 .cluster-view-keyword {
-  font-family: "Kosugi", sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
   line-height: 1.25;
   text-transform: uppercase;
   color: inherit;
@@ -148,7 +148,7 @@
 .cluster-view-label {
   font-size: 1em;
   color: #444;
-  font-family: "Kosugi", sans-serif;
+  font-family: var(--font-body);
 }
 .cluster-view-empty {
   text-align: left;

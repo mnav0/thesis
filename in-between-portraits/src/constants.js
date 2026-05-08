@@ -1,4 +1,16 @@
-export const FONT_SANS = '"Kosugi", sans-serif';
+/** Uppercase labels, keys, tags */
+export const FONT_LABEL = '"Kosugi", sans-serif';
+
+/** Body text, tooltips, captions — swap this string to change all mixed-case text. */
+export const FONT_BODY = '"Kosugi", sans-serif';
+
+/** @deprecated use FONT_BODY or FONT_LABEL */
+export const FONT_SANS = FONT_BODY;
+
+/** Type scale in px (assumes 16px base) — mirrors --text-* CSS custom properties. */
+export const FONT_SIZE_BODY_PX = 20;
+export const FONT_SIZE_UI_PX = 16;
+export const FONT_SIZE_KEY_PX = 12;
 
 /** Diameter in px for artist dots/points used across clusters, sankey, and travel overlay. */
 export const DOT_SIZE_PX = 18;

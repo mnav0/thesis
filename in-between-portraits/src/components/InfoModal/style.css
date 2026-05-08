@@ -99,8 +99,8 @@
 
 .info-overlay-button__heading {
   margin-top: 0.25rem 0 1rem 0;
-  font-family: "Kosugi", sans-serif;
-  font-size: 1.25rem;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
   line-height: 1.25;
   text-transform: uppercase;
 }
@@ -120,10 +120,10 @@
 }
 
 .info-overlay-button__item {
-  font-family: "Kosugi", sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: var(--text-ui);
   line-height: 1.35;
-  margin-left: 0.25rem;
+  margin-left: 0.35rem;
 }
 
 .info-overlay-button__item + .info-overlay-button__item {

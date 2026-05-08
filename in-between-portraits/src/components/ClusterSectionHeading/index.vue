@@ -58,7 +58,7 @@ function iconMaskStyle(iconUrl) {
   <div class="cluster-heading">
     <div class="cluster-heading__left">
       <div class="cluster-heading__group-info-wrap">
-        <span class="cluster-heading__group-line uppercase">Group artists by words of</span>
+        <span class="cluster-heading__group-line">Group artists by words of</span>
         <div class="cluster-heading__group-info-button">
             <InfoModal
               heading="Methodology"

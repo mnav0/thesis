@@ -8,10 +8,9 @@ import {
   EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
 } from "../../constants/exhibitions-viz.js";
-import { FONT_SANS } from "../../constants.js";
+import { FONT_LABEL, FONT_SIZE_UI_PX } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 
-const LABEL_FONT_PX = 16;
 const TOP_BOTTOM_PADDING_PX = 24;
 
 const exhibitions = computed(() => {
@@ -122,8 +121,8 @@ function renderChart() {
     .attr("text-anchor", "end")
     .attr("dominant-baseline", "central")
     .attr("fill", "#fff")
-    .style("font-family", FONT_SANS)
-    .style("font-size", `${LABEL_FONT_PX}px`)
+    .style("font-family", FONT_LABEL)
+    .style("font-size", `${FONT_SIZE_UI_PX}px`)
     .text(String(lo));
 
   svg
@@ -133,8 +132,8 @@ function renderChart() {
     .attr("text-anchor", "start")
     .attr("dominant-baseline", "middle")
     .attr("fill", "#fff")
-    .style("font-family", FONT_SANS)
-    .style("font-size", `${LABEL_FONT_PX}px`)
+    .style("font-family", FONT_LABEL)
+    .style("font-size", `${FONT_SIZE_UI_PX}px`)
     .text(String(hi));
 
   const rx = EXHIBITIONS_VIZ_CONFIG.layout.nodeRadiusPx;

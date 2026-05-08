@@ -1115,7 +1115,11 @@ function initialsFromName(name) {
     .filter(Boolean);
   if (!parts.length) return "";
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  return parts
+    .map((p) => (p.match(/[\p{L}]/u)?.[0] ?? ""))
+    .filter(Boolean)
+    .join("")
+    .toUpperCase();
 }
 
 function getClusterBoxStyle(group) {

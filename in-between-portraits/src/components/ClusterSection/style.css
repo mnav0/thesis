@@ -25,9 +25,8 @@
   background-repeat: repeat;
   background-size: auto;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--text-ui);
   line-height: 1;
-  text-transform: none;
 }
 
 .cluster-section__art-mode-btn--active {
@@ -158,11 +157,11 @@
 }
 
 .cs-center-label-line {
-  font-size: clamp(0.95rem, 2.8vw, 1.45rem);
+  font-size: clamp(var(--text-ui), 2.8vw, var(--text-body));
   line-height: 1.2;
   letter-spacing: 0.04em;
   color: #111;
-  font-family: "Kosugi", sans-serif;
+  font-family: var(--font-label);
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -248,7 +247,8 @@
   transform: translateX(-50%);
   left: 50%;
   top: calc(100% + 2px);
-  font-size: 0.75rem;
+  font-family: var(--font-label);
+  font-size: var(--text-key);
   line-height: 1;
   letter-spacing: 0.06em;
   padding: 1px 3px;
@@ -276,8 +276,8 @@
   background: rgba(255, 255, 255, 0.97);
   border: 1px solid #111;
   padding: 6px 10px;
-  font-size: clamp(0.8rem, 1.35vw, 0.95rem);
-  font-family: "Kosugi", sans-serif;
+  font-size: var(--text-ui);
+  font-family: var(--font-body);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s;
@@ -328,14 +328,14 @@
 .cluster-section-key__equals {
   display: inline-block;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: var(--text-key);
   line-height: 1;
 }
 
 .cluster-section-key__copy {
   display: inline-block;
   min-width: 0;
-  font-size: 0.75rem;
+  font-size: var(--text-key);
   line-height: 1;
 }
 
@@ -388,7 +388,7 @@
 
 .cluster-section-key__initials,
 .cluster-section-key__anchor-label {
-  font-size: 0.75rem;
+  font-size: var(--text-key);
   padding-top: 0.15rem;
   line-height: 1;
   letter-spacing: 0.02em;

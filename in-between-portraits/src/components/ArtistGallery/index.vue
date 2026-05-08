@@ -662,7 +662,6 @@ function tooltipOptionsFromPoint(point) {
     bg: isInstitution ? "#fff" : "#111",
     fg: isInstitution ? "#111" : "#fff",
     border: isInstitution ? "#111" : "#fff",
-    smallText: true,
     html: `<div style="line-height:1.25"><div>${escapeHtml(point.text)} (${escapeHtml(point.displayDate || "n.d.")})</div></div>`,
   };
 }
