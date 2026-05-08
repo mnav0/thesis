@@ -187,13 +187,13 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  padding: 4vh 18% 12vh 22%;
+  padding: 2vh 18% 16vh 22%;
   pointer-events: none;
   box-sizing: border-box;
 }
 
 .gallery-featured-art {
-  width: min(500px, 70%);
+  width: min(460px, 70%, 30vh);
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -216,53 +216,57 @@
   height: 78%;
 }
 .gallery-featured-art__placeholder--fallback {
-  background: #fff;
-  border: 1.5px solid #111;
+  background: #000;
 }
 
-/**
- * Featured text card: same padding, sans-serif type, line-height,
- * max/min width, separator rule, and right-aligned attribution at 0.98em.
- */
-.gallery-featured-text {
-  margin: 0;
-  padding: 8px 12px;
-  width: min(560px, 86%);
-  max-width: 560px;
+/* ---- two-part artwork label ---- */
+.gallery-featured-label {
+  width: min(650px, 100%);
+  max-width: 650px;
   min-width: 150px;
-  font-family: var(--font-body);
-  font-size: var(--text-ui);
-  line-height: 1.35;
   pointer-events: auto;
   box-sizing: border-box;
   box-shadow: 0 2px 8px #0002;
-  white-space: pre-line;
-}
-.gallery-featured-text--artist {
-  background: #111;
-  color: #fff;
-  border: 1px solid #fff;
-}
-.gallery-featured-text--institution {
-  background: #fff;
-  color: #111;
+  font-family: var(--font-body);
+  font-size: var(--text-ui);
+  line-height: 1.35;
   border: 1px solid #111;
 }
-.gallery-featured-text__body {
-  margin: 0;
-  padding-bottom: 0.7em;
+.gallery-featured-label__header {
+  background: #111;
+  color: #fff;
+  padding: 8px 16px;
+  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+}
+.gallery-featured-label__body {
+  padding: 8px 16px;
+  box-sizing: border-box;
+  white-space: pre-line;
   font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.gallery-featured-label__body--artist {
+  background: #111;
+  color: #fff;
+  border-top: 1px solid #fff;
+}
+.gallery-featured-label__body--institution {
+  background: #fff;
+  color: #111;
+}
+.gallery-featured-label__text {
+  margin: 0;
+  padding-bottom: 0.7em;
   color: inherit;
 }
-.gallery-featured-text__attribution {
+.gallery-featured-label__attribution {
   margin: 0.7em 0 0;
   padding-top: 0.5em;
   border-top: 1px solid currentColor;
   font-size: 0.98em;
-  font-family: inherit;
-  line-height: inherit;
   text-align: right;
   color: inherit;
 }
@@ -342,10 +346,10 @@
     padding: 2rem 1.25rem;
   }
   .gallery-stage-center {
-    padding: 4vh 18% 12vh 6%;
+    padding: 2vh 18% 16vh 6%;
   }
   .gallery-featured-art {
-    width: min(360px, 78%);
+    width: min(340px, 78%, 32vh);
   }
   .gallery-canvas-item__img {
     width: 48px;

@@ -85,8 +85,8 @@
       "id": 10,
       "name": "America is Hard to See",
       "labels": [
-        "american",
         "america",
+        "american",
         "hard"
       ]
     },
@@ -112,9 +112,9 @@
       "id": 13,
       "name": "One Way or Another: Asian American Art Now",
       "labels": [
+        "american",
         "chinese",
-        "asian",
-        "american"
+        "asian"
       ]
     },
     {

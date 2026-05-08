@@ -7,7 +7,6 @@ import {
   ref,
   watch,
 } from "vue";
-import { createTooltip } from "../../utils/d3/tooltip.js";
 import {
   artistPointsRows,
   artistWordRows,
@@ -93,13 +92,6 @@ function hasText(point) {
   return Boolean(point && point.text && String(point.text).trim());
 }
 
-function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
 
 const enrichedPoints = computed(() => {
   const artworkById = new Map(
@@ -134,9 +126,9 @@ const enrichedPoints = computed(() => {
 
       if (isArtwork) {
         const art = artworkById.get(sourceIdx);
-        const plotDate =
-          String(art?.date_created || "") ||
-          String(art?.date_acquired_or_updated || "");
+        const plotDate = isInstitutionSource
+          ? String(art?.date_acquired_or_updated || art?.date_created || "")
+          : String(art?.date_created || "");
         out.push({
           ...base,
           date: plotDate,
@@ -282,18 +274,27 @@ function pickRange(rand, min, max) {
 }
 
 const FEATURED_ART_BLOCK = {
-  minX: 30,
-  maxX: 74,
-  minY: 18,
-  maxY: 62,
+  minX: 32,
+  maxX: 72,
+  minY: 13,
+  maxY: 63,
 };
 
 const FEATURED_TEXT_BLOCK = {
   minX: 20,
-  maxX: 86,
-  minY: 58,
-  maxY: 90,
+  maxX: 84,
+  minY: 56,
+  maxY: 72,
 };
+
+// Timeline bar (~72px) and empty space below the featured content are non-interactive.
+const STAGE_BOTTOM_BLOCK = {
+  minX: 0,
+  maxX: 100,
+  minY: 74,
+  maxY: 100,
+};
+
 
 function expandRect(rect, padX = 0, padY = 0) {
   return {
@@ -317,18 +318,18 @@ function isInBlockedStageAreas(xPct, yPct, blockedRects) {
 function pickScatterPosOutsideBlockedArea(rand, blockedRects) {
   for (let i = 0; i < 18; i++) {
     const xPct = pickRange(rand, 4, 96);
-    const yPct = pickRange(rand, 8, 92);
+    const yPct = pickRange(rand, 8, 88);
     if (!isInBlockedStageAreas(xPct, yPct, blockedRects)) return { xPct, yPct };
   }
   const leftSide = rand() < 0.5;
   const xPct = leftSide ? pickRange(rand, 4, 20) : pickRange(rand, 84, 96);
-  const yPct = pickRange(rand, 8, 92);
+  const yPct = pickRange(rand, 8, 88);
   return { xPct, yPct };
 }
 
 const canvasPositions = computed(() => {
   const map = new Map();
-  const blocked = [FEATURED_ART_BLOCK, FEATURED_TEXT_BLOCK];
+  const blocked = [FEATURED_ART_BLOCK, FEATURED_TEXT_BLOCK, STAGE_BOTTOM_BLOCK];
   chronoPoints.value.forEach((p) => {
     const rand = seededRandom(hash32(p.pointKey));
     const { xPct, yPct } = pickScatterPosOutsideBlockedArea(rand, blocked);
@@ -346,6 +347,7 @@ const dotPositions = computed(() => {
   const blocked = [
     expandRect(FEATURED_ART_BLOCK, 4, 4),
     expandRect(FEATURED_TEXT_BLOCK, 7, 6),
+    STAGE_BOTTOM_BLOCK,
   ];
   chronoPoints.value.forEach((p) => {
     const rand = seededRandom(hash32(`dot-${p.pointKey}`));
@@ -428,13 +430,11 @@ function onScroll() {
 }
 
 let resizeObs = null;
-let artworkTooltipApi = null;
 
 onMounted(() => {
   if (!scrollRef.value) return;
   viewportH.value = scrollRef.value.clientHeight;
   measureHero();
-  artworkTooltipApi = createTooltip(scrollRef.value);
   scrollRef.value.addEventListener("scroll", onScroll, { passive: true });
   resizeObs = new ResizeObserver(() => {
     if (scrollRef.value) viewportH.value = scrollRef.value.clientHeight;
@@ -449,10 +449,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (scrollRef.value) {
     scrollRef.value.removeEventListener("scroll", onScroll);
-  }
-  if (artworkTooltipApi) {
-    artworkTooltipApi.destroy();
-    artworkTooltipApi = null;
   }
   if (resizeObs) {
     resizeObs.disconnect();
@@ -520,7 +516,7 @@ const featuredArtwork = computed(() => {
 const featuredTextCandidate = computed(() => {
   const pts = chronoPoints.value;
   const cutoff = activeIdxRounded.value;
-  const predicate = (p) => hasText(p) && !p.isArtwork;
+  const predicate = (p) => hasText(p) && !isArtistArtwork(p);
   if (props.artistIds.length > 1 && featuredArtwork.value) {
     const aid = featuredArtwork.value.artistId;
     return findLatestWithFallback(pts, cutoff, (p) => predicate(p) && p.artistId === aid);
@@ -567,86 +563,6 @@ const activeYear = computed(() => {
   return null;
 });
 
-const artworkHoverPointsBySourceIdx = computed(() => {
-  const map = new Map();
-  for (const point of displayPoints.value) {
-    if (!point.isArtwork) continue;
-    const key = String(point.sourceIdx || "");
-    if (!key) continue;
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(point);
-  }
-  return map;
-});
-
-const tooltipRandomSeed = ref(0);
-watch(
-  () => featuredTextCandidate.value?.pointKey || null,
-  () => {
-    tooltipRandomSeed.value += 1;
-  },
-);
-
-function candidateDistanceScore(point, { featuredOrder, featuredYear, artworkYear }) {
-  if (Number.isFinite(featuredOrder) && Number.isFinite(point.sourcePointOrder)) {
-    return Math.abs(point.sourcePointOrder - featuredOrder);
-  }
-  if (Number.isFinite(featuredYear) && Number.isFinite(point.year)) {
-    return Math.abs(point.year - featuredYear);
-  }
-  if (Number.isFinite(point.year)) {
-    return Math.abs(point.year - artworkYear);
-  }
-  return Number.POSITIVE_INFINITY;
-}
-
-function pickClosestByScore(candidates, context) {
-  if (!candidates.length) return null;
-  return candidates
-    .slice()
-    .sort((a, b) => candidateDistanceScore(a, context) - candidateDistanceScore(b, context))[0];
-}
-
-function pickByFeaturedSource(candidates, sourceActor, context, artworkSourceIdx) {
-  if (!candidates.length) return null;
-  const preferred = candidates.filter((p) => p.sourceActor === sourceActor);
-  if (sourceActor === "institution" && preferred.length) {
-    const rand = seededRandom(
-      hash32(`inst-${tooltipRandomSeed.value}-${artworkSourceIdx}`),
-    );
-    const idx = Math.floor(rand() * preferred.length);
-    return preferred[idx] || preferred[0];
-  }
-  if (preferred.length) return pickClosestByScore(preferred, context);
-  return pickClosestByScore(candidates, context);
-}
-
-function hoverTooltipForArtwork(point) {
-  if (!point) return null;
-  const key = String(point.sourceIdx || "");
-  if (!key) return null;
-  const candidates = artworkHoverPointsBySourceIdx.value.get(key) ?? [];
-  if (!candidates.length) return null;
-  const sourceActor = featuredTextCandidate.value?.sourceActor || "artist";
-  const selected = pickByFeaturedSource(
-    candidates,
-    sourceActor,
-    {
-      featuredOrder: featuredTextCandidate.value?.sourcePointOrder,
-      featuredYear: featuredTextCandidate.value?.year,
-      artworkYear: point.year,
-    },
-    key,
-  );
-  if (!selected || !hasText(selected)) return null;
-  return {
-    text: selected.text,
-    sourceName: selected.sourceName,
-    displayDate: selected.displayDate,
-    sourceActor: selected.sourceActor,
-  };
-}
-
 const timelineProgress = computed(() => {
   const { min, max } = yearBounds.value;
   if (min == null || max == null || max === min) return 0;
@@ -692,28 +608,6 @@ function handleImageError(pointKey) {
   const next = new Set(failedImageKeys.value);
   next.add(pointKey);
   failedImageKeys.value = next;
-}
-
-function tooltipOptionsFromPoint(point) {
-  if (!point || !hasText(point)) return null;
-  const isInstitution = point.sourceActor === "institution";
-  return {
-    bg: isInstitution ? "#fff" : "#111",
-    fg: isInstitution ? "#111" : "#fff",
-    border: isInstitution ? "#111" : "#fff",
-    html: `<div style="line-height:1.25"><div>${escapeHtml(point.text)} (${escapeHtml(point.displayDate || "n.d.")})</div></div>`,
-  };
-}
-
-function showFeaturedArtworkTooltip(event) {
-  if (!artworkTooltipApi) return;
-  const opts = tooltipOptionsFromPoint(featuredArtworkTooltip.value);
-  if (!opts) return;
-  artworkTooltipApi.show(event, opts);
-}
-
-function hideFeaturedArtworkTooltip() {
-  artworkTooltipApi?.hide();
 }
 
 // ---------- navigation: smooth scroll to a point ----------
@@ -800,9 +694,12 @@ function onTrackPointerUp(e) {
 
 // ---------- derived render data ----------
 
-const galleryBodyStyle = computed(() => ({
-  height: `calc(${chronoPoints.value.length * SEGMENT_VH}vh + 100vh)`,
-}));
+const galleryBodyStyle = computed(() => {
+  const h = viewportH.value || window?.innerHeight || 800;
+  const segmentPx = (SEGMENT_VH / 100) * h;
+  const n = Math.max(0, chronoPoints.value.length - 1);
+  return { height: `${n * segmentPx + h}px` };
+});
 
 const canvasItems = computed(() =>
   chronoPoints.value.map((p) => ({
@@ -812,17 +709,10 @@ const canvasItems = computed(() =>
 );
 
 const visibleDotPoints = computed(() =>
-  chronoPoints.value.filter((point) => !point.isArtwork),
+  chronoPoints.value.filter((point) => !isArtistArtwork(point)),
 );
 
-const featuredArtworkTooltip = computed(() => hoverTooltipForArtwork(featuredArtwork.value));
 
-watch(
-  () => featuredArtwork.value?.pointKey || null,
-  () => {
-    artworkTooltipApi?.hide();
-  },
-);
 </script>
 
 <template>
@@ -914,9 +804,6 @@ watch(
                 v-if="featuredArtwork"
                 :key="featuredArtwork.pointKey"
                 class="gallery-featured-art"
-                @mouseenter="showFeaturedArtworkTooltip"
-                @mousemove="showFeaturedArtworkTooltip"
-                @mouseleave="hideFeaturedArtworkTooltip"
               >
                 <img
                   v-if="shouldShowImage(featuredArtwork)"
@@ -932,21 +819,30 @@ watch(
               </div>
             </Transition>
 
-            <Transition name="stage-fade" mode="out-in">
-              <article
-                v-if="featuredText"
-                :key="featuredText.pointKey"
-                class="gallery-featured-text"
-                :class="`gallery-featured-text--${featuredText.sourceActor}`"
-              >
-                <div class="gallery-featured-text__body">
-                  {{ featuredText.text }}
+            <div v-if="featuredArtwork || featuredText" class="gallery-featured-label">
+              <Transition name="stage-fade" mode="out-in">
+                <div
+                  v-if="featuredArtwork"
+                  :key="featuredArtwork.pointKey"
+                  class="gallery-featured-label__header"
+                >
+                  {{ featuredArtwork.title }}<template v-if="featuredArtwork.year"> ({{ featuredArtwork.year }})</template>
                 </div>
-                <div class="gallery-featured-text__attribution">
-                  {{ featuredText.sourceName }} ({{ featuredText.displayDate }})
+              </Transition>
+              <Transition name="stage-fade" mode="out-in">
+                <div
+                  v-if="featuredText"
+                  :key="featuredText.pointKey"
+                  class="gallery-featured-label__body"
+                  :class="`gallery-featured-label__body--${featuredText.sourceActor}`"
+                >
+                  <div class="gallery-featured-label__text">{{ featuredText.text }}</div>
+                  <div class="gallery-featured-label__attribution">
+                    {{ featuredText.sourceName }} ({{ featuredText.displayDate }})
+                  </div>
                 </div>
-              </article>
-            </Transition>
+              </Transition>
+            </div>
           </div>
         </div>
       </div>
