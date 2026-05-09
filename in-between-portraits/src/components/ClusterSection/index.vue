@@ -64,6 +64,7 @@ function canvasInnerDimensions() {
   return { w, h, innerW, innerH };
 }
 
+const LABEL_PROXIMITY_RADIUS = 70;
 const CLUSTER_BOX_MIN_WIDTH = 150;
 const CLUSTER_BOX_MIN_HEIGHT = 170;
 const CLUSTER_BOX_PADDING = 18;
@@ -816,6 +817,55 @@ const pointNudgesByKey = computed(() => {
   return out;
 });
 
+const labelDirectionByKey = computed(() => {
+  const all = [];
+
+  for (const group of layoutGroupsList.value) {
+    group.items.forEach((item, idx) => {
+      const key = pointKey(group, item, idx);
+      const base = baseArtistCanvasPos(item, group);
+      const nudge = pointNudgesByKey.value[key] ?? { dx: 0, dy: 0 };
+      all.push({ key, x: base.x + nudge.dx, y: base.y + nudge.dy });
+    });
+  }
+
+  for (const artist of surfaceSharedArtistItems.value) {
+    const key = `shared-${artist.artistId}`;
+    const base = getSharedArtistCanvasPos(artist);
+    if (!base) continue;
+    const nudge = pointNudgesByKey.value[key] ?? { dx: 0, dy: 0 };
+    all.push({ key, x: base.x + nudge.dx, y: base.y + nudge.dy });
+  }
+
+  const out = {};
+  for (const p of all) {
+    const counts = { above: 0, below: 0, left: 0, right: 0 };
+
+    for (const q of all) {
+      if (q.key === p.key) continue;
+      const dx = q.x - p.x;
+      const dy = q.y - p.y;
+      if (Math.hypot(dx, dy) >= LABEL_PROXIMITY_RADIUS) continue;
+      if (dy < 0) counts.above++;
+      if (dy > 0) counts.below++;
+      if (dx < 0) counts.left++;
+      if (dx > 0) counts.right++;
+    }
+
+    const dirs = ['above', 'right', 'below', 'left'];
+    let best = 'above';
+    let bestCount = counts.above;
+    for (const d of dirs) {
+      if (counts[d] < bestCount) {
+        bestCount = counts[d];
+        best = d;
+      }
+    }
+    out[p.key] = best;
+  }
+  return out;
+});
+
 const hoveredPoint = ref(null);
 const hoveredClusterId = ref(null);
 const clusterCenterPositions = ref({});
@@ -1120,6 +1170,13 @@ function initialsFromName(name) {
     .filter(Boolean)
     .join("")
     .toUpperCase();
+}
+
+function splitNameForDisplay(name) {
+  const words = String(name ?? "").trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 1) return words;
+  const split = Math.ceil(words.length / 2);
+  return [words.slice(0, split).join(" "), words.slice(split).join(" ")];
 }
 
 function getClusterBoxStyle(group) {
@@ -1457,6 +1514,9 @@ function displayLabelLines(group) {
               hasActiveHoverContext &&
               hoveredPoint !== pointKey(group, item, idx) &&
               !activePointKeys.has(pointKey(group, item, idx)),
+            'cs-point--label-below': labelDirectionByKey[pointKey(group, item, idx)] === 'below',
+            'cs-point--label-right': labelDirectionByKey[pointKey(group, item, idx)] === 'right',
+            'cs-point--label-left': labelDirectionByKey[pointKey(group, item, idx)] === 'left',
           }"
           :style="getArtistStyle(item, group, idx)"
           :data-point-id="pointKey(group, item, idx)"
@@ -1481,7 +1541,13 @@ function displayLabelLines(group) {
           <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(item.artistName) }}
           </div>
-          <div v-if="!artMode" class="cs-point-name">{{ item.artistName }}</div>
+          <div v-if="!artMode" class="cs-point-name">
+            <span
+              v-for="(part, i) in splitNameForDisplay(item.artistName)"
+              :key="i"
+              class="cs-point-name__line"
+            >{{ part }}</span>
+          </div>
         </div>
       </div>
       <template v-if="surfaceSharedArtistItems.length">
@@ -1497,6 +1563,9 @@ function displayLabelLines(group) {
               hasActiveHoverContext &&
               hoveredPoint !== `shared-${artist.artistId}` &&
               !activePointKeys.has(`shared-${artist.artistId}`),
+            'cs-point--label-below': labelDirectionByKey[`shared-${artist.artistId}`] === 'below',
+            'cs-point--label-right': labelDirectionByKey[`shared-${artist.artistId}`] === 'right',
+            'cs-point--label-left': labelDirectionByKey[`shared-${artist.artistId}`] === 'left',
           }"
           :style="getSharedArtistStyle(artist)"
           :data-point-id="`shared-${artist.artistId}`"
@@ -1518,7 +1587,13 @@ function displayLabelLines(group) {
           <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(artist.artistName) }}
           </div>
-          <div v-if="!artMode" class="cs-point-name">{{ artist.artistName }}</div>
+          <div v-if="!artMode" class="cs-point-name">
+            <span
+              v-for="(part, i) in splitNameForDisplay(artist.artistName)"
+              :key="i"
+              class="cs-point-name__line"
+            >{{ part }}</span>
+          </div>
         </div>
       </template>
     </div>
