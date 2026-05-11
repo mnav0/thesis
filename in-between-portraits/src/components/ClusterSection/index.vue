@@ -1444,10 +1444,6 @@ function displayLabelLines(group) {
       ref="sectionRef"
       class="cluster-section-canvas"
       :style="canvasDotSizeStyle"
-      @mouseleave="
-        hoveredPoint = null;
-        hoveredClusterId = null;
-      "
     >
       <svg
         :key="`svg-${renderEpoch}`"
@@ -1482,8 +1478,10 @@ function displayLabelLines(group) {
             class="cs-cluster-box-hit"
             :class="{ 'cs-cluster-box-hit--active': isClusterActive(group.clusterId) }"
             :style="getClusterBoxStyle(group)"
-            @mouseenter="hoveredClusterId = group.clusterId"
-            @mouseleave="hoveredClusterId = null"
+            @mouseenter="
+              hoveredClusterId = group.clusterId;
+              hoveredPoint = null;
+            "
             @click.stop="handleCenterClick(group)"
           />
           <div
@@ -1538,10 +1536,6 @@ function displayLabelLines(group) {
             hoveredClusterId = group.clusterId;
             hoveredPoint = pointKey(group, item, idx);
           "
-          @mouseleave="
-            hoveredPoint = null;
-            hoveredClusterId = null;
-          "
           @click.stop="handlePointClick(item)"
         >
           <ClusterArtistArtMark
@@ -1583,9 +1577,8 @@ function displayLabelLines(group) {
           :data-point-id="`shared-${artist.artistId}`"
           :data-artist-id="String(artist.artistId)"
           :aria-label="artist.artistName"
-          @mouseenter="hoveredPoint = `shared-${artist.artistId}`"
-          @mouseleave="
-            hoveredPoint = null;
+          @mouseenter="
+            hoveredPoint = `shared-${artist.artistId}`;
             hoveredClusterId = null;
           "
           @click.stop="handlePointClick(artist)"
