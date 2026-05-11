@@ -6,6 +6,19 @@
   /* Mirrors DOT_SIZE_PX in constants.js */
   --dot-size: 18px;
 
+  /* cluster section UI constants */
+  --cluster-control-texture: url("/texture.svg");
+  --cluster-control-texture-wash: rgba(255, 255, 255, 0.2);
+  --cluster-control-textured-fill:
+    linear-gradient(
+      var(--cluster-control-texture-wash),
+      var(--cluster-control-texture-wash)
+    ),
+    var(--cluster-control-texture);
+  --cluster-control-soft-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --cluster-control-active-shadow:
+    2px 2px 0 #111, var(--cluster-control-soft-shadow);
+
   --font-serif: "Instrument Serif", serif;
   --font-label: "Kosugi", sans-serif;  /* uppercase labels, keys, tags */
   --font-body: "Kosugi", sans-serif;   /* body text, tooltips, captions */

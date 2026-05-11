@@ -11,6 +11,7 @@
 }
 
 .cluster-section__art-mode-btn {
+  box-sizing: border-box;
   position: absolute;
   top: 2.9rem;
   right: 1.5rem;
@@ -18,21 +19,29 @@
   bottom: auto;
   z-index: 20;
   margin: 0;
-  border: 0.25px solid #111;
+  border: 1px solid #111;
   padding: 0.75rem 1rem;
   background-color: #fff;
-  background-image: url("/texture.svg");
-  background-repeat: repeat;
-  background-size: auto;
+  background-image: var(--cluster-control-textured-fill);
+  background-repeat: repeat, repeat;
+  background-size: auto, auto;
+  color: #111;
   cursor: pointer;
   font-size: var(--text-ui);
   line-height: 1;
 }
 
+.cluster-section__art-mode-btn:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+  z-index: 21;
+}
+
 .cluster-section__art-mode-btn--active {
   background-image: none;
-  background-color: #111;
-  color: #fff;
+  background-color: #fff;
+  color: #111;
+  box-shadow: var(--cluster-control-active-shadow);
 }
 
 .cluster-section-canvas {

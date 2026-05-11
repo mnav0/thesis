@@ -46,8 +46,8 @@ const props = defineProps({
   // { type: "exhibition", year: Number|null }
   // null → no filter (single-artist dot click, show everything)
   pointFilter: { type: Object, default: null },
-  // View mode active when this modal was opened ('artist' | 'institution' | 'exhibitions').
-  // Determines which actor row appears first in the keyword summary.
+  // View mode when this gallery was opened ('artist' | 'institution' | 'exhibitions').
+  // Highlights the matching keyword card (same chrome as cluster mode toggles).
   sourceMode: { type: String, default: null },
 });
 
@@ -419,14 +419,24 @@ function actorIconStyle(actor) {
   return { maskImage: `url("${src}")`, WebkitMaskImage: `url("${src}")` };
 }
 
+/** Matches cluster heading toggles: Exhibition → Artist → Institution */
+const KEYWORD_ACTOR_ORDER = ["exhibition", "artist", "institution"];
+
+const sourceModeToKeywordActor = {
+  artist: "artist",
+  institution: "institution",
+  exhibitions: "exhibition",
+};
+
+const activeKeywordActor = computed(() => {
+  const mode = props.sourceMode;
+  if (mode == null || mode === "") return null;
+  return sourceModeToKeywordActor[mode] ?? null;
+});
+
 const keywordRows = computed(() => {
   if (props.artistIds.length !== 1) return [];
   const artistId = Number(props.artistIds[0]);
-
-  const sourceModeToActor = { artist: "artist", institution: "institution", exhibitions: "exhibition" };
-  const clickedActor = sourceModeToActor[props.sourceMode] ?? "artist";
-  const defaultOrder = ["artist", "institution", "exhibition"];
-  const actorOrder = [clickedActor, ...defaultOrder.filter((a) => a !== clickedActor)];
 
   const byActor = {
     artist: getClusterKeywords(artistClustersMap, artistId),
@@ -434,9 +444,9 @@ const keywordRows = computed(() => {
     exhibition: getExhibitionKeywords(exhibitionClustersMap, artistId),
   };
 
-  return actorOrder
-    .filter((actor) => byActor[actor].length)
-    .map((actor) => ({ actor, keywords: byActor[actor] }));
+  return KEYWORD_ACTOR_ORDER.filter((actor) => byActor[actor].length).map(
+    (actor) => ({ actor, keywords: byActor[actor] }),
+  );
 });
 
 // ---------- scroll-driven active index ----------
@@ -800,7 +810,7 @@ const visibleDotPoints = computed(() =>
         v-if="heroData"
         ref="heroRef"
         class="gallery-hero"
-        :class="{ 'gallery-hero--keyword-border': keywordRows[0]?.actor === 'artist' }"
+        :class="{ 'gallery-hero--keyword-border': keywordRows.length > 0 }"
       >
         <!-- Exhibition hero: name as heading, no quote marks, location (year) attribution -->
         <template v-if="heroData.kind === 'exhibition'">
@@ -822,18 +832,37 @@ const visibleDotPoints = computed(() =>
         </template>
       </section>
 
-      <section v-if="keywordRows.length" class="gallery-keyword-summary" aria-label="Source keywords">
+      <section
+        v-if="keywordRows.length"
+        class="gallery-keyword-summary"
+        aria-label="Source keywords"
+      >
         <div
           v-for="row in keywordRows"
           :key="row.actor"
-          class="gallery-keyword-row"
-          :class="`gallery-keyword-row--${row.actor}`"
+          class="gallery-keyword-card"
+          :class="[
+            `gallery-keyword-card--${row.actor}`,
+            {
+              'gallery-keyword-card--active':
+                activeKeywordActor != null && row.actor === activeKeywordActor,
+            },
+          ]"
         >
-          <span class="gallery-keyword-row__icon" aria-hidden="true">
-            <span v-if="row.actor === 'exhibition'" class="gallery-keyword-row__exhibition-node" />
-            <span v-else class="gallery-keyword-row__mode-icon" :style="actorIconStyle(row.actor)" />
+          <span class="gallery-keyword-card__icon" aria-hidden="true">
+            <span
+              v-if="row.actor === 'exhibition'"
+              class="gallery-keyword-card__exhibition-node"
+            />
+            <span
+              v-else
+              class="gallery-keyword-card__mode-icon"
+              :style="actorIconStyle(row.actor)"
+            />
           </span>
-          <span class="gallery-keyword-row__keyword label-text">{{ row.keywords.join(', ') }}</span>
+          <span class="gallery-keyword-card__keyword label-text">{{
+            row.keywords.join(", ")
+          }}</span>
         </div>
       </section>
 

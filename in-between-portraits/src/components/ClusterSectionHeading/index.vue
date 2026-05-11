@@ -69,12 +69,18 @@ function iconMaskStyle(iconUrl) {
           </div>
         </div>
       <div class="cluster-heading__toggle-row">
-        <div class="cluster-heading__toggle" role="tablist" aria-label="Cluster grouping mode">
+        <div
+          class="cluster-heading__toggle"
+          role="tablist"
+          aria-label="Source texts to group by"
+        >
           <button
             v-for="mode in modes"
             :key="mode.key"
             type="button"
             class="cluster-heading__toggle-btn label-text"
+            role="tab"
+            :aria-selected="isActive(mode.key)"
             :class="{ 'cluster-heading__toggle-btn--active': isActive(mode.key) }"
             @click="emit('change-view-mode', mode.key)"
           >
