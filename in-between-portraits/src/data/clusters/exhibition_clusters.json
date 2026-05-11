@@ -15,16 +15,16 @@
       "labels": [
         "mixed",
         "asian",
-        "american"
+        "race"
       ]
     },
     {
       "id": 2,
       "name": "Ruth Asawa: Citizen of the Universe",
       "labels": [
+        "integration",
         "citizen",
-        "life",
-        "universe"
+        "life"
       ]
     },
     {
@@ -32,8 +32,8 @@
       "name": "Dis/orient: Contemporary Art of the Asian Diaspora",
       "labels": [
         "diaspora",
-        "dis",
-        "orient"
+        "asian",
+        "dis"
       ]
     },
     {
@@ -42,7 +42,7 @@
       "labels": [
         "asian",
         "american",
-        "legacies"
+        "political"
       ]
     },
     {
@@ -51,7 +51,7 @@
       "labels": [
         "chinese",
         "asian",
-        "east"
+        "american"
       ]
     },
     {
@@ -59,8 +59,8 @@
       "name": "Biennale Arte 2015: All the World's Futures",
       "labels": [
         "international",
-        "world",
-        "countries"
+        "countries",
+        "world"
       ]
     },
     {
@@ -76,9 +76,9 @@
       "id": 9,
       "name": "Across the Pacific: Contemporary Korean and Korean American Art",
       "labels": [
+        "cultural",
         "korean",
-        "pacific",
-        "english"
+        "pacific"
       ]
     },
     {
@@ -87,25 +87,25 @@
       "labels": [
         "america",
         "american",
-        "hard"
+        "established"
       ]
     },
     {
       "id": 11,
       "name": "Portraiture Now: Asian American Portraits of Encounter",
       "labels": [
+        "portraits",
         "portraiture",
-        "asian",
-        "smithsonian"
+        "asian"
       ]
     },
     {
       "id": 12,
       "name": "Ascendancy: The Self in Contemporary Art",
       "labels": [
-        "personal",
-        "ascendancy",
-        "agency"
+        "self",
+        "contemporary",
+        "personal"
       ]
     },
     {
@@ -113,17 +113,26 @@
       "name": "One Way or Another: Asian American Art Now",
       "labels": [
         "american",
-        "chinese",
-        "asian"
+        "asian",
+        "chinese"
       ]
     },
     {
       "id": 14,
       "name": "The Decade Show: Frameworks of Identity in the 1980s",
       "labels": [
+        "performance",
         "frameworks",
-        "studio",
-        "decade"
+        "studio"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Scratching at the Moon",
+      "labels": [
+        "communities",
+        "asian",
+        "american"
       ]
     }
   ],
@@ -141,11 +150,12 @@
     {
       "artistId": 1,
       "exhibitionIds": [
-        1
+        1,
+        15
       ],
-      "isShared": false,
-      "_radius_frac": 0.35,
-      "_angle": 0.0
+      "isShared": true,
+      "_radius_frac": 0.85,
+      "_jitter_angle": 0.4833
     },
     {
       "artistId": 2,
@@ -155,7 +165,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 1.1424
+      "_jitter_angle": 0.9666
     },
     {
       "artistId": 3,
@@ -164,7 +174,7 @@
       ],
       "isShared": false,
       "_radius_frac": 0.35,
-      "_angle": 1.5708
+      "_angle": 0.0
     },
     {
       "artistId": 17,
@@ -173,7 +183,7 @@
       ],
       "isShared": false,
       "_radius_frac": 0.35,
-      "_angle": 3.1416
+      "_angle": 2.0944
     },
     {
       "artistId": 18,
@@ -183,7 +193,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 2.856
+      "_jitter_angle": 2.4166
     },
     {
       "artistId": 20,
@@ -192,7 +202,7 @@
       ],
       "isShared": false,
       "_radius_frac": 0.35,
-      "_angle": 4.7124
+      "_angle": 4.1888
     },
     {
       "artistId": 5,
@@ -202,7 +212,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 3.9984
+      "_jitter_angle": 3.3833
     },
     {
       "artistId": 6,
@@ -230,7 +240,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 5.712
+      "_jitter_angle": 4.8332
     },
     {
       "artistId": 10,
@@ -241,7 +251,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 6.2832
+      "_jitter_angle": 5.3165
     },
     {
       "artistId": 12,
@@ -251,7 +261,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 6.8544
+      "_jitter_angle": 5.7999
     },
     {
       "artistId": 13,
@@ -261,7 +271,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 7.4256
+      "_jitter_angle": 6.2832
     },
     {
       "artistId": 14,
@@ -281,7 +291,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 8.568
+      "_jitter_angle": 7.2498
     },
     {
       "artistId": 19,
@@ -292,7 +302,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 9.1392
+      "_jitter_angle": 7.7332
     },
     {
       "artistId": 7,
@@ -329,7 +339,7 @@
       ],
       "isShared": true,
       "_radius_frac": 0.85,
-      "_jitter_angle": 11.424
+      "_jitter_angle": 9.6664
     },
     {
       "artistId": 9,
@@ -388,11 +398,12 @@
     {
       "artistId": 28,
       "exhibitionIds": [
-        13
+        13,
+        15
       ],
-      "isShared": false,
-      "_radius_frac": 0.35,
-      "_angle": 0.0
+      "isShared": true,
+      "_radius_frac": 0.85,
+      "_jitter_angle": 13.0497
     },
     {
       "artistId": 27,
