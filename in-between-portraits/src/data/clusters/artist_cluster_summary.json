@@ -1,15 +1,16 @@
 {
   "numClusters": [
     {
-      "k": 9,
-      "n": 8,
+      "k": 8,
+      "n": 7,
       "groups": [
         {
           "id": 1,
           "gridIndex": 0,
           "keywords": [
-            "migrants",
-            "flowers"
+            "oriental",
+            "masterprint",
+            "masterprints"
           ],
           "featured_quote": null
         },
@@ -17,8 +18,6 @@
           "id": 3,
           "gridIndex": 1,
           "keywords": [
-            "portrait",
-            "abstraction",
             "untitled"
           ],
           "featured_quote": null
@@ -27,9 +26,649 @@
           "id": 5,
           "gridIndex": 2,
           "keywords": [
-            "human",
-            "think",
-            "symbolic"
+            "social",
+            "constantly",
+            "digital"
+          ],
+          "featured_quote": {
+            "source_idx": "AT147",
+            "point": 167,
+            "text": "I use this science-fiction inspired project to undermine stable conceptions of identity and examine how hybrid identities emerge and transform through different kinds of biological and cultural contact."
+          }
+        },
+        {
+          "id": 0,
+          "gridIndex": 3,
+          "keywords": [
+            "asian"
+          ],
+          "featured_quote": {
+            "source_idx": "AT110",
+            "point": 116,
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
+          }
+        },
+        {
+          "id": 6,
+          "gridIndex": 4,
+          "keywords": [
+            "american",
+            "country",
+            "family",
+            "community"
+          ],
+          "featured_quote": {
+            "source_idx": "AT142",
+            "point": 154,
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
+          }
+        },
+        {
+          "id": 4,
+          "gridIndex": 5,
+          "keywords": [
+            "mixed",
+            "people",
+            "race",
+            "asian",
+            "racial"
+          ],
+          "featured_quote": {
+            "source_idx": "AT18",
+            "point": 17,
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+          }
+        },
+        {
+          "id": 2,
+          "gridIndex": 6,
+          "keywords": [
+            "self",
+            "portraiture",
+            "portraits",
+            "asian",
+            "race"
+          ],
+          "featured_quote": {
+            "source_idx": "AT119",
+            "point": 128,
+            "text": "My earlier work is about cultural identification, it took the form of a series of self portraits, still life and portraits over a five year period. The self portraits is called the I-Traits and was based on the photographic idealization and self-imitation of non-white cultural types."
+          }
+        }
+      ],
+      "artists": [
+        {
+          "artistId": 0,
+          "primaryGroup": 3,
+          "gridIndex": 1,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.2875,
+            "2": 0.05,
+            "3": 0.5625,
+            "4": 0.0,
+            "5": 0.05,
+            "6": 0.0,
+            "7": 0.05
+          },
+          "_jitter_angle": 0.0,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 1,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": false,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0769,
+            "4": 0.0,
+            "5": 0.9231,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_angle": 1.0472,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 2,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.1818,
+            "1": 0.2727,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.1818,
+            "5": 0.3636,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 0.2327,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 3,
+          "primaryGroup": 2,
+          "gridIndex": 6,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.6531,
+            "3": 0.0204,
+            "4": 0.3265,
+            "5": 0.0,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 0.4654,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 4,
+          "primaryGroup": 4,
+          "gridIndex": 5,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0816,
+            "1": 0.0204,
+            "2": 0.1633,
+            "3": 0.0,
+            "4": 0.5714,
+            "5": 0.0,
+            "6": 0.1633,
+            "7": 0.0
+          },
+          "_jitter_angle": 0.6981,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 5,
+          "primaryGroup": 1,
+          "gridIndex": 0,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.5781,
+            "2": 0.0,
+            "3": 0.3281,
+            "4": 0.0625,
+            "5": 0.0,
+            "6": 0.0312,
+            "7": 0.0
+          },
+          "_jitter_angle": 0.9308,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 6,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": false,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0952,
+            "2": 0.0,
+            "3": 0.1429,
+            "4": 0.0,
+            "5": 0.7619,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_angle": 4.1888,
+          "_radius_frac": 0.16
+        },
+        {
+          "artistId": 7,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.1778,
+            "1": 0.0222,
+            "2": 0.1778,
+            "3": 0.0,
+            "4": 0.0889,
+            "5": 0.2667,
+            "6": 0.1778,
+            "7": 0.0889
+          },
+          "_jitter_angle": 1.1636,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 8,
+          "primaryGroup": 3,
+          "gridIndex": 1,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.1081,
+            "1": 0.1892,
+            "2": 0.1081,
+            "3": 0.4865,
+            "4": 0.0,
+            "5": 0.1081,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 1.3963,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 9,
+          "primaryGroup": 0,
+          "gridIndex": 3,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.3019,
+            "1": 0.0189,
+            "2": 0.1509,
+            "3": 0.0755,
+            "4": 0.3019,
+            "5": 0.0,
+            "6": 0.1509,
+            "7": 0.0
+          },
+          "_jitter_angle": 1.629,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 10,
+          "primaryGroup": 3,
+          "gridIndex": 1,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.3462,
+            "1": 0.1154,
+            "2": 0.0,
+            "3": 0.3846,
+            "4": 0.0,
+            "5": 0.0,
+            "6": 0.1538,
+            "7": 0.0
+          },
+          "_jitter_angle": 1.8617,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 11,
+          "primaryGroup": 4,
+          "gridIndex": 5,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0755,
+            "2": 0.0,
+            "3": 0.0189,
+            "4": 0.5283,
+            "5": 0.1509,
+            "6": 0.2264,
+            "7": 0.0
+          },
+          "_jitter_angle": 2.0944,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 12,
+          "primaryGroup": 3,
+          "gridIndex": 1,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.2105,
+            "1": 0.0526,
+            "2": 0.2105,
+            "3": 0.3158,
+            "4": 0.2105,
+            "5": 0.0,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 2.3271,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 13,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.1379,
+            "1": 0.069,
+            "2": 0.0,
+            "3": 0.1724,
+            "4": 0.0,
+            "5": 0.4138,
+            "6": 0.1379,
+            "7": 0.069
+          },
+          "_jitter_angle": 2.5598,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 14,
+          "primaryGroup": 6,
+          "gridIndex": 4,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.2353,
+            "1": 0.0196,
+            "2": 0.0,
+            "3": 0.0392,
+            "4": 0.2353,
+            "5": 0.0784,
+            "6": 0.3922,
+            "7": 0.0
+          },
+          "_jitter_angle": 2.7925,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 15,
+          "primaryGroup": 0,
+          "gridIndex": 3,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.4211,
+            "1": 0.0877,
+            "2": 0.1404,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.2807,
+            "6": 0.0,
+            "7": 0.0702
+          },
+          "_jitter_angle": 3.0252,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 16,
+          "primaryGroup": 0,
+          "gridIndex": 3,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.4138,
+            "1": 0.0345,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.1379,
+            "5": 0.0,
+            "6": 0.1379,
+            "7": 0.2759
+          },
+          "_jitter_angle": 3.2579,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 17,
+          "primaryGroup": 2,
+          "gridIndex": 6,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.6154,
+            "3": 0.0769,
+            "4": 0.0,
+            "5": 0.0,
+            "6": 0.3077,
+            "7": 0.0
+          },
+          "_jitter_angle": 3.4907,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 18,
+          "primaryGroup": 2,
+          "gridIndex": 6,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.6531,
+            "3": 0.0204,
+            "4": 0.0816,
+            "5": 0.0816,
+            "6": 0.1633,
+            "7": 0.0
+          },
+          "_jitter_angle": 3.7234,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 19,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.2857,
+            "1": 0.0714,
+            "2": 0.0,
+            "3": 0.0714,
+            "4": 0.0,
+            "5": 0.5714,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 3.9561,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 20,
+          "primaryGroup": 2,
+          "gridIndex": 6,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.1633,
+            "1": 0.0,
+            "2": 0.4898,
+            "3": 0.0204,
+            "4": 0.2449,
+            "5": 0.0,
+            "6": 0.0816,
+            "7": 0.0
+          },
+          "_jitter_angle": 4.1888,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 21,
+          "primaryGroup": 3,
+          "gridIndex": 1,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.08,
+            "1": 0.16,
+            "2": 0.0,
+            "3": 0.6,
+            "4": 0.0,
+            "5": 0.0,
+            "6": 0.16,
+            "7": 0.0
+          },
+          "_jitter_angle": 4.4215,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 22,
+          "primaryGroup": 6,
+          "gridIndex": 4,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0526,
+            "1": 0.1447,
+            "2": 0.2105,
+            "3": 0.0132,
+            "4": 0.0,
+            "5": 0.0526,
+            "6": 0.3289,
+            "7": 0.1974
+          },
+          "_jitter_angle": 4.6542,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 23,
+          "primaryGroup": 5,
+          "gridIndex": 2,
+          "isShared": false,
+          "clusterDistribution": {
+            "0": 0.0816,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0204,
+            "4": 0.0,
+            "5": 0.8163,
+            "6": 0.0,
+            "7": 0.0816
+          },
+          "_angle": 1.0472,
+          "_radius_frac": 0.16
+        },
+        {
+          "artistId": 24,
+          "primaryGroup": 2,
+          "gridIndex": 6,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.0244,
+            "2": 0.4878,
+            "3": 0.0,
+            "4": 0.0976,
+            "5": 0.3902,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 4.8869,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 25,
+          "primaryGroup": 1,
+          "gridIndex": 0,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0784,
+            "1": 0.6667,
+            "2": 0.0,
+            "3": 0.0196,
+            "4": 0.0784,
+            "5": 0.0,
+            "6": 0.1569,
+            "7": 0.0
+          },
+          "_jitter_angle": 5.1196,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 26,
+          "primaryGroup": 0,
+          "gridIndex": 3,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.2759,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.2759,
+            "6": 0.2759,
+            "7": 0.1724
+          },
+          "_jitter_angle": 5.3523,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 27,
+          "primaryGroup": 6,
+          "gridIndex": 4,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.0,
+            "1": 0.1875,
+            "2": 0.0,
+            "3": 0.0625,
+            "4": 0.0,
+            "5": 0.25,
+            "6": 0.5,
+            "7": 0.0
+          },
+          "_jitter_angle": 5.5851,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 28,
+          "primaryGroup": 0,
+          "gridIndex": 3,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.5333,
+            "1": 0.0,
+            "2": 0.2667,
+            "3": 0.2,
+            "4": 0.0,
+            "5": 0.0,
+            "6": 0.0,
+            "7": 0.0
+          },
+          "_jitter_angle": 5.8178,
+          "_radius_frac": 1.0
+        },
+        {
+          "artistId": 29,
+          "primaryGroup": 0,
+          "gridIndex": 3,
+          "isShared": true,
+          "clusterDistribution": {
+            "0": 0.4286,
+            "1": 0.1786,
+            "2": 0.0,
+            "3": 0.25,
+            "4": 0.0,
+            "5": 0.0,
+            "6": 0.0,
+            "7": 0.1429
+          },
+          "_jitter_angle": 6.0505,
+          "_radius_frac": 1.0
+        }
+      ]
+    },
+    {
+      "k": 9,
+      "n": 8,
+      "groups": [
+        {
+          "id": 1,
+          "gridIndex": 0,
+          "keywords": [
+            "oriental",
+            "masterprint",
+            "masterprints"
+          ],
+          "featured_quote": null
+        },
+        {
+          "id": 3,
+          "gridIndex": 1,
+          "keywords": [
+            "untitled"
+          ],
+          "featured_quote": null
+        },
+        {
+          "id": 5,
+          "gridIndex": 2,
+          "keywords": [
+            "social",
+            "like",
+            "constantly",
+            "digital"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -42,13 +681,13 @@
           "gridIndex": 3,
           "keywords": [
             "asian",
-            "chinese",
-            "anonymous"
+            "american",
+            "artists"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
@@ -56,49 +695,57 @@
           "gridIndex": 4,
           "keywords": [
             "community",
-            "feel"
+            "like",
+            "project",
+            "hapa",
+            "race"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 24,
-            "text": "To me, it didn\u2019t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
+            "text": "To me, it didn’t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
           }
         },
         {
           "id": 6,
           "gridIndex": 5,
           "keywords": [
-            "feeling",
             "family",
-            "people"
+            "american",
+            "country",
+            "feeling"
           ],
           "featured_quote": {
             "source_idx": "AT142",
             "point": 154,
-            "text": "As a young adult, I sought validation\u2014about myself, my heritage, my sense of belonging\u2014from my birth country by seeking some form of authentic self via the Philippines."
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
           }
         },
         {
           "id": 4,
           "gridIndex": 6,
           "keywords": [
+            "racial",
             "mixed",
-            "ethnic",
-            "people"
+            "people",
+            "race",
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
           "id": 2,
           "gridIndex": 7,
           "keywords": [
+            "portraits",
+            "portraiture",
             "self",
-            "contemporary",
-            "representation"
+            "race",
+            "arts"
           ],
           "featured_quote": {
             "source_idx": "AT119",
@@ -689,8 +1336,10 @@
           "gridIndex": 0,
           "keywords": [
             "self",
-            "contemporary",
-            "representation"
+            "color",
+            "portraits",
+            "portraiture",
+            "race"
           ],
           "featured_quote": {
             "source_idx": "AT119",
@@ -702,56 +1351,60 @@
           "id": 0,
           "gridIndex": 1,
           "keywords": [
-            "representation",
+            "asian",
+            "american",
             "people",
-            "chinese"
+            "artists"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
           "id": 8,
           "gridIndex": 2,
           "keywords": [
-            "individual",
-            "people",
-            "community"
+            "race",
+            "community",
+            "like",
+            "feel"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 24,
-            "text": "To me, it didn\u2019t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
+            "text": "To me, it didn’t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
           }
         },
         {
           "id": 6,
           "gridIndex": 3,
           "keywords": [
-            "feeling",
             "family",
-            "people"
+            "country",
+            "american",
+            "japanese"
           ],
           "featured_quote": {
             "source_idx": "AT142",
             "point": 154,
-            "text": "As a young adult, I sought validation\u2014about myself, my heritage, my sense of belonging\u2014from my birth country by seeking some form of authentic self via the Philippines."
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
           }
         },
         {
           "id": 4,
           "gridIndex": 4,
           "keywords": [
-            "heritage",
+            "mixed",
             "people",
-            "mixed"
+            "race",
+            "asian"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
@@ -759,8 +1412,10 @@
           "gridIndex": 5,
           "keywords": [
             "human",
-            "think",
-            "social"
+            "constantly",
+            "digital",
+            "body",
+            "physical"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -772,23 +1427,21 @@
           "id": 7,
           "gridIndex": 6,
           "keywords": [
-            "people",
-            "painting",
-            "kkk"
+            "comparative",
+            "morphologies"
           ],
           "featured_quote": {
             "source_idx": "AT91",
             "point": 89,
-            "text": "The \u201cafterimage of history\u201d makes me think on a more psychological register about personal patterns. The present conditions one lives in are repetitions, some of which go back to other very early traumatic moments."
+            "text": "The “afterimage of history” makes me think on a more psychological register about personal patterns. The present conditions one lives in are repetitions, some of which go back to other very early traumatic moments."
           }
         },
         {
           "id": 9,
           "gridIndex": 7,
           "keywords": [
-            "oriental",
-            "abstraction",
-            "untitled"
+            "untitled",
+            "oriental"
           ],
           "featured_quote": null
         },
@@ -796,9 +1449,11 @@
           "id": 1,
           "gridIndex": 8,
           "keywords": [
-            "tiger",
-            "iv",
-            "flowers"
+            "flowers",
+            "flower",
+            "desert",
+            "umakichi",
+            "chrysanthemums"
           ],
           "featured_quote": null
         },
@@ -808,7 +1463,9 @@
           "keywords": [
             "migrants",
             "cults",
-            "applicant"
+            "applicant",
+            "lamp",
+            "cargo"
           ],
           "featured_quote": null
         }
@@ -1424,9 +2081,11 @@
           "id": 3,
           "gridIndex": 0,
           "keywords": [
-            "cults",
             "flowers",
-            "lamp"
+            "cults",
+            "lamp",
+            "flower",
+            "cargo"
           ],
           "featured_quote": null
         },
@@ -1434,7 +2093,6 @@
           "id": 9,
           "gridIndex": 1,
           "keywords": [
-            "abstraction",
             "untitled",
             "oriental"
           ],
@@ -1444,9 +2102,10 @@
           "id": 5,
           "gridIndex": 2,
           "keywords": [
-            "empathic",
+            "social",
             "people",
-            "having"
+            "human",
+            "historical"
           ],
           "featured_quote": {
             "source_idx": "AT121",
@@ -1458,65 +2117,71 @@
           "id": 0,
           "gridIndex": 3,
           "keywords": [
-            "representation",
-            "people",
-            "anonymous"
+            "asian",
+            "artists",
+            "women",
+            "american",
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
           "id": 8,
           "gridIndex": 4,
           "keywords": [
-            "personal",
-            "individual",
-            "community"
+            "community",
+            "project",
+            "hapa",
+            "race",
+            "personal"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 24,
-            "text": "To me, it didn\u2019t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
+            "text": "To me, it didn’t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
           }
         },
         {
           "id": 4,
           "gridIndex": 5,
           "keywords": [
-            "cultural",
+            "racial",
+            "mixed",
             "people",
-            "mixed"
+            "race",
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
           "id": 6,
           "gridIndex": 6,
           "keywords": [
+            "country",
+            "japanese",
+            "american",
             "feeling",
-            "family",
-            "country"
+            "philippines"
           ],
           "featured_quote": {
             "source_idx": "AT142",
             "point": 154,
-            "text": "As a young adult, I sought validation\u2014about myself, my heritage, my sense of belonging\u2014from my birth country by seeking some form of authentic self via the Philippines."
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
           }
         },
         {
           "id": 10,
           "gridIndex": 7,
           "keywords": [
-            "ethnic",
-            "contemporary",
-            "people"
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "AT132",
@@ -1528,9 +2193,11 @@
           "id": 2,
           "gridIndex": 8,
           "keywords": [
-            "representation",
+            "portraiture",
+            "portraits",
             "self",
-            "portrait"
+            "color",
+            "painting"
           ],
           "featured_quote": {
             "source_idx": "AT119",
@@ -2180,9 +2847,7 @@
           "id": 9,
           "gridIndex": 0,
           "keywords": [
-            "abstraction",
-            "untitled",
-            "purple"
+            "untitled"
           ],
           "featured_quote": null
         },
@@ -2190,9 +2855,11 @@
           "id": 3,
           "gridIndex": 1,
           "keywords": [
+            "yellow",
             "migrants",
-            "painting",
-            "cults"
+            "cults",
+            "applicant",
+            "lamp"
           ],
           "featured_quote": null
         },
@@ -2200,9 +2867,9 @@
           "id": 11,
           "gridIndex": 2,
           "keywords": [
-            "comparative",
             "oriental",
-            "famous"
+            "masterprint",
+            "masterprints"
           ],
           "featured_quote": null
         },
@@ -2210,9 +2877,10 @@
           "id": 7,
           "gridIndex": 3,
           "keywords": [
-            "speak",
-            "got",
-            "subjects"
+            "historical",
+            "important",
+            "exploration",
+            "spectacle"
           ],
           "featured_quote": {
             "source_idx": "AT121",
@@ -2224,79 +2892,87 @@
           "id": 5,
           "gridIndex": 4,
           "keywords": [
-            "empathic",
-            "people",
-            "having"
+            "human",
+            "like",
+            "having",
+            "social",
+            "physical"
           ],
           "featured_quote": {
             "source_idx": "AT46",
             "point": 37,
-            "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can\u2019t see it, and you always think you\u2019re an independent person or being."
+            "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can’t see it, and you always think you’re an independent person or being."
           }
         },
         {
           "id": 0,
           "gridIndex": 5,
           "keywords": [
-            "representation",
-            "people",
-            "anonymous"
+            "asian",
+            "american",
+            "artists",
+            "women",
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
           "id": 6,
           "gridIndex": 6,
           "keywords": [
+            "country",
+            "american",
             "feeling",
-            "family",
-            "country"
+            "philippines",
+            "cultures"
           ],
           "featured_quote": {
             "source_idx": "AT142",
             "point": 154,
-            "text": "As a young adult, I sought validation\u2014about myself, my heritage, my sense of belonging\u2014from my birth country by seeking some form of authentic self via the Philippines."
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
           }
         },
         {
           "id": 4,
           "gridIndex": 7,
           "keywords": [
-            "cultural",
+            "racial",
             "mixed",
-            "people"
+            "race",
+            "people",
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
           "id": 8,
           "gridIndex": 8,
           "keywords": [
-            "individual",
-            "personal",
-            "community"
+            "community",
+            "hapa",
+            "project",
+            "race",
+            "tell"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 24,
-            "text": "To me, it didn\u2019t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
+            "text": "To me, it didn’t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
           }
         },
         {
           "id": 10,
           "gridIndex": 9,
           "keywords": [
-            "ethnic",
-            "contemporary",
-            "people"
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "AT132",
@@ -2308,9 +2984,11 @@
           "id": 2,
           "gridIndex": 10,
           "keywords": [
+            "portraiture",
+            "portraits",
             "self",
-            "representation",
-            "portrait"
+            "color",
+            "painting"
           ],
           "featured_quote": {
             "source_idx": "AT119",
@@ -2990,9 +3668,9 @@
           "id": 11,
           "gridIndex": 0,
           "keywords": [
-            "family",
             "oriental",
-            "famous"
+            "masterprint",
+            "masterprints"
           ],
           "featured_quote": null
         },
@@ -3000,9 +3678,7 @@
           "id": 9,
           "gridIndex": 1,
           "keywords": [
-            "abstraction",
-            "untitled",
-            "migrants"
+            "untitled"
           ],
           "featured_quote": null
         },
@@ -3011,8 +3687,10 @@
           "gridIndex": 2,
           "keywords": [
             "cults",
-            "floor",
-            "lamp"
+            "lamp",
+            "cargo",
+            "table",
+            "akari"
           ],
           "featured_quote": null
         },
@@ -3020,23 +3698,23 @@
           "id": 7,
           "gridIndex": 3,
           "keywords": [
-            "subjects",
+            "history",
+            "room",
             "painting",
-            "kkk"
+            "subjects"
           ],
           "featured_quote": {
             "source_idx": "AT175",
             "point": 206,
-            "text": "I hope to wash my subjects of their  \u2018otherness\u2019 and reveal them as dignified, even mythic figures on the grander scale of history painting."
+            "text": "I hope to wash my subjects of their  ‘otherness’ and reveal them as dignified, even mythic figures on the grander scale of history painting."
           }
         },
         {
           "id": 12,
           "gridIndex": 4,
           "keywords": [
-            "empathic",
-            "human",
-            "social"
+            "comparative",
+            "morphologies"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -3048,37 +3726,40 @@
           "id": 5,
           "gridIndex": 5,
           "keywords": [
-            "people",
-            "inhabit",
-            "having"
+            "audience",
+            "life",
+            "media"
           ],
           "featured_quote": {
             "source_idx": "AT46",
             "point": 37,
-            "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can\u2019t see it, and you always think you\u2019re an independent person or being."
+            "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can’t see it, and you always think you’re an independent person or being."
           }
         },
         {
           "id": 0,
           "gridIndex": 6,
           "keywords": [
-            "representation",
-            "people",
-            "anonymous"
+            "asian",
+            "american",
+            "women",
+            "artists"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
           "id": 10,
           "gridIndex": 7,
           "keywords": [
-            "ethnic",
-            "contemporary",
-            "people"
+            "people",
+            "works",
+            "projects",
+            "artists",
+            "like"
           ],
           "featured_quote": {
             "source_idx": "AT132",
@@ -3090,9 +3771,11 @@
           "id": 2,
           "gridIndex": 8,
           "keywords": [
+            "portraiture",
+            "portraits",
             "self",
-            "representation",
-            "portrait"
+            "color",
+            "painting"
           ],
           "featured_quote": {
             "source_idx": "AT119",
@@ -3104,42 +3787,43 @@
           "id": 8,
           "gridIndex": 9,
           "keywords": [
-            "personal",
-            "individual",
-            "people"
+            "individual"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 24,
-            "text": "To me, it didn\u2019t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
+            "text": "To me, it didn’t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
           }
         },
         {
           "id": 4,
           "gridIndex": 10,
           "keywords": [
-            "cultural",
+            "racial",
             "mixed",
-            "people"
+            "race",
+            "people",
+            "asian"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
           "id": 6,
           "gridIndex": 11,
           "keywords": [
-            "feeling",
             "family",
-            "community"
+            "american",
+            "japanese",
+            "filipino"
           ],
           "featured_quote": {
             "source_idx": "AT142",
             "point": 154,
-            "text": "As a young adult, I sought validation\u2014about myself, my heritage, my sense of belonging\u2014from my birth country by seeking some form of authentic self via the Philippines."
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
           }
         }
       ],
@@ -3844,9 +4528,9 @@
           "id": 11,
           "gridIndex": 0,
           "keywords": [
-            "family",
             "oriental",
-            "famous"
+            "masterprint",
+            "masterprints"
           ],
           "featured_quote": null
         },
@@ -3854,9 +4538,9 @@
           "id": 13,
           "gridIndex": 1,
           "keywords": [
-            "untitled",
             "flowers",
-            "portfolio"
+            "flower",
+            "desert"
           ],
           "featured_quote": null
         },
@@ -3864,9 +4548,11 @@
           "id": 3,
           "gridIndex": 2,
           "keywords": [
-            "portrait",
-            "child",
-            "cults"
+            "cults",
+            "cargo",
+            "table",
+            "site",
+            "nude"
           ],
           "featured_quote": null
         },
@@ -3874,23 +4560,24 @@
           "id": 14,
           "gridIndex": 3,
           "keywords": [
-            "community",
-            "exodus",
-            "artists"
+            "migrants",
+            "applicant",
+            "photos",
+            "refugee",
+            "kong"
           ],
           "featured_quote": {
             "source_idx": "AT165",
             "point": 195,
-            "text": "Another outcome emerges from the various publics that encounter the works\u2014certain awareness and new perspective\u2014which the artists themselves also gain. Through the Hong Kong chapter of\u00a0The Vietnam Exodus Project, some of the refugees I\u2019ve connected with are stateless."
+            "text": "Another outcome emerges from the various publics that encounter the works—certain awareness and new perspective—which the artists themselves also gain. Through the Hong Kong chapter of The Vietnam Exodus Project, some of the refugees I’ve connected with are stateless."
           }
         },
         {
           "id": 5,
           "gridIndex": 4,
           "keywords": [
-            "culture",
-            "inhabit",
-            "people"
+            "audience",
+            "bring"
           ],
           "featured_quote": {
             "source_idx": "AT154",
@@ -3902,14 +4589,15 @@
           "id": 0,
           "gridIndex": 5,
           "keywords": [
-            "anonymous",
-            "people",
-            "chinese"
+            "asian",
+            "american",
+            "women",
+            "anonymous"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
@@ -3917,8 +4605,9 @@
           "gridIndex": 6,
           "keywords": [
             "ethnic",
-            "contemporary",
-            "people"
+            "projects",
+            "people",
+            "cultural"
           ],
           "featured_quote": {
             "source_idx": "AT132",
@@ -3930,9 +4619,11 @@
           "id": 2,
           "gridIndex": 7,
           "keywords": [
+            "portraiture",
             "self",
-            "portrait",
-            "portraits"
+            "portraits",
+            "color",
+            "painting"
           ],
           "featured_quote": {
             "source_idx": "AT119",
@@ -3944,65 +4635,65 @@
           "id": 8,
           "gridIndex": 8,
           "keywords": [
-            "personal",
-            "individual",
+            "race",
+            "like",
             "people"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 24,
-            "text": "To me, it didn\u2019t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
+            "text": "To me, it didn’t matter if participants were Hapa in my view or not. Identity is, at its core, a deeply personal and individual decision, and a mandate of this project for me was to never tell anyone else what they were or could be or could not be."
           }
         },
         {
           "id": 4,
           "gridIndex": 9,
           "keywords": [
-            "heritage",
-            "people",
-            "mixed"
+            "racial",
+            "mixed",
+            "race",
+            "people"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
           "id": 6,
           "gridIndex": 10,
           "keywords": [
-            "belonging",
             "feeling",
-            "family"
+            "philippines"
           ],
           "featured_quote": {
             "source_idx": "AT142",
             "point": 154,
-            "text": "As a young adult, I sought validation\u2014about myself, my heritage, my sense of belonging\u2014from my birth country by seeking some form of authentic self via the Philippines."
+            "text": "As a young adult, I sought validation—about myself, my heritage, my sense of belonging—from my birth country by seeking some form of authentic self via the Philippines."
           }
         },
         {
           "id": 15,
           "gridIndex": 11,
           "keywords": [
+            "nostalgia",
             "unity",
-            "people",
-            "having"
+            "death",
+            "life"
           ],
           "featured_quote": {
             "source_idx": "AT100",
             "point": 103,
-            "text": "I would use the funds to complete Unity for Nostalgia, a video work I began last year. This project expands on my ongoing exploration of \u201cghosts\u201d as metaphors for socio-historical relationships obscured within dominant historical narratives."
+            "text": "I would use the funds to complete Unity for Nostalgia, a video work I began last year. This project expands on my ongoing exploration of “ghosts” as metaphors for socio-historical relationships obscured within dominant historical narratives."
           }
         },
         {
           "id": 12,
           "gridIndex": 12,
           "keywords": [
-            "hybrid",
-            "empathic",
-            "human"
+            "comparative",
+            "morphologies"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -4802,9 +5493,8 @@
           "id": 1,
           "gridIndex": 0,
           "keywords": [
-            "tiger",
-            "hudson",
-            "floor"
+            "lucky",
+            "akari"
           ],
           "featured_quote": null
         },
@@ -4812,9 +5502,7 @@
           "id": 5,
           "gridIndex": 1,
           "keywords": [
-            "abstraction",
-            "untitled",
-            "painting"
+            "untitled"
           ],
           "featured_quote": null
         },
@@ -4822,8 +5510,6 @@
           "id": 7,
           "gridIndex": 2,
           "keywords": [
-            "untitled",
-            "iris",
             "flowers"
           ],
           "featured_quote": null
@@ -4832,9 +5518,9 @@
           "id": 11,
           "gridIndex": 3,
           "keywords": [
-            "familiar",
             "oriental",
-            "family"
+            "masterprint",
+            "masterprints"
           ],
           "featured_quote": null
         },
@@ -4842,9 +5528,11 @@
           "id": 12,
           "gridIndex": 4,
           "keywords": [
-            "heritage",
             "self",
-            "portrait"
+            "migrants",
+            "applicant",
+            "portraits",
+            "photos"
           ],
           "featured_quote": {
             "source_idx": "AT23",
@@ -4856,9 +5544,9 @@
           "id": 13,
           "gridIndex": 5,
           "keywords": [
-            "culture",
-            "inhabit",
-            "people"
+            "narratives",
+            "hope",
+            "culture"
           ],
           "featured_quote": {
             "source_idx": "AT154",
@@ -4871,41 +5559,42 @@
           "gridIndex": 6,
           "keywords": [
             "experiences",
-            "immigrant",
-            "chinese"
+            "women",
+            "chinese",
+            "asian"
           ],
           "featured_quote": {
             "source_idx": "AT110",
             "point": 116,
-            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992\u201393), which was shown at the Whitney Biennial in 1993."
+            "text": "For me, being young, Asian and female was a poignant identity but people wanted to exoticize and orientalize you. That prompted me to make the video installation Those Fluttering Objects of Desire (1992–93), which was shown at the Whitney Biennial in 1993."
           }
         },
         {
           "id": 8,
           "gridIndex": 7,
           "keywords": [
-            "ethnic",
-            "mixed",
-            "asian"
+            "asian",
+            "american",
+            "artists"
           ],
           "featured_quote": {
             "source_idx": "AT134",
             "point": 141,
-            "text": "I\u2019d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact \u201cmixed\u201d and this was something I wanted to explore in my artwork."
+            "text": "I’d already been very grounded in Asian American arts and a collectivized and activist identity but over the course of time I had noticed that more and more of us in Asian American arts were in fact “mixed” and this was something I wanted to explore in my artwork."
           }
         },
         {
           "id": 16,
           "gridIndex": 8,
           "keywords": [
-            "transnational",
-            "fellow",
-            "feel"
+            "language",
+            "impacted",
+            "fall"
           ],
           "featured_quote": {
             "source_idx": "AT25",
             "point": 27,
-            "text": "On a larger scope, the project has helped push the idea of ethnic identity and the whole concept of multiraciality further into the public discourse and that\u2019s valuable. All these intangibles feed me as an artist and as a teacher and as a person."
+            "text": "On a larger scope, the project has helped push the idea of ethnic identity and the whole concept of multiraciality further into the public discourse and that’s valuable. All these intangibles feed me as an artist and as a teacher and as a person."
           }
         },
         {
@@ -4913,8 +5602,9 @@
           "gridIndex": 9,
           "keywords": [
             "cultural",
-            "empathic",
-            "experience"
+            "post",
+            "world",
+            "human"
           ],
           "featured_quote": {
             "source_idx": "AT147",
@@ -4926,9 +5616,9 @@
           "id": 22,
           "gridIndex": 10,
           "keywords": [
-            "living",
-            "animistic",
-            "relationship"
+            "exploration",
+            "spectacle",
+            "places"
           ],
           "featured_quote": {
             "source_idx": "AT121",
@@ -4940,37 +5630,38 @@
           "id": 20,
           "gridIndex": 11,
           "keywords": [
-            "thinking",
-            "bring",
-            "like"
+            "intuitive",
+            "scene",
+            "like",
+            "functions"
           ],
           "featured_quote": {
             "source_idx": "AT46",
             "point": 37,
-            "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can\u2019t see it, and you always think you\u2019re an independent person or being."
+            "text": "It also suggests the life before me, which is the heritage, the history, the culture and the knowledge that has been passed on to me from generation to generation which you cannot visualize. You can’t see it, and you always think you’re an independent person or being."
           }
         },
         {
           "id": 3,
           "gridIndex": 12,
           "keywords": [
-            "heritage",
-            "people",
-            "mixed"
+            "mixed",
+            "race",
+            "asian"
           ],
           "featured_quote": {
             "source_idx": "AT18",
             "point": 17,
-            "text": "If somebody is mixed-race, we assume they\u2019re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
+            "text": "If somebody is mixed-race, we assume they’re mixed black and white, not two non-white ethnic groups. Often, I felt like an outsider, and for a long time, creating a visual unity of my cultural heritage was the subject of my work, but as I aged, those concerns receded."
           }
         },
         {
           "id": 9,
           "gridIndex": 13,
           "keywords": [
-            "belonging",
-            "heritage",
-            "people"
+            "american",
+            "filipino",
+            "philippines"
           ],
           "featured_quote": {
             "source_idx": "AT144",
@@ -4982,9 +5673,9 @@
           "id": 4,
           "gridIndex": 14,
           "keywords": [
-            "community",
             "family",
-            "people"
+            "yellow",
+            "went"
           ],
           "featured_quote": {
             "source_idx": "AT99",

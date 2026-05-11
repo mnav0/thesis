@@ -375,11 +375,20 @@ const dotPositions = computed(() => {
 
 // ---------- per-source keyword summary ----------
 
-function getClusterKeywords(clusterMap, artistId) {
+/** Max keywords listed per actor card in the gallery hero. */
+const GALLERY_KEYWORD_CARD_TOP = 5;
+
+function sortKeywordsByCountDesc(counts) {
+  return [...counts.entries()].sort(
+    (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+  );
+}
+
+/** Counts every keyword hit from matching cluster groups, then returns the top `topN`. */
+function topClusterKeywordsForGallery(clusterMap, artistId, topN) {
   const list = clusterMap?.numClusters;
   if (!list?.length) return [];
-  const seen = new Set();
-  const keywords = [];
+  const counts = new Map();
   for (const entry of list) {
     const artistEntry = entry.artists?.find((a) => Number(a.artistId) === artistId);
     if (!artistEntry) continue;
@@ -393,25 +402,34 @@ function getClusterKeywords(clusterMap, artistId) {
     for (const { clusterId } of primaryAssociations) {
       const group = entry.groups?.find((g) => Number(g.id) === clusterId);
       for (const kw of (group?.keywords ?? []).slice(0, CLUSTER_KEYWORDS_TO_SHOW)) {
-        if (!seen.has(kw)) {
-          seen.add(kw);
-          keywords.push(kw);
-        }
+        if (kw == null || String(kw).trim() === "") continue;
+        const key = String(kw);
+        counts.set(key, (counts.get(key) || 0) + 1);
       }
     }
   }
-  return keywords;
+  return sortKeywordsByCountDesc(counts)
+    .slice(0, topN)
+    .map(([kw]) => kw);
 }
 
-function getExhibitionKeywords(exMap, artistId) {
+/** Counts label occurrences across the artist's exhibitions, then returns the top `topN`. */
+function topExhibitionKeywordsForGallery(exMap, artistId, topN) {
   const artistEntry = exMap?.artists?.find((a) => Number(a.artistId) === artistId);
   if (!artistEntry?.exhibitionIds?.length) return [];
-  const labels = [];
+  const counts = new Map();
   for (const eid of artistEntry.exhibitionIds) {
     const ex = exMap.exhibitions?.find((e) => e.id === Number(eid));
-    if (ex?.labels?.length) labels.push(...ex.labels);
+    if (!ex?.labels?.length) continue;
+    for (const label of ex.labels) {
+      if (label == null || String(label).trim() === "") continue;
+      const key = String(label);
+      counts.set(key, (counts.get(key) || 0) + 1);
+    }
   }
-  return [...new Set(labels)];
+  return sortKeywordsByCountDesc(counts)
+    .slice(0, topN)
+    .map(([kw]) => kw);
 }
 
 function actorIconStyle(actor) {
@@ -437,13 +455,12 @@ const activeKeywordActor = computed(() => {
 const keywordRows = computed(() => {
   if (props.artistIds.length !== 1) return [];
   const artistId = Number(props.artistIds[0]);
-
+  const n = GALLERY_KEYWORD_CARD_TOP;
   const byActor = {
-    artist: getClusterKeywords(artistClustersMap, artistId),
-    institution: getClusterKeywords(institutionClustersMap, artistId),
-    exhibition: getExhibitionKeywords(exhibitionClustersMap, artistId),
+    artist: topClusterKeywordsForGallery(artistClustersMap, artistId, n),
+    institution: topClusterKeywordsForGallery(institutionClustersMap, artistId, n),
+    exhibition: topExhibitionKeywordsForGallery(exhibitionClustersMap, artistId, n),
   };
-
   return KEYWORD_ACTOR_ORDER.filter((actor) => byActor[actor].length).map(
     (actor) => ({ actor, keywords: byActor[actor] }),
   );
