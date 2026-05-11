@@ -1379,6 +1379,16 @@ function handleCenterClick(group) {
   const exhibitionHero = isExhibitionMode
     ? (exhibitionsById.get(cid) ?? null)
     : null;
+  const pointFilter = isExhibitionMode
+    ? Number.isFinite(exhibitionHero?.year)
+      ? { type: "exhibition", year: exhibitionHero.year }
+      : null
+    : {
+        type: "cluster",
+        viewMode: viewMode.value === "institution" ? "institution" : "artist",
+        clusterId: cid,
+        n: selectedN.value,
+      };
   emit("select-cluster", {
     name: clusterTitle,
     items: uniqueArtists.map((a) => ({
@@ -1389,6 +1399,8 @@ function handleCenterClick(group) {
     keywords,
     clusterFeaturedQuote: group.featuredQuote ?? null,
     exhibitionHero,
+    view_mode: viewMode.value,
+    pointFilter,
   });
 }
 
