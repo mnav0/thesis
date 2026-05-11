@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { sankey as d3Sankey, sankeyLinkHorizontal, sankeyLeft } from "d3-sankey";
 import { createTooltip } from "../../utils/d3/tooltip.js";
 import {
-  escapeHtml,
+  artistTooltipShowOptions,
   exhibitionTooltipShowOptions,
 } from "../../utils/exhibition-tooltip.js";
 import { exhibitionStartYear, parseArtistIds } from "../../utils/exhibition-data.js";
@@ -18,9 +18,11 @@ import { DOT_SIZE_PX, FONT_BODY, FONT_SIZE_UI_PX } from "../../constants.js";
 import { getArtistDotData } from "../../utils/artist-dot.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
+import artworksCSV from "../../data/artworks.csv?raw";
+import institutionsCSV from "../../data/institutions.csv?raw";
 
 const NODE_WIDTH = EXHIBITIONS_VIZ_CONFIG.layout.nodeSizePx;
-const NODE_PADDING = 32;
+const NODE_PADDING = 36;
 const LABEL_OFFSET_PX = EXHIBITIONS_SANKEY_LABEL_OFFSET_PX;
 const LABEL_LINE_HEIGHT_EM = 1.1;
 const LABEL_SINGLE_LINE_DY_EM = 0.35;
@@ -37,7 +39,27 @@ const artistsById = computed(() => {
   return map;
 });
 
-/** Tooltip only: birth/death line, or null if no birth year. */
+const institutionNamesByArtistId = computed(() => {
+  const instName = {};
+  for (const r of d3.csvParse(institutionsCSV)) {
+    const id = String(r.id ?? "").trim();
+    if (id) instName[id] = String(r.name || "").trim();
+  }
+  const byArtist = {};
+  for (const row of d3.csvParse(artworksCSV)) {
+    const aid = String(row.artist ?? "").trim();
+    const name = instName[String(row.institution ?? "").trim()];
+    if (!aid || !name) continue;
+    if (!byArtist[aid]) byArtist[aid] = new Set();
+    byArtist[aid].add(name);
+  }
+  const out = {};
+  for (const [aid, set] of Object.entries(byArtist)) {
+    out[aid] = [...set].sort((a, b) => a.localeCompare(b));
+  }
+  return out;
+});
+
 function artistLifeLine(row) {
   if (!row) return null;
   const by = String(row.birth_year ?? "").trim();
@@ -47,12 +69,11 @@ function artistLifeLine(row) {
   return `(${by} - )`;
 }
 
-/** Longest label line width for exhibition names. */
 const EXHIBITION_LINE_MAX_CHARS = 28;
+const WRAP_EXTRA_LINE_WEIGHT = 7;
 
-/** Greedy word wrap; used as fallback and for long segments. */
 function wrapGreedyWords(trimmed, max) {
-  const words = trimmed.split(/\s+/);
+  const words = trimmed.split(/\s+/).filter(Boolean);
   const lines = [];
   let current = "";
 
@@ -83,15 +104,55 @@ function wrapGreedyWords(trimmed, max) {
   return lines.length ? lines : [trimmed];
 }
 
-/**
- * Dynamic-programming line wrap at word boundaries.
- * Uses the minimum needed line count and minimizes unevenness.
- */
-function wrapBalancedWords(trimmed, max) {
-  const words = trimmed.split(/\s+/).filter(Boolean);
-  if (words.length <= 1) return wrapGreedyWords(trimmed, max);
+function expandOversizedWords(words, max) {
+  const out = [];
+  for (const w of words) {
+    if (w.length <= max) out.push(w);
+    else {
+      for (let i = 0; i < w.length; i += max) out.push(w.slice(i, i + max));
+    }
+  }
+  return out;
+}
 
+function minLinesForWords(words, max) {
   const n = words.length;
+  if (n === 0) return 0;
+  const dp = Array(n + 1).fill(Infinity);
+  dp[0] = 0;
+  for (let end = 1; end <= n; end++) {
+    for (let start = 0; start < end; start++) {
+      const seg = words.slice(start, end).join(" ");
+      if (seg.length > max) continue;
+      if (Number.isFinite(dp[start])) {
+        dp[end] = Math.min(dp[end], dp[start] + 1);
+      }
+    }
+  }
+  return dp[n];
+}
+
+function lineLengthRange(lines) {
+  const lens = lines.map((l) => l.trim().length);
+  if (!lens.length) return 0;
+  return Math.max(...lens) - Math.min(...lens);
+}
+
+function lineLengthVarianceScore(lines) {
+  const lens = lines.map((l) => l.trim().length);
+  if (!lens.length) return 0;
+  const mean = lens.reduce((a, b) => a + b, 0) / lens.length;
+  return lens.reduce((acc, len) => acc + (len - mean) ** 2, 0);
+}
+
+function wrapBalancedWordsForK(words, max, k) {
+  const n = words.length;
+  if (k < 1 || n === 0) return null;
+  if (k === 1) {
+    const one = words.join(" ");
+    return one.length <= max ? [one] : null;
+  }
+
   const lens = words.map((word) => word.length);
   const prefix = [0];
   for (let i = 0; i < n; i++) prefix.push(prefix[i] + lens[i]);
@@ -102,75 +163,83 @@ function wrapBalancedWords(trimmed, max) {
     return wordsLen + spaces;
   }
 
-  const lineCount = Math.max(1, Math.ceil(trimmed.length / max));
-  const targetLen = trimmed.length / lineCount;
-  const dp = Array.from({ length: lineCount + 1 }, () => Array(n + 1).fill(Infinity));
-  const prev = Array.from({ length: lineCount + 1 }, () => Array(n + 1).fill(-1));
+  const targetLen = words.join(" ").length / k;
+  const dp = Array.from({ length: k + 1 }, () => Array(n + 1).fill(Infinity));
+  const prev = Array.from({ length: k + 1 }, () => Array(n + 1).fill(-1));
   dp[0][0] = 0;
 
-  for (let k = 1; k <= lineCount; k++) {
+  for (let line = 1; line <= k; line++) {
     for (let end = 1; end <= n; end++) {
       for (let start = 0; start < end; start++) {
-        if (!Number.isFinite(dp[k - 1][start])) continue;
+        if (!Number.isFinite(dp[line - 1][start])) continue;
         const len = segmentLength(start, end);
         if (len > max) continue;
-        const cost = dp[k - 1][start] + (len - targetLen) ** 2;
-        if (cost < dp[k][end]) {
-          dp[k][end] = cost;
-          prev[k][end] = start;
+        const cost = dp[line - 1][start] + (len - targetLen) ** 2;
+        if (cost < dp[line][end]) {
+          dp[line][end] = cost;
+          prev[line][end] = start;
         }
       }
     }
   }
 
-  if (!Number.isFinite(dp[lineCount][n])) return wrapGreedyWords(trimmed, max);
+  if (!Number.isFinite(dp[k][n])) return null;
 
   const lines = [];
   let end = n;
-  for (let k = lineCount; k >= 1; k--) {
-    const start = prev[k][end];
-    if (start < 0) break;
+  for (let line = k; line >= 1; line--) {
+    const start = prev[line][end];
+    if (start < 0) return null;
     lines.push(words.slice(start, end).join(" "));
     end = start;
   }
   lines.reverse();
-  return lines.length ? lines : wrapGreedyWords(trimmed, max);
+  return lines.length ? lines : null;
 }
 
-function wrapColonFirst(trimmed, max) {
-  const colonIdx = trimmed.indexOf(":");
-  if (colonIdx <= 0 || colonIdx >= trimmed.length - 1) return null;
+function balanceWordLines(words, max) {
+  const expanded = expandOversizedWords(words, max);
+  if (!expanded.length) return [];
+  const joined = expanded.join(" ");
+  if (joined.length <= max) return [joined];
 
-  const prefix = trimmed.slice(0, colonIdx + 1).trim();
-  const suffix = trimmed.slice(colonIdx + 1).trim();
-  if (!suffix || prefix.length > max) return null;
-
-  // Preferred behavior: clean two-line title/subtitle split when possible.
-  if (suffix.length <= max) return [prefix, suffix];
-
-  // Try to keep a two-line split by pulling some suffix words up to line 1.
-  const suffixWords = suffix.split(/\s+/).filter(Boolean);
-  let bestTwoLine = null;
-  for (let i = 1; i < suffixWords.length; i++) {
-    const line1 = `${prefix} ${suffixWords.slice(0, i).join(" ")}`.trim();
-    const line2 = suffixWords.slice(i).join(" ");
-    if (!line2) continue;
-    if (line1.length > max || line2.length > max) continue;
-    bestTwoLine = [line1, line2];
+  const minK = minLinesForWords(expanded, max);
+  if (!Number.isFinite(minK) || minK < 1) {
+    return wrapGreedyWords(joined, max);
   }
-  if (bestTwoLine) return bestTwoLine;
 
-  return [prefix, ...wrapBalancedWords(suffix, max)];
+  const maxKTry = Math.min(minK + 2, expanded.length);
+  let bestLines = null;
+  let bestScore = Infinity;
+  let bestRange = Infinity;
+  let bestK = Infinity;
+
+  for (let k = minK; k <= maxKTry; k++) {
+    const candidate = wrapBalancedWordsForK(expanded, max, k);
+    if (!candidate) continue;
+    const range = lineLengthRange(candidate);
+    const variance = lineLengthVarianceScore(candidate);
+    const extra = Math.max(0, k - minK);
+    const score = (range + extra * WRAP_EXTRA_LINE_WEIGHT) * 1000 + variance;
+    if (
+      score < bestScore ||
+      (score === bestScore && range < bestRange) ||
+      (score === bestScore && range === bestRange && k < bestK)
+    ) {
+      bestLines = candidate;
+      bestScore = score;
+      bestRange = range;
+      bestK = k;
+    }
+  }
+
+  return bestLines?.length ? bestLines : wrapGreedyWords(joined, max);
 }
 
-/**
- * Avoid a lone short word on the final line (e.g. "Art") by merging onto the
- * previous line or moving one word from the previous line down.
- */
 function fixWidowLastLine(lines, max) {
   if (lines.length < 2) return lines;
 
-  const WIDOW_WORD_MAX = 5;
+  const MERGE_ORPHAN_MAX_LEN = 5;
 
   const last = lines[lines.length - 1].trim();
   const prev = lines[lines.length - 2].trim();
@@ -178,11 +247,12 @@ function fixWidowLastLine(lines, max) {
   if (lastWords.length !== 1) return lines;
 
   const orphan = lastWords[0];
-  if (orphan.length > WIDOW_WORD_MAX) return lines;
 
-  const merged = `${prev} ${orphan}`;
-  if (merged.length <= max) {
-    return [...lines.slice(0, -2), merged];
+  if (orphan.length <= MERGE_ORPHAN_MAX_LEN) {
+    const merged = `${prev} ${orphan}`;
+    if (merged.length <= max) {
+      return [...lines.slice(0, -2), merged];
+    }
   }
 
   const prevWords = prev.split(/\s+/).filter(Boolean);
@@ -203,8 +273,24 @@ function wrapExhibitionTitle(name) {
   if (!trimmed) return [name];
   if (trimmed.length <= max) return [trimmed];
 
-  const colonFirst = wrapColonFirst(trimmed, max);
-  const lines = colonFirst?.length ? colonFirst : wrapBalancedWords(trimmed, max);
+  const colonIdx = trimmed.indexOf(":");
+  const allWords = trimmed.split(/\s+/).filter(Boolean);
+  let lines;
+  if (colonIdx > 0 && colonIdx < trimmed.length - 1) {
+    const prefix = trimmed.slice(0, colonIdx + 1).trim();
+    const rest = trimmed.slice(colonIdx + 1).trim();
+    if (!rest.length) {
+      lines = prefix.length <= max ? [prefix] : balanceWordLines(allWords, max);
+    } else if (prefix.length <= max) {
+      const words = [prefix, ...rest.split(/\s+/).filter(Boolean)];
+      lines = balanceWordLines(words, max);
+    } else {
+      lines = balanceWordLines(allWords, max);
+    }
+  } else {
+    lines = balanceWordLines(allWords, max);
+  }
+
   return fixWidowLastLine(lines, max);
 }
 
@@ -221,7 +307,10 @@ function drawNodeLabel(g, d) {
     .attr("text-anchor", anchor)
     .attr("fill", "#fff")
     .style("font-family", FONT_BODY)
-    .style("font-size", `${FONT_SIZE_UI_PX}px`);
+    .style("font-size", `${FONT_SIZE_UI_PX}px`)
+    .style("cursor", "default")
+    .style("user-select", "none")
+    .style("-webkit-user-select", "none");
 
   if (d.type !== "exhibition") {
     text.attr("dy", `${LABEL_SINGLE_LINE_DY_EM}em`).text(d.name);
@@ -250,6 +339,7 @@ function drawNodeLabel(g, d) {
 }
 
 const graphData = computed(() => {
+  const instByArtist = institutionNamesByArtistId.value;
   const exhibitionRows = d3.csvParse(exhibitionsCSV);
   const exhibitions = exhibitionRows.map((r) => ({
     id: r.id,
@@ -278,6 +368,7 @@ const graphData = computed(() => {
         nodeId: `ar-${id}`,
         name: row?.name || fallback,
         lifeLine: artistLifeLine(row),
+        institutionNames: instByArtist[id] ?? [],
         type: "artist",
       };
     }),
@@ -362,15 +453,7 @@ function renderChart() {
     if (d.type === "exhibition") {
       return exhibitionTooltipShowOptions(d);
     }
-    const life = d.lifeLine
-      ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>`
-      : "";
-    return {
-      bg: "#000",
-      fg: "#fff",
-      border: "#fff",
-      html: `<div><strong>${escapeHtml(d.name)}</strong></div>${life}`,
-    };
+    return artistTooltipShowOptions(d);
   }
 
   function connectedContext(nodeId) {
@@ -434,7 +517,7 @@ function renderChart() {
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
     .attr("rx", EXHIBITIONS_VIZ_CONFIG.layout.nodeRadiusPx)
-    .style("cursor", "pointer");
+    .style("cursor", "default");
 
   function artistDotTransform(d) {
     const dot = getArtistDotData(d.nodeId.slice(3));
@@ -458,7 +541,7 @@ function renderChart() {
     .attr("fill", nodeFill)
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
-    .style("cursor", "pointer");
+    .style("cursor", "default");
 
   artistNodes
     .append("path")
@@ -474,7 +557,7 @@ function renderChart() {
     .attr("cy", (d) => (d.y0 + d.y1) / 2)
     .attr("r", Math.max(DOT_SIZE_PX, 8))
     .attr("fill", "transparent")
-    .style("cursor", "pointer");
+    .style("cursor", "default");
 
   function applyHoverState(nodeId = null) {
     hoveredNodeId = nodeId;

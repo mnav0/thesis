@@ -123,6 +123,9 @@ function renderChart() {
     .attr("fill", "#fff")
     .style("font-family", FONT_LABEL)
     .style("font-size", `${FONT_SIZE_UI_PX}px`)
+    .style("cursor", "default")
+    .style("user-select", "none")
+    .style("-webkit-user-select", "none")
     .text(String(lo));
 
   svg
@@ -134,6 +137,9 @@ function renderChart() {
     .attr("fill", "#fff")
     .style("font-family", FONT_LABEL)
     .style("font-size", `${FONT_SIZE_UI_PX}px`)
+    .style("cursor", "default")
+    .style("user-select", "none")
+    .style("-webkit-user-select", "none")
     .text(String(hi));
 
   const rx = EXHIBITIONS_VIZ_CONFIG.layout.nodeRadiusPx;
@@ -153,7 +159,7 @@ function renderChart() {
     .attr("fill", "#fff")
     .attr("stroke", "#fff")
     .attr("stroke-width", 1)
-    .style("cursor", "pointer");
+    .style("cursor", "default");
   markers.each(function (d) {
     d._markerEl = this;
   });
@@ -173,7 +179,7 @@ function renderChart() {
     .attr("width", hitWidth)
     .attr("height", (d) => markerHeightByExhibitionId.value[d.id] ?? size)
     .attr("fill", "transparent")
-    .style("cursor", "pointer");
+    .style("cursor", "default");
 
   markers
     .on("mouseenter", function (event, d) {

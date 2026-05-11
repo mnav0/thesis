@@ -1,17 +1,7 @@
 import * as d3 from "d3";
 import { FONT_BODY } from "../../constants.js";
 
-/**
- * Creates a D3-managed tooltip div inside `container` and returns
- * { tooltip, show, hide } helpers.
- *
- *   show(event, { bg, fg, border, html, smallText })
- *     – positions the tooltip near the cursor (relative to container)
- *       and sets its content / colours.
- *
- *   hide()
- *     – hides the tooltip.
- */
+/** Fixed-position tooltip on `document.body`; `show(event, { bg, fg, border, html })`. */
 export function createTooltip(container) {
   const mountTarget = document.body ?? container;
   const tooltip = d3
@@ -26,12 +16,13 @@ export function createTooltip(container) {
     .style("font-size", "1em")
     .style("pointer-events", "none")
     .style("display", "none")
-    .style("max-width", "300px")
-    .style("min-width", "150px")
+    .style("max-width", "min(400px, calc(100vw - 20px))")
+    .style("box-sizing", "border-box")
     .style("z-index", 10000)
     .style("box-shadow", "0 2px 8px #0002")
-    .style("white-space", "pre-line")
-    .style("line-height", "1.35");
+    .style("white-space", "normal")
+    .style("line-height", "1.35")
+    .style("vertical-align", "top");
 
   function show(event, { bg, fg, border, html }) {
     const mouseX = event.clientX;
@@ -39,7 +30,7 @@ export function createTooltip(container) {
     const offset = 10;
 
     tooltip
-      .style("display", null)
+      .style("display", "inline-block")
       .style("background", bg)
       .style("color", fg)
       .style("border-color", border)
@@ -63,7 +54,6 @@ export function createTooltip(container) {
       top = mouseY - tooltipRect.height - offset;
     }
 
-    // Final clamping so tooltip stays fully inside container bounds.
     left = Math.max(offset, Math.min(left, viewportW - tooltipRect.width - offset));
     top = Math.max(offset, Math.min(top, viewportH - tooltipRect.height - offset));
 

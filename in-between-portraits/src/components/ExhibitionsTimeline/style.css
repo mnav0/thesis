@@ -4,9 +4,17 @@
   margin-right: auto;
   position: relative;
   color: #fff;
+  cursor: default;
 }
 
 .exhibitions-timeline :deep(svg) {
   display: block;
   width: 100%;
+  cursor: default;
+}
+
+.exhibitions-timeline :deep(svg text) {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
 }

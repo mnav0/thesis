@@ -245,7 +245,7 @@ onBeforeUnmount(() => {
         >
           <template #subheading-addon>
             <InfoModal
-              headingHtml="Filtered to artists with work in top museum digital archives:"
+              headingHtml="Artists are catalogued by top museum digital archives:"
               :bullet-points="datasetInfoPoints"
               triggerTitle="Artist selection criteria"
               list-type="numbered"

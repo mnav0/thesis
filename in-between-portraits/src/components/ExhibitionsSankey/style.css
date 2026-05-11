@@ -5,4 +5,15 @@
   position: relative;
   margin-left: 0;
   margin-right: auto;
+  cursor: default;
+}
+
+.exhibitions-sankey :deep(svg) {
+  cursor: default;
+}
+
+.exhibitions-sankey :deep(.sankey-node-label) {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
 }

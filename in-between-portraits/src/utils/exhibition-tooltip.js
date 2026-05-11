@@ -1,7 +1,3 @@
-/**
- * HTML for exhibition node tooltip (Sankey exhibition rects + timeline markers).
- * Matches copy/styling used in ExhibitionsSankey.
- */
 export function escapeHtml(s) {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -10,12 +6,6 @@ export function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
-/**
- * @param {object} d
- * @param {string} d.name
- * @param {string} [d.location]
- * @param {string | null} [d.startYear]
- */
 export function exhibitionTooltipShowOptions(d) {
   const year = d.startYear ? escapeHtml(d.startYear) : "-";
   const loc = d.location ? escapeHtml(d.location) : "-";
@@ -33,5 +23,27 @@ export function exhibitionTooltipShowOptions(d) {
     fg: "#111",
     border: "#111",
     html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div><div style="height:0.8em"></div><div>${loc} (${year})</div>${artistLine}</div>`,
+  };
+}
+
+export function artistTooltipShowOptions(d) {
+  const life = d.lifeLine
+    ? `<div style="margin-top:2px">${escapeHtml(d.lifeLine)}</div>`
+    : "";
+  const names = Array.isArray(d.institutionNames) ? d.institutionNames.filter(Boolean) : [];
+  const institutionsHtml = names.length
+    ? `<div style="height:0.8em"></div>${names
+        .map((n, i) => {
+          const t = escapeHtml(n);
+          const line = i < names.length - 1 ? `${t},` : t;
+          return `<div style="white-space:nowrap">${line}</div>`;
+        })
+        .join("")}`
+    : "";
+  return {
+    bg: "#000",
+    fg: "#fff",
+    border: "#fff",
+    html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div>${life}${institutionsHtml}</div>`,
   };
 }
