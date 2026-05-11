@@ -1547,7 +1547,7 @@ function displayLabelLines(group) {
           <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(item.artistName) }}
           </div>
-          <div v-if="!artMode" class="cs-point-name">
+          <div class="cs-point-name">
             <span
               v-for="(part, i) in splitNameForDisplay(item.artistName)"
               :key="i"
@@ -1592,7 +1592,7 @@ function displayLabelLines(group) {
           <div v-if="!artMode" class="cs-point-tag label-text">
             {{ initialsFromName(artist.artistName) }}
           </div>
-          <div v-if="!artMode" class="cs-point-name">
+          <div class="cs-point-name">
             <span
               v-for="(part, i) in splitNameForDisplay(artist.artistName)"
               :key="i"
