@@ -49,6 +49,8 @@ const props = defineProps({
   // View mode when this gallery was opened ('artist' | 'institution' | 'exhibitions').
   // Highlights the matching keyword card (same chrome as cluster mode toggles).
   sourceMode: { type: String, default: null },
+  // Modal header shows artist name (no keyword row) — hero quote attribution is date only.
+  compactHeroAttribution: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(["pastHeroChange"]);
@@ -128,6 +130,7 @@ const enrichedPoints = computed(() => {
         pointKey: `g-${rawId}-${sourceIdx}-${idx}`,
         id: String(point.id ?? ""),
         artistId: String(rawId),
+        artistName,
         sourceIdx,
         sourcePointOrder: idx,
         sourceActor,
@@ -180,7 +183,7 @@ const enrichedPoints = computed(() => {
 /**
  * Unified hero data for the gallery hero section. Returns one of:
  *   { kind: "exhibition", name, location, year }
- *   { kind: "quote", text, artistName, year }
+ *   { kind: "quote", text, attributionLine, quoteSourceActor }
  *   null  — no hero rendered
  */
 const heroData = computed(() => {
@@ -190,30 +193,101 @@ const heroData = computed(() => {
     if (!name) return null;
     return { kind: "exhibition", name, location: location || null, year: year || null };
   }
-  // Multi-artist embedding cluster: use the cluster's featured_quote.
-  if (props.clusterFeaturedQuote) {
+
+  const pts = enrichedPoints.value;
+  const singleArtistId =
+    props.artistIds.length === 1 ? String(props.artistIds[0]) : null;
+
+  // Cluster center (embedding filter): use the cluster summary featured_quote.
+  // Dot / point opens omit pointFilter — those use the CSV hero for one artist.
+  const clusterFilter = props.pointFilter?.type === "cluster";
+  if (clusterFilter && props.clusterFeaturedQuote) {
     const cq = props.clusterFeaturedQuote;
-    if (!cq.text) return null;
-    const wordRow = artistWordsById.get(String(cq.source_idx || ""));
-    const artistName = wordRow?.artist ? resolveArtistName(wordRow.artist) : "";
-    // Year comes from the word row's date, not from the cluster JSON (which has no date field).
-    const year = wordRow?.date ? parseYear(String(wordRow.date)) : null;
-    return { kind: "quote", text: cq.text, artistName, year };
+    if (!String(cq.text ?? "").trim()) return null;
+    const idx = String(cq.source_idx || "").trim();
+    const instRow = institutionWordsById.get(idx);
+    const artistRow = artistWordsById.get(idx);
+    const quoteSourceActor = instRow
+      ? "institution"
+      : artistRow
+        ? "artist"
+        : idx.startsWith("IT")
+          ? "institution"
+          : "artist";
+
+    let nameFromRow = "";
+    if (instRow) {
+      nameFromRow = resolveInstitutionName(
+        instRow.institution == null ? "" : String(instRow.institution),
+      );
+    } else if (artistRow) {
+      nameFromRow = artistRow.artist ? resolveArtistName(artistRow.artist) : "";
+    }
+
+    const cands = pts.filter((p) => String(p.sourceIdx).trim() === idx);
+    let matchPt = null;
+    if (singleArtistId) {
+      matchPt = cands.find((p) => p.artistId === singleArtistId) || null;
+    }
+    if (!matchPt) matchPt = cands[0] || null;
+
+    let displayName = String(nameFromRow || "").trim();
+    if (!displayName && matchPt) {
+      displayName = String(matchPt.sourceName || "").trim();
+    }
+    if (!displayName) {
+      if (singleArtistId) {
+        displayName = resolveArtistName(singleArtistId);
+      } else if (props.artistIds.length > 1) {
+        displayName = props.artistIds
+          .map((id) => resolveArtistName(id))
+          .filter(Boolean)
+          .join(" · ")
+          .trim();
+      }
+    }
+
+    // Same date string as gallery-featured-label: enriched `displayDate`, else word row.
+    let displayDate = "n.d.";
+    if (matchPt) {
+      displayDate = String(matchPt.displayDate || "").trim() || "n.d.";
+    } else {
+      const row = instRow || artistRow;
+      const raw = row ? String(row.date ?? "").trim() : "";
+      displayDate = raw || "n.d.";
+    }
+
+    const fullAttributionLine = displayName
+      ? `${displayName} (${displayDate})`
+      : quoteSourceActor === "institution"
+        ? `Institutional source (${displayDate})`
+        : `Artist source (${displayDate})`;
+    const attributionLine = props.compactHeroAttribution
+      ? displayDate
+      : fullAttributionLine;
+
+    return { kind: "quote", text: cq.text, attributionLine, quoteSourceActor };
   }
-  // Single-artist: look up via the featured_quotes CSV.
+
+  // Single-artist (dot open or cluster with no featured quote): CSV hero.
   if (props.artistIds.length !== 1) return null;
   const aid = String(props.artistIds[0]);
   const uuid =
     featuredQuotesByArtistId.get(aid) ||
     featuredQuotesByArtistId.get(String(Number(aid) - 1));
   if (!uuid) return null;
-  const found = enrichedPoints.value.find((p) => p.id === uuid);
+  const found = pts.find((p) => p.id === uuid);
   if (!found) return null;
+  const displayName = resolveArtistName(aid);
+  const displayDate = String(found.displayDate || "").trim() || "n.d.";
+  const attributionLine = props.compactHeroAttribution
+    ? displayDate
+    : `${displayName} (${displayDate})`;
   return {
     kind: "quote",
     text: found.text,
-    artistName: resolveArtistName(aid),
-    year: parseYear(found.date) || found.year || null,
+    attributionLine,
+    quoteSourceActor: "artist",
   };
 });
 
@@ -655,6 +729,36 @@ const featuredKeys = computed(() => {
 });
 
 /**
+ * Top-of-label header row.
+ *  - Artwork present: title (left) + artist name (right, when multi-artist).
+ *  - No artwork but body present + multi-artist: just the artist name (left).
+ *  - Otherwise: no header row.
+ */
+const headerData = computed(() => {
+  const artwork = featuredArtwork.value;
+  const text = featuredText.value;
+  const multi = props.artistIds.length > 1;
+  if (artwork) {
+    const title = artwork.year
+      ? `${artwork.title} (${artwork.year})`
+      : artwork.title;
+    return {
+      key: `aw-${artwork.pointKey}`,
+      title,
+      artist: multi ? artwork.artistName || null : null,
+    };
+  }
+  if (text && multi && text.artistName) {
+    return {
+      key: `ar-${text.artistId}`,
+      title: null,
+      artist: text.artistName,
+    };
+  }
+  return null;
+});
+
+/**
  * Timeline year matches the attribution on the featured text card
  * `(sourceName) (displayDate)` — i.e. `featuredText.year`. When no text
  * slot is shown, use the rounded scroll segment’s point so the bar still
@@ -827,7 +931,11 @@ const visibleDotPoints = computed(() =>
         v-if="heroData"
         ref="heroRef"
         class="gallery-hero"
-        :class="{ 'gallery-hero--keyword-border': keywordRows.length > 0 }"
+        :class="{
+          'gallery-hero--keyword-border': keywordRows.length > 0,
+          'gallery-hero--light':
+            heroData.kind === 'quote' && heroData.quoteSourceActor === 'institution',
+        }"
       >
         <!-- Exhibition hero: name as heading, no quote marks, location (year) attribution -->
         <template v-if="heroData.kind === 'exhibition'">
@@ -842,9 +950,8 @@ const visibleDotPoints = computed(() =>
           <blockquote class="gallery-hero__quote">
             {{ heroData.text }}
           </blockquote>
-          <div class="gallery-hero__attribution">
-            <template v-if="heroData.artistName">{{ heroData.artistName }}</template>
-            <template v-if="heroData.year"><template v-if="heroData.artistName">, </template>{{ heroData.year }}</template>
+          <div v-if="heroData.attributionLine" class="gallery-hero__attribution">
+            {{ heroData.attributionLine }}
           </div>
         </template>
       </section>
@@ -966,11 +1073,24 @@ const visibleDotPoints = computed(() =>
             <div v-if="featuredArtwork || featuredText" class="gallery-featured-label">
               <Transition name="stage-fade" mode="out-in">
                 <div
-                  v-if="featuredArtwork"
-                  :key="featuredArtwork.pointKey"
+                  v-if="headerData"
+                  :key="headerData.key"
                   class="gallery-featured-label__header"
+                  :class="{
+                    'gallery-featured-label__header--artist-only':
+                      !headerData.title,
+                    'gallery-featured-label__header--with-artist':
+                      headerData.title && headerData.artist,
+                  }"
                 >
-                  {{ featuredArtwork.title }}<template v-if="featuredArtwork.year"> ({{ featuredArtwork.year }})</template>
+                  <span
+                    v-if="headerData.title"
+                    class="gallery-featured-label__header-title"
+                  >{{ headerData.title }}</span>
+                  <span
+                    v-if="headerData.artist"
+                    class="gallery-featured-label__header-artist"
+                  >{{ headerData.artist }}</span>
                 </div>
               </Transition>
               <Transition name="stage-fade" mode="out-in">

@@ -3,7 +3,14 @@ import { computed, ref, watch } from "vue";
 import ArtistGallery from "../ArtistGallery/index.vue";
 import {
   featuredQuotesByArtistId,
+  institutionWordRows,
 } from "../../data/index.js";
+
+const institutionFeaturedQuoteIdSet = new Set(
+  institutionWordRows
+    .map((r) => String(r.id ?? "").trim())
+    .filter(Boolean),
+);
 
 const props = defineProps({
   cluster: Object,
@@ -14,6 +21,15 @@ const emit = defineEmits(["close"]);
 
 /** When false, gallery hero is still in view — modal header matches hero (#111). */
 const galleryPastHero = ref(true);
+
+/** Cluster hero uses light surfaces (white / black type) — keep modal header light too. */
+const clusterHeroHeaderLight = computed(() => {
+  const c = props.cluster;
+  if (!c?.clusterFeaturedQuote || c.exhibitionHero) return false;
+  if (c.pointFilter?.type !== "cluster") return false;
+  const idx = String(c.clusterFeaturedQuote.source_idx ?? "").trim();
+  return institutionFeaturedQuoteIdSet.has(idx);
+});
 
 /** Check whether this cluster/artist will render a hero section. */
 function hasFeaturedQuote(ids) {
@@ -71,7 +87,8 @@ watch(
         'cluster-view-header--on-hero':
           showArtistGallery &&
           galleryArtistIds.length > 0 &&
-          !galleryPastHero,
+          !galleryPastHero &&
+          !clusterHeroHeaderLight,
       }"
     >
       <div class="cluster-view-keywords">
@@ -100,6 +117,7 @@ watch(
       :exhibition-hero="cluster.exhibitionHero"
       :point-filter="cluster.pointFilter ?? null"
       :source-mode="cluster.view_mode ?? null"
+      :compact-hero-attribution="!cluster.keywords?.length"
       @past-hero-change="galleryPastHero = $event"
     />
     <div
