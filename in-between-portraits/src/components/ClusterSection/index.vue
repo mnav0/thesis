@@ -679,6 +679,7 @@ function artCandidatesForArtist(artistId) {
 
 function toggleArtMode() {
   artMode.value = !artMode.value;
+  clearClusterHoverState();
 }
 
 watch(artMode, (on) => {
@@ -868,6 +869,12 @@ const labelDirectionByKey = computed(() => {
 
 const hoveredPoint = ref(null);
 const hoveredClusterId = ref(null);
+
+function clearClusterHoverState() {
+  hoveredPoint.value = null;
+  hoveredClusterId.value = null;
+}
+
 const clusterCenterPositions = ref({});
 const pointPositions = ref({});
 const renderEpoch = ref(0);
