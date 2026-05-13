@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 :root {
-  /* Mirrors DOT_SIZE_PX in constants.js */
+  /*
+   * Keep with src/constants.js:
+   *   DOT_SIZE_PX → --dot-size
+   *   FONT_SIZE_{BODY,UI,KEY}_PX → --text-{body,ui,key} (rem @ 16px root)
+   *   CSS_LETTER_SPACING_* → --tracking-* (same names)
+   */
   --dot-size: 18px;
 
-  /* cluster section UI constants */
   --cluster-control-texture: url("/texture.svg");
   --cluster-control-texture-wash: rgba(255, 255, 255, 0.2);
   --cluster-control-textured-fill:
@@ -20,12 +24,35 @@
     2px 2px 0 #111, var(--cluster-control-soft-shadow);
 
   --font-serif: "Instrument Serif", serif;
-  --font-label: "Kosugi", sans-serif;  /* uppercase labels, keys, tags */
-  --font-body: "Kosugi", sans-serif;   /* body text, tooltips, captions */
+  --font-label: "Kosugi", sans-serif;
+  --font-body: "Kosugi", sans-serif;
 
-  --text-body: 1.25rem;   /* body paragraphs, info modal content */
-  --text-ui: 1rem;       /* labels, attribution, point tags, timeline, text cards */
-  --text-key: 0.75rem;   /* cluster keys only */
+  --text-body: 1.25rem;
+  --text-ui: 1rem;
+  --text-key: 0.75rem;
+  --text-display-serif: 3.6rem;
+
+  --leading-key: 1.3;
+  --leading-ui: 1.25;
+  --leading-body: 1.25;
+  --leading-hero-serif: 1.08;
+
+  --tracking-display-serif: 0.01em;
+  --tracking-key: 0.055em;
+  --tracking-ui: 0.06em;
+  --tracking-body: 0.02em;
+  --tracking-default: normal;
+
+  --pad-prose-y: 0.35lh;
+  --pad-prose-x: 0.5lh;
+  --gap-prose-block: 0.55em;
+  --gap-prose-list-item: 0.45em;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --text-display-serif: 2rem;
+  }
 }
 
 body {
@@ -41,7 +68,7 @@ h1 {
   margin-bottom: 0;
   font-family: var(--font-serif);
   font-size: 6rem;
-  letter-spacing: 0.01em;
+  letter-spacing: var(--tracking-display-serif);
   line-height: 0.9;
 
   @media (max-width: 768px) {
@@ -55,6 +82,7 @@ h2 {
   font-size: 6rem;
   line-height: 1.05;
   font-family: var(--font-serif);
+  letter-spacing: var(--tracking-display-serif);
 
   @media (max-width: 768px) {
     font-size: 4rem;
@@ -68,11 +96,14 @@ h2 {
 h3 {
   font-family: var(--font-label);
   font-size: var(--text-body);
-  line-height: 1.25;
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
   text-transform: uppercase;
 
   @media (max-width: 768px) {
     font-size: var(--text-ui);
+    line-height: var(--leading-ui);
+    letter-spacing: var(--tracking-ui);
   }
 }
 
@@ -81,10 +112,13 @@ li,
 span {
   font-family: var(--font-body);
   font-size: var(--text-body);
-  line-height: 1.25;
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
 
   @media (max-width: 768px) {
     font-size: var(--text-ui);
+    line-height: var(--leading-ui);
+    letter-spacing: var(--tracking-ui);
   }
 }
 
@@ -96,6 +130,7 @@ select {
 
 .uppercase {
   text-transform: uppercase;
+  letter-spacing: var(--tracking-ui);
 }
 
 .app-shell {
@@ -178,8 +213,6 @@ select {
   float: right;
 }
 
-/* ── Section 2: Identity heading descriptor swap ── */
-
 .identity-heading__descriptors {
   position: relative;
   display: block;
@@ -204,8 +237,6 @@ select {
   opacity: 1;
 }
 
-/* ── Floating persona for actors→persona transition ── */
-
 .floating-persona {
   position: fixed;
   pointer-events: none;
@@ -213,13 +244,11 @@ select {
   opacity: 0;
 }
 
-/* Invisible anchors inside scroll content mark start/end positions */
 .exhibitions-bridge-anchor {
   height: 1px;
   pointer-events: none;
 }
 
-/* Fixed label outside #smooth-wrapper (same pattern as .floating-persona) */
 .exhibitions-bridge-label {
   position: fixed;
   top: 0;
@@ -236,8 +265,8 @@ select {
   width: 100%;
   margin-left: 0;
   margin-right: auto;
-  padding-left: var(--exhibitions-inner-margin-x, 236px);
-  padding-right: var(--exhibitions-inner-margin-x, 236px);
+  padding-left: var(--exhibitions-inner-margin-x, 236px); /* constants/exhibitions-viz.js EXHIBITIONS_INNER_MARGIN_X_PX */
+  padding-right: var(--exhibitions-inner-margin-x, 236px); /* constants/exhibitions-viz.js EXHIBITIONS_INNER_MARGIN_X_PX */
   height: 2.25rem;
   box-sizing: border-box;
 }
@@ -246,11 +275,6 @@ select {
   position: absolute;
   left: 0;
   top: 50%;
-  font-family: var(--font-label);
-  font-size: var(--text-ui);
-  line-height: 1.25;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: #fff;
   white-space: nowrap;
 }
@@ -258,7 +282,9 @@ select {
 .label-text {
   font-family: var(--font-label);
   font-size: var(--text-ui);
-  line-height: 1.25;
+  font-weight: 400;
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
   text-transform: uppercase;
 }
 

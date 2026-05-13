@@ -5,6 +5,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import App from "./App.vue";
 import { fetchAndParseData } from "./data/index.js";
 import "./style.css";
+import "./styles/cluster-ui-label.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 

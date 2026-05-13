@@ -1,35 +1,33 @@
-/** Uppercase labels, keys, tags */
+/* Mirror :root in src/style.css (FONT_SIZE_*_PX, DOT_SIZE_PX, --tracking-*). */
 export const FONT_LABEL = '"Kosugi", sans-serif';
 
-/** Body text, tooltips, captions — swap this string to change all mixed-case text. */
 export const FONT_BODY = '"Kosugi", sans-serif';
 
 /** @deprecated use FONT_BODY or FONT_LABEL */
 export const FONT_SANS = FONT_BODY;
 
-/** Type scale in px (assumes 16px base) — mirrors --text-* CSS custom properties. */
-export const FONT_SIZE_BODY_PX = 20;
-export const FONT_SIZE_UI_PX = 16;
-export const FONT_SIZE_KEY_PX = 12;
+export const FONT_SIZE_BODY_PX = 20; /* --text-body */
+export const FONT_SIZE_UI_PX = 16; /* --text-ui */
+export const FONT_SIZE_KEY_PX = 12; /* --text-key */
 
-/** Diameter in px for artist dots/points used across clusters, sankey, and travel overlay. */
-export const DOT_SIZE_PX = 18;
+export const CSS_LETTER_SPACING_KEY = "var(--tracking-key)";
+export const CSS_LETTER_SPACING_UI = "var(--tracking-ui)";
+export const CSS_LETTER_SPACING_BODY = "var(--tracking-body)";
+/** @deprecated use CSS_LETTER_SPACING_UI */
+export const CSS_LETTER_SPACING_LABEL = CSS_LETTER_SPACING_UI;
+/** @deprecated use CSS_LETTER_SPACING_BODY */
+export const CSS_LETTER_SPACING_PROSE = CSS_LETTER_SPACING_BODY;
 
-/** Cluster art mode: thumbnail / hit box diameter relative to `DOT_SIZE_PX`. */
+export const DOT_SIZE_PX = 18; /* --dot-size */
+
 export const CLUSTER_ART_MODE_DOT_SCALE = 4;
-export const CLUSTER_ART_MODE_DOT_SIZE_PX = DOT_SIZE_PX * CLUSTER_ART_MODE_DOT_SCALE;
+export const CLUSTER_ART_MODE_DOT_SIZE_PX = DOT_SIZE_PX * CLUSTER_ART_MODE_DOT_SCALE; /* ClusterSection: --dot-size when art mode */
 
-/**
- * Artist id for the generic “persona” silhouette: actors preview, floating persona,
- * persona section, cluster key legend, etc. Matches `src/assets/artist-dots/<id>.svg`.
- */
+/** Persona silhouette asset: `artist-dots/{id}.svg`. */
 export const REPRESENTATIVE_PERSONA_ARTIST_ID = 18;
 
-/** How many keywords to show per cluster group in the cluster view and artist keyword summary. */
 export const CLUSTER_KEYWORDS_TO_SHOW = 1;
 
-/** Minimum cluster distribution weight to show any association in the keyword summary. */
 export const CLUSTER_MIN_ASSOCIATION_WEIGHT = 0.02;
 
-/** An association is “primary-like” if its weight is within this gap of the primary cluster's weight. */
 export const CLUSTER_PRIMARY_LINE_GAP = 0.1;

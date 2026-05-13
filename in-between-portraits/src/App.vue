@@ -296,11 +296,17 @@ onBeforeUnmount(() => {
             class="exhibitions-bridge-label__track"
             :style="{ '--exhibitions-inner-margin-x': `${EXHIBITIONS_INNER_MARGIN_X_PX}px` }"
           >
-            <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--exhibitions">
+            <span
+              class="label-text exhibitions-bridge-label__token exhibitions-bridge-label__token--exhibitions"
+            >
               Exhibitions
             </span>
-            <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--and">and</span>
-            <span class="exhibitions-bridge-label__token exhibitions-bridge-label__token--artists">
+            <span
+              class="label-text exhibitions-bridge-label__token exhibitions-bridge-label__token--and"
+            >and</span>
+            <span
+              class="label-text exhibitions-bridge-label__token exhibitions-bridge-label__token--artists"
+            >
               artists
             </span>
           </div>

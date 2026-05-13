@@ -6,22 +6,23 @@
   margin-left: auto;
 }
 
-/* ── State layers ── */
-
 .identity-state {
   position: absolute;
   inset: 0;
 }
 
-/* ── Labels ── */
-
 .identity-label {
   position: absolute;
   transform: translate(-50%, -50%) scale(var(--identity-label-scale, 1));
   transform-origin: center;
+  box-sizing: border-box;
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.25;
-  letter-spacing: 0.08em;
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
+  font-weight: 400;
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
   white-space: nowrap;
   text-align: center;
   opacity: var(--identity-label-opacity, 1);

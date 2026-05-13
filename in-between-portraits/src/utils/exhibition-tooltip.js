@@ -22,7 +22,7 @@ export function exhibitionTooltipShowOptions(d) {
     bg: "#fff",
     fg: "#111",
     border: "#111",
-    html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div><div style="height:0.8em"></div><div>${loc} (${year})</div>${artistLine}</div>`,
+    html: `<div style="line-height:1.25"><div><strong>${escapeHtml(d.name)}</strong></div><div style="height:0.8em"></div><div>${loc} (${year})</div>${artistLine}</div>`,
   };
 }
 
@@ -44,6 +44,6 @@ export function artistTooltipShowOptions(d) {
     bg: "#000",
     fg: "#fff",
     border: "#fff",
-    html: `<div style="line-height:1.2"><div><strong>${escapeHtml(d.name)}</strong></div>${life}${institutionsHtml}</div>`,
+    html: `<div style="line-height:1.25"><div><strong>${escapeHtml(d.name)}</strong></div>${life}${institutionsHtml}</div>`,
   };
 }

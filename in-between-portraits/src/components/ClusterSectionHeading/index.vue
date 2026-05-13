@@ -78,7 +78,7 @@ function iconMaskStyle(iconUrl) {
             v-for="mode in modes"
             :key="mode.key"
             type="button"
-            class="cluster-heading__toggle-btn label-text"
+            class="cluster-heading__toggle-btn"
             role="tab"
             :aria-selected="isActive(mode.key)"
             :class="{ 'cluster-heading__toggle-btn--active': isActive(mode.key) }"
@@ -102,19 +102,19 @@ function iconMaskStyle(iconUrl) {
           <button
             v-if="showNAdjustControls && canDecrementGroupN"
             type="button"
-            class="cluster-heading__group-count-step-btn label-text"
+            class="cluster-heading__group-count-step-btn"
             aria-label="Decrease groups"
             @click="emit('decrement-n')"
           >
             -
           </button>
-          <div class="cluster-heading__group-count-value label-text" aria-live="polite">
+          <div class="cluster-heading__group-count-value" aria-live="polite">
             {{ groupCount }} groups
           </div>
           <button
             v-if="showNAdjustControls && canIncrementGroupN"
             type="button"
-            class="cluster-heading__group-count-step-btn label-text"
+            class="cluster-heading__group-count-step-btn"
             aria-label="Increase groups"
             @click="emit('increment-n')"
           >

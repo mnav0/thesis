@@ -1,7 +1,6 @@
 import * as d3 from "d3";
-import { FONT_BODY } from "../../constants.js";
+import { CSS_LETTER_SPACING_BODY, FONT_BODY } from "../../constants.js";
 
-/** Fixed-position tooltip on `document.body`; `show(event, { bg, fg, border, html })`. */
 export function createTooltip(container) {
   const mountTarget = document.body ?? container;
   const tooltip = d3
@@ -14,6 +13,7 @@ export function createTooltip(container) {
     .style("padding", "8px 12px")
     .style("font-family", FONT_BODY)
     .style("font-size", "1em")
+    .style("letter-spacing", CSS_LETTER_SPACING_BODY)
     .style("pointer-events", "none")
     .style("display", "none")
     .style("max-width", "min(400px, calc(100vw - 20px))")
@@ -21,7 +21,7 @@ export function createTooltip(container) {
     .style("z-index", 10000)
     .style("box-shadow", "0 2px 8px #0002")
     .style("white-space", "normal")
-    .style("line-height", "1.35")
+    .style("line-height", "var(--leading-body)")
     .style("vertical-align", "top");
 
   function show(event, { bg, fg, border, html }) {

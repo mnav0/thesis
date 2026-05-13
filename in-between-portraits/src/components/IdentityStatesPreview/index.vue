@@ -45,7 +45,7 @@ const labelItems = computed(() => {
       <span
         v-for="item in labelItems"
         :key="item.theme"
-        class="identity-label label-text"
+        class="identity-label"
         :data-theme-key="item.themeKey"
         :style="{ left: item.left, top: item.top }"
       >{{ item.theme }}</span>

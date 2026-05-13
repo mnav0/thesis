@@ -8,7 +8,7 @@ import {
   EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
 } from "../../constants/exhibitions-viz.js";
-import { FONT_LABEL, FONT_SIZE_UI_PX } from "../../constants.js";
+import { CSS_LETTER_SPACING_UI, FONT_LABEL, FONT_SIZE_UI_PX } from "../../constants.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 
 const TOP_BOTTOM_PADDING_PX = 24;
@@ -123,6 +123,7 @@ function renderChart() {
     .attr("fill", "#fff")
     .style("font-family", FONT_LABEL)
     .style("font-size", `${FONT_SIZE_UI_PX}px`)
+    .style("letter-spacing", CSS_LETTER_SPACING_UI)
     .style("cursor", "default")
     .style("user-select", "none")
     .style("-webkit-user-select", "none")
@@ -137,6 +138,7 @@ function renderChart() {
     .attr("fill", "#fff")
     .style("font-family", FONT_LABEL)
     .style("font-size", `${FONT_SIZE_UI_PX}px`)
+    .style("letter-spacing", CSS_LETTER_SPACING_UI)
     .style("cursor", "default")
     .style("user-select", "none")
     .style("-webkit-user-select", "none")

@@ -14,7 +14,12 @@ import {
   EXHIBITIONS_VIZ_CONFIG,
   exhibitionMarkHeightPx,
 } from "../../constants/exhibitions-viz.js";
-import { DOT_SIZE_PX, FONT_BODY, FONT_SIZE_UI_PX } from "../../constants.js";
+import {
+  CSS_LETTER_SPACING_UI,
+  DOT_SIZE_PX,
+  FONT_BODY,
+  FONT_SIZE_UI_PX,
+} from "../../constants.js";
 import { getArtistDotData } from "../../utils/artist-dot.js";
 import exhibitionsCSV from "../../data/exhibitions.csv?raw";
 import artistsCSV from "../../data/artists.csv?raw";
@@ -69,7 +74,7 @@ function artistLifeLine(row) {
   return `(${by} - )`;
 }
 
-const EXHIBITION_LINE_MAX_CHARS = 28;
+const EXHIBITION_LINE_MAX_CHARS = 26;
 const WRAP_EXTRA_LINE_WEIGHT = 7;
 
 function wrapGreedyWords(trimmed, max) {
@@ -308,6 +313,7 @@ function drawNodeLabel(g, d) {
     .attr("fill", "#fff")
     .style("font-family", FONT_BODY)
     .style("font-size", `${FONT_SIZE_UI_PX}px`)
+    .style("letter-spacing", CSS_LETTER_SPACING_UI)
     .style("cursor", "default")
     .style("user-select", "none")
     .style("-webkit-user-select", "none");

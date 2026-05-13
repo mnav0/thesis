@@ -1,0 +1,35 @@
+.cluster-heading__group-line,
+.cluster-heading__toggle-btn,
+.cluster-heading__group-count-step-btn,
+.cluster-heading__group-count-value,
+.cluster-section__art-mode-btn,
+.cs-center-label-line {
+  font-family: var(--font-label);
+  font-size: var(--text-ui);
+  font-weight: 400;
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
+  color: #111;
+}
+
+.cluster-heading__group-line,
+.cluster-heading__toggle-btn,
+.cluster-section__art-mode-btn,
+.cs-center-label-line {
+  text-transform: uppercase;
+}
+
+.cluster-heading__group-count-step-btn,
+.cluster-heading__group-count-value {
+  text-transform: none;
+}
+
+.cluster-heading__toggle-btn .cluster-heading__toggle-label {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+}

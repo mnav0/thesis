@@ -15,8 +15,9 @@
   background: transparent;
   color: inherit;
   text-transform: none;
-  line-height: 1;
-  font-size: 0.95rem;
+  line-height: var(--leading-ui);
+  font-size: var(--text-ui);
+  letter-spacing: var(--tracking-ui);
   cursor: pointer;
 }
 
@@ -31,7 +32,9 @@
 .info-overlay-button--small .info-overlay-button__trigger {
   width: 1.05rem;
   height: 1.05rem;
-  font-size: 0.7125rem;
+  font-size: var(--text-key);
+  line-height: var(--leading-key);
+  letter-spacing: var(--tracking-key);
 }
 
 .info-overlay-button__overlay {
@@ -60,9 +63,13 @@
   max-height: min(85vh, 48rem);
   overflow-y: auto;
   border: 1px solid currentColor;
-  padding: 1.25rem;
   box-sizing: border-box;
   background: currentColor;
+  font-family: var(--font-body);
+  font-size: var(--text-ui);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-body);
+  padding: 0.75rem 1.25rem 1.5rem 1.25rem;
 }
 
 .info-overlay-button__overlay--light .info-overlay-button__modal {
@@ -80,7 +87,7 @@
   background: none;
   color: inherit;
   font-size: 2.2em;
-  line-height: 1;
+  line-height: var(--leading-ui);
   font-family: "Instrument Serif", serif;
   padding: 0;
   margin: 0;
@@ -94,20 +101,21 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: calc(0.45lh + 0.15rem);
 }
 
 .info-overlay-button__heading {
-  margin-top: 0.25rem 0 1rem 0;
+  margin: 0;
   font-family: var(--font-label);
   font-size: var(--text-ui);
-  line-height: 1.25;
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
   text-transform: uppercase;
 }
 
 .info-overlay-button__list {
   margin: 0;
-  padding-left: 1.2rem;
+  padding-left: 1.2em;
   list-style-position: outside;
 }
 
@@ -120,24 +128,25 @@
 }
 
 .info-overlay-button__item {
-  font-family: var(--font-body);
-  font-size: var(--text-ui);
-  line-height: 1.35;
-  margin-left: 0.35rem;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  margin-left: 0.35em;
 }
 
 .info-overlay-button__item + .info-overlay-button__item {
-  margin-top: 0.5rem;
+  margin-top: var(--gap-prose-list-item);
 }
 
 .info-overlay-button__separator {
-  height: 2rem;
+  height: calc(0.85lh + 0.35rem);
 }
 
 @media (max-width: 768px) {
   .info-overlay-button__modal {
     width: min(100%, 100vw);
     max-height: min(88vh, 100svh);
-    padding: 1rem;
+    padding: calc(0.55lh + 0.2rem) 1rem calc(0.75lh + 0.2rem);
   }
 }

@@ -1438,7 +1438,7 @@ function displayLabelLines(group) {
 
     <button
       type="button"
-      class="cluster-section__art-mode-btn label-text"
+      class="cluster-section__art-mode-btn"
       :class="{ 'cluster-section__art-mode-btn--active': artMode }"
       :aria-pressed="artMode"
       aria-label="Toggle art mode"
@@ -1551,7 +1551,7 @@ function displayLabelLines(group) {
             :mode-epoch="artModeEpoch"
           />
           <ArtistDot v-else :artist-id="item.artistId" />
-          <div v-if="!artMode" class="cs-point-tag label-text">
+          <div v-if="!artMode" class="cs-point-tag">
             {{ initialsFromName(item.artistName) }}
           </div>
           <div class="cs-point-name">
@@ -1596,7 +1596,7 @@ function displayLabelLines(group) {
             :mode-epoch="artModeEpoch"
           />
           <ArtistDot v-else :artist-id="artist.artistId" />
-          <div v-if="!artMode" class="cs-point-tag label-text">
+          <div v-if="!artMode" class="cs-point-tag">
             {{ initialsFromName(artist.artistName) }}
           </div>
           <div class="cs-point-name">

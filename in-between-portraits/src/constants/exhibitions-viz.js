@@ -1,4 +1,4 @@
-/** Horizontal inset (px) for timeline baseline + Sankey plot; left and right stay equal so both views align. */
+/** Same inset as `src/style.css` `.exhibitions-bridge-label__track` fallback and Sankey/Timeline margins. */
 export const EXHIBITIONS_INNER_MARGIN_X_PX = 236;
 
 /** Must match ExhibitionsSankey `drawNodeLabel` offset. */
